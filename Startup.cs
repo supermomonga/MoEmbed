@@ -31,10 +31,26 @@ namespace MoEmbed
             }
 
             var routeBuilder = new RouteBuilder(app);
-            routeBuilder.MapGet("", MoEmbed.Api.Index);
+            routeBuilder.MapGet("", MoEmbed.Api.Embed);
 
             app.UseRouter(routeBuilder.Build());
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

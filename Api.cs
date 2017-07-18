@@ -5,15 +5,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace MoEmbed
 {
     public class Api
     {
-        public static Task Index(HttpContext context)
+        public static Task Embed(HttpContext context)
         {
-            return context.Response.WriteAsync("Hello MoEmbed");
+            Task res;
+            var queries = context.Request.Query;
+            var url = queries["url"];
+            if (string.IsNullOrEmpty(url))
+            {
+                res = context.Response.WriteAsync($"No url given");
+            } else {
+                res = context.Response.WriteAsync($"Hello {url}");
+            }
+            return res;
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
