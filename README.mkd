@@ -1,7 +1,7 @@
 
 # MoEmbed
 
-MoEmbed is a OEmbed server which supports any websites.
+MoEmbed is a [OEmbed](http://oembed.com/) provider which supports any websites.
 
 # Features and concepts
 
