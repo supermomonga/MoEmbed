@@ -15,12 +15,14 @@ namespace MoEmbed
         {
             Task res;
             var queries = context.Request.Query;
-            var url = queries["url"];
+            var url = queries["url"].ToString();
             if (string.IsNullOrEmpty(url))
             {
                 res = context.Response.WriteAsync($"No url given");
             } else {
-                res = context.Response.WriteAsync($"Hello {url}");
+                var embed = new LinkEmbedObject(url);
+                var json = embed.ToJsonString();
+                res = context.Response.WriteAsync(json);
             }
             return res;
         }
