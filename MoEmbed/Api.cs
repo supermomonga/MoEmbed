@@ -24,7 +24,7 @@ namespace MoEmbed
             var url = queries["url"].ToString();
             if (string.IsNullOrEmpty(url))
             {
-                await context.Response.WriteAsync("{ error: 'No URL given' }");
+                await context.Response.WriteAsync("{ \"error\": \"No URL given\" }");
             }
             else
             {
@@ -39,7 +39,7 @@ namespace MoEmbed
                 }
                 catch (System.UriFormatException)
                 {
-                    json = "{ error: 'Invalid URL format. Please ensure you passed an URLEncoded URL.' }";
+                    json = "{ \"error\": \"Invalid URL format. Please ensure you passed an URLEncoded URL.\" }";
                 }
                 await context.Response.WriteAsync(json);
             }
