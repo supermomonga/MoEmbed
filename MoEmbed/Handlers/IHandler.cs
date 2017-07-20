@@ -6,10 +6,8 @@ namespace MoEmbed.Handlers
 {
     interface IHandler
     {
-        Uri Uri { get; set; }
-        void Init(Uri uri);
-        bool CanHandle();
-        EmbedObject GetEmbedObject();
+        bool CanHandle(Uri uri);
+        EmbedObject GetEmbedObject(Uri uri);
     }
 }
 

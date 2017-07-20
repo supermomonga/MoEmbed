@@ -8,34 +8,17 @@ namespace MoEmbed.Handlers
 {
     class TwitterHandler : IHandler
     {
-        public Uri Uri { get; set; }
-
-        public TwitterHandler(string uriString)
+        private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/\d+");
+        
+        public bool CanHandle(Uri uri)
         {
-            var uri = new Uri(uriString);
-            this.Init(uri);
+            return regex.IsMatch(uri.ToString());
         }
 
-        public TwitterHandler(Uri uri)
-        {
-            this.Init(uri);
-        }
-
-        public void Init(Uri uri)
-        {
-            this.Uri = uri;
-        }
-
-        public bool CanHandle()
-        {
-            var regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/\d+");
-            return regex.IsMatch(this.Uri.ToString());
-        }
-
-        public EmbedObject GetEmbedObject()
+        public EmbedObject GetEmbedObject(Uri uri)
         {
             // TODO: implement this.
-            return new LinkEmbedObject(this.Uri);
+            return new LinkEmbedObject(uri);
         }
     }
 }
