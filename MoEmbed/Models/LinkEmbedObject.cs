@@ -15,20 +15,35 @@ namespace MoEmbed.Models
 {
     class LinkEmbedObject : EmbedObject
     {
-        public override string Type { get; set; } = "link";
-        public override string Title { get; set; }
-        public override string AuthorName { get; set; }
-
         // Requred properties of this type
 
         // Optional properties of this type
 
         public LinkEmbedObject(string uri) : this(new Uri(uri)) { }
-        public LinkEmbedObject(Uri uri)
+        public LinkEmbedObject(Uri uri) : base(Types.Link) { }
+        public async override Task FetchAsync()
         {
-            this.Title = $"Title of '{uri}'";
-            this.AuthorName = $"AuthorName of '{uri}'";
+            // ~~~~
+            this.Title = "fetched title";
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

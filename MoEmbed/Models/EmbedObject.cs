@@ -1,34 +1,67 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace MoEmbed.Models
 {
+    public enum Types { Photo, Video, Link, Rich }
+
     abstract class EmbedObject
     {
         // See spec: http://oembed.com/#section2
 
-        public abstract string Type { get; set; }
+        [JsonIgnoreAttribute]
+        public Types Type { get; }
+
+        [JsonPropertyAttribute("type")]
+        public string TypeString
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case Types.Photo: return "photo";
+                    case Types.Link: return "link";
+                    case Types.Video: return "video";
+                    case Types.Rich: return "rich";
+                    default: return Type.ToString();
+                }
+            }
+        }
 
         // Version is fixed.
+        [JsonPropertyAttribute]
         public static string Version { get; } = "1.0";
 
-        public abstract string Title { get; set; }
+        public string Title { get; set; }
 
         // Below is optional properties
-        public abstract string AuthorName { get; set; }
+        public string AuthorName { get; set; }
 
-        protected JsonSerializer jsonSerializer { get; set; } = new JsonSerializer();
+        private JsonSerializer _JsonSerializer;
+        protected JsonSerializer JsonSerializer
+        {
+            get
+            {
+                if (this._JsonSerializer == null)
+                {
+                    this._JsonSerializer = new JsonSerializer();
+                    this._JsonSerializer.ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    };
+                }
+                return this._JsonSerializer;
+            }
+        }
+
+        public EmbedObject(Types type)
+        {
+            this.Type = type;
+        }
+
+        public abstract Task FetchAsync();
 
         public Task WriteAsync(Stream stream)
         {
@@ -43,7 +76,7 @@ namespace MoEmbed.Models
 
         public void Write(TextWriter textWriter)
         {
-            this.jsonSerializer.Serialize(textWriter, this);
+            this.JsonSerializer.Serialize(textWriter, this);
         }
 
         public string ToJsonString()

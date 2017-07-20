@@ -32,6 +32,7 @@ namespace MoEmbed
                     };
                     var handler = handlers.Find(h => h.CanHandle());
                     var embed = handler.GetEmbedObject();
+                    embed.FetchAsync().GetAwaiter().GetResult();
                     json = embed.ToJsonString();
                 }
                 catch (System.UriFormatException)
