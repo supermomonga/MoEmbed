@@ -19,7 +19,6 @@ namespace MoEmbed
 
         public static async Task Embed(HttpContext context)
         {
-            Task res;
             var queries = context.Request.Query;
             var url = queries["url"].ToString();
             if (string.IsNullOrEmpty(url))
