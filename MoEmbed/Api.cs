@@ -13,35 +13,36 @@ namespace MoEmbed
 {
     public class Api
     {
-        public static Task Embed(HttpContext context)
+        private static readonly List<IHandler> handlers = new List<IHandler> {
+            new TwitterHandler()
+        };
+
+        public static async Task Embed(HttpContext context)
         {
             Task res;
             var queries = context.Request.Query;
             var url = queries["url"].ToString();
             if (string.IsNullOrEmpty(url))
             {
-                res = context.Response.WriteAsync("{ error: 'No URL given' }");
+                await context.Response.WriteAsync("{ error: 'No URL given' }");
             }
             else
             {
                 string json;
                 try
                 {
-                    var handlers = new List<IHandler> {
-                        new TwitterHandler(url)
-                    };
-                    var handler = handlers.Find(h => h.CanHandle());
-                    var embed = handler.GetEmbedObject();
-                    embed.FetchAsync().GetAwaiter().GetResult();
+                    var uri = new Uri(url);
+                    var handler = handlers.Find(h => h.CanHandle(uri));
+                    var embed = handler.GetEmbedObject(uri);
+                    await embed.FetchAsync();
                     json = embed.ToJsonString();
                 }
                 catch (System.UriFormatException)
                 {
                     json = "{ error: 'Invalid URL format. Please ensure you passed an URLEncoded URL.' }";
                 }
-                res = context.Response.WriteAsync(json);
+                await context.Response.WriteAsync(json);
             }
-            return res;
         }
     }
 }
