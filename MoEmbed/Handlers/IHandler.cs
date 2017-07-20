@@ -2,33 +2,14 @@ using System;
 using System.Threading.Tasks;
 using MoEmbed.Models;
 
-namespace MoEmbed
+namespace MoEmbed.Handlers
 {
-    namespace Handlers
+    interface IHandler
     {
-        interface IHandler
-        {
-            Uri Uri { get; set; }
-            void Init(Uri uri);
-            bool CanHandle();
-            EmbedObject GetEmbedObject();
-        }
+        Uri Uri { get; set; }
+        void Init(Uri uri);
+        bool CanHandle();
+        EmbedObject GetEmbedObject();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
