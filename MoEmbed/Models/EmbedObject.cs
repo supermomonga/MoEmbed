@@ -11,10 +11,10 @@ namespace MoEmbed.Models
     {
         // See spec: http://oembed.com/#section2
 
-        [JsonIgnoreAttribute]
+        [JsonIgnore]
         public Types Type { get; }
 
-        [JsonPropertyAttribute("type")]
+        [JsonProperty("type")]
         public string TypeString
         {
             get
@@ -31,7 +31,7 @@ namespace MoEmbed.Models
         }
 
         // Version is fixed.
-        [JsonPropertyAttribute]
+        [JsonProperty]
         public static string Version => "1.0";
 
         public string Title { get; set; }
