@@ -32,7 +32,7 @@ namespace MoEmbed.Models
 
         // Version is fixed.
         [JsonPropertyAttribute]
-        public static string Version { get; } = "1.0";
+        public static string Version => "1.0";
 
         public string Title { get; set; }
 
