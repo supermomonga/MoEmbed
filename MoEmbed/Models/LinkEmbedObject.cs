@@ -17,10 +17,14 @@ namespace MoEmbed.Models
     {
         // Requred properties of this type
 
+        public override Types Type => Types.Link;
+
+        
+
         // Optional properties of this type
 
         public LinkEmbedObject(string uri) : this(new Uri(uri)) { }
-        public LinkEmbedObject(Uri uri) : base(Types.Link) { }
+        public LinkEmbedObject(Uri uri) { }
         public async override Task FetchAsync()
         {
             // ~~~~
