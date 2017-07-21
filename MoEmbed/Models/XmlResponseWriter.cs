@@ -29,12 +29,9 @@ namespace MoEmbed.Models
         public void WriteProperty(string name, object value)
         {
             ThrowIfDisposed();
-            if(value != null)
-            {
-                BaseWriter.WriteStartElement(name);
-                BaseWriter.WriteString(value.ToString());
-                BaseWriter.WriteEndElement(); 
-            }
+            BaseWriter.WriteStartElement(name);
+            BaseWriter.WriteString(value?.ToString() ?? string.Empty);
+            BaseWriter.WriteEndElement(); 
         }
 
         public void WriteEndResponse()
