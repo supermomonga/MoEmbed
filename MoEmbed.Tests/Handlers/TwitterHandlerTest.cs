@@ -8,7 +8,7 @@ namespace MoEmbed.Tests.Handlers
     {
         [Theory]
         [InlineData("https://twitter.com/mikoillust/status/887644409226866689")]
-        public void TwitterHandlerTest(string url)
+        public void Test(string url)
         {
         }
     }
