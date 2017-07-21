@@ -1,4 +1,5 @@
-
-
 bin/
 obj/
+/.vs/MoEmbed/v15
+/.vs/MoEmbed/v15/.suo
+*.user
