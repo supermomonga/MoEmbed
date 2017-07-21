@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace MoEmbed.Models
@@ -6,6 +8,19 @@ namespace MoEmbed.Models
     public class JsonResponseWriter : IResponseWriter
     {
         private readonly bool _LeaveOpen;
+
+        public JsonResponseWriter(Stream stream, bool leaveOpen = false)
+        {
+            BaseWriter = new JsonTextWriter(new StreamWriter(stream, new UTF8Encoding(false), 4096, leaveOpen));
+        }
+
+        public JsonResponseWriter(TextWriter textWriter, bool leaveOpen = false)
+        {
+            BaseWriter = new JsonTextWriter(textWriter)
+            {
+                CloseOutput = !leaveOpen
+            };
+        }
 
         public JsonResponseWriter(JsonWriter baseWriter, bool leaveOpen = false)
         {
