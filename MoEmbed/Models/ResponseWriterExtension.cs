@@ -22,7 +22,7 @@ namespace MoEmbed.Models
         {
             if(value != null)
             {
-                writer.WriteProperty(name, value);
+                writer.WriteProperty(name, value.Value);
             }
         }
     }
