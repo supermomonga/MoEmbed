@@ -13,6 +13,7 @@ namespace MoEmbed
 {
     public class Api
     {
+        private const string JSON_CONTENT_TYPE = "application/json";
         private static readonly List<IHandler> handlers = new List<IHandler> {
             new TwitterHandler()
         };
@@ -23,24 +24,47 @@ namespace MoEmbed
             var url = queries["url"].ToString();
             if (string.IsNullOrEmpty(url))
             {
+                context.Response.ContentType = JSON_CONTENT_TYPE;
                 await context.Response.WriteAsync("{ \"error\": \"No URL given\" }");
             }
             else
             {
-                string json;
+                var fmt = queries["format"].ToString();
+                string contentType;
+                IResponseWriter writer;
+                if (string.IsNullOrEmpty(fmt) || fmt == "json")
+                {
+                    contentType = JSON_CONTENT_TYPE;
+                    writer = new JsonResponseWriter(context.Response.Body);
+                }
+                else if (fmt == "xml")
+                {
+                    contentType = "text/xml";
+                    writer = new XmlResponseWriter(context.Response.Body);
+                }
+                else
+                {
+                    context.Response.ContentType = JSON_CONTENT_TYPE;
+                    await context.Response.WriteAsync("{ \"error\": \"Invalid format\" }");
+                    return;
+                }
+
                 try
                 {
                     var uri = new Uri(url);
                     var handler = handlers.Find(h => h.CanHandle(uri));
                     var embed = handler.GetEmbedObject(uri);
                     await embed.FetchAsync();
-                    json = embed.ToJsonString();
+
+                    context.Response.ContentType = contentType;
+                    await embed.WriteAsync(writer);
                 }
                 catch (System.UriFormatException)
                 {
-                    json = "{ \"error\": \"Invalid URL format. Please ensure you passed an URLEncoded URL.\" }";
+                    context.Response.ContentType = JSON_CONTENT_TYPE;
+                    var json = "{ \"error\": \"Invalid URL format. Please ensure you passed an URLEncoded URL.\" }";
+                    await context.Response.WriteAsync(json);
                 }
-                await context.Response.WriteAsync(json);
             }
         }
     }
