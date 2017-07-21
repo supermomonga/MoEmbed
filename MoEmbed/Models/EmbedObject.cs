@@ -100,6 +100,16 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("thumbnail_width", ThumbnailWidth);
             writer.WritePropertyIfNeeded("thumbnail_height", ThumbnailHeight);
         }
+
+        public override string ToString()
+        {
+            using (var w = new StringWriter())
+            using (var j = new JsonResponseWriter(w))
+            {
+                Write(j);                
+                return w.ToString();
+            }
+        }
     }
 }
 
