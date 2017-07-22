@@ -36,28 +36,29 @@ namespace MoEmbed.Models
         }
 
         public void WriteProperty(string name, bool value)
-            => WriteProperty(name, value ? "true": "false");
+            => WriteProperty(name, value ? "true" : "false");
 
         public void WriteProperty(string name, double value)
             => WriteProperty(name, value.ToString("r"));
-        
+
         public void WriteProperty(string name, object value)
         {
             ThrowIfDisposed();
             BaseWriter.WriteStartElement(name);
             BaseWriter.WriteString(value?.ToString() ?? string.Empty);
-            BaseWriter.WriteEndElement(); 
+            BaseWriter.WriteEndElement();
         }
 
         public void WriteEndResponse()
         {
             ThrowIfDisposed();
-            BaseWriter.WriteEndElement();            
+            BaseWriter.WriteEndElement();
+            BaseWriter.Flush();
         }
 
         private void ThrowIfDisposed()
         {
-            if(BaseWriter == null)
+            if (BaseWriter == null)
             {
                 throw new ObjectDisposedException(nameof(BaseWriter));
             }
@@ -65,7 +66,7 @@ namespace MoEmbed.Models
 
         public void Dispose()
         {
-            if(!_LeaveOpen)
+            if (!_LeaveOpen)
             {
                 BaseWriter?.Dispose();
             }

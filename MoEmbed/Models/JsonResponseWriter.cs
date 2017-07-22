@@ -49,7 +49,7 @@ namespace MoEmbed.Models
             BaseWriter.WritePropertyName(name);
             BaseWriter.WriteValue(value);
         }
-        
+
         public void WriteProperty(string name, object value)
         {
             ThrowIfDisposed();
@@ -60,12 +60,13 @@ namespace MoEmbed.Models
         public void WriteEndResponse()
         {
             ThrowIfDisposed();
-            BaseWriter.WriteEndObject();            
+            BaseWriter.WriteEndObject();
+            BaseWriter.Flush();
         }
 
         private void ThrowIfDisposed()
         {
-            if(BaseWriter == null)
+            if (BaseWriter == null)
             {
                 throw new ObjectDisposedException(nameof(BaseWriter));
             }
@@ -73,7 +74,7 @@ namespace MoEmbed.Models
 
         public void Dispose()
         {
-            if(!_LeaveOpen)
+            if (!_LeaveOpen)
             {
                 BaseWriter?.Close();
             }
