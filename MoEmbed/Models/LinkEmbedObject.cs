@@ -19,8 +19,6 @@ namespace MoEmbed.Models
 
         public override Types Type => Types.Link;
 
-        
-
         // Optional properties of this type
 
         public LinkEmbedObject(string uri) : this(new Uri(uri)) { }
@@ -32,22 +30,4 @@ namespace MoEmbed.Models
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
