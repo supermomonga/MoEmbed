@@ -9,7 +9,7 @@ namespace MoEmbed.Handlers
     class TwitterHandler : IHandler
     {
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/\d+");
-        
+
         public bool CanHandle(Uri uri)
         {
             return regex.IsMatch(uri.ToString());
