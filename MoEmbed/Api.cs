@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using MoEmbed.Models;
 using MoEmbed.Handlers;
 
@@ -13,12 +14,18 @@ namespace MoEmbed
 {
     public class Api
     {
+        private readonly ILogger<Api> _logger;
         private const string JSON_CONTENT_TYPE = "application/json";
         private static readonly List<IHandler> handlers = new List<IHandler> {
             new TwitterHandler()
         };
 
-        public static async Task Embed(HttpContext context)
+        public Api(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.CreateLogger<Api>();
+        }
+
+        public async Task Embed(HttpContext context)
         {
             var queries = context.Request.Query;
             var url = queries["url"].ToString();
@@ -51,8 +58,10 @@ namespace MoEmbed
 
                 try
                 {
+                    _logger.LogInformation("Handling URL: {url}", url);
                     var uri = new Uri(url);
                     var handler = handlers.Find(h => h.CanHandle(uri));
+                    _logger.LogInformation("Handler: {handler}", handler);
                     var embed = handler.GetEmbedObject(uri);
                     await embed.FetchAsync();
 

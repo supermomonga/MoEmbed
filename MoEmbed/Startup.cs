@@ -29,9 +29,9 @@ namespace MoEmbed
             {
                 app.UseDeveloperExceptionPage();
             }
-
             var routeBuilder = new RouteBuilder(app);
-            routeBuilder.MapGet("", MoEmbed.Api.Embed);
+            var api = new Api(loggerFactory);
+            routeBuilder.MapGet("", api.Embed);
 
             app.UseRouter(routeBuilder.Build());
         }
