@@ -37,38 +37,38 @@ namespace MoEmbed.Models
 
         [DefaultValue(null)]
         public virtual string Title { get; set; }
-        
+
         [DefaultValue(null)]
         public virtual string AuthorName { get; set; }
-                
+
         [DefaultValue(null)]
         public virtual Uri AuthorUrl { get; set; }
-                
+
         [DefaultValue(null)]
         public virtual string ProviderName { get; set; }
-                
+
         [DefaultValue(null)]
         public virtual Uri ProviderUrl { get; set; }
-                
+
         [DefaultValue(null)]
         public virtual int? CacheAge { get; set; }
-                
+
         [DefaultValue(null)]
         public virtual Uri ThumbnailUrl { get; set; }
-                
+
         [DefaultValue(null)]
         public virtual int? ThumbnailWidth { get; set; }
-        
+
         [DefaultValue(null)]
         public virtual int? ThumbnailHeight { get; set; }
-        
+
         #endregion optional properties
 
         public abstract Task FetchAsync();
 
         public async Task WriteJsonAsync(Stream stream)
         {
-            using(var r = new JsonResponseWriter(stream, leaveOpen: true))
+            using (var r = new JsonResponseWriter(stream, leaveOpen: true))
             {
                 await WriteAsync(r);
             }
@@ -106,7 +106,7 @@ namespace MoEmbed.Models
             using (var w = new StringWriter())
             using (var j = new JsonResponseWriter(w))
             {
-                Write(j);                
+                Write(j);
                 return w.ToString();
             }
         }
