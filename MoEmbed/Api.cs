@@ -16,8 +16,9 @@ namespace MoEmbed
     {
         private readonly ILogger<Api> _logger;
         private const string JSON_CONTENT_TYPE = "application/json";
-        private static readonly List<IHandler> handlers = new List<IHandler> {
-            new TwitterHandler()
+
+        private static readonly List<IEmbedObjectHandler> handlers = new List<IEmbedObjectHandler> {
+            new TwitterEmbedObjectHandler()
         };
 
         public Api(ILoggerFactory loggerFactory)
@@ -78,16 +79,3 @@ namespace MoEmbed
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

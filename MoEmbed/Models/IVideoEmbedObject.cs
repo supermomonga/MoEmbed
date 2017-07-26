@@ -1,6 +1,6 @@
 namespace MoEmbed.Models
 {
-    interface IVideoEmbedObject
+    public interface IVideoEmbedObject
     {
         // Responses of this type must obey
         // the maxwidth and maxheight request parameters.
@@ -15,4 +15,3 @@ namespace MoEmbed.Models
         int Height { get; set; }
     }
 }
-

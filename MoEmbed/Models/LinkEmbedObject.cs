@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MoEmbed.Models
 {
-    class LinkEmbedObject : EmbedObject
+    public class LinkEmbedObject : EmbedObject
     {
         // Requred properties of this type
 
@@ -20,4 +20,3 @@ namespace MoEmbed.Models
         }
     }
 }
-
