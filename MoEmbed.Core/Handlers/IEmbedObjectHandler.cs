@@ -4,10 +4,10 @@ using MoEmbed.Models;
 
 namespace MoEmbed.Handlers
 {
-    interface IHandler
+    public interface IEmbedObjectHandler
     {
         bool CanHandle(Uri uri);
+
         EmbedObject GetEmbedObject(Uri uri);
     }
 }
-

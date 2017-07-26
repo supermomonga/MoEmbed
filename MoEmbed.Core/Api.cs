@@ -16,9 +16,11 @@ namespace MoEmbed
     {
         private readonly ILogger<Api> _logger;
         private const string JSON_CONTENT_TYPE = "application/json";
-        private static readonly List<IHandler> handlers = new List<IHandler> {
-            new TwitterHandler()
-        };
+
+        private List<IEmbedObjectHandler> _Handlers;
+
+        public List<IEmbedObjectHandler> Handlers
+            => _Handlers ?? (_Handlers = new List<IEmbedObjectHandler>());
 
         public Api(ILoggerFactory loggerFactory)
         {
@@ -60,7 +62,7 @@ namespace MoEmbed
                 {
                     _logger.LogInformation("Handling URL: {url}", url);
                     var uri = new Uri(url);
-                    var handler = handlers.Find(h => h.CanHandle(uri));
+                    var handler = Handlers.Find(h => h.CanHandle(uri));
                     _logger.LogInformation("Handler: {handler}", handler);
                     var embed = handler.GetEmbedObject(uri);
                     await embed.FetchAsync();
@@ -78,16 +80,3 @@ namespace MoEmbed
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

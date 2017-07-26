@@ -9,7 +9,7 @@ namespace MoEmbed.Models
 {
     public enum Types { Photo, Video, Link, Rich }
 
-    abstract class EmbedObject
+    public abstract class EmbedObject
     {
         // See spec: http://oembed.com/#section2
 
@@ -112,4 +112,3 @@ namespace MoEmbed.Models
         }
     }
 }
-

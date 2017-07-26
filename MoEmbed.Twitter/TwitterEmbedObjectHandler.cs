@@ -1,4 +1,3 @@
-
 using System;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
@@ -6,7 +5,7 @@ using MoEmbed.Models;
 
 namespace MoEmbed.Handlers
 {
-    class TwitterHandler : IHandler
+    public class TwitterEmbedObjectHandler : IEmbedObjectHandler
     {
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/\d+");
 

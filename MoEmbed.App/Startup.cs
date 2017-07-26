@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MoEmbed.Handlers;
 
 namespace MoEmbed
 {
@@ -31,6 +32,7 @@ namespace MoEmbed
             }
             var routeBuilder = new RouteBuilder(app);
             var api = new Api(loggerFactory);
+            api.Handlers.Add(new TwitterEmbedObjectHandler());
             routeBuilder.MapGet("", api.Embed);
 
             app.UseRouter(routeBuilder.Build());

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoEmbed\MoEmbed.csproj" />
+    <ProjectReference Include="..\MoEmbed.Core\MoEmbed.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

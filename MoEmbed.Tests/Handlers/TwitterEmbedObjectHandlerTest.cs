@@ -1,10 +1,9 @@
 using System;
 using Xunit;
-using MoEmbed;
 
 namespace MoEmbed.Tests.Handlers
 {
-    public class TwitterHandlerTest
+    public class TwitterEmbedObjectHandlerTest
     {
         [Theory]
         [InlineData("https://twitter.com/mikoillust/status/887644409226866689")]
@@ -13,4 +12,3 @@ namespace MoEmbed.Tests.Handlers
         }
     }
 }
-

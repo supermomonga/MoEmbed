@@ -1,6 +1,6 @@
 namespace MoEmbed.Models
 {
-    interface IPhotoEmbedObject
+    public interface IPhotoEmbedObject
     {
         // Responses of this type must obey
         // the maxwidth and maxheight request parameters.
@@ -14,4 +14,3 @@ namespace MoEmbed.Models
         int Height { get; set; }
     }
 }
-
