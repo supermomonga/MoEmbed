@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 
 namespace MoEmbed.Models
 {
@@ -179,7 +180,11 @@ namespace MoEmbed.Models
 
         private void LoadHtml(string html)
         {
-            // TODO:this.Title = "fetched title";
+            var hd = new HtmlDocument();
+            hd.LoadHtml(html);
+
+            var nav = hd.CreateNavigator();
+            Title = nav.SelectSingleNode("//html/head/title/text()")?.Value;
         }
     }
 }
