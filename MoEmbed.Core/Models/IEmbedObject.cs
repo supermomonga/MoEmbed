@@ -46,21 +46,27 @@ namespace MoEmbed.Models
 
         /// <summary>
         /// Gets a URL to a thumbnail image representing the resource.
+        /// </summary>
+        /// <remarks>
         /// The thumbnail must respect any <see cref="ConsumerRequest.MaxWidth"/> and <see cref="ConsumerRequest.MaxHeight"/> parameters.
         /// If this parameter is present, <see cref="ThumbnailWidth" /> and <see cref="ThumbnailHeight" /> must also be present.
-        /// </summary>
+        /// </remarks>
         Uri ThumbnailUrl { get; }
 
         /// <summary>
         /// Gets the width of the optional thumbnail.
-        /// If this parameter is present, <see cref="ThumbnailUrl" /> and <see cref="ThumbnailHeight" /> must also be present.
         /// </summary>
+        /// <remarks>
+        /// If this parameter is present, <see cref="ThumbnailUrl" /> and <see cref="ThumbnailHeight" /> must also be present.
+        /// </remarks>
         int? ThumbnailWidth { get; }
 
         /// <summary>
         /// Gets the height of the optional thumbnail.
-        /// If this parameter is present, <see cref="ThumbnailUrl" /> and <see cref="ThumbnailWidth" /> must also be present.
         /// </summary>
+        /// <remarks>
+        /// If this parameter is present, <see cref="ThumbnailUrl" /> and <see cref="ThumbnailWidth" /> must also be present.
+        /// </remarks>
         int? ThumbnailHeight { get; }
     }
 }
