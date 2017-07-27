@@ -4,6 +4,11 @@ namespace MoEmbed.Models
 {
     public sealed class ConsumerRequest
     {
+        public ConsumerRequest(Uri url)
+        {
+            Url = url;
+        }
+
         /// <summary>
         /// Gets the URL to retrieve embedding information for.
         /// </summary>

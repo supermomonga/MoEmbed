@@ -1,9 +1,31 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace MoEmbed.Models
 {
     public static class ResponseWriterExtension
     {
+        public static void WritePropertyIfNeeded(this IResponseWriter writer, string name, object value)
+        {
+            if (value != null)
+            {
+                var t = value.GetType();
+
+                if (t == typeof(bool))
+                {
+                    writer.WriteProperty(name, (bool)value);
+                }
+                else if (Regex.IsMatch(t.FullName, "^System.(U?Int(16|32|64)|S?Byte|Single|Double|Decimal)$"))
+                {
+                    writer.WriteProperty(name, ((IConvertible)value).ToDouble(null));
+                }
+                else
+                {
+                    writer.WriteProperty(name, value.ToString());
+                }
+            }
+        }
+
         public static void WritePropertyIfNeeded(this IResponseWriter writer, string name, string value)
         {
             if (value != null)
