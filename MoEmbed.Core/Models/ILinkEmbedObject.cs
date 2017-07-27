@@ -1,12 +1,10 @@
 namespace MoEmbed.Models
 {
-    public interface ILinkEmbedObject
+    /// <summary>
+    /// Responses of this type allow a provider to return any generic embed data (such as <see cref="IEmbedObject.Title"/> and <see cref="IEmbedObject.AuthorName"/>), without providing either the url or html parameters.
+    /// The consumer may then link to the resource, using the URL specified in the original request.
+    /// </summary>
+    public interface ILinkEmbedObject : IEmbedObject
     {
-        // Responses of this type must obey
-        // the maxwidth and maxheight request parameters.
-
-        string Html { get; set; }
-        int Width { get; set; }
-        int Height { get; set; }
     }
 }

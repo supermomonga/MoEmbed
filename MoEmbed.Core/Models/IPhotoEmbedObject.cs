@@ -1,16 +1,27 @@
+using System;
+
 namespace MoEmbed.Models
 {
-    public interface IPhotoEmbedObject
+    /// <summary>
+    /// This type is used for representing static photos.
+    /// </summary>
+    public interface IPhotoEmbedObject : IEmbedObject
     {
-        // Responses of this type must obey
-        // the maxwidth and maxheight request parameters.
+        /// <summary>
+        /// Gets the source URL of the image.
+        /// Consumers should be able to insert this URL into an &lt;img&gt; element.
+        /// Only HTTP and HTTPS URLs are valid.
+        /// </summary>
+        Uri Url { get; }
 
-        // The source URL of the image.
-        // Consumers should be able to insert this URL into an
-        // <img> element. Only HTTP and HTTPS URLs are valid.
-        string Url { get; set; }
+        /// <summary>
+        /// Gets the width in pixels of the image specified in the <see cref="ConsumerRequest.Url"/> parameter.
+        /// </summary>
+        int Width { get; }
 
-        int Width { get; set; }
-        int Height { get; set; }
+        /// <summary>
+        /// Gets the height in pixels of the image specified in the <see cref="ConsumerRequest.Url"/> parameter.
+        /// </summary>
+        int Height { get; }
     }
 }
