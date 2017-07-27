@@ -1,0 +1,163 @@
+﻿<#@ template language="C#" debug="True" hostspecific="true" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using MoEmbed.Models;
+namespace MoEmbed.Handlers
+{
+<#
+var skip = new HashSet<string>()
+{
+	"twitter"
+};
+var nameMap = new Dictionary<string, string>()
+{
+	["23hq"] = "TwentyThree"
+};
+var schemeUrls = new List<string>();
+var generated = new List<string>();
+
+var d = Host.ResolvePath("../../oembed/providers");
+foreach (var f in Directory.GetFiles(d, "*.yml"))
+{
+	var n = Path.GetFileNameWithoutExtension(f);
+	if (skip.Contains(n))
+	{
+		continue;
+	}
+	if (nameMap.ContainsKey(n))
+	{
+		n = nameMap[n];
+	}
+	else
+	{
+		n = string.Concat(n.Split('_', '.', '-').Select(s => s.Substring(0, 1).ToUpper() + s.Substring(1)));
+	}
+	var schemes = false;
+	string prov = null;
+	string url = null;
+	schemeUrls.Clear();
+	using (var sr = new StreamReader(f))
+	{
+		for (var l = sr.ReadLine(); l != null; l = sr.ReadLine())
+		{
+			if (schemes)
+			{
+				var um = Regex.Match(l, "    - ");
+				if (um.Success)
+				{
+					var u = l.Substring(um.Length).Trim('\'', '"', ' ');
+					schemeUrls.Add(string.Join("[^/]", u.Split(new [] {'*'}, StringSplitOptions.RemoveEmptyEntries).Select(Regex.Escape)));
+					continue;
+				}
+				schemes = false;
+			}
+
+			var pm = Regex.Match(l, "  provider_url: ");
+			if (pm.Success)
+			{
+				prov = l.Substring(pm.Length).Trim('\'', '"', ' ');
+				continue;
+			}
+
+			if (Regex.IsMatch(l, "  - schemes:"))
+			{
+				schemes = true;
+				continue;
+			}
+			var em = Regex.Match(l, @"^\s+-?\s+url:\s*");
+			if (em.Success)
+			{
+				url = l.Substring(em.Length).Trim('\'', '"', ' ');
+				continue;
+			}
+		}
+	}
+
+	if (string.IsNullOrWhiteSpace(url) || string.IsNullOrWhiteSpace(prov))
+	{
+#>
+	// TODO: <#= Path.GetFileName(f) #> Error: No Endpoint URL
+<#
+	}
+	else
+	{
+		generated.Add(n);
+#>
+
+	/// <summary>
+	/// Handles oEmbed request for <see href="<#= prov #>" />.
+	/// </summary>
+	public sealed class <#= n #>EmbedObjectHandler : RemoteEmbedObjectHandler
+	{
+<#
+		if (schemeUrls.Count > 2)
+		{
+#>
+		private static readonly Regex _UriPattern = new Regex(@"^(<#= string.Join("|", schemeUrls) #>)");
+<#
+		}
+		else if (schemeUrls.Any())
+		{
+#>
+		private static readonly Regex _UriPattern = new Regex(@"<#= schemeUrls[0] #>");
+<#
+		}
+		else
+		{
+#>
+		private static readonly Regex _UriPattern = new Regex(@"^<#= Regex.Escape(prov) #>");
+<#
+		}
+#>
+		/// <inheritdoc />
+		public override bool CanHandle(Uri uri)
+			=> _UriPattern.IsMatch(uri.ToString());
+
+		/// <inheritdoc />
+		protected override Uri GetProviderUriFor(ConsumerRequest request)
+<#
+		if (url.EndsWith(".xml") || url.EndsWith(".json"))
+		{
+#>
+			=> GetProviderUriWithoutFormat("<#= url #>", request);
+<#
+		}
+		else if (url.EndsWith(".{format}"))
+		{
+#>
+			=> GetProviderUriWithExtension("<#= url.Substring(0, url.Length - 9) #>", request);
+<#
+		}
+		else
+		{
+#>
+			=> GetProviderUriCore("<#= url.Split('?')[0] #>", request);
+<#
+		}
+#>
+	}
+<#
+	}
+}
+#>
+	partial class RemoteEmbedObjectHandler
+	{
+		public static IEnumerable<RemoteEmbedObjectHandler> CreateKnownHandlers()
+		{
+<#
+	foreach (var n in generated)
+	{
+#>
+			yield return new <#= n #>EmbedObjectHandler();
+<#
+	}
+#>
+		}
+	}
+}

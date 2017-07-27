@@ -33,6 +33,7 @@ namespace MoEmbed
             var routeBuilder = new RouteBuilder(app);
             var api = new Api(loggerFactory);
             api.Handlers.Add(new TwitterEmbedObjectHandler());
+            api.Handlers.AddRange(RemoteEmbedObjectHandler.CreateKnownHandlers());
             routeBuilder.MapGet("", api.Embed);
 
             app.UseRouter(routeBuilder.Build());
