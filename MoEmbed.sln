@@ -1,15 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoEmbed.Tests", "MoEmbed.Tests\MoEmbed.Tests.csproj", "{15D8E42A-916A-45FC-A336-CEADC807C815}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoEmbed.Core", "MoEmbed.Core\MoEmbed.Core.csproj", "{325CE248-4D3E-405B-BA1E-9DBFA012C42F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoEmbed.Twitter", "MoEmbed.Twitter\MoEmbed.Twitter.csproj", "{6A34DE81-D12C-480B-90B5-B9431342C3D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoEmbed.Twitter", "MoEmbed.Twitter\MoEmbed.Twitter.csproj", "{6A34DE81-D12C-480B-90B5-B9431342C3D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoEmbed.App", "MoEmbed.App\MoEmbed.App.csproj", "{7B314662-0857-438D-8F59-BD05DB1C0FF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoEmbed.App", "MoEmbed.App\MoEmbed.App.csproj", "{7B314662-0857-438D-8F59-BD05DB1C0FF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1998198-9A24-43CF-8A22-CC3CBF86E391}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.mkd = README.mkd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
