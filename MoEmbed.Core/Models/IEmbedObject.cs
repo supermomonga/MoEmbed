@@ -1,9 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 namespace MoEmbed.Models
 {
     public interface IEmbedObject
     {
+        /// <summary>
+        /// Gets media list.
+        /// </summary>
+        List<Media> Medias { get; }
+
         /// <summary>
         /// Gets the resource type. Valid values, along with value-specific parameters, are described below.
         /// </summary>
