@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
@@ -23,6 +24,7 @@ namespace MoEmbed
 
             Configuration = builder.Build();
         }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -41,7 +43,14 @@ namespace MoEmbed
             }
             var routeBuilder = new RouteBuilder(app);
             var api = new Api(loggerFactory);
-            api.Handlers.Add(new TwitterEmbedObjectHandler(Configuration["TwitterAccessToken"]));
+
+            var twitterConsumerKey = Configuration["TwitterConsumerKey"];
+            var twitterConsumerSecret = Configuration["TwitterConsumerSecret"];
+            if(!string.IsNullOrEmpty(twitterConsumerKey) && !string.IsNullOrEmpty(twitterConsumerSecret))
+            {
+                api.Handlers.Add(new TwitterEmbedObjectHandler(twitterConsumerKey, twitterConsumerSecret));
+            }
+
             api.Handlers.AddRange(RemoteEmbedObjectHandler.CreateKnownHandlers());
             routeBuilder.MapGet("", api.Embed);
 
@@ -49,8 +58,6 @@ namespace MoEmbed
         }
     }
 }
-
-
 
 
 

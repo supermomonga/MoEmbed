@@ -1,18 +1,24 @@
 using System;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
+using Tweetinvi.Models;
 
 namespace MoEmbed.Handlers
 {
     public class TwitterEmbedObjectHandler : IEmbedObjectHandler
     {
-        private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/\d+");
+        private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/(?<statusId>\d+)");
 
-        private string AccessToken { get; }
+        private ITwitterCredentials Credentials { get; }
 
-        public TwitterEmbedObjectHandler(string accessToken)
+        public TwitterEmbedObjectHandler(string consumerKey, string consumerSecret)
         {
-            this.AccessToken = accessToken;
+            this.Credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
+        }
+
+        public TwitterEmbedObjectHandler(string consumerKey, string consumerSecret, string accessToken)
+        {
+            this.Credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, accessToken);
         }
 
         public bool CanHandle(Uri uri)
@@ -22,15 +28,8 @@ namespace MoEmbed.Handlers
 
         public EmbedObject GetEmbedObject(Uri uri)
         {
-            // TODO: implement this.
-            return new LinkEmbedObject(uri);
+            return new TwitterEmbedObject(uri, this.Credentials);
         }
     }
 }
-
-
-
-
-
-
 
