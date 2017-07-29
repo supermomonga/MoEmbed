@@ -8,6 +8,13 @@ namespace MoEmbed.Handlers
     {
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/\d+");
 
+        private string AccessToken { get; }
+
+        public TwitterEmbedObjectHandler(string accessToken)
+        {
+            this.AccessToken = accessToken;
+        }
+
         public bool CanHandle(Uri uri)
         {
             return regex.IsMatch(uri.ToString());
@@ -20,3 +27,10 @@ namespace MoEmbed.Handlers
         }
     }
 }
+
+
+
+
+
+
+

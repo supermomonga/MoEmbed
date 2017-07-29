@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MoEmbed.Handlers;
@@ -9,6 +10,19 @@ namespace MoEmbed
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -27,7 +41,7 @@ namespace MoEmbed
             }
             var routeBuilder = new RouteBuilder(app);
             var api = new Api(loggerFactory);
-            api.Handlers.Add(new TwitterEmbedObjectHandler());
+            api.Handlers.Add(new TwitterEmbedObjectHandler(Configuration["TwitterAccessToken"]));
             api.Handlers.AddRange(RemoteEmbedObjectHandler.CreateKnownHandlers());
             routeBuilder.MapGet("", api.Embed);
 
