@@ -9,4 +9,8 @@
     <ProjectReference Include="..\MoEmbed.Core\MoEmbed.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="TweetinviAPI" Version="2.0.0" />
+  </ItemGroup>
+
 </Project>
