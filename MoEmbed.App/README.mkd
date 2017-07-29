@@ -1,0 +1,8 @@
+
+# MoEmbed.App
+
+## Get Twitter bearer token
+
+```sh
+./build.sh --target TwitterSetup
+```
