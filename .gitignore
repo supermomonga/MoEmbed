@@ -267,3 +267,6 @@ secrets.json
 build.sh
 build.ps1
 tools
+
+# VSCode
+.vscode
