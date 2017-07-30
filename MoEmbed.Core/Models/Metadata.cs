@@ -3,9 +3,10 @@ using System.Threading.Tasks;
 
 namespace MoEmbed.Models
 {
+    // TODO: Move to Another file
     public enum Types { Photo, Video, Link, Rich }
 
-    public abstract class EmbedObject
+    public abstract class Metadata
     {
         // See spec: http://oembed.com/#section2
 

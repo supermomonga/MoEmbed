@@ -26,7 +26,7 @@ namespace MoEmbed.Providers
             return regex.IsMatch(uri.ToString());
         }
 
-        public EmbedObject GetEmbedObject(Uri uri)
+        public Metadata GetEmbedObject(Uri uri)
         {
             return new TwitterEmbedObject(uri, this.Credentials);
         }

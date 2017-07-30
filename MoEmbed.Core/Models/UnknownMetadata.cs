@@ -8,19 +8,22 @@ using HtmlAgilityPack;
 
 namespace MoEmbed.Models
 {
+    /// <summary>
+    /// Represents the <see cref="Metadata"/> for the unknown URL.
+    /// </summary>
     [Serializable]
-    public class LinkEmbedObject : EmbedObject, ILinkEmbedObject
+    public class UnknownMetadata : Metadata, ILinkEmbedObject
     {
-        public LinkEmbedObject()
+        public UnknownMetadata()
         {
         }
 
-        public LinkEmbedObject(string uri)
+        public UnknownMetadata(string uri)
             : this(new Uri(uri))
         {
         }
 
-        public LinkEmbedObject(Uri uri)
+        public UnknownMetadata(Uri uri)
         {
             Uri = uri;
         }

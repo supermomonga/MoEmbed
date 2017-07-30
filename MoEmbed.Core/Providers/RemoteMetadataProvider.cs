@@ -82,8 +82,8 @@ namespace MoEmbed.Providers
             return new Uri(s.ToString());
         }
 
-        public EmbedObject GetEmbedObject(Uri uri)
-            => new RemoteEmbedObject()
+        public Metadata GetEmbedObject(Uri uri)
+            => new RemoteMetadata()
             {
                 Uri = uri,
                 OEmbedUrl = GetProviderUriFor(new ConsumerRequest(uri))

@@ -7,6 +7,6 @@ namespace MoEmbed.Providers
     {
         bool CanHandle(Uri uri);
 
-        EmbedObject GetEmbedObject(Uri uri);
+        Metadata GetEmbedObject(Uri uri);
     }
 }

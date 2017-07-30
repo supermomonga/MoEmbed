@@ -11,7 +11,7 @@ using Tweetinvi.Models;
 namespace MoEmbed.Models
 {
     [Serializable]
-    public class TwitterEmbedObject : EmbedObject, IRichEmbedObject
+    public class TwitterEmbedObject : Metadata, IRichEmbedObject
     {
         public TwitterEmbedObject(string uri, ITwitterCredentials credentials)
             : this(new Uri(uri), credentials)

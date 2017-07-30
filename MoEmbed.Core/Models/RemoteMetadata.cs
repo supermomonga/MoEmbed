@@ -9,10 +9,10 @@ using Newtonsoft.Json.Linq;
 namespace MoEmbed.Models
 {
     /// <summary>
-    /// Represents the EmbedObject fetching from remote oEmbed providers.
+    /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
     /// </summary>
     [Serializable]
-    public class RemoteEmbedObject : EmbedObject
+    public class RemoteMetadata : Metadata
     {
         private Dictionary<string, object> _Values;
 
