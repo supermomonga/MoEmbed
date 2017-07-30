@@ -3,20 +3,20 @@ using System.Text.RegularExpressions;
 using MoEmbed.Models;
 using Tweetinvi.Models;
 
-namespace MoEmbed.Handlers
+namespace MoEmbed.Providers
 {
-    public class TwitterEmbedObjectHandler : IEmbedObjectHandler
+    public class TwitterMetadataProvider : IMetadataProvider
     {
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/(?<statusId>\d+)");
 
         private ITwitterCredentials Credentials { get; }
 
-        public TwitterEmbedObjectHandler(string consumerKey, string consumerSecret)
+        public TwitterMetadataProvider(string consumerKey, string consumerSecret)
         {
             this.Credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
         }
 
-        public TwitterEmbedObjectHandler(string consumerKey, string consumerSecret, string accessToken)
+        public TwitterMetadataProvider(string consumerKey, string consumerSecret, string accessToken)
         {
             this.Credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, accessToken);
         }

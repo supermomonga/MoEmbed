@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using MoEmbed.Models;
-using MoEmbed.Handlers;
+using MoEmbed.Providers;
 
 namespace MoEmbed
 {
@@ -13,10 +13,10 @@ namespace MoEmbed
         private readonly ILogger<MetadataService> _logger;
         private const string JSON_CONTENT_TYPE = "application/json";
 
-        private List<IEmbedObjectHandler> _Handlers;
+        private List<IMetadataProvider> _Providers;
 
-        public List<IEmbedObjectHandler> Handlers
-            => _Handlers ?? (_Handlers = new List<IEmbedObjectHandler>());
+        public List<IMetadataProvider> Providers
+            => _Providers ?? (_Providers = new List<IMetadataProvider>());
 
         public MetadataService(ILoggerFactory loggerFactory)
         {
@@ -58,7 +58,7 @@ namespace MoEmbed
                 {
                     _logger.LogInformation("Handling URL: {url}", url);
                     var uri = new Uri(url);
-                    var handler = Handlers.Find(h => h.CanHandle(uri));
+                    var handler = Providers.Find(h => h.CanHandle(uri));
                     _logger.LogInformation("Handler: {handler}", handler);
                     var embed = handler.GetEmbedObject(uri);
                     await embed.FetchAsync();

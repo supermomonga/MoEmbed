@@ -2,9 +2,9 @@ using System;
 using System.Text;
 using MoEmbed.Models;
 
-namespace MoEmbed.Handlers
+namespace MoEmbed.Providers
 {
-    public abstract partial class RemoteEmbedObjectHandler : IEmbedObjectHandler
+    public abstract partial class RemoteMetadataProvider : IMetadataProvider
     {
         public abstract bool CanHandle(Uri uri);
 

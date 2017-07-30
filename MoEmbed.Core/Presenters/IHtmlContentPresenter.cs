@@ -1,4 +1,4 @@
-namespace MoEmbed.Handlers
+namespace MoEmbed.Presenters
 {
     interface IHtmlContentPresenter
     {

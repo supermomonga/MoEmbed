@@ -1,9 +1,9 @@
 using System;
 using MoEmbed.Models;
 
-namespace MoEmbed.Handlers
+namespace MoEmbed.Providers
 {
-    public interface IEmbedObjectHandler
+    public interface IMetadataProvider
     {
         bool CanHandle(Uri uri);
 

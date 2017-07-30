@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MoEmbed.Handlers;
+using MoEmbed.Providers;
 
 namespace MoEmbed
 {
@@ -48,10 +48,10 @@ namespace MoEmbed
             var twitterConsumerSecret = Configuration["TwitterConsumerSecret"];
             if(!string.IsNullOrEmpty(twitterConsumerKey) && !string.IsNullOrEmpty(twitterConsumerSecret))
             {
-                api.Handlers.Add(new TwitterEmbedObjectHandler(twitterConsumerKey, twitterConsumerSecret));
+                api.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
             }
 
-            api.Handlers.AddRange(RemoteEmbedObjectHandler.CreateKnownHandlers());
+            api.Providers.AddRange(RemoteMetadataProvider.CreateKnownHandlers());
             routeBuilder.MapGet("", api.Embed);
 
             app.UseRouter(routeBuilder.Build());
