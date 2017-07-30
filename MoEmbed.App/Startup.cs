@@ -42,17 +42,17 @@ namespace MoEmbed
                 app.UseDeveloperExceptionPage();
             }
             var routeBuilder = new RouteBuilder(app);
-            var api = new MetadataService(loggerFactory);
+            var service = new MetadataService(loggerFactory);
 
             var twitterConsumerKey = Configuration["TwitterConsumerKey"];
             var twitterConsumerSecret = Configuration["TwitterConsumerSecret"];
-            if(!string.IsNullOrEmpty(twitterConsumerKey) && !string.IsNullOrEmpty(twitterConsumerSecret))
+            if (!string.IsNullOrEmpty(twitterConsumerKey) && !string.IsNullOrEmpty(twitterConsumerSecret))
             {
-                api.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
+                service.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
             }
 
-            api.Providers.AddRange(RemoteMetadataProvider.CreateKnownHandlers());
-            routeBuilder.MapGet("", api.Embed);
+            service.Providers.AddRange(RemoteMetadataProvider.CreateKnownHandlers());
+            routeBuilder.MapGet("", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
 
             app.UseRouter(routeBuilder.Build());
         }
