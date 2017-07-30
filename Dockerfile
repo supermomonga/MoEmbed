@@ -10,7 +10,7 @@ COPY ./MoEmbed.Tests/MoEmbed.Tests.csproj     ./MoEmbed.Tests/MoEmbed.Tests.cspr
 COPY ./MoEmbed.Twitter/MoEmbed.Twitter.csproj ./MoEmbed.Twitter/MoEmbed.Twitter.csproj
 RUN dotnet restore
 
-# Install entire source code
+# Copy entire source code
 COPY ./MoEmbed.App     ./MoEmbed.App
 COPY ./MoEmbed.Core    ./MoEmbed.Core
 COPY ./MoEmbed.Tests   ./MoEmbed.Tests
