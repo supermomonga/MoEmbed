@@ -8,9 +8,9 @@ using MoEmbed.Handlers;
 
 namespace MoEmbed
 {
-    public class Api
+    public class MetadataService
     {
-        private readonly ILogger<Api> _logger;
+        private readonly ILogger<MetadataService> _logger;
         private const string JSON_CONTENT_TYPE = "application/json";
 
         private List<IEmbedObjectHandler> _Handlers;
@@ -18,9 +18,9 @@ namespace MoEmbed
         public List<IEmbedObjectHandler> Handlers
             => _Handlers ?? (_Handlers = new List<IEmbedObjectHandler>());
 
-        public Api(ILoggerFactory loggerFactory)
+        public MetadataService(ILoggerFactory loggerFactory)
         {
-            _logger = loggerFactory.CreateLogger<Api>();
+            _logger = loggerFactory.CreateLogger<MetadataService>();
         }
 
         public async Task Embed(HttpContext context)

@@ -42,7 +42,7 @@ namespace MoEmbed
                 app.UseDeveloperExceptionPage();
             }
             var routeBuilder = new RouteBuilder(app);
-            var api = new Api(loggerFactory);
+            var api = new MetadataService(loggerFactory);
 
             var twitterConsumerKey = Configuration["TwitterConsumerKey"];
             var twitterConsumerSecret = Configuration["TwitterConsumerSecret"];
