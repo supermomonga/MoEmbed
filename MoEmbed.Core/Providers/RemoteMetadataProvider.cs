@@ -8,6 +8,9 @@ namespace MoEmbed.Providers
     {
         public abstract bool CanHandle(Uri uri);
 
+        public bool CanHandle(ConsumerRequest request)
+            => CanHandle(request.Url);
+
         protected abstract Uri GetProviderUriFor(ConsumerRequest request);
 
         protected static Uri GetProviderUriWithoutFormat(string serviceUri, ConsumerRequest request)
@@ -82,11 +85,17 @@ namespace MoEmbed.Providers
             return new Uri(s.ToString());
         }
 
-        public Metadata GetEmbedObject(Uri uri)
-            => new RemoteMetadata()
+        public Metadata GetMetadata(ConsumerRequest request)
+        {
+            if (!CanHandle(request))
             {
-                Uri = uri,
-                OEmbedUrl = GetProviderUriFor(new ConsumerRequest(uri))
+                return null;
+            }
+            return new RemoteMetadata()
+            {
+                Uri = request.Url,
+                OEmbedUrl = GetProviderUriFor(request)
             };
+        }
     }
 }

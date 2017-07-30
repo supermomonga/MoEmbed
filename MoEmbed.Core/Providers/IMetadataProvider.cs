@@ -5,8 +5,8 @@ namespace MoEmbed.Providers
 {
     public interface IMetadataProvider
     {
-        bool CanHandle(Uri uri);
+        bool CanHandle(ConsumerRequest  request);
 
-        Metadata GetEmbedObject(Uri uri);
+        Metadata GetMetadata(ConsumerRequest request);
     }
 }

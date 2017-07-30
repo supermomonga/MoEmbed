@@ -33,9 +33,7 @@ namespace MoEmbed.Models
         {
             get
             {
-                object t;
-                Types e;
-                if (_Values != null && _Values.TryGetValue("type", out t) && Enum.TryParse<Types>(t?.ToString(), out e))
+                if (_Values != null && _Values.TryGetValue("type", out object t) && Enum.TryParse<Types>(t?.ToString(), out Types e))
                 {
                     return e;
                 }

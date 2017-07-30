@@ -26,9 +26,17 @@ namespace MoEmbed.Providers
             return regex.IsMatch(uri.ToString());
         }
 
-        public Metadata GetEmbedObject(Uri uri)
+        public bool CanHandle(ConsumerRequest request)
+            => CanHandle(request.Url);
+
+
+        public Metadata GetMetadata(ConsumerRequest request)
         {
-            return new TwitterEmbedObject(uri, this.Credentials);
+            if (!CanHandle(request))
+            {
+                return null;
+            }
+            return new TwitterEmbedObject(request.Url, this.Credentials);
         }
     }
 }
