@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Generated Codes\RemoteEmbedObjectHandlers.tt">
+    <None Update="Generated Codes\RemoteMetadataProviders.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RemoteEmbedObjectHandlers.cs</LastGenOutput>
+      <LastGenOutput>RemoteMetadataProviders.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -38,10 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Generated Codes\RemoteEmbedObjectHandlers.cs">
+    <Compile Update="Generated Codes\RemoteMetadataProviders.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>RemoteEmbedObjectHandlers.tt</DependentUpon>
+      <DependentUpon>RemoteMetadataProviders.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

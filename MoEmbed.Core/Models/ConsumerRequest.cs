@@ -8,6 +8,13 @@ namespace MoEmbed.Models
         {
             Url = url;
         }
+        public ConsumerRequest(Uri url, int? maxWidth, int? maxHeight, string format)
+        {
+            Url = url;
+            MaxWidth = maxWidth;
+            MaxHeight = maxHeight;
+            Format = format;
+        }
 
         /// <summary>
         /// Gets the URL to retrieve embedding information for.

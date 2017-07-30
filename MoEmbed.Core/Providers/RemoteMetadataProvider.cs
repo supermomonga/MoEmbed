@@ -2,11 +2,14 @@ using System;
 using System.Text;
 using MoEmbed.Models;
 
-namespace MoEmbed.Handlers
+namespace MoEmbed.Providers
 {
-    public abstract partial class RemoteEmbedObjectHandler : IEmbedObjectHandler
+    public abstract partial class RemoteMetadataProvider : IMetadataProvider
     {
         public abstract bool CanHandle(Uri uri);
+
+        public bool CanHandle(ConsumerRequest request)
+            => CanHandle(request.Url);
 
         protected abstract Uri GetProviderUriFor(ConsumerRequest request);
 
@@ -82,11 +85,17 @@ namespace MoEmbed.Handlers
             return new Uri(s.ToString());
         }
 
-        public EmbedObject GetEmbedObject(Uri uri)
-            => new RemoteEmbedObject()
+        public Metadata GetMetadata(ConsumerRequest request)
+        {
+            if (!CanHandle(request))
             {
-                Uri = uri,
-                OEmbedUrl = GetProviderUriFor(new ConsumerRequest(uri))
+                return null;
+            }
+            return new RemoteMetadata()
+            {
+                Uri = request.Url,
+                OEmbedUrl = GetProviderUriFor(request)
             };
+        }
     }
 }

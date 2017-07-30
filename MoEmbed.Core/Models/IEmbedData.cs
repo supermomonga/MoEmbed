@@ -3,22 +3,12 @@ using System.Collections.Generic;
 
 namespace MoEmbed.Models
 {
-    public interface IEmbedObject
+    public interface IEmbedData
     {
-        /// <summary>
-        /// Gets media list.
-        /// </summary>
-        List<Media> Medias { get; }
-
         /// <summary>
         /// Gets the resource type. Valid values, along with value-specific parameters, are described below.
         /// </summary>
-        string Type { get; }
-
-        /// <summary>
-        /// Gets the oEmbed version number. This must be <c>1.0</c>.
-        /// </summary>
-        string Version { get; }
+        Types Type { get; }
 
         /// <summary>
         /// Gets a text title, describing the resource.

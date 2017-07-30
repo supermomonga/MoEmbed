@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
-namespace MoEmbed.Handlers
+namespace MoEmbed.Providers
 {
 <#
 var skip = new HashSet<string>()
@@ -93,7 +93,7 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
     /// <summary>
     /// Handles oEmbed request for <see href="<#= prov #>" />.
     /// </summary>
-    public sealed class <#= n #>EmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class <#= n #>MetadataProvider : RemoteMetadataProvider
     {
 <#
         if (schemeUrls.Count > 2)
@@ -146,15 +146,15 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
     }
 }
 #>
-    partial class RemoteEmbedObjectHandler
+    partial class RemoteMetadataProvider
     {
-        public static IEnumerable<RemoteEmbedObjectHandler> CreateKnownHandlers()
+        public static IEnumerable<RemoteMetadataProvider> CreateKnownHandlers()
         {
 <#
     foreach (var n in generated)
     {
 #>
-            yield return new <#= n #>EmbedObjectHandler();
+            yield return new <#= n #>MetadataProvider();
 <#
     }
 #>

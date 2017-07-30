@@ -50,48 +50,42 @@ namespace MoEmbed.Models
             }
         }
 
-        public static void WriteCommonProperties(this IResponseWriter writer, IEmbedObject obj)
+        public static void WriteOEmbed(this IResponseWriter writer, IEmbedData obj)
         {
-            writer.WriteProperty("type", obj.Type);
-            writer.WriteProperty("version", obj.Version);
-            writer.WritePropertyIfNeeded("title", obj.Title);
-            writer.WritePropertyIfNeeded("author_name", obj.AuthorName);
-            writer.WritePropertyIfNeeded("author_url", obj.AuthorUrl);
-            writer.WritePropertyIfNeeded("provider_name", obj.ProviderName);
-            writer.WritePropertyIfNeeded("provider_url", obj.ProviderUrl);
-            writer.WritePropertyIfNeeded("cache_age", obj.CacheAge);
-            writer.WritePropertyIfNeeded("thumbnail_url", obj.ThumbnailUrl);
-            writer.WritePropertyIfNeeded("thumbnail_width", obj.ThumbnailWidth);
-            writer.WritePropertyIfNeeded("thumbnail_height", obj.ThumbnailHeight);
-        }
+            writer.WriteStartResponse();
 
-        public static void WriteDefaultProperties(this IResponseWriter writer, IPhotoEmbedObject obj)
-        {
-            writer.WriteCommonProperties(obj);
-            writer.WritePropertyIfNeeded("url", obj.Url);
-            writer.WritePropertyIfNeeded("width", obj.Width);
-            writer.WritePropertyIfNeeded("height", obj.Height);
-        }
+            writer.WriteProperty(OEmbed.TYPE, obj.Type.ToString().ToLower());
+            writer.WriteProperty(OEmbed.VERSION, "1.0");
+            writer.WritePropertyIfNeeded(OEmbed.TITLE, obj.Title);
+            writer.WritePropertyIfNeeded(OEmbed.AUTHOR_NAME, obj.AuthorName);
+            writer.WritePropertyIfNeeded(OEmbed.AUTHOR_URL, obj.AuthorUrl);
+            writer.WritePropertyIfNeeded(OEmbed.PROVIDER_NAME, obj.ProviderName);
+            writer.WritePropertyIfNeeded(OEmbed.PROVIDER_URL, obj.ProviderUrl);
+            writer.WritePropertyIfNeeded(OEmbed.CACHE_AGE, obj.CacheAge);
+            writer.WritePropertyIfNeeded(OEmbed.THUMBNAIL_URL, obj.ThumbnailUrl);
+            writer.WritePropertyIfNeeded(OEmbed.THUMBNAIL_WIDTH, obj.ThumbnailWidth);
+            writer.WritePropertyIfNeeded(OEmbed.THUMBNAIL_HEIGHT, obj.ThumbnailHeight);
 
-        public static void WriteDefaultProperties(this IResponseWriter writer, IVideoEmbedObject obj)
-        {
-            writer.WriteCommonProperties(obj);
-            writer.WritePropertyIfNeeded("html", obj.Html);
-            writer.WritePropertyIfNeeded("width", obj.Width);
-            writer.WritePropertyIfNeeded("height", obj.Height);
-        }
+            switch (obj.Type)
+            {
+                case Types.Photo:
+                    writer.WritePropertyIfNeeded(OEmbed.URL, (obj as IPhotoEmbedData)?.Url);
+                    writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IPhotoEmbedData)?.Width);
+                    writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IPhotoEmbedData)?.Height);
+                    break;
+                case Types.Video:
+                    writer.WritePropertyIfNeeded(OEmbed.URL, (obj as IVideoEmbedData)?.Html);
+                    writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IVideoEmbedData)?.Width);
+                    writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IVideoEmbedData)?.Height);
+                    break;
+                case Types.Rich:
+                    writer.WritePropertyIfNeeded(OEmbed.URL, (obj as IRichEmbedData)?.Html);
+                    writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IRichEmbedData)?.Width);
+                    writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IRichEmbedData)?.Height);
+                    break;
+            }
 
-        public static void WriteDefaultProperties(this IResponseWriter writer, ILinkEmbedObject obj)
-        {
-            writer.WriteCommonProperties(obj);
-        }
-
-        public static void WriteDefaultProperties(this IResponseWriter writer, IRichEmbedObject obj)
-        {
-            writer.WriteCommonProperties(obj);
-            writer.WritePropertyIfNeeded("html", obj.Html);
-            writer.WritePropertyIfNeeded("width", obj.Width);
-            writer.WritePropertyIfNeeded("height", obj.Height);
+            writer.WriteEndResponse();
         }
     }
 }

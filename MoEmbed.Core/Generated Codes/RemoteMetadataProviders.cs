@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
-namespace MoEmbed.Handlers
+namespace MoEmbed.Providers
 {
 
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.23hq.com" />.
     /// </summary>
-    public sealed class TwentyThreeEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TwentyThreeMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.23hq\.com/[^/]/photo/");
         /// <inheritdoc />
@@ -23,7 +23,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://alpha.app.net/browse/posts/" />.
     /// </summary>
-    public sealed class AlphaAppNetEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class AlphaAppNetMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://alpha\.app\.net/[^/]/post/");
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://live.amcharts.com/" />.
     /// </summary>
-    public sealed class AmchartsLiveEditorEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class AmchartsLiveEditorMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://live\.amcharts\.com/");
         /// <inheritdoc />
@@ -53,7 +53,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.animatron.com/" />.
     /// </summary>
-    public sealed class AnimatronEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class AnimatronMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.animatron\.com/project/");
         /// <inheritdoc />
@@ -68,7 +68,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://animoto.com/" />.
     /// </summary>
-    public sealed class AnimotoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class AnimotoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://animoto\.com/play/");
         /// <inheritdoc />
@@ -83,7 +83,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://audiosnaps.com" />.
     /// </summary>
-    public sealed class AudiosnapsEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class AudiosnapsMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://audiosnaps\.com/k/");
         /// <inheritdoc />
@@ -98,7 +98,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://blackfire.io" />.
     /// </summary>
-    public sealed class BlackfireIoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class BlackfireIoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://blackfire\.io/profiles/[^/]/graph");
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://boxofficebuz.com" />.
     /// </summary>
-    public sealed class BoxofficebuzEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class BoxofficebuzMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://boxofficebuz\.com");
         /// <inheritdoc />
@@ -128,7 +128,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://cacoo.com" />.
     /// </summary>
-    public sealed class CacooEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CacooMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://cacoo\.com/diagrams/");
         /// <inheritdoc />
@@ -143,7 +143,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://img.catbo.at/" />.
     /// </summary>
-    public sealed class CatboatEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CatboatMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://img\.catbo\.at/");
         /// <inheritdoc />
@@ -158,7 +158,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.chartblocks.com/" />.
     /// </summary>
-    public sealed class ChartblocksEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ChartblocksMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://public\.chartblocks\.com/c/");
         /// <inheritdoc />
@@ -173,7 +173,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.chirbit.com/" />.
     /// </summary>
-    public sealed class ChirbitComEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ChirbitComMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://chirb\.it/");
         /// <inheritdoc />
@@ -188,7 +188,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.circuitlab.com/" />.
     /// </summary>
-    public sealed class CircuitlabEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CircuitlabMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.circuitlab\.com/circuit/");
         /// <inheritdoc />
@@ -203,7 +203,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.clipland.com/" />.
     /// </summary>
-    public sealed class CliplandEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CliplandMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.clipland\.com/v/");
         /// <inheritdoc />
@@ -218,7 +218,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://clyp.it/" />.
     /// </summary>
-    public sealed class ClypEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ClypMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://clyp\.it/");
         /// <inheritdoc />
@@ -233,7 +233,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://codepen.io" />.
     /// </summary>
-    public sealed class CodepenEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CodepenMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://codepen\.io/");
         /// <inheritdoc />
@@ -248,7 +248,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://codepoints.net" />.
     /// </summary>
-    public sealed class CodepointsEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CodepointsMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://codepoints\.net/|https://codepoints\.net/|http://www\.codepoints\.net/|https://www\.codepoints\.net/)");
         /// <inheritdoc />
@@ -263,7 +263,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.collegehumor.com/" />.
     /// </summary>
-    public sealed class CollegehumorEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CollegehumorMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.collegehumor\.com/video/");
         /// <inheritdoc />
@@ -278,7 +278,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://coub.com/" />.
     /// </summary>
-    public sealed class CoubEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CoubMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://coub\.com/view/");
         /// <inheritdoc />
@@ -293,7 +293,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://crowdranking.com" />.
     /// </summary>
-    public sealed class CrowdRankingEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class CrowdRankingMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://crowdranking\.com/[^/]/");
         /// <inheritdoc />
@@ -308,7 +308,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.dailymotion.com" />.
     /// </summary>
-    public sealed class DailymotionEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DailymotionMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.dailymotion\.com/video/");
         /// <inheritdoc />
@@ -323,7 +323,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.dailymile.com" />.
     /// </summary>
-    public sealed class DailyMileEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DailyMileMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.dailymile\.com/people/[^/]/entries/");
         /// <inheritdoc />
@@ -338,7 +338,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.deviantart.com" />.
     /// </summary>
-    public sealed class DeviantartComEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DeviantartComMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.deviantart\.com/art/|http://[^/]\.deviantart\.com/[^/]\#/d|http://fav\.me/|http://sta\.sh/)");
         /// <inheritdoc />
@@ -353,7 +353,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.didacte.com/" />.
     /// </summary>
-    public sealed class DidacteEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DidacteMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://[^/]\.didacte\.com/a/course/");
         /// <inheritdoc />
@@ -368,7 +368,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.dipity.com" />.
     /// </summary>
-    public sealed class DipityEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DipityMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.dipity\.com/[^/]/[^/]/");
         /// <inheritdoc />
@@ -383,7 +383,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.docdroid.net/" />.
     /// </summary>
-    public sealed class DocdroidEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DocdroidMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://[^/]\.docdroid\.net/|http://[^/]\.docdroid\.net/|https://docdro\.id/|http://docdro\.id/)");
         /// <inheritdoc />
@@ -398,7 +398,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.docs.com" />.
     /// </summary>
-    public sealed class DocsEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DocsMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://docs\.com/");
         /// <inheritdoc />
@@ -413,7 +413,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://dotsub.com/" />.
     /// </summary>
-    public sealed class DotsubEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class DotsubMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://dotsub\.com/view/");
         /// <inheritdoc />
@@ -428,7 +428,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.edocr.com" />.
     /// </summary>
-    public sealed class EdocrEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class EdocrMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://edocr\.com/docs/");
         /// <inheritdoc />
@@ -443,7 +443,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.edumedia-sciences.com/" />.
     /// </summary>
-    public sealed class EdumediaSciencesComEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class EdumediaSciencesComMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.edumedia-sciences\.com/");
         /// <inheritdoc />
@@ -458,7 +458,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://egliseinfo.catholique.fr/" />.
     /// </summary>
-    public sealed class EgliseinfoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class EgliseinfoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://egliseinfo\.catholique\.fr/");
         /// <inheritdoc />
@@ -473,7 +473,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://api.embed.ly/" />.
     /// </summary>
-    public sealed class EmbedlyEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class EmbedlyMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://api\.embed\.ly/");
         /// <inheritdoc />
@@ -488,7 +488,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://embedarticles.com/" />.
     /// </summary>
-    public sealed class EmbedArticlesEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class EmbedArticlesMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://embedarticles\.com/");
         /// <inheritdoc />
@@ -503,7 +503,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://eyrie.io/" />.
     /// </summary>
-    public sealed class EyrieioEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class EyrieioMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://eyrie\.io/board/");
         /// <inheritdoc />
@@ -518,7 +518,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.facebook.com/" />.
     /// </summary>
-    public sealed class FacebookEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class FacebookMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.facebook\.com/");
         /// <inheritdoc />
@@ -533,7 +533,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://flat.io" />.
     /// </summary>
-    public sealed class FlatEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class FlatMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://flat\.io/score/");
         /// <inheritdoc />
@@ -548,7 +548,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.flickr.com/" />.
     /// </summary>
-    public sealed class FlickrEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class FlickrMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.flickr\.com/photos/");
         /// <inheritdoc />
@@ -563,7 +563,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.foxsports.com.au" />.
     /// </summary>
-    public sealed class FoxSportsAustraliaEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class FoxSportsAustraliaMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://fiso\.foxsports\.com\.au/isomorphic-widget/");
         /// <inheritdoc />
@@ -578,7 +578,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://framebuzz.com/" />.
     /// </summary>
-    public sealed class FramebuzzEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class FramebuzzMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://framebuzz\.com/v/");
         /// <inheritdoc />
@@ -593,7 +593,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.funnyordie.com/" />.
     /// </summary>
-    public sealed class FunnyordieEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class FunnyordieMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.funnyordie\.com/videos/");
         /// <inheritdoc />
@@ -608,7 +608,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://geo-en.hlipp.de/" />.
     /// </summary>
-    public sealed class GeographEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class GeographMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.geograph\.org\.uk/|http://[^/]\.geograph\.co\.uk/|http://[^/]\.geograph\.ie/|http://[^/]\.wikimedia\.org/[^/]_geograph\.org\.uk_|http://[^/]\.geograph\.org\.gg/|http://[^/]\.geograph\.org\.je/|http://channel-islands\.geograph\.org/|http://channel-islands\.geographs\.org/|http://[^/]\.channel\.geographs\.org/|http://geo-en\.hlipp\.de/|http://geo\.hlipp\.de/|http://germany\.geograph\.org/)");
         /// <inheritdoc />
@@ -623,7 +623,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.gettyimages.com/" />.
     /// </summary>
-    public sealed class GettyImagesEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class GettyImagesMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://gty\.im/");
         /// <inheritdoc />
@@ -638,7 +638,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://gfycat.com/" />.
     /// </summary>
-    public sealed class GfycatEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class GfycatMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://gfycat\.com/|http://www\.gfycat\.com/|https://gfycat\.com/|https://www\.gfycat\.com/)");
         /// <inheritdoc />
@@ -653,7 +653,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://giphy.com" />.
     /// </summary>
-    public sealed class GIPHYEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class GIPHYMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://giphy\.com/gifs/|http://gph\.is/|https://media\.giphy\.com/media/[^/]/giphy\.gif)");
         /// <inheritdoc />
@@ -668,7 +668,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://gyazo.com" />.
     /// </summary>
-    public sealed class GyazoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class GyazoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://gyazo\.com/");
         /// <inheritdoc />
@@ -683,7 +683,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://huffduffer.com" />.
     /// </summary>
-    public sealed class HuffdufferEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class HuffdufferMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://huffduffer\.com/[^/]/");
         /// <inheritdoc />
@@ -698,7 +698,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.hulu.com/" />.
     /// </summary>
-    public sealed class HuluEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class HuluMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.hulu\.com/watch/");
         /// <inheritdoc />
@@ -713,7 +713,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.iFixit.com" />.
     /// </summary>
-    public sealed class IfixitEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class IfixitMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.ifixit\.com/Guide/View/");
         /// <inheritdoc />
@@ -728,7 +728,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.ifttt.com/" />.
     /// </summary>
-    public sealed class IftttEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class IftttMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://ifttt\.com/recipes/");
         /// <inheritdoc />
@@ -743,7 +743,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://player.indacolive.com/" />.
     /// </summary>
-    public sealed class IndacoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class IndacoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://player\.indacolive\.com/player/jwp/clients/");
         /// <inheritdoc />
@@ -758,7 +758,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://infogr.am/" />.
     /// </summary>
-    public sealed class InfogramEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class InfogramMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://infogr\.am/");
         /// <inheritdoc />
@@ -773,7 +773,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.inoreader.com" />.
     /// </summary>
-    public sealed class InoreaderEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class InoreaderMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.inoreader\.com/oembed/");
         /// <inheritdoc />
@@ -788,7 +788,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://inphood.com/" />.
     /// </summary>
-    public sealed class InphoodEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class InphoodMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.inphood\.com/");
         /// <inheritdoc />
@@ -803,7 +803,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://instagram.com" />.
     /// </summary>
-    public sealed class InstagramEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class InstagramMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://instagram\.com/p/|http://instagr\.am/p/|http://www\.instagram\.com/p/|http://www\.instagr\.am/p/|https://instagram\.com/p/|https://instagr\.am/p/|https://www\.instagram\.com/p/|https://www\.instagr\.am/p/)");
         /// <inheritdoc />
@@ -818,7 +818,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.isnare.com/" />.
     /// </summary>
-    public sealed class IsnareArticlesEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class IsnareArticlesMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.isnare\.com/");
         /// <inheritdoc />
@@ -833,7 +833,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.kickstarter.com" />.
     /// </summary>
-    public sealed class KickstarterEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class KickstarterMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.kickstarter\.com/projects/");
         /// <inheritdoc />
@@ -848,7 +848,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.kidoju.com/" />.
     /// </summary>
-    public sealed class KidojuEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class KidojuMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.kidoju\.com/en/x/[^/]/");
         /// <inheritdoc />
@@ -863,7 +863,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://kit.com/" />.
     /// </summary>
-    public sealed class KitEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class KitMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://kit\.com/[^/]/");
         /// <inheritdoc />
@@ -878,7 +878,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.kitchenbowl.com" />.
     /// </summary>
-    public sealed class KitchenbowlEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class KitchenbowlMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.kitchenbowl\.com/recipe/");
         /// <inheritdoc />
@@ -893,7 +893,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://jdr.knacki.info" />.
     /// </summary>
-    public sealed class KnackiEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class KnackiMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://jdr\.knacki\.info/meuh/");
         /// <inheritdoc />
@@ -908,7 +908,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://learningapps.org/" />.
     /// </summary>
-    public sealed class LearningappsOrgEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class LearningappsOrgMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://learningapps\.org/");
         /// <inheritdoc />
@@ -923,7 +923,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://mathembed.com" />.
     /// </summary>
-    public sealed class MathembedEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class MathembedMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://mathembed\.com/latex\?inputText=");
         /// <inheritdoc />
@@ -938,7 +938,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.meetup.com" />.
     /// </summary>
-    public sealed class MeetupEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class MeetupMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://meetup\.com/");
         /// <inheritdoc />
@@ -953,7 +953,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://me.me/" />.
     /// </summary>
-    public sealed class MemeEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class MemeMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://me\.me/i/");
         /// <inheritdoc />
@@ -968,7 +968,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://mixcloud.com/" />.
     /// </summary>
-    public sealed class MixcloudEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class MixcloudMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.mixcloud\.com/[^/]/[^/]/");
         /// <inheritdoc />
@@ -983,7 +983,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.mobypicture.com" />.
     /// </summary>
-    public sealed class MobyPictureEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class MobyPictureMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.mobypicture\.com/user/[^/]/view/");
         /// <inheritdoc />
@@ -998,7 +998,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://modelo.io/" />.
     /// </summary>
-    public sealed class ModeloEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ModeloMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://beta\.modelo\.io/embedded/");
         /// <inheritdoc />
@@ -1013,7 +1013,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://mybeweeg.com" />.
     /// </summary>
-    public sealed class MybeweegEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class MybeweegMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://mybeweeg\.com/w/");
         /// <inheritdoc />
@@ -1028,7 +1028,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.nanoo.tv/" />.
     /// </summary>
-    public sealed class NanooEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class NanooMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.nanoo\.tv/link/|http://nanoo\.tv/link/|http://[^/]\.nanoo\.pro/link/|http://nanoo\.pro/link/|https://[^/]\.nanoo\.tv/link/|https://nanoo\.tv/link/|https://[^/]\.nanoo\.pro/link/|https://nanoo\.pro/link/)");
         /// <inheritdoc />
@@ -1043,7 +1043,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.nfb.ca/" />.
     /// </summary>
-    public sealed class NfbCaEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class NfbCaMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.nfb\.ca/film/");
         /// <inheritdoc />
@@ -1058,7 +1058,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.odds.com.au" />.
     /// </summary>
-    public sealed class OddsEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OddsMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.odds\.com\.au/");
         /// <inheritdoc />
@@ -1073,7 +1073,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://mix.office.com/" />.
     /// </summary>
-    public sealed class OfficeMixEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OfficeMixMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://mix\.office\.com/watch/");
         /// <inheritdoc />
@@ -1088,7 +1088,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://official.fm" />.
     /// </summary>
-    public sealed class OfficialFmEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OfficialFmMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://official\.fm/tracks/");
         /// <inheritdoc />
@@ -1103,7 +1103,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://on.aol.com/" />.
     /// </summary>
-    public sealed class OnAolEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OnAolMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://on\.aol\.com/video/");
         /// <inheritdoc />
@@ -1118,7 +1118,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.ora.tv/" />.
     /// </summary>
-    public sealed class OraTvEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OraTvMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.ora\.tv/");
         /// <inheritdoc />
@@ -1133,7 +1133,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://orbitvu.co" />.
     /// </summary>
-    public sealed class OrbitvuEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OrbitvuMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://orbitvu\.co/001/[^/]/ov3601/view|https://orbitvu\.co/001/[^/]/ov3601/[^/]/view|https://orbitvu\.co/001/[^/]/ov3602/[^/]/view|https://orbitvu\.co/001/[^/]/2/orbittour/[^/]/view|https://orbitvu\.co/001/[^/]/1/2/orbittour/[^/]/view|http://orbitvu\.co/001/[^/]/ov3601/view|http://orbitvu\.co/001/[^/]/ov3601/[^/]/view|http://orbitvu\.co/001/[^/]/ov3602/[^/]/view|http://orbitvu\.co/001/[^/]/2/orbittour/[^/]/view|http://orbitvu\.co/001/[^/]/1/2/orbittour/[^/]/view)");
         /// <inheritdoc />
@@ -1148,7 +1148,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.oumy.com/" />.
     /// </summary>
-    public sealed class OumyEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class OumyMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.oumy\.com/v/");
         /// <inheritdoc />
@@ -1163,7 +1163,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.pastery.net" />.
     /// </summary>
-    public sealed class PasteryEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class PasteryMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://pastery\.net/|https://pastery\.net/|http://www\.pastery\.net/|https://www\.pastery\.net/)");
         /// <inheritdoc />
@@ -1178,7 +1178,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.pixdor.com/" />.
     /// </summary>
-    public sealed class PixdorEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class PixdorMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://store\.pixdor\.com/place-marker-widget/[^/]/show");
         /// <inheritdoc />
@@ -1193,7 +1193,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://polldaddy.com" />.
     /// </summary>
-    public sealed class PollDaddyEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class PollDaddyMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.polldaddy\.com/s/|http://[^/]\.polldaddy\.com/poll/|http://[^/]\.polldaddy\.com/ratings/)");
         /// <inheritdoc />
@@ -1208,7 +1208,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.sellwithport.com/" />.
     /// </summary>
-    public sealed class PortEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class PortMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://app\.sellwithport\.com/\#/buyer/");
         /// <inheritdoc />
@@ -1223,7 +1223,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://portfolium.com" />.
     /// </summary>
-    public sealed class PortfoliumEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class PortfoliumMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://portfolium\.com/entry/");
         /// <inheritdoc />
@@ -1238,7 +1238,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.punters.com.au" />.
     /// </summary>
-    public sealed class PuntersEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class PuntersMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.punters\.com\.au/");
         /// <inheritdoc />
@@ -1253,7 +1253,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.quizz.biz/" />.
     /// </summary>
-    public sealed class QuizBizEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class QuizBizMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.quiz\.biz/quizz-[^/]\.html");
         /// <inheritdoc />
@@ -1268,7 +1268,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://rapidengage.com" />.
     /// </summary>
-    public sealed class RapidengageEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class RapidengageMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://rapidengage\.com/s/");
         /// <inheritdoc />
@@ -1283,7 +1283,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://reddit.com/" />.
     /// </summary>
-    public sealed class RedditEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class RedditMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://reddit\.com/r/[^/]/comments/[^/]/");
         /// <inheritdoc />
@@ -1298,7 +1298,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.releasewire.com/" />.
     /// </summary>
-    public sealed class ReleasewireEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ReleasewireMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://rwire\.com/");
         /// <inheritdoc />
@@ -1313,7 +1313,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://repubhub.icopyright.net/" />.
     /// </summary>
-    public sealed class RepubhubEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class RepubhubMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://repubhub\.icopyright\.net/freePost\.act\?");
         /// <inheritdoc />
@@ -1328,7 +1328,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.reverbnation.com/" />.
     /// </summary>
-    public sealed class ReverbnationEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ReverbnationMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.reverbnation\.com/");
         /// <inheritdoc />
@@ -1343,7 +1343,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://roomshare.jp" />.
     /// </summary>
-    public sealed class RoomshareEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class RoomshareMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://roomshare\.jp/post/");
         /// <inheritdoc />
@@ -1358,7 +1358,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://rumble.com/" />.
     /// </summary>
-    public sealed class RumbleEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class RumbleMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://rumble\.com/");
         /// <inheritdoc />
@@ -1373,7 +1373,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://videos.sapo.pt" />.
     /// </summary>
-    public sealed class SapoVideosEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SapoVideosMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://videos\.sapo\.pt/");
         /// <inheritdoc />
@@ -1388,7 +1388,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.screen9.com/" />.
     /// </summary>
-    public sealed class Screen9EmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class Screen9MetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.screen9\.com/");
         /// <inheritdoc />
@@ -1403,7 +1403,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.screencast.com/" />.
     /// </summary>
-    public sealed class ScreencastComEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ScreencastComMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.screencast\.com/");
         /// <inheritdoc />
@@ -1418,7 +1418,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.screenr.com/" />.
     /// </summary>
-    public sealed class ScreenrEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ScreenrMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.screenr\.com/[^/]/");
         /// <inheritdoc />
@@ -1433,7 +1433,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://scribblemaps.com" />.
     /// </summary>
-    public sealed class ScribblemapsEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ScribblemapsMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://www\.scribblemaps\.com/maps/view/|https://www\.scribblemaps\.com/maps/view/|http://scribblemaps\.com/maps/view/|https://scribblemaps\.com/maps/view/)");
         /// <inheritdoc />
@@ -1448,7 +1448,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.scribd.com/" />.
     /// </summary>
-    public sealed class ScribdEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ScribdMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.scribd\.com/doc/");
         /// <inheritdoc />
@@ -1463,7 +1463,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.shortnote.jp/" />.
     /// </summary>
-    public sealed class ShortnoteEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ShortnoteMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://www\.shortnote\.jp/view/notes/");
         /// <inheritdoc />
@@ -1478,7 +1478,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://shoudio.com" />.
     /// </summary>
-    public sealed class ShoudioEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ShoudioMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://shoudio\.com/");
         /// <inheritdoc />
@@ -1493,7 +1493,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://showtheway.io" />.
     /// </summary>
-    public sealed class ShowTheWayEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class ShowTheWayMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://showtheway\.io/to/");
         /// <inheritdoc />
@@ -1508,7 +1508,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.silk.co/" />.
     /// </summary>
-    public sealed class SilkEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SilkMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.silk\.co/explore/|https://[^/]\.silk\.co/explore/|http://[^/]\.silk\.co/s/embed/|https://[^/]\.silk\.co/s/embed/)");
         /// <inheritdoc />
@@ -1523,7 +1523,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://onsizzle.com/" />.
     /// </summary>
-    public sealed class SizzleEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SizzleMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://onsizzle\.com/i/");
         /// <inheritdoc />
@@ -1538,7 +1538,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://sketchfab.com" />.
     /// </summary>
-    public sealed class SketchfabEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SketchfabMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://sketchfab\.com/models/|https://sketchfab\.com/models/|https://sketchfab\.com/[^/]/folders/)");
         /// <inheritdoc />
@@ -1553,7 +1553,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.slideshare.net/" />.
     /// </summary>
-    public sealed class SlideshareEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SlideshareMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://www\.slideshare\.net/[^/]/|http://fr\.slideshare\.net/[^/]/|http://de\.slideshare\.net/[^/]/|http://es\.slideshare\.net/[^/]/|http://pt\.slideshare\.net/[^/]/)");
         /// <inheritdoc />
@@ -1568,7 +1568,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.smugmug.com/" />.
     /// </summary>
-    public sealed class SmugmugEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SmugmugMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.smugmug\.com/");
         /// <inheritdoc />
@@ -1583,7 +1583,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://soundcloud.com/" />.
     /// </summary>
-    public sealed class SoundcloudEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SoundcloudMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://soundcloud\.com/");
         /// <inheritdoc />
@@ -1598,7 +1598,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://soundsgood.co" />.
     /// </summary>
-    public sealed class SoundsgoodEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SoundsgoodMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://play\.soundsgood\.co/playlist/");
         /// <inheritdoc />
@@ -1613,7 +1613,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://speakerdeck.com" />.
     /// </summary>
-    public sealed class SpeakerdeckEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SpeakerdeckMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://speakerdeck\.com/[^/]/");
         /// <inheritdoc />
@@ -1628,7 +1628,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.spreaker.com/" />.
     /// </summary>
-    public sealed class SpreakerEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SpreakerMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.spreaker\.com/");
         /// <inheritdoc />
@@ -1643,7 +1643,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://streamable.com/" />.
     /// </summary>
-    public sealed class StreamableEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class StreamableMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://streamable\.com/");
         /// <inheritdoc />
@@ -1658,7 +1658,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.streamone.nl" />.
     /// </summary>
-    public sealed class StreamonecloudEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class StreamonecloudMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://content\.streamonecloud\.net/embed/");
         /// <inheritdoc />
@@ -1673,7 +1673,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.sway.com" />.
     /// </summary>
-    public sealed class SwayEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class SwayMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://sway\.com/");
         /// <inheritdoc />
@@ -1688,7 +1688,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://ted.com" />.
     /// </summary>
-    public sealed class TedEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TedMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://ted\.com/talks/");
         /// <inheritdoc />
@@ -1703,7 +1703,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://theysaidso.com/" />.
     /// </summary>
-    public sealed class TheySaidSoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TheySaidSoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://theysaidso\.com/image/");
         /// <inheritdoc />
@@ -1718,7 +1718,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.nytimes.com" />.
     /// </summary>
-    public sealed class TheNewYorkTimesEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TheNewYorkTimesMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://www\.nytimes\.com/svc/oembed|https://nytimes\.com/|https://[^/]\.nytimes\.com/)");
         /// <inheritdoc />
@@ -1733,7 +1733,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.tickcounter.com" />.
     /// </summary>
-    public sealed class TickcounterEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TickcounterMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://www\.tickcounter\.com/countdown/|http://www\.tickcounter\.com/countup/|http://www\.tickcounter\.com/ticker/|http://www\.tickcounter\.com/worldclock/|https://www\.tickcounter\.com/countdown/|https://www\.tickcounter\.com/countup/|https://www\.tickcounter\.com/ticker/|https://www\.tickcounter\.com/worldclock/)");
         /// <inheritdoc />
@@ -1748,7 +1748,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.topy.se/" />.
     /// </summary>
-    public sealed class TopyEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TopyMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.topy\.se/image/");
         /// <inheritdoc />
@@ -1763,7 +1763,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.twitch.tv" />.
     /// </summary>
-    public sealed class TwitchEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class TwitchMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://clips\.twitch\.tv/|https://clips\.twitch\.tv/|http://www\.twitch\.tv/|https://www\.twitch\.tv/|http://twitch\.tv/|https://twitch\.tv/)");
         /// <inheritdoc />
@@ -1778,7 +1778,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://player.ubideo.com/" />.
     /// </summary>
-    public sealed class UbideoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class UbideoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://player\.ubideo\.com/");
         /// <inheritdoc />
@@ -1793,7 +1793,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://mais.uol.com.br/" />.
     /// </summary>
-    public sealed class UolEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class UolMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://[^/]\.uol\.com\.br/view/");
         /// <inheritdoc />
@@ -1808,7 +1808,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.ustream.tv" />.
     /// </summary>
-    public sealed class UstreamEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class UstreamMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.ustream\.tv/");
         /// <inheritdoc />
@@ -1823,7 +1823,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://uttles.com" />.
     /// </summary>
-    public sealed class UttlesEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class UttlesMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://uttles\.com/uttle/");
         /// <inheritdoc />
@@ -1838,7 +1838,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://veer.tv/" />.
     /// </summary>
-    public sealed class VeerEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VeerMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://veer\.tv/videos/");
         /// <inheritdoc />
@@ -1853,7 +1853,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://verse.media/" />.
     /// </summary>
-    public sealed class VerseEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VerseMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://verse\.media/");
         /// <inheritdoc />
@@ -1868,7 +1868,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.vevo.com/" />.
     /// </summary>
-    public sealed class VevoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VevoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.vevo\.com/");
         /// <inheritdoc />
@@ -1883,7 +1883,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.videojug.com" />.
     /// </summary>
-    public sealed class VideojugEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VideojugMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://www\.videojug\.com/film/");
         /// <inheritdoc />
@@ -1898,7 +1898,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vidl.it/" />.
     /// </summary>
-    public sealed class VidlitEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VidlitMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://vidl\.it/");
         /// <inheritdoc />
@@ -1913,7 +1913,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vimeo.com/" />.
     /// </summary>
-    public sealed class VimeoEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VimeoMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://vimeo\.com/");
         /// <inheritdoc />
@@ -1928,7 +1928,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vine.co/" />.
     /// </summary>
-    public sealed class VineEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VineMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://vine\.co/v/");
         /// <inheritdoc />
@@ -1943,7 +1943,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vlipsy.com/" />.
     /// </summary>
-    public sealed class VlipsyEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class VlipsyMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://vlipsy\.com/");
         /// <inheritdoc />
@@ -1958,7 +1958,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.wiredrive.com/" />.
     /// </summary>
-    public sealed class WiredriveEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class WiredriveMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"https://[^/]\.wiredrive\.com/");
         /// <inheritdoc />
@@ -1973,7 +1973,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.wizer.me/" />.
     /// </summary>
-    public sealed class WizerMeEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class WizerMeMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.wizer\.me/learn/|https://[^/]\.wizer\.me/learn/|http://[^/]\.wizer\.me/preview/|https://[^/]\.wizer\.me/preview/)");
         /// <inheritdoc />
@@ -1988,7 +1988,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.wootled.com/" />.
     /// </summary>
-    public sealed class WootledEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class WootledMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.wootled\.com/");
         /// <inheritdoc />
@@ -2003,7 +2003,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://wordpress.com/" />.
     /// </summary>
-    public sealed class WordpressComEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class WordpressComMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://wordpress\.com/");
         /// <inheritdoc />
@@ -2018,7 +2018,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://yfrog.com/" />.
     /// </summary>
-    public sealed class YfrogEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class YfrogMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.yfrog\.com/");
         /// <inheritdoc />
@@ -2033,7 +2033,7 @@ namespace MoEmbed.Handlers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.youtube.com/" />.
     /// </summary>
-    public sealed class YoutubeEmbedObjectHandler : RemoteEmbedObjectHandler
+    public sealed class YoutubeMetadataProvider : RemoteMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.youtube\.com/");
         /// <inheritdoc />
@@ -2044,146 +2044,146 @@ namespace MoEmbed.Handlers
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("http://www.youtube.com/oembed", request);
     }
-    partial class RemoteEmbedObjectHandler
+    partial class RemoteMetadataProvider
     {
-        public static IEnumerable<RemoteEmbedObjectHandler> CreateKnownHandlers()
+        public static IEnumerable<RemoteMetadataProvider> CreateKnownHandlers()
         {
-            yield return new TwentyThreeEmbedObjectHandler();
-            yield return new AlphaAppNetEmbedObjectHandler();
-            yield return new AmchartsLiveEditorEmbedObjectHandler();
-            yield return new AnimatronEmbedObjectHandler();
-            yield return new AnimotoEmbedObjectHandler();
-            yield return new AudiosnapsEmbedObjectHandler();
-            yield return new BlackfireIoEmbedObjectHandler();
-            yield return new BoxofficebuzEmbedObjectHandler();
-            yield return new CacooEmbedObjectHandler();
-            yield return new CatboatEmbedObjectHandler();
-            yield return new ChartblocksEmbedObjectHandler();
-            yield return new ChirbitComEmbedObjectHandler();
-            yield return new CircuitlabEmbedObjectHandler();
-            yield return new CliplandEmbedObjectHandler();
-            yield return new ClypEmbedObjectHandler();
-            yield return new CodepenEmbedObjectHandler();
-            yield return new CodepointsEmbedObjectHandler();
-            yield return new CollegehumorEmbedObjectHandler();
-            yield return new CoubEmbedObjectHandler();
-            yield return new CrowdRankingEmbedObjectHandler();
-            yield return new DailymotionEmbedObjectHandler();
-            yield return new DailyMileEmbedObjectHandler();
-            yield return new DeviantartComEmbedObjectHandler();
-            yield return new DidacteEmbedObjectHandler();
-            yield return new DipityEmbedObjectHandler();
-            yield return new DocdroidEmbedObjectHandler();
-            yield return new DocsEmbedObjectHandler();
-            yield return new DotsubEmbedObjectHandler();
-            yield return new EdocrEmbedObjectHandler();
-            yield return new EdumediaSciencesComEmbedObjectHandler();
-            yield return new EgliseinfoEmbedObjectHandler();
-            yield return new EmbedlyEmbedObjectHandler();
-            yield return new EmbedArticlesEmbedObjectHandler();
-            yield return new EyrieioEmbedObjectHandler();
-            yield return new FacebookEmbedObjectHandler();
-            yield return new FlatEmbedObjectHandler();
-            yield return new FlickrEmbedObjectHandler();
-            yield return new FoxSportsAustraliaEmbedObjectHandler();
-            yield return new FramebuzzEmbedObjectHandler();
-            yield return new FunnyordieEmbedObjectHandler();
-            yield return new GeographEmbedObjectHandler();
-            yield return new GettyImagesEmbedObjectHandler();
-            yield return new GfycatEmbedObjectHandler();
-            yield return new GIPHYEmbedObjectHandler();
-            yield return new GyazoEmbedObjectHandler();
-            yield return new HuffdufferEmbedObjectHandler();
-            yield return new HuluEmbedObjectHandler();
-            yield return new IfixitEmbedObjectHandler();
-            yield return new IftttEmbedObjectHandler();
-            yield return new IndacoEmbedObjectHandler();
-            yield return new InfogramEmbedObjectHandler();
-            yield return new InoreaderEmbedObjectHandler();
-            yield return new InphoodEmbedObjectHandler();
-            yield return new InstagramEmbedObjectHandler();
-            yield return new IsnareArticlesEmbedObjectHandler();
-            yield return new KickstarterEmbedObjectHandler();
-            yield return new KidojuEmbedObjectHandler();
-            yield return new KitEmbedObjectHandler();
-            yield return new KitchenbowlEmbedObjectHandler();
-            yield return new KnackiEmbedObjectHandler();
-            yield return new LearningappsOrgEmbedObjectHandler();
-            yield return new MathembedEmbedObjectHandler();
-            yield return new MeetupEmbedObjectHandler();
-            yield return new MemeEmbedObjectHandler();
-            yield return new MixcloudEmbedObjectHandler();
-            yield return new MobyPictureEmbedObjectHandler();
-            yield return new ModeloEmbedObjectHandler();
-            yield return new MybeweegEmbedObjectHandler();
-            yield return new NanooEmbedObjectHandler();
-            yield return new NfbCaEmbedObjectHandler();
-            yield return new OddsEmbedObjectHandler();
-            yield return new OfficeMixEmbedObjectHandler();
-            yield return new OfficialFmEmbedObjectHandler();
-            yield return new OnAolEmbedObjectHandler();
-            yield return new OraTvEmbedObjectHandler();
-            yield return new OrbitvuEmbedObjectHandler();
-            yield return new OumyEmbedObjectHandler();
-            yield return new PasteryEmbedObjectHandler();
-            yield return new PixdorEmbedObjectHandler();
-            yield return new PollDaddyEmbedObjectHandler();
-            yield return new PortEmbedObjectHandler();
-            yield return new PortfoliumEmbedObjectHandler();
-            yield return new PuntersEmbedObjectHandler();
-            yield return new QuizBizEmbedObjectHandler();
-            yield return new RapidengageEmbedObjectHandler();
-            yield return new RedditEmbedObjectHandler();
-            yield return new ReleasewireEmbedObjectHandler();
-            yield return new RepubhubEmbedObjectHandler();
-            yield return new ReverbnationEmbedObjectHandler();
-            yield return new RoomshareEmbedObjectHandler();
-            yield return new RumbleEmbedObjectHandler();
-            yield return new SapoVideosEmbedObjectHandler();
-            yield return new Screen9EmbedObjectHandler();
-            yield return new ScreencastComEmbedObjectHandler();
-            yield return new ScreenrEmbedObjectHandler();
-            yield return new ScribblemapsEmbedObjectHandler();
-            yield return new ScribdEmbedObjectHandler();
-            yield return new ShortnoteEmbedObjectHandler();
-            yield return new ShoudioEmbedObjectHandler();
-            yield return new ShowTheWayEmbedObjectHandler();
-            yield return new SilkEmbedObjectHandler();
-            yield return new SizzleEmbedObjectHandler();
-            yield return new SketchfabEmbedObjectHandler();
-            yield return new SlideshareEmbedObjectHandler();
-            yield return new SmugmugEmbedObjectHandler();
-            yield return new SoundcloudEmbedObjectHandler();
-            yield return new SoundsgoodEmbedObjectHandler();
-            yield return new SpeakerdeckEmbedObjectHandler();
-            yield return new SpreakerEmbedObjectHandler();
-            yield return new StreamableEmbedObjectHandler();
-            yield return new StreamonecloudEmbedObjectHandler();
-            yield return new SwayEmbedObjectHandler();
-            yield return new TedEmbedObjectHandler();
-            yield return new TheySaidSoEmbedObjectHandler();
-            yield return new TheNewYorkTimesEmbedObjectHandler();
-            yield return new TickcounterEmbedObjectHandler();
-            yield return new TopyEmbedObjectHandler();
-            yield return new TwitchEmbedObjectHandler();
-            yield return new UbideoEmbedObjectHandler();
-            yield return new UolEmbedObjectHandler();
-            yield return new UstreamEmbedObjectHandler();
-            yield return new UttlesEmbedObjectHandler();
-            yield return new VeerEmbedObjectHandler();
-            yield return new VerseEmbedObjectHandler();
-            yield return new VevoEmbedObjectHandler();
-            yield return new VideojugEmbedObjectHandler();
-            yield return new VidlitEmbedObjectHandler();
-            yield return new VimeoEmbedObjectHandler();
-            yield return new VineEmbedObjectHandler();
-            yield return new VlipsyEmbedObjectHandler();
-            yield return new WiredriveEmbedObjectHandler();
-            yield return new WizerMeEmbedObjectHandler();
-            yield return new WootledEmbedObjectHandler();
-            yield return new WordpressComEmbedObjectHandler();
-            yield return new YfrogEmbedObjectHandler();
-            yield return new YoutubeEmbedObjectHandler();
+            yield return new TwentyThreeMetadataProvider();
+            yield return new AlphaAppNetMetadataProvider();
+            yield return new AmchartsLiveEditorMetadataProvider();
+            yield return new AnimatronMetadataProvider();
+            yield return new AnimotoMetadataProvider();
+            yield return new AudiosnapsMetadataProvider();
+            yield return new BlackfireIoMetadataProvider();
+            yield return new BoxofficebuzMetadataProvider();
+            yield return new CacooMetadataProvider();
+            yield return new CatboatMetadataProvider();
+            yield return new ChartblocksMetadataProvider();
+            yield return new ChirbitComMetadataProvider();
+            yield return new CircuitlabMetadataProvider();
+            yield return new CliplandMetadataProvider();
+            yield return new ClypMetadataProvider();
+            yield return new CodepenMetadataProvider();
+            yield return new CodepointsMetadataProvider();
+            yield return new CollegehumorMetadataProvider();
+            yield return new CoubMetadataProvider();
+            yield return new CrowdRankingMetadataProvider();
+            yield return new DailymotionMetadataProvider();
+            yield return new DailyMileMetadataProvider();
+            yield return new DeviantartComMetadataProvider();
+            yield return new DidacteMetadataProvider();
+            yield return new DipityMetadataProvider();
+            yield return new DocdroidMetadataProvider();
+            yield return new DocsMetadataProvider();
+            yield return new DotsubMetadataProvider();
+            yield return new EdocrMetadataProvider();
+            yield return new EdumediaSciencesComMetadataProvider();
+            yield return new EgliseinfoMetadataProvider();
+            yield return new EmbedlyMetadataProvider();
+            yield return new EmbedArticlesMetadataProvider();
+            yield return new EyrieioMetadataProvider();
+            yield return new FacebookMetadataProvider();
+            yield return new FlatMetadataProvider();
+            yield return new FlickrMetadataProvider();
+            yield return new FoxSportsAustraliaMetadataProvider();
+            yield return new FramebuzzMetadataProvider();
+            yield return new FunnyordieMetadataProvider();
+            yield return new GeographMetadataProvider();
+            yield return new GettyImagesMetadataProvider();
+            yield return new GfycatMetadataProvider();
+            yield return new GIPHYMetadataProvider();
+            yield return new GyazoMetadataProvider();
+            yield return new HuffdufferMetadataProvider();
+            yield return new HuluMetadataProvider();
+            yield return new IfixitMetadataProvider();
+            yield return new IftttMetadataProvider();
+            yield return new IndacoMetadataProvider();
+            yield return new InfogramMetadataProvider();
+            yield return new InoreaderMetadataProvider();
+            yield return new InphoodMetadataProvider();
+            yield return new InstagramMetadataProvider();
+            yield return new IsnareArticlesMetadataProvider();
+            yield return new KickstarterMetadataProvider();
+            yield return new KidojuMetadataProvider();
+            yield return new KitMetadataProvider();
+            yield return new KitchenbowlMetadataProvider();
+            yield return new KnackiMetadataProvider();
+            yield return new LearningappsOrgMetadataProvider();
+            yield return new MathembedMetadataProvider();
+            yield return new MeetupMetadataProvider();
+            yield return new MemeMetadataProvider();
+            yield return new MixcloudMetadataProvider();
+            yield return new MobyPictureMetadataProvider();
+            yield return new ModeloMetadataProvider();
+            yield return new MybeweegMetadataProvider();
+            yield return new NanooMetadataProvider();
+            yield return new NfbCaMetadataProvider();
+            yield return new OddsMetadataProvider();
+            yield return new OfficeMixMetadataProvider();
+            yield return new OfficialFmMetadataProvider();
+            yield return new OnAolMetadataProvider();
+            yield return new OraTvMetadataProvider();
+            yield return new OrbitvuMetadataProvider();
+            yield return new OumyMetadataProvider();
+            yield return new PasteryMetadataProvider();
+            yield return new PixdorMetadataProvider();
+            yield return new PollDaddyMetadataProvider();
+            yield return new PortMetadataProvider();
+            yield return new PortfoliumMetadataProvider();
+            yield return new PuntersMetadataProvider();
+            yield return new QuizBizMetadataProvider();
+            yield return new RapidengageMetadataProvider();
+            yield return new RedditMetadataProvider();
+            yield return new ReleasewireMetadataProvider();
+            yield return new RepubhubMetadataProvider();
+            yield return new ReverbnationMetadataProvider();
+            yield return new RoomshareMetadataProvider();
+            yield return new RumbleMetadataProvider();
+            yield return new SapoVideosMetadataProvider();
+            yield return new Screen9MetadataProvider();
+            yield return new ScreencastComMetadataProvider();
+            yield return new ScreenrMetadataProvider();
+            yield return new ScribblemapsMetadataProvider();
+            yield return new ScribdMetadataProvider();
+            yield return new ShortnoteMetadataProvider();
+            yield return new ShoudioMetadataProvider();
+            yield return new ShowTheWayMetadataProvider();
+            yield return new SilkMetadataProvider();
+            yield return new SizzleMetadataProvider();
+            yield return new SketchfabMetadataProvider();
+            yield return new SlideshareMetadataProvider();
+            yield return new SmugmugMetadataProvider();
+            yield return new SoundcloudMetadataProvider();
+            yield return new SoundsgoodMetadataProvider();
+            yield return new SpeakerdeckMetadataProvider();
+            yield return new SpreakerMetadataProvider();
+            yield return new StreamableMetadataProvider();
+            yield return new StreamonecloudMetadataProvider();
+            yield return new SwayMetadataProvider();
+            yield return new TedMetadataProvider();
+            yield return new TheySaidSoMetadataProvider();
+            yield return new TheNewYorkTimesMetadataProvider();
+            yield return new TickcounterMetadataProvider();
+            yield return new TopyMetadataProvider();
+            yield return new TwitchMetadataProvider();
+            yield return new UbideoMetadataProvider();
+            yield return new UolMetadataProvider();
+            yield return new UstreamMetadataProvider();
+            yield return new UttlesMetadataProvider();
+            yield return new VeerMetadataProvider();
+            yield return new VerseMetadataProvider();
+            yield return new VevoMetadataProvider();
+            yield return new VideojugMetadataProvider();
+            yield return new VidlitMetadataProvider();
+            yield return new VimeoMetadataProvider();
+            yield return new VineMetadataProvider();
+            yield return new VlipsyMetadataProvider();
+            yield return new WiredriveMetadataProvider();
+            yield return new WizerMeMetadataProvider();
+            yield return new WootledMetadataProvider();
+            yield return new WordpressComMetadataProvider();
+            yield return new YfrogMetadataProvider();
+            yield return new YoutubeMetadataProvider();
         }
     }
 }
