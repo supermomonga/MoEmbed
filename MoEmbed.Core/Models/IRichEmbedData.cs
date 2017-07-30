@@ -3,7 +3,7 @@ namespace MoEmbed.Models
     /// <summary>
     /// This type is used for rich HTML content that does not fall under one of the other categories.
     /// </summary>
-    public interface IRichEmbedObject : IEmbedObject
+    public interface IRichEmbedData : IEmbedData
     {
         /// <summary>
         /// Gets the HTML required to display the resource.

@@ -8,14 +8,13 @@ using Newtonsoft.Json.Linq;
 
 namespace MoEmbed.Models
 {
+
     /// <summary>
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
     /// </summary>
     [Serializable]
     public class RemoteMetadata : Metadata
     {
-        private Dictionary<string, object> _Values;
-
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
@@ -28,25 +27,15 @@ namespace MoEmbed.Models
         [DefaultValue(null)]
         public Uri OEmbedUrl { get; set; }
 
-        /// <inheritdoc />
-        public override Types Type
-        {
-            get
-            {
-                if (_Values != null && _Values.TryGetValue("type", out object t) && Enum.TryParse<Types>(t?.ToString(), out Types e))
-                {
-                    return e;
-                }
-                return Types.Link;
-            }
-        }
+        [DefaultValue(null)]
+        public DictionaryEmbedData Data { get; set; }
 
         /// <inheritdoc />
-        public override async Task FetchAsync()
+        public override async Task<IEmbedData> FetchAsync()
         {
-            if (_Values != null)
+            if (Data != null)
             {
-                return;
+                return Data;
             }
 
             using (var hc = new HttpClient())
@@ -82,16 +71,7 @@ namespace MoEmbed.Models
                     values = jo.ToObject<Dictionary<string, object>>();
                 }
 
-                _Values = values;
-            }
-        }
-
-        /// <inheritdoc />
-        protected override void WriteProperties(IResponseWriter writer)
-        {
-            foreach (var kv in _Values)
-            {
-                writer.WritePropertyIfNeeded(kv.Key, kv.Value);
+                return Data = new DictionaryEmbedData(values);
             }
         }
     }

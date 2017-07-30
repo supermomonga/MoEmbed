@@ -68,10 +68,15 @@ namespace MoEmbed
                         if (m != null)
                         {
                             _logger.LogInformation("Selected Provider: {0}", prov);
-                            await m.FetchAsync();
+                            var d = await m.FetchAsync();
+                            if (d == null)
+                            {
+                                // 404
+                                return;
+                            }
                             context.Response.ContentType = contentType;
-                            await m.WriteAsync(writer);
-                            break;
+                            writer.WriteOEmbed(d);
+                            return;
                         }
                     }
                 }
