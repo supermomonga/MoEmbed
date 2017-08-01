@@ -9,32 +9,43 @@ namespace MoEmbed
     public class MetadataService
     {
         private readonly ILogger<MetadataService> _logger;
+        private readonly IMetadataCache _Cache;
 
         private List<IMetadataProvider> _Providers;
+
+        public MetadataService(ILoggerFactory loggerFactory, IMetadataCache cache = null)
+        {
+            _logger = loggerFactory.CreateLogger<MetadataService>();
+            _Cache = cache;
+        }
 
         public List<IMetadataProvider> Providers
             => _Providers ?? (_Providers = new List<IMetadataProvider>());
 
-        public MetadataService(ILoggerFactory loggerFactory)
-        {
-            _logger = loggerFactory.CreateLogger<MetadataService>();
-        }
-
         public async Task<EmbedDataResult> GetDataAsync(ConsumerRequest request)
         {
-            foreach (var prov in Providers)
+            var m = _Cache?.Read(this, request);
+            if (m == null)
             {
-                var m = prov.GetMetadata(request);
-                if (m != null)
+                foreach (var prov in Providers)
                 {
-                    _logger.LogInformation("Selected Provider: {0}", prov);
-                    var d = await m.FetchAsync();
-
-                    if (d == null)
+                    m = prov.GetMetadata(request);
+                    if (m != null)
                     {
+                        _logger?.LogInformation("Selected Provider: {0}", prov);
+
+                        _Cache?.Write(this, request, m);
                         break;
                     }
+                }
+            }
 
+            if (m != null)
+            {
+                var d = await m.FetchAsync();
+
+                if (d != null)
+                {
                     return new EmbedDataResult()
                     {
                         Succeeded = true,

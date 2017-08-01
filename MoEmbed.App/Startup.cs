@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,6 +30,7 @@ namespace MoEmbed
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddRouting();
         }
 
@@ -42,7 +44,10 @@ namespace MoEmbed
                 app.UseDeveloperExceptionPage();
             }
             var routeBuilder = new RouteBuilder(app);
-            var service = new MetadataService(loggerFactory);
+
+            var service = new MetadataService(
+                                loggerFactory,
+                                new MemoryMetadataCache(app.ApplicationServices.GetService<IMemoryCache>()));
 
             var twitterConsumerKey = Configuration["TwitterConsumerKey"];
             var twitterConsumerSecret = Configuration["TwitterConsumerSecret"];
