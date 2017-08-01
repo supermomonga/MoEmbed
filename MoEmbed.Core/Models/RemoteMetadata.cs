@@ -18,13 +18,13 @@ namespace MoEmbed.Models
         /// Gets or sets the requested URL.
         /// </summary>
         [DefaultValue(null)]
-        public Uri Uri { get; set; }
+        public string Uri { get; set; }
 
         /// <summary>
         /// Gets or sets the oEmbed servide URL.
         /// </summary>
         [DefaultValue(null)]
-        public Uri OEmbedUrl { get; set; }
+        public string OEmbedUrl { get; set; }
 
         [DefaultValue(null)]
         public DictionaryEmbedData Data { get; set; }

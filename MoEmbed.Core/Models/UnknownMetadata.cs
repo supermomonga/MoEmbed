@@ -19,32 +19,32 @@ namespace MoEmbed.Models
         }
 
         public UnknownMetadata(string uri)
-            : this(new Uri(uri))
         {
+            Uri = uri;
         }
 
         public UnknownMetadata(Uri uri)
         {
-            Uri = uri;
+            Uri = uri.ToString();
         }
 
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
         [DefaultValue(null)]
-        public Uri Uri { get; set; }
+        public string Uri { get; set; }
 
         /// <summary>
         /// Gets or sets the URL the <see cref="Uri" /> moved to.
         /// </summary>
         [DefaultValue(null)]
-        public Uri MovedTo { get; set; }
+        public string MovedTo { get; set; }
 
         /// <summary>
         /// Gets or sets the resolved data.
         /// </summary>
         [DefaultValue(null)]
-        public IEmbedData Data { get; set; }
+        public DictionaryEmbedData Data { get; set; }
 
         [NonSerialized]
         private Task<IEmbedData> _FetchTask;
@@ -117,14 +117,14 @@ namespace MoEmbed.Models
                     case HttpStatusCode.Moved:
                         if (u == (MovedTo ?? Uri))
                         {
-                            MovedTo = res.Headers.Location;
+                            MovedTo = res.Headers.Location.ToString();
                         }
-                        u = res.Headers.Location;
+                        u = res.Headers.Location.ToString();
                         continue;
                     case HttpStatusCode.Ambiguous:
                     case HttpStatusCode.Found:
                     case HttpStatusCode.RedirectMethod:
-                        u = res.Headers.Location;
+                        u = res.Headers.Location.ToString();
                         continue;
                 }
 
@@ -138,7 +138,7 @@ namespace MoEmbed.Models
             hd.LoadHtml(html);
 
             var nav = hd.CreateNavigator();
-            Data = new EmbedData()
+            Data = new DictionaryEmbedData()
             {
                 Type = Types.Link,
                 Title = nav.SelectSingleNode("//html/head/title/text()")?.Value

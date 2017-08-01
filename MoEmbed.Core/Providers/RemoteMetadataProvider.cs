@@ -93,8 +93,8 @@ namespace MoEmbed.Providers
             }
             return new RemoteMetadata()
             {
-                Uri = request.Url,
-                OEmbedUrl = GetProviderUriFor(request)
+                Uri = request.Url.ToString(),
+                OEmbedUrl = GetProviderUriFor(request).ToString()
             };
         }
     }

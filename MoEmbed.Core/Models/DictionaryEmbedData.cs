@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace MoEmbed.Models
 {
     [Serializable]
-    public class DictionaryEmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData
+    public class DictionaryEmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData, IXmlSerializable
     {
         // TODO: Add interfaces to Addcess as dictionary
 
@@ -43,45 +47,185 @@ namespace MoEmbed.Models
                 }
                 return Types.Link;
             }
+            set
+            {
+                switch (value)
+                {
+                    case Types.Link:
+                        _Values[OEmbed.TYPE] = OEmbed.LINK_TYPE;
+                        break;
+
+                    case Types.Photo:
+                        _Values[OEmbed.TYPE] = OEmbed.PHOTO_TYPE;
+                        break;
+
+                    case Types.Video:
+                        _Values[OEmbed.TYPE] = OEmbed.VIDEO_TYPE;
+                        break;
+
+                    case Types.Rich:
+                        _Values[OEmbed.TYPE] = OEmbed.RICH_TYPE;
+                        break;
+
+                    default:
+                        _Values[OEmbed.TYPE] = value.ToString("G").ToLowerInvariant();
+                        break;
+                }
+            }
         }
 
         public string Title
-            => _Values.TryGetValue(OEmbed.TITLE, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.TITLE, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.TITLE] = value;
+        }
 
         public string AuthorName
-            => _Values.TryGetValue(OEmbed.AUTHOR_NAME, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.AUTHOR_NAME, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.AUTHOR_NAME] = value;
+        }
 
         public Uri AuthorUrl
-            => _Values.TryGetValue(OEmbed.AUTHOR_URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.AUTHOR_URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.AUTHOR_URL] = value?.ToString();
+        }
 
         public string ProviderName
-            => _Values.TryGetValue(OEmbed.PROVIDER_NAME, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.PROVIDER_NAME, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.PROVIDER_NAME] = value;
+        }
 
         public Uri ProviderUrl
-            => _Values.TryGetValue(OEmbed.PROVIDER_URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.PROVIDER_URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.PROVIDER_URL] = value?.ToString();
+        }
 
         public int? CacheAge
-            => _Values.TryGetValue(OEmbed.CACHE_AGE, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.CACHE_AGE, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+            set => _Values[OEmbed.CACHE_AGE] = value;
+        }
 
         public Uri ThumbnailUrl
-            => _Values.TryGetValue(OEmbed.THUMBNAIL_URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.THUMBNAIL_URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.THUMBNAIL_URL] = value?.ToString();
+        }
 
         public int? ThumbnailWidth
-            => _Values.TryGetValue(OEmbed.THUMBNAIL_WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.THUMBNAIL_WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+            set => _Values[OEmbed.THUMBNAIL_WIDTH] = value;
+        }
 
         public int? ThumbnailHeight
-            => _Values.TryGetValue(OEmbed.THUMBNAIL_HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.THUMBNAIL_HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+            set => _Values[OEmbed.THUMBNAIL_HEIGHT] = value;
+        }
 
         public Uri Url
-            => _Values.TryGetValue(OEmbed.URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.URL] = value?.ToString();
+        }
 
         public string Html
-            => _Values.TryGetValue(OEmbed.HTML, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.HTML, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.HTML] = value;
+        }
 
         public int Width
-            => _Values.TryGetValue(OEmbed.WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+        {
+            get => _Values.TryGetValue(OEmbed.WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+            set => _Values[OEmbed.WIDTH] = value;
+        }
 
         public int Height
-            => _Values.TryGetValue(OEmbed.HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+        {
+            get => _Values.TryGetValue(OEmbed.HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+            set => _Values[OEmbed.HEIGHT] = value;
+        }
+
+        /// <inheritdoc />
+        public XmlSchema GetSchema()
+            => null;
+
+        /// <inheritdoc />
+        public void ReadXml(XmlReader reader)
+        {
+            var isEmpty = reader.IsEmptyElement;
+            reader.Read();
+
+            if (isEmpty)
+            {
+                return;
+            }
+
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                var tn = reader.LocalName;
+                var key = reader.GetAttribute("Key");
+                reader.ReadStartElement();
+
+                switch (tn)
+                {
+                    case nameof(Boolean):
+                        _Values[key] = reader.ReadContentAsBoolean();
+                        break;
+
+                    case nameof(Int32):
+                        _Values[key] = reader.ReadContentAsInt();
+                        break;
+
+                    case nameof(Int64):
+                        _Values[key] = reader.ReadContentAsLong();
+                        break;
+
+                    case nameof(Single):
+                        _Values[key] = reader.ReadContentAsFloat();
+                        break;
+
+                    case nameof(Double):
+                        _Values[key] = reader.ReadContentAsDouble();
+                        break;
+
+                    case nameof(Decimal):
+                        _Values[key] = reader.ReadContentAsDecimal();
+                        break;
+
+                    default:
+                        _Values[key] = reader.ReadContentAsString();
+                        break;
+                }
+
+                reader.ReadEndElement();
+            }
+
+            reader.ReadEndElement();
+        }
+
+        /// <inheritdoc />
+        public void WriteXml(XmlWriter writer)
+        {
+            foreach (var kv in _Values)
+            {
+                if (kv.Value != null)
+                {
+                    writer.WriteStartElement(kv.Value.GetType().Name);
+                    writer.WriteAttributeString("Key", kv.Key);
+                    writer.WriteString(kv.Value.ToString());
+                    writer.WriteEndElement();
+                }
+            }
+        }
+
+        public Dictionary<string, object> ToDictionary()
+            => _Values.ToDictionary(kv => kv.Key, kv => kv.Value);
     }
 }
