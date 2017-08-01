@@ -46,13 +46,32 @@ namespace MoEmbed.Models
         [DefaultValue(null)]
         public IEmbedData Data { get; set; }
 
+        [NonSerialized]
+        private Task<IEmbedData> _FetchTask;
+
         /// <inheritdoc />
-        public async override Task<IEmbedData> FetchAsync()
+        public override Task<IEmbedData> FetchAsync()
         {
-            if (Data != null)
+            lock (this)
             {
-                return Data;
+                if (_FetchTask == null)
+                {
+                    if (Data != null)
+                    {
+                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                    }
+                    else
+                    {
+                        _FetchTask = FetchAsyncCore();
+                        _FetchTask.ConfigureAwait(false);
+                    }
+                }
+                return _FetchTask;
             }
+        }
+
+        private async Task<IEmbedData> FetchAsyncCore()
+        {
             using (var hh = new HttpClientHandler()
             {
                 AllowAutoRedirect = false

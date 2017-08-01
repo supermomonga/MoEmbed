@@ -8,7 +8,6 @@ using Newtonsoft.Json.Linq;
 
 namespace MoEmbed.Models
 {
-
     /// <summary>
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
     /// </summary>
@@ -30,14 +29,32 @@ namespace MoEmbed.Models
         [DefaultValue(null)]
         public DictionaryEmbedData Data { get; set; }
 
-        /// <inheritdoc />
-        public override async Task<IEmbedData> FetchAsync()
-        {
-            if (Data != null)
-            {
-                return Data;
-            }
+        [NonSerialized]
+        private Task<IEmbedData> _FetchTask;
 
+        /// <inheritdoc />
+        public override Task<IEmbedData> FetchAsync()
+        {
+            lock (this)
+            {
+                if (_FetchTask == null)
+                {
+                    if (Data != null)
+                    {
+                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                    }
+                    else
+                    {
+                        _FetchTask = FetchAsyncCore();
+                        _FetchTask.ConfigureAwait(false);
+                    }
+                }
+                return _FetchTask;
+            }
+        }
+
+        private async Task<IEmbedData> FetchAsyncCore()
+        {
             using (var hc = new HttpClient())
             {
                 // TODO: share HttpClient in service
