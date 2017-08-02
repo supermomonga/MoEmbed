@@ -11,10 +11,12 @@ namespace MoEmbed
     public class MemoryMetadataCache : IMetadataCache
     {
         private readonly IMemoryCache _Cache;
+        private readonly DistributedMetadataCache _Distributed;
 
-        public MemoryMetadataCache(IMemoryCache cache)
+        public MemoryMetadataCache(IMemoryCache cache, DistributedMetadataCache distributed = null)
         {
             _Cache = cache;
+            _Distributed = distributed;
         }
 
         /// <summary>
@@ -24,19 +26,45 @@ namespace MoEmbed
         /// <param name="request">The consumer request.</param>
         /// <returns>The task object representing the asynchronous operation.
         /// The <see cref="Task{TResult}.Result"/> property on the task object returns a cached <see cref="Metadata"/>.</returns>
-        public Task<Metadata> ReadAsync(MetadataService service, ConsumerRequest request)
+        public async Task<Metadata> ReadAsync(MetadataService service, ConsumerRequest request)
         {
-            _Cache.TryGetValue(request.Url, out Metadata r);
-            return Task.FromResult(r);
+            if (!_Cache.TryGetValue(request.Url, out Metadata r))
+            {
+                if (_Distributed != null)
+                {
+                    r = await _Distributed.ReadAsync(service, request).ConfigureAwait(false);
+
+                    if (r != null)
+                    {
+                        _Cache.Set(request.Url, r, new MemoryCacheEntryOptions()
+                        {
+                            SlidingExpiration = TimeSpan.FromMinutes(60)
+                        });
+                    }
+                }
+            }
+
+            return r;
         }
 
-        public Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata)
+        public async Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata)
         {
-            _Cache.Set(request.Url, metadata, new MemoryCacheEntryOptions()
+            if (metadata == null)
             {
-                SlidingExpiration = TimeSpan.FromMinutes(60)
-            });
-            return Task.FromResult(0);
+                _Cache.Remove(request.Url);
+            }
+            else
+            {
+                _Cache.Set(request.Url, metadata, new MemoryCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromMinutes(60)
+                });
+            }
+
+            if (_Distributed != null)
+            {
+                await _Distributed.WriteAsync(service, request, metadata).ConfigureAwait(false);
+            }
         }
     }
 }
