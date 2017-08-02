@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using MoEmbed.Models;
 
 namespace MoEmbed
@@ -12,9 +13,10 @@ namespace MoEmbed
         /// </summary>
         /// <param name="service">The <see cref="MetadataService" /> reading cache.</param>
         /// <param name="request">The consumer request.</param>
-        /// <returns>If hit, a cached <see cref="Metadata"/>. Otherwise <c>null</c>.</returns>
-        Metadata Read(MetadataService service, ConsumerRequest request);
+        /// <returns>The task object representing the asynchronous operation.
+        /// The <see cref="Task{TResult}.Result"/> property on the task object returns a cached <see cref="Metadata"/>.</returns>
+        Task<Metadata> ReadAsync(MetadataService service, ConsumerRequest request);
 
-        void Write(MetadataService service, ConsumerRequest request, Metadata metadata);
+        Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata);
     }
 }

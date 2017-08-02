@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using MoEmbed.Models;
 
@@ -21,19 +22,21 @@ namespace MoEmbed
         /// </summary>
         /// <param name="service">The <see cref="MetadataService" /> reading cache.</param>
         /// <param name="request">The consumer request.</param>
-        /// <returns>If hit, a cached <see cref="Metadata"/>. Otherwise <c>null</c>.</returns>
-        public Metadata Read(MetadataService service, ConsumerRequest request)
+        /// <returns>The task object representing the asynchronous operation.
+        /// The <see cref="Task{TResult}.Result"/> property on the task object returns a cached <see cref="Metadata"/>.</returns>
+        public Task<Metadata> ReadAsync(MetadataService service, ConsumerRequest request)
         {
             _Cache.TryGetValue(request.Url, out Metadata r);
-            return r;
+            return Task.FromResult(r);
         }
 
-        public void Write(MetadataService service, ConsumerRequest request, Metadata metadata)
+        public Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata)
         {
             _Cache.Set(request.Url, metadata, new MemoryCacheEntryOptions()
             {
                 SlidingExpiration = TimeSpan.FromMinutes(60)
             });
+            return Task.FromResult(0);
         }
     }
 }

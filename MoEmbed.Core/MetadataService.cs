@@ -24,7 +24,7 @@ namespace MoEmbed
 
         public async Task<EmbedDataResult> GetDataAsync(ConsumerRequest request)
         {
-            var m = _Cache?.Read(this, request);
+            var m = _Cache == null ? null : await _Cache.ReadAsync(this, request).ConfigureAwait(false);
             if (m == null)
             {
                 foreach (var prov in Providers)
@@ -34,7 +34,7 @@ namespace MoEmbed
                     {
                         _logger?.LogInformation("Selected Provider: {0}", prov);
 
-                        _Cache?.Write(this, request, m);
+                        _Cache?.WriteAsync(this, request, m).ConfigureAwait(false);
                         break;
                     }
                 }
