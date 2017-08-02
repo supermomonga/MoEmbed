@@ -1,10 +1,7 @@
 using System;
 using System.ComponentModel;
-using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
 using Tweetinvi;
 using Tweetinvi.Models;
 
@@ -27,6 +24,7 @@ namespace MoEmbed.Models
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
 
         private string _ScreenName;
+
         /// <summary>
         /// Gets the tweet's screen name.
         /// </summary>
@@ -40,6 +38,7 @@ namespace MoEmbed.Models
         }
 
         private long _TweetId;
+
         /// <summary>
         /// Gets the tweet ID.
         /// </summary>
@@ -53,6 +52,7 @@ namespace MoEmbed.Models
         }
 
         private Uri _Uri;
+
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
@@ -78,13 +78,42 @@ namespace MoEmbed.Models
         [DefaultValue(null)]
         public Uri MovedTo { get; set; }
 
+        /// <summary>
+        /// Gets or sets the resolved data.
+        /// </summary>
+        [DefaultValue(null)]
+        public EmbedData Data { get; set; }
+
+        [NonSerialized]
+        private Task<IEmbedData> _FetchTask;
+
         /// <inheritdoc />
-        public async override Task<IEmbedData> FetchAsync()
+        public override Task<IEmbedData> FetchAsync()
+        {
+            lock (this)
+            {
+                if (_FetchTask == null)
+                {
+                    if (Data != null)
+                    {
+                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                    }
+                    else
+                    {
+                        _FetchTask = Task.Run((Func<IEmbedData>)FetchCore);
+                        _FetchTask.ConfigureAwait(false);
+                    }
+                }
+                return _FetchTask;
+            }
+        }
+
+        private IEmbedData FetchCore()
         {
             var tweet = Tweet.GetTweet(TweetId);
             var user = User.GetUserFromScreenName(ScreenName);
 
-            return new EmbedData()
+            return Data = new EmbedData()
             {
                 Type = Types.Rich,
 
@@ -107,17 +136,3 @@ namespace MoEmbed.Models
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

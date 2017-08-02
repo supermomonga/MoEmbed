@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MoEmbed.Models
 {
     [Serializable]
     public class DictionaryEmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData
     {
-        // TODO: Add interfaces to Addcess as dictionary
+        // TODO: Add interfaces to Acess as dictionary
 
-        private readonly Dictionary<string, object> _Values;
+        private Dictionary<string, object> _Values;
 
         public DictionaryEmbedData()
         {
@@ -20,6 +25,8 @@ namespace MoEmbed.Models
             _Values = values;
         }
 
+        [DefaultValue(Types.Link)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Types Type
         {
             get
@@ -43,45 +50,161 @@ namespace MoEmbed.Models
                 }
                 return Types.Link;
             }
+            set
+            {
+                switch (value)
+                {
+                    case Types.Link:
+                        _Values[OEmbed.TYPE] = OEmbed.LINK_TYPE;
+                        break;
+
+                    case Types.Photo:
+                        _Values[OEmbed.TYPE] = OEmbed.PHOTO_TYPE;
+                        break;
+
+                    case Types.Video:
+                        _Values[OEmbed.TYPE] = OEmbed.VIDEO_TYPE;
+                        break;
+
+                    case Types.Rich:
+                        _Values[OEmbed.TYPE] = OEmbed.RICH_TYPE;
+                        break;
+
+                    default:
+                        _Values[OEmbed.TYPE] = value.ToString("G").ToLowerInvariant();
+                        break;
+                }
+            }
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Title
-            => _Values.TryGetValue(OEmbed.TITLE, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.TITLE, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.TITLE] = value;
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string AuthorName
-            => _Values.TryGetValue(OEmbed.AUTHOR_NAME, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.AUTHOR_NAME, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.AUTHOR_NAME] = value;
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri AuthorUrl
-            => _Values.TryGetValue(OEmbed.AUTHOR_URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.AUTHOR_URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.AUTHOR_URL] = value?.ToString();
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ProviderName
-            => _Values.TryGetValue(OEmbed.PROVIDER_NAME, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.PROVIDER_NAME, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.PROVIDER_NAME] = value;
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri ProviderUrl
-            => _Values.TryGetValue(OEmbed.PROVIDER_URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.PROVIDER_URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.PROVIDER_URL] = value?.ToString();
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int? CacheAge
-            => _Values.TryGetValue(OEmbed.CACHE_AGE, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.CACHE_AGE, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+            set => _Values[OEmbed.CACHE_AGE] = value;
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri ThumbnailUrl
-            => _Values.TryGetValue(OEmbed.THUMBNAIL_URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.THUMBNAIL_URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.THUMBNAIL_URL] = value?.ToString();
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int? ThumbnailWidth
-            => _Values.TryGetValue(OEmbed.THUMBNAIL_WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.THUMBNAIL_WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+            set => _Values[OEmbed.THUMBNAIL_WIDTH] = value;
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int? ThumbnailHeight
-            => _Values.TryGetValue(OEmbed.THUMBNAIL_HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.THUMBNAIL_HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
+            set => _Values[OEmbed.THUMBNAIL_HEIGHT] = value;
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri Url
-            => _Values.TryGetValue(OEmbed.URL, out object s) ? new Uri(s?.ToString()) : null;
+        {
+            get => _Values.TryGetValue(OEmbed.URL, out object s) ? new Uri(s?.ToString()) : null;
+            set => _Values[OEmbed.URL] = value?.ToString();
+        }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Html
-            => _Values.TryGetValue(OEmbed.HTML, out object s) ? s?.ToString() : null;
+        {
+            get => _Values.TryGetValue(OEmbed.HTML, out object s) ? s?.ToString() : null;
+            set => _Values[OEmbed.HTML] = value;
+        }
 
+        [DefaultValue(0)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Width
-            => _Values.TryGetValue(OEmbed.WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+        {
+            get => _Values.TryGetValue(OEmbed.WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+            set => _Values[OEmbed.WIDTH] = value;
+        }
 
+        [DefaultValue(0)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Height
-            => _Values.TryGetValue(OEmbed.HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+        {
+            get => _Values.TryGetValue(OEmbed.HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
+            set => _Values[OEmbed.HEIGHT] = value;
+        }
+
+        public string Json
+        {
+            // HACK: avoiding Portable.Xaml 0.16.0 bug
+            get => " " + ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    _Values.Clear();
+                }
+                else
+                {
+                    _Values = JsonConvert.DeserializeObject<Dictionary<string, object>>(value);
+                }
+            }
+        }
+
+        public Dictionary<string, object> ToDictionary()
+            => _Values.ToDictionary(kv => kv.Key, kv => kv.Value);
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return JObject.FromObject(_Values).ToString();
+        }
     }
 }
