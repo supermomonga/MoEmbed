@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Portable.Xaml;
 using Xunit;
 
 namespace MoEmbed.Models
@@ -25,14 +26,14 @@ namespace MoEmbed.Models
             var d1 = rm.FetchAsync().GetAwaiter().GetResult();
             Assert.Equal(rm.Data, d1);
 
-            var xs = new XmlSerializer(rm.GetType());
             using (var sw = new StringWriter())
             {
-                xs.Serialize(sw, rm);
+                XamlServices.Save(sw, rm);
 
-                using (var sr = new StringReader(sw.ToString()))
+                var xml = sw.ToString();
+                using (var sr = new StringReader(xml))
                 {
-                    var obj = xs.Deserialize(sr);
+                    var obj = XamlServices.Load(sr);
                     Assert.IsType<RemoteMetadata>(obj);
 
                     var rm2 = (RemoteMetadata)obj;

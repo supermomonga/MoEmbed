@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MoEmbed.Models
 {
     [Serializable]
-    public class DictionaryEmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData, IXmlSerializable
+    public class DictionaryEmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData
     {
-        // TODO: Add interfaces to Addcess as dictionary
+        // TODO: Add interfaces to Acess as dictionary
 
-        private readonly Dictionary<string, object> _Values;
+        private Dictionary<string, object> _Values;
 
         public DictionaryEmbedData()
         {
@@ -24,6 +25,8 @@ namespace MoEmbed.Models
             _Values = values;
         }
 
+        [DefaultValue(Types.Link)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Types Type
         {
             get
@@ -74,158 +77,134 @@ namespace MoEmbed.Models
             }
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Title
         {
             get => _Values.TryGetValue(OEmbed.TITLE, out object s) ? s?.ToString() : null;
             set => _Values[OEmbed.TITLE] = value;
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string AuthorName
         {
             get => _Values.TryGetValue(OEmbed.AUTHOR_NAME, out object s) ? s?.ToString() : null;
             set => _Values[OEmbed.AUTHOR_NAME] = value;
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri AuthorUrl
         {
             get => _Values.TryGetValue(OEmbed.AUTHOR_URL, out object s) ? new Uri(s?.ToString()) : null;
             set => _Values[OEmbed.AUTHOR_URL] = value?.ToString();
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ProviderName
         {
             get => _Values.TryGetValue(OEmbed.PROVIDER_NAME, out object s) ? s?.ToString() : null;
             set => _Values[OEmbed.PROVIDER_NAME] = value;
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri ProviderUrl
         {
             get => _Values.TryGetValue(OEmbed.PROVIDER_URL, out object s) ? new Uri(s?.ToString()) : null;
             set => _Values[OEmbed.PROVIDER_URL] = value?.ToString();
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int? CacheAge
         {
             get => _Values.TryGetValue(OEmbed.CACHE_AGE, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
             set => _Values[OEmbed.CACHE_AGE] = value;
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri ThumbnailUrl
         {
             get => _Values.TryGetValue(OEmbed.THUMBNAIL_URL, out object s) ? new Uri(s?.ToString()) : null;
             set => _Values[OEmbed.THUMBNAIL_URL] = value?.ToString();
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int? ThumbnailWidth
         {
             get => _Values.TryGetValue(OEmbed.THUMBNAIL_WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
             set => _Values[OEmbed.THUMBNAIL_WIDTH] = value;
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int? ThumbnailHeight
         {
             get => _Values.TryGetValue(OEmbed.THUMBNAIL_HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) : null;
             set => _Values[OEmbed.THUMBNAIL_HEIGHT] = value;
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Uri Url
         {
             get => _Values.TryGetValue(OEmbed.URL, out object s) ? new Uri(s?.ToString()) : null;
             set => _Values[OEmbed.URL] = value?.ToString();
         }
 
+        [DefaultValue(null)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Html
         {
             get => _Values.TryGetValue(OEmbed.HTML, out object s) ? s?.ToString() : null;
             set => _Values[OEmbed.HTML] = value;
         }
 
+        [DefaultValue(0)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Width
         {
             get => _Values.TryGetValue(OEmbed.WIDTH, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
             set => _Values[OEmbed.WIDTH] = value;
         }
 
+        [DefaultValue(0)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Height
         {
             get => _Values.TryGetValue(OEmbed.HEIGHT, out object obj) ? (obj as IConvertible)?.ToInt32(null) ?? 0 : 0;
             set => _Values[OEmbed.HEIGHT] = value;
         }
 
-        /// <inheritdoc />
-        public XmlSchema GetSchema()
-            => null;
-
-        /// <inheritdoc />
-        public void ReadXml(XmlReader reader)
+        public string Json
         {
-            var isEmpty = reader.IsEmptyElement;
-            reader.Read();
-
-            if (isEmpty)
+            // HACK: avoiding Portable.Xaml 0.16.0 bug
+            get => " " + ToString();
+            set
             {
-                return;
-            }
-
-            while (reader.NodeType != XmlNodeType.EndElement)
-            {
-                var tn = reader.LocalName;
-                var key = reader.GetAttribute("Key");
-                reader.ReadStartElement();
-
-                switch (tn)
+                if (string.IsNullOrEmpty(value))
                 {
-                    case nameof(Boolean):
-                        _Values[key] = reader.ReadContentAsBoolean();
-                        break;
-
-                    case nameof(Int32):
-                        _Values[key] = reader.ReadContentAsInt();
-                        break;
-
-                    case nameof(Int64):
-                        _Values[key] = reader.ReadContentAsLong();
-                        break;
-
-                    case nameof(Single):
-                        _Values[key] = reader.ReadContentAsFloat();
-                        break;
-
-                    case nameof(Double):
-                        _Values[key] = reader.ReadContentAsDouble();
-                        break;
-
-                    case nameof(Decimal):
-                        _Values[key] = reader.ReadContentAsDecimal();
-                        break;
-
-                    default:
-                        _Values[key] = reader.ReadContentAsString();
-                        break;
+                    _Values.Clear();
                 }
-
-                reader.ReadEndElement();
-            }
-
-            reader.ReadEndElement();
-        }
-
-        /// <inheritdoc />
-        public void WriteXml(XmlWriter writer)
-        {
-            foreach (var kv in _Values)
-            {
-                if (kv.Value != null)
+                else
                 {
-                    writer.WriteStartElement(kv.Value.GetType().Name);
-                    writer.WriteAttributeString("Key", kv.Key);
-                    writer.WriteString(kv.Value.ToString());
-                    writer.WriteEndElement();
+                    _Values = JsonConvert.DeserializeObject<Dictionary<string, object>>(value);
                 }
             }
         }
 
         public Dictionary<string, object> ToDictionary()
             => _Values.ToDictionary(kv => kv.Key, kv => kv.Value);
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return JObject.FromObject(_Values).ToString();
+        }
     }
 }
