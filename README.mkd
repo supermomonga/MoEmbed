@@ -1,4 +1,6 @@
 
+[![CircleCI](https://circleci.com/gh/supermomonga/MoEmbed.svg?style=svg)](https://circleci.com/gh/supermomonga/MoEmbed)
+
 # MoEmbed
 
 MoEmbed is a [oEmbed](http://oembed.com/) provider which supports any websites.
