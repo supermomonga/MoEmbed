@@ -1,0 +1,21 @@
+machine:
+  environment:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    NUGET_XMLDOC_MODE: skip
+
+dependencies:
+  cache_directories:
+    - "~/.nuget"
+  pre:
+    - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+    - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+    - sudo apt-get update
+    - sudo apt-get install dotnet-dev-1.0.1
+  override:
+    - dotnet restore
+
+test:
+  override:
+    - cd ./MoEmbed.Tests
+    - dotnet test
+
