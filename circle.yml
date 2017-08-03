@@ -16,6 +16,6 @@ dependencies:
 
 test:
   override:
-    - cd ./MoEmbed.Tests
-    - dotnet test
+    - dotnet test:
+        pwd: MoEmbed.Tests
 
