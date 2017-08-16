@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Models.OEmbed
 {
-    public interface IMediaEmbedData : IEmbedData
+    public interface IMediaOEmbedData : IOEmbedData
     {
         /// <summary>
         /// Gets media list.

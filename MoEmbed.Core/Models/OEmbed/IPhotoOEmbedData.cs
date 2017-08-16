@@ -5,7 +5,7 @@ namespace MoEmbed.Models.OEmbed
   /// <summary>
   /// This type is used for representing static photos.
   /// </summary>
-  public interface IPhotoEmbedData : IEmbedData
+  public interface IPhotoOEmbedData : IOEmbedData
   {
     /// <summary>
     /// Gets the source URL of the image.

@@ -28,13 +28,13 @@ namespace MoEmbed.Models.Metadata
         public string OEmbedUrl { get; set; }
 
         [DefaultValue(null)]
-        public DictionaryEmbedData Data { get; set; }
+        public EmbedData Data { get; set; }
 
         [NonSerialized]
-        private Task<IEmbedData> _FetchTask;
+        private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<IEmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync()
         {
             lock (this)
             {
@@ -42,7 +42,7 @@ namespace MoEmbed.Models.Metadata
                 {
                     if (Data != null)
                     {
-                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                        _FetchTask = Task.FromResult<EmbedData>(Data);
                     }
                     else
                     {
@@ -54,7 +54,7 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        private async Task<IEmbedData> FetchAsyncCore()
+        private async Task<EmbedData> FetchAsyncCore()
         {
             using (var hc = new HttpClient())
             {

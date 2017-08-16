@@ -6,6 +6,6 @@ namespace MoEmbed
     {
         public bool Succeeded { get; internal set; }
         public string ErrorMessage { get; internal set; }
-        public IEmbedData Data { get; internal set; }
+        public EmbedData Data { get; internal set; }
     }
 }

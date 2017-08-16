@@ -3,7 +3,8 @@ using System.ComponentModel;
 
 namespace MoEmbed.Models.OEmbed
 {
-  public class EmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData
+	public enum Types { Photo, Video, Link, Rich }
+	public class OEmbedData : IOEmbedData, IPhotoOEmbedData, IVideoOEmbedData, IRichOEmbedData
   {
     public Types Type { get; set; }
 

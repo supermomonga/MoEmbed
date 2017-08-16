@@ -93,7 +93,7 @@ namespace MoEmbed
             context.Response.ContentType = contentType;
             if (result.Data != null)
             {
-                writer.WriteOEmbed(result.Data);
+                writer.WriteEmbedData(result.Data);
             }
             else
             {

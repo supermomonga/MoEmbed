@@ -3,7 +3,7 @@ namespace MoEmbed.Models.OEmbed
   /// <summary>
   /// This type is used for representing playable videos.
   /// </summary>
-  public interface IVideoEmbedData : IEmbedData
+  public interface IVideoOEmbedData : IOEmbedData
   {
     /// <summary>
     /// Gets the HTML required to embed a video player.
