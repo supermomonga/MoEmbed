@@ -10,7 +10,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class TwentyThreeMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.23hq\.com/[^/]/photo/");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.23hq\.com/.*/photo/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -25,7 +25,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class AlphaAppNetMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://alpha\.app\.net/[^/]/post/");
+        private static readonly Regex _UriPattern = new Regex(@"https://alpha\.app\.net/.*/post/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -100,7 +100,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class BlackfireIoMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://blackfire\.io/profiles/[^/]/graph");
+        private static readonly Regex _UriPattern = new Regex(@"https://blackfire\.io/profiles/.*/graph");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -295,7 +295,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class CrowdRankingMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://crowdranking\.com/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://crowdranking\.com/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -325,7 +325,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class DailyMileMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.dailymile\.com/people/[^/]/entries/");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.dailymile\.com/people/.*/entries/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -340,7 +340,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class DeviantartComMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.deviantart\.com/art/|http://[^/]\.deviantart\.com/[^/]\#/d|http://fav\.me/|http://sta\.sh/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.deviantart\.com/art/|http://.*\.deviantart\.com/.*\#/d|http://fav\.me/|http://sta\.sh/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -355,7 +355,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class DidacteMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://[^/]\.didacte\.com/a/course/");
+        private static readonly Regex _UriPattern = new Regex(@"https://.*\.didacte\.com/a/course/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -370,7 +370,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class DipityMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.dipity\.com/[^/]/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.dipity\.com/.*/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -385,7 +385,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class DocdroidMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(https://[^/]\.docdroid\.net/|http://[^/]\.docdroid\.net/|https://docdro\.id/|http://docdro\.id/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://.*\.docdroid\.net/|http://.*\.docdroid\.net/|https://docdro\.id/|http://docdro\.id/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -550,7 +550,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class FlickrMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.flickr\.com/photos/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.flickr\.com/photos/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -610,7 +610,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class GeographMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.geograph\.org\.uk/|http://[^/]\.geograph\.co\.uk/|http://[^/]\.geograph\.ie/|http://[^/]\.wikimedia\.org/[^/]_geograph\.org\.uk_|http://[^/]\.geograph\.org\.gg/|http://[^/]\.geograph\.org\.je/|http://channel-islands\.geograph\.org/|http://channel-islands\.geographs\.org/|http://[^/]\.channel\.geographs\.org/|http://geo-en\.hlipp\.de/|http://geo\.hlipp\.de/|http://germany\.geograph\.org/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.geograph\.org\.uk/|http://.*\.geograph\.co\.uk/|http://.*\.geograph\.ie/|http://.*\.wikimedia\.org/.*_geograph\.org\.uk_|http://.*\.geograph\.org\.gg/|http://.*\.geograph\.org\.je/|http://channel-islands\.geograph\.org/|http://channel-islands\.geographs\.org/|http://.*\.channel\.geographs\.org/|http://geo-en\.hlipp\.de/|http://geo\.hlipp\.de/|http://germany\.geograph\.org/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -655,7 +655,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class GIPHYMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(https://giphy\.com/gifs/|http://gph\.is/|https://media\.giphy\.com/media/[^/]/giphy\.gif)");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://giphy\.com/gifs/|http://gph\.is/|https://media\.giphy\.com/media/.*/giphy\.gif)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -685,7 +685,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class HuffdufferMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://huffduffer\.com/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://huffduffer\.com/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -790,7 +790,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class InphoodMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.inphood\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.inphood\.com/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -850,7 +850,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class KidojuMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://www\.kidoju\.com/en/x/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"https://www\.kidoju\.com/en/x/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -865,7 +865,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class KitMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://kit\.com/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://kit\.com/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -970,7 +970,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class MixcloudMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.mixcloud\.com/[^/]/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.mixcloud\.com/.*/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -985,7 +985,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class MobyPictureMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.mobypicture\.com/user/[^/]/view/");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.mobypicture\.com/user/.*/view/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1030,7 +1030,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class NanooMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.nanoo\.tv/link/|http://nanoo\.tv/link/|http://[^/]\.nanoo\.pro/link/|http://nanoo\.pro/link/|https://[^/]\.nanoo\.tv/link/|https://nanoo\.tv/link/|https://[^/]\.nanoo\.pro/link/|https://nanoo\.pro/link/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.nanoo\.tv/link/|http://nanoo\.tv/link/|http://.*\.nanoo\.pro/link/|http://nanoo\.pro/link/|https://.*\.nanoo\.tv/link/|https://nanoo\.tv/link/|https://.*\.nanoo\.pro/link/|https://nanoo\.pro/link/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1045,7 +1045,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class NfbCaMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.nfb\.ca/film/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.nfb\.ca/film/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1135,7 +1135,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class OrbitvuMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(https://orbitvu\.co/001/[^/]/ov3601/view|https://orbitvu\.co/001/[^/]/ov3601/[^/]/view|https://orbitvu\.co/001/[^/]/ov3602/[^/]/view|https://orbitvu\.co/001/[^/]/2/orbittour/[^/]/view|https://orbitvu\.co/001/[^/]/1/2/orbittour/[^/]/view|http://orbitvu\.co/001/[^/]/ov3601/view|http://orbitvu\.co/001/[^/]/ov3601/[^/]/view|http://orbitvu\.co/001/[^/]/ov3602/[^/]/view|http://orbitvu\.co/001/[^/]/2/orbittour/[^/]/view|http://orbitvu\.co/001/[^/]/1/2/orbittour/[^/]/view)");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://orbitvu\.co/001/.*/ov3601/view|https://orbitvu\.co/001/.*/ov3601/.*/view|https://orbitvu\.co/001/.*/ov3602/.*/view|https://orbitvu\.co/001/.*/2/orbittour/.*/view|https://orbitvu\.co/001/.*/1/2/orbittour/.*/view|http://orbitvu\.co/001/.*/ov3601/view|http://orbitvu\.co/001/.*/ov3601/.*/view|http://orbitvu\.co/001/.*/ov3602/.*/view|http://orbitvu\.co/001/.*/2/orbittour/.*/view|http://orbitvu\.co/001/.*/1/2/orbittour/.*/view)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1180,7 +1180,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class PixdorMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://store\.pixdor\.com/place-marker-widget/[^/]/show");
+        private static readonly Regex _UriPattern = new Regex(@"https://store\.pixdor\.com/place-marker-widget/.*/show");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1195,7 +1195,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class PollDaddyMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.polldaddy\.com/s/|http://[^/]\.polldaddy\.com/poll/|http://[^/]\.polldaddy\.com/ratings/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.polldaddy\.com/s/|http://.*\.polldaddy\.com/poll/|http://.*\.polldaddy\.com/ratings/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1255,7 +1255,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class QuizBizMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.quiz\.biz/quizz-[^/]\.html");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.quiz\.biz/quizz-.*\.html");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1285,7 +1285,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class RedditMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://reddit\.com/r/[^/]/comments/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"https://reddit\.com/r/.*/comments/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1420,7 +1420,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class ScreenrMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://www\.screenr\.com/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://www\.screenr\.com/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1510,7 +1510,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class SilkMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.silk\.co/explore/|https://[^/]\.silk\.co/explore/|http://[^/]\.silk\.co/s/embed/|https://[^/]\.silk\.co/s/embed/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.silk\.co/explore/|https://.*\.silk\.co/explore/|http://.*\.silk\.co/s/embed/|https://.*\.silk\.co/s/embed/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1540,7 +1540,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class SketchfabMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://sketchfab\.com/models/|https://sketchfab\.com/models/|https://sketchfab\.com/[^/]/folders/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://sketchfab\.com/models/|https://sketchfab\.com/models/|https://sketchfab\.com/.*/folders/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1555,7 +1555,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class SlideshareMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://www\.slideshare\.net/[^/]/|http://fr\.slideshare\.net/[^/]/|http://de\.slideshare\.net/[^/]/|http://es\.slideshare\.net/[^/]/|http://pt\.slideshare\.net/[^/]/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://www\.slideshare\.net/.*/|http://fr\.slideshare\.net/.*/|http://de\.slideshare\.net/.*/|http://es\.slideshare\.net/.*/|http://pt\.slideshare\.net/.*/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1570,7 +1570,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class SmugmugMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.smugmug\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.smugmug\.com/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1615,7 +1615,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class SpeakerdeckMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://speakerdeck\.com/[^/]/");
+        private static readonly Regex _UriPattern = new Regex(@"http://speakerdeck\.com/.*/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1630,7 +1630,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class SpreakerMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.spreaker\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.spreaker\.com/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1720,7 +1720,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class TheNewYorkTimesMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(https://www\.nytimes\.com/svc/oembed|https://nytimes\.com/|https://[^/]\.nytimes\.com/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://www\.nytimes\.com/svc/oembed|https://nytimes\.com/|https://.*\.nytimes\.com/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1795,7 +1795,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class UolMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://[^/]\.uol\.com\.br/view/");
+        private static readonly Regex _UriPattern = new Regex(@"https://.*\.uol\.com\.br/view/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1810,7 +1810,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class UstreamMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.ustream\.tv/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.ustream\.tv/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1960,7 +1960,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class WiredriveMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"https://[^/]\.wiredrive\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"https://.*\.wiredrive\.com/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -1975,7 +1975,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class WizerMeMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://[^/]\.wizer\.me/learn/|https://[^/]\.wizer\.me/learn/|http://[^/]\.wizer\.me/preview/|https://[^/]\.wizer\.me/preview/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.wizer\.me/learn/|https://.*\.wizer\.me/learn/|http://.*\.wizer\.me/preview/|https://.*\.wizer\.me/preview/)");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
@@ -2020,7 +2020,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class YfrogMetadataProvider : RemoteMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"http://[^/]\.yfrog\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"http://.*\.yfrog\.com/");
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());
