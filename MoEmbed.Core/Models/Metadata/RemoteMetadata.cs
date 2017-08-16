@@ -83,7 +83,7 @@ namespace MoEmbed.Models.Metadata
                         {
                             var e = (XmlElement)xn;
                             // TODO: parse number
-                            values[e.LocalName] = d.Value;
+                            values[e.LocalName] = e.InnerText;
                         }
                     }
                 }
