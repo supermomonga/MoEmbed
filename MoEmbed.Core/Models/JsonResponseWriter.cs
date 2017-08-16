@@ -17,9 +17,9 @@ namespace MoEmbed.Models
         public JsonResponseWriter(TextWriter textWriter, bool leaveOpen = false)
         {
             BaseWriter = new JsonTextWriter(textWriter)
-            {
-                CloseOutput = !leaveOpen
-            };
+                {
+                    CloseOutput = !leaveOpen
+                };
         }
 
         public JsonResponseWriter(JsonWriter baseWriter, bool leaveOpen = false)
@@ -62,6 +62,49 @@ namespace MoEmbed.Models
             ThrowIfDisposed();
             BaseWriter.WriteEndObject();
             BaseWriter.Flush();
+        }
+
+        public void WriteStartArrayProperty(string name)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WritePropertyName(name);
+            BaseWriter.WriteStartArray();
+        }
+
+        public void WriteEndArrayProperty()
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteEndArray();
+        }
+
+        public void WriteStartObjectProperty(string name)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteStartObject();
+        }
+
+        public void WriteEndObjectProperty()
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteEndObject();
+        }
+
+        public void WriteArrayValue(string name, bool value)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteValue(value);
+        }
+
+        public void WriteArrayValue(string name, double value)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteValue(value);
+        }
+
+        public void WriteArrayValue(string name, object value)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteValue(value);
         }
 
         private void ThrowIfDisposed()

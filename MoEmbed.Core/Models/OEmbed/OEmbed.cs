@@ -1,4 +1,4 @@
-namespace MoEmbed.Models
+namespace MoEmbed.Models.OEmbed
 {
     internal static class OEmbed
     {

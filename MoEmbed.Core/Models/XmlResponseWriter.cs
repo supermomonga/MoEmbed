@@ -56,6 +56,44 @@ namespace MoEmbed.Models
             BaseWriter.Flush();
         }
 
+        public void WriteStartArrayProperty(string name)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteStartElement(name);
+        }
+
+        public void WriteEndArrayProperty()
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteEndElement();
+        }
+
+        public void WriteStartObjectProperty(string name)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteStartElement(name);
+        }
+
+        public void WriteEndObjectProperty()
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteEndElement();
+        }
+
+        public void WriteArrayValue(string name, bool value)
+            => WriteArrayValue(name, value ? "true" : "false");
+
+        public void WriteArrayValue(string name, double value)
+            => WriteArrayValue(name, value.ToString("r"));
+
+        public void WriteArrayValue(string name, object value)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteStartElement(name);
+            BaseWriter.WriteString(value?.ToString() ?? string.Empty);
+            BaseWriter.WriteEndElement();
+        }
+
         private void ThrowIfDisposed()
         {
             if (BaseWriter == null)

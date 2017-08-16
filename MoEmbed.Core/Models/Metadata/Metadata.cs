@@ -1,7 +1,8 @@
 using System.IO;
 using System.Threading.Tasks;
+using MoEmbed.Models.OEmbed;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Models.Metadata
 {
     // TODO: Move to Another file
     public enum Types { Photo, Video, Link, Rich }
@@ -19,3 +20,4 @@ namespace MoEmbed.Models
         }
     }
 }
+

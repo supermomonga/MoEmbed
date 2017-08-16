@@ -5,8 +5,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json.Linq;
+using MoEmbed.Models.OEmbed;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Models.Metadata
 {
     /// <summary>
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.

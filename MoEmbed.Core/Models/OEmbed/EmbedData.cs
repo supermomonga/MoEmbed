@@ -1,22 +1,17 @@
 using System;
 using System.ComponentModel;
-using System.Collections.Generic;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Models.OEmbed
 {
-  public class EmbedData
+  public class EmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData
   {
+    public Types Type { get; set; }
+
     /// <summary>
     /// Gets or sets a text title, describing the resource.
     /// </summary>
     [DefaultValue(null)]
     public string Title { get; set; }
-
-    /// <summary>
-    /// Gets or sets a description
-    /// </summary>
-    [DefaultValue(null)]
-    public string Description { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the author/owner of the resource.
@@ -79,37 +74,13 @@ namespace MoEmbed.Models
     [DefaultValue(null)]
     public Uri Url { get; set; }
 
-    public List<Media> _Medias;
-    public List<Media> Medias {
-        get
-        {
-            return _Medias ?? ( _Medias = new List<Media>() );
-        }
-        set
-        {
-            if(value != _Medias)
-            {
-                _Medias?.Clear();
-                if(value?.Count > 0)
-                {
-                    Medias.AddRange(value);
-                }
-            }
-        }
-    }
+    [DefaultValue(0)]
+    public int Width { get; set; }
 
-    public bool ShouldSerializeMedias
-      => _Medias?.Count > 0;
+    [DefaultValue(0)]
+    public int Height { get; set; }
 
+    [DefaultValue(null)]
+    public string Html { get; set; }
   }
 }
-
-
-
-
-
-
-
-
-
-

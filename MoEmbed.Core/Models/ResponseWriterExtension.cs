@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using MoEmbed.Models.OEmbed;
 
 namespace MoEmbed.Models
 {
@@ -9,6 +10,7 @@ namespace MoEmbed.Models
         {
             if (value != null)
             {
+
                 var t = value.GetType();
 
                 if (t == typeof(bool))
@@ -74,12 +76,12 @@ namespace MoEmbed.Models
                     writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IPhotoEmbedData)?.Height);
                     break;
                 case Types.Video:
-                    writer.WritePropertyIfNeeded(OEmbed.URL, (obj as IVideoEmbedData)?.Html);
+                    writer.WritePropertyIfNeeded(OEmbed.HTML, (obj as IVideoEmbedData)?.Html);
                     writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IVideoEmbedData)?.Width);
                     writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IVideoEmbedData)?.Height);
                     break;
                 case Types.Rich:
-                    writer.WritePropertyIfNeeded(OEmbed.URL, (obj as IRichEmbedData)?.Html);
+                    writer.WritePropertyIfNeeded(OEmbed.HTML, (obj as IRichEmbedData)?.Html);
                     writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IRichEmbedData)?.Width);
                     writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IRichEmbedData)?.Height);
                     break;
