@@ -113,7 +113,7 @@ namespace MoEmbed.Models
             var tweet = Tweet.GetTweet(TweetId);
             var user = User.GetUserFromScreenName(ScreenName);
 
-            return Data = new EmbedData()
+            Data = new EmbedData()
             {
 
                 AuthorName = $"{ user.Name }(@{ ScreenName })",
@@ -128,6 +128,38 @@ namespace MoEmbed.Models
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
             };
+
+            foreach(var m in tweet.Media)
+            {
+                // https://dev.twitter.com/overview/api/entities-in-twitter-objects#media
+                if(m.MediaType == "photo")
+                {
+                    var media = new Media
+                    {
+                        Type = MediaTypes.Image,
+                        ThumbnailUri = new Uri($"{m.MediaURLHttps}:thumb"),
+                        RawUri = new Uri(m.MediaURLHttps),
+                        Location = new Uri(m.ExpandedURL),
+                    };
+                    Data.Medias.Add(media);
+                }
+            }
+            return Data;
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets the media type. Valid values, along with value-specific parameters, are described below.
         /// </summary>
-        public MediaTypes Type { get; }
+        public MediaTypes Type { get; set; }
 
         /// <summary>
         /// Thumbnail image URL
