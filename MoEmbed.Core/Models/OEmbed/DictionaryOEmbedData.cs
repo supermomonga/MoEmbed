@@ -9,18 +9,18 @@ using Newtonsoft.Json.Linq;
 namespace MoEmbed.Models.OEmbed
 {
     [Serializable]
-    public class DictionaryEmbedData : IEmbedData, IPhotoEmbedData, IVideoEmbedData, IRichEmbedData
+    public class DictionaryOEmbedData : IOEmbedData, IPhotoOEmbedData, IVideoOEmbedData, IRichOEmbedData
     {
         // TODO: Add interfaces to Acess as dictionary
 
         private Dictionary<string, object> _Values;
 
-        public DictionaryEmbedData()
+        public DictionaryOEmbedData()
         {
             _Values = new Dictionary<string, object>();
         }
 
-        internal DictionaryEmbedData(Dictionary<string, object> values)
+        internal DictionaryOEmbedData(Dictionary<string, object> values)
         {
             _Values = values;
         }

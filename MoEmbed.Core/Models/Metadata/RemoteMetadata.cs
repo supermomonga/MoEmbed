@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using MoEmbed.Models.OEmbed;
+using System.Linq;
+using System.Reflection;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -28,13 +32,13 @@ namespace MoEmbed.Models.Metadata
         public string OEmbedUrl { get; set; }
 
         [DefaultValue(null)]
-        public DictionaryEmbedData Data { get; set; }
+        public EmbedData Data { get; set; }
 
         [NonSerialized]
-        private Task<IEmbedData> _FetchTask;
+        private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<IEmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync()
         {
             lock (this)
             {
@@ -42,7 +46,7 @@ namespace MoEmbed.Models.Metadata
                 {
                     if (Data != null)
                     {
-                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                        _FetchTask = Task.FromResult<EmbedData>(Data);
                     }
                     else
                     {
@@ -54,7 +58,7 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        private async Task<IEmbedData> FetchAsyncCore()
+        private async Task<EmbedData> FetchAsyncCore()
         {
             using (var hc = new HttpClient())
             {
@@ -79,7 +83,7 @@ namespace MoEmbed.Models.Metadata
                         {
                             var e = (XmlElement)xn;
                             // TODO: parse number
-                            values[e.LocalName] = d.Value;
+                            values[e.LocalName] = e.InnerText;
                         }
                     }
                 }
@@ -89,8 +93,47 @@ namespace MoEmbed.Models.Metadata
                     values = jo.ToObject<Dictionary<string, object>>();
                 }
 
-                return Data = new DictionaryEmbedData(values);
+                Data = new EmbedData();
+                if(values.ContainsKey("title"))
+                {
+                    Data.Title = values["title"].ToString();
+                }
+                if(values.ContainsKey("author_name"))
+                {
+                    Data.AuthorName = values["author_name"].ToString();
+                }
+                if(values.ContainsKey("author_url"))
+                {
+                    Data.AuthorUrl = new Uri(values["author_url"].ToString());
+                }
+                if(values.ContainsKey("provider_name"))
+                {
+                    Data.ProviderName = values["provider_name"].ToString();
+                }
+                if(values.ContainsKey("provider_url"))
+                {
+                    Data.ProviderUrl = new Uri(values["provider_url"].ToString());
+                }
+                if(values.ContainsKey("cache_age"))
+                {
+                    Data.CacheAge = (values["cache_age"] as IConvertible).ToInt32(null);
+                }
+                if(values.ContainsKey("thumbnail_url"))
+                {
+                    Data.ThumbnailUrl = new Uri(values["thumbnail_url"].ToString());
+                }
+                if(values.ContainsKey("thumbnail_width"))
+                {
+                    Data.ThumbnailWidth = (values["thumbnail_width"] as IConvertible).ToInt32(null);
+                }
+                if(values.ContainsKey("thumbnail_height"))
+                {
+                    Data.ThumbnailHeight = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+                }
+                return Data;
             }
         }
     }
 }
+
+

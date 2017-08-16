@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using MoEmbed.Models;
+using MoEmbed.Models.Metadata;
 
 namespace MoEmbed.Providers
 {

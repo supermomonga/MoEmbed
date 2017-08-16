@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MoEmbed.Models.OEmbed
 {
-  public interface IEmbedData
+  public interface IOEmbedData
   {
     /// <summary>
     /// Gets the resource type. Valid values, along with value-specific parameters, are described below.

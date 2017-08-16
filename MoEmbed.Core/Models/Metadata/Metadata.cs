@@ -1,6 +1,5 @@
 using System.IO;
 using System.Threading.Tasks;
-using MoEmbed.Models.OEmbed;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -9,7 +8,7 @@ namespace MoEmbed.Models.Metadata
 
     public abstract class Metadata
     {
-        public abstract Task<IEmbedData> FetchAsync();
+        public abstract Task<EmbedData> FetchAsync();
 
         /// <summary>
         /// Invoked when the instance deserialized from storage.

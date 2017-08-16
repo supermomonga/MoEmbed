@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
+using MoEmbed.Models.Metadata;
 using Tweetinvi.Models;
 
 namespace MoEmbed.Providers

@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Models.Metadata
 {
     /// <summary>
     /// Represents the <see cref="Metadata"/> for the unknown URL.
@@ -44,13 +44,13 @@ namespace MoEmbed.Models
         /// Gets or sets the resolved data.
         /// </summary>
         [DefaultValue(null)]
-        public DictionaryEmbedData Data { get; set; }
+        public EmbedData Data { get; set; }
 
         [NonSerialized]
-        private Task<IEmbedData> _FetchTask;
+        private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<IEmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync()
         {
             lock (this)
             {
@@ -58,7 +58,7 @@ namespace MoEmbed.Models
                 {
                     if (Data != null)
                     {
-                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                        _FetchTask = Task.FromResult<EmbedData>(Data);
                     }
                     else
                     {
@@ -70,7 +70,7 @@ namespace MoEmbed.Models
             }
         }
 
-        private async Task<IEmbedData> FetchAsyncCore()
+        private async Task<EmbedData> FetchAsyncCore()
         {
             using (var hh = new HttpClientHandler()
             {
@@ -138,9 +138,8 @@ namespace MoEmbed.Models
             hd.LoadHtml(html);
 
             var nav = hd.CreateNavigator();
-            Data = new DictionaryEmbedData()
+            Data = new EmbedData()
             {
-                Type = Types.Link,
                 Title = nav.SelectSingleNode("//html/head/title/text()")?.Value
             };
         }

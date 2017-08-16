@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using MoEmbed.Models;
+using MoEmbed.Models.Metadata;
 
 namespace MoEmbed
 {

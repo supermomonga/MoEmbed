@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using MoEmbed.Models.OEmbed;
+using MoEmbed.Models.Metadata;
 
 namespace MoEmbed.Models
 {
@@ -52,39 +53,71 @@ namespace MoEmbed.Models
             }
         }
 
-        public static void WriteOEmbed(this IResponseWriter writer, IEmbedData obj)
+        public static void WriteOEmbed(this IResponseWriter writer, IOEmbedData obj)
         {
             writer.WriteStartResponse();
 
-            writer.WriteProperty(OEmbed.TYPE, obj.Type.ToString().ToLower());
-            writer.WriteProperty(OEmbed.VERSION, "1.0");
-            writer.WritePropertyIfNeeded(OEmbed.TITLE, obj.Title);
-            writer.WritePropertyIfNeeded(OEmbed.AUTHOR_NAME, obj.AuthorName);
-            writer.WritePropertyIfNeeded(OEmbed.AUTHOR_URL, obj.AuthorUrl);
-            writer.WritePropertyIfNeeded(OEmbed.PROVIDER_NAME, obj.ProviderName);
-            writer.WritePropertyIfNeeded(OEmbed.PROVIDER_URL, obj.ProviderUrl);
-            writer.WritePropertyIfNeeded(OEmbed.CACHE_AGE, obj.CacheAge);
-            writer.WritePropertyIfNeeded(OEmbed.THUMBNAIL_URL, obj.ThumbnailUrl);
-            writer.WritePropertyIfNeeded(OEmbed.THUMBNAIL_WIDTH, obj.ThumbnailWidth);
-            writer.WritePropertyIfNeeded(OEmbed.THUMBNAIL_HEIGHT, obj.ThumbnailHeight);
+            writer.WriteProperty(OEmbed.OEmbed.TYPE, obj.Type.ToString().ToLower());
+            writer.WriteProperty(OEmbed.OEmbed.VERSION, "1.0");
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.TITLE, obj.Title);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.AUTHOR_NAME, obj.AuthorName);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.AUTHOR_URL, obj.AuthorUrl);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.PROVIDER_NAME, obj.ProviderName);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.PROVIDER_URL, obj.ProviderUrl);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.CACHE_AGE, obj.CacheAge);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.THUMBNAIL_URL, obj.ThumbnailUrl);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.THUMBNAIL_WIDTH, obj.ThumbnailWidth);
+            writer.WritePropertyIfNeeded(OEmbed.OEmbed.THUMBNAIL_HEIGHT, obj.ThumbnailHeight);
 
             switch (obj.Type)
             {
-                case Types.Photo:
-                    writer.WritePropertyIfNeeded(OEmbed.URL, (obj as IPhotoEmbedData)?.Url);
-                    writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IPhotoEmbedData)?.Width);
-                    writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IPhotoEmbedData)?.Height);
+                case OEmbed.Types.Photo:
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.URL, (obj as IPhotoOEmbedData)?.Url);
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IPhotoOEmbedData)?.Width);
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IPhotoOEmbedData)?.Height);
                     break;
-                case Types.Video:
-                    writer.WritePropertyIfNeeded(OEmbed.HTML, (obj as IVideoEmbedData)?.Html);
-                    writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IVideoEmbedData)?.Width);
-                    writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IVideoEmbedData)?.Height);
+                case OEmbed.Types.Video:
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HTML, (obj as IVideoOEmbedData)?.Html);
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IVideoOEmbedData)?.Width);
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IVideoOEmbedData)?.Height);
                     break;
-                case Types.Rich:
-                    writer.WritePropertyIfNeeded(OEmbed.HTML, (obj as IRichEmbedData)?.Html);
-                    writer.WritePropertyIfNeeded(OEmbed.WIDTH, (obj as IRichEmbedData)?.Width);
-                    writer.WritePropertyIfNeeded(OEmbed.HEIGHT, (obj as IRichEmbedData)?.Height);
+                case OEmbed.Types.Rich:
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HTML, (obj as IRichOEmbedData)?.Html);
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IRichOEmbedData)?.Width);
+                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IRichOEmbedData)?.Height);
                     break;
+            }
+
+            writer.WriteEndResponse();
+        }
+
+        public static void WriteEmbedData(this IResponseWriter writer, EmbedData obj)
+        {
+            writer.WriteStartResponse();
+
+            writer.WritePropertyIfNeeded("title", obj.Title);
+            writer.WritePropertyIfNeeded("author_name", obj.AuthorName);
+            writer.WritePropertyIfNeeded("author_url", obj.AuthorUrl);
+            writer.WritePropertyIfNeeded("provider_name", obj.ProviderName);
+            writer.WritePropertyIfNeeded("provider_url", obj.ProviderUrl);
+            writer.WritePropertyIfNeeded("cache_age", obj.CacheAge);
+            writer.WritePropertyIfNeeded("thumbnail_url", obj.ThumbnailUrl);
+            writer.WritePropertyIfNeeded("thumbnail_width", obj.ThumbnailWidth);
+            writer.WritePropertyIfNeeded("thumbnail_height", obj.ThumbnailHeight);
+
+            if(obj.Medias.Count > 0)
+            {
+                writer.WriteStartArrayProperty("medias");
+                foreach(var media in obj.Medias)
+                {
+                    writer.WriteStartObjectProperty("media");
+                    writer.WriteProperty("type", media.Type.ToString());
+                    writer.WriteProperty("thumbnail_url", media.ThumbnailUri.ToString());
+                    writer.WriteProperty("raw_url", media.RawUri.ToString());
+                    writer.WriteProperty("location", media.Location.ToString());
+                    writer.WriteEndObjectProperty();
+                }
+                writer.WriteEndArrayProperty();
             }
 
             writer.WriteEndResponse();
