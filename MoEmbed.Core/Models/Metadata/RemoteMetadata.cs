@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using MoEmbed.Models.OEmbed;
+using System.Linq;
+using System.Reflection;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -89,8 +93,47 @@ namespace MoEmbed.Models.Metadata
                     values = jo.ToObject<Dictionary<string, object>>();
                 }
 
-                return Data = new DictionaryEmbedData(values);
+                Data = new EmbedData();
+                if(values["title"] != null)
+                {
+                    Data.Title = values["Title"].ToString();
+                }
+                if(values["author_name"] != null)
+                {
+                    Data.AuthorName = values["author_name"].ToString();
+                }
+                if(values["author_url"] != null)
+                {
+                    Data.AuthorUrl = new Uri(values["author_url"].ToString());
+                }
+                if(values["provider_name"] != null)
+                {
+                    Data.ProviderName = values["provider_name"].ToString();
+                }
+                if(values["provider_url"] != null)
+                {
+                    Data.ProviderUrl = new Uri(values["provider_url"].ToString());
+                }
+                if(values["cache_age"] != null)
+                {
+                    Data.CacheAge = (values["cache_age"] as IConvertible).ToInt32(null);
+                }
+                if(values["thumbnail_url"] != null)
+                {
+                    Data.ThumbnailUrl = new Uri(values["thumbnail_url"].ToString());
+                }
+                if(values["thumbnail_width"] != null)
+                {
+                    Data.ThumbnailWidth = (values["thumbnail_width"] as IConvertible).ToInt32(null);
+                }
+                if(values["thumbnail_height"] != null)
+                {
+                    Data.ThumbnailHeight = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+                }
+                return Data;
             }
         }
     }
 }
+
+

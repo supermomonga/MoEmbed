@@ -138,9 +138,8 @@ namespace MoEmbed.Models.Metadata
             hd.LoadHtml(html);
 
             var nav = hd.CreateNavigator();
-            Data = new DictionaryEmbedData()
+            Data = new EmbedData()
             {
-                Type = Types.Link,
                 Title = nav.SelectSingleNode("//html/head/title/text()")?.Value
             };
         }

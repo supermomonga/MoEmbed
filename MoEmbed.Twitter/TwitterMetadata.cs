@@ -8,7 +8,7 @@ using Tweetinvi.Models;
 namespace MoEmbed.Models
 {
     [Serializable]
-    public class TwitterMetadata : Metadata
+    public class TwitterMetadata : Metadata.Metadata
     {
         public TwitterMetadata(string uri, ITwitterCredentials credentials)
             : this(new Uri(uri), credentials)
@@ -85,10 +85,10 @@ namespace MoEmbed.Models
         public EmbedData Data { get; set; }
 
         [NonSerialized]
-        private Task<IEmbedData> _FetchTask;
+        private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<IEmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync()
         {
             lock (this)
             {
@@ -96,11 +96,11 @@ namespace MoEmbed.Models
                 {
                     if (Data != null)
                     {
-                        _FetchTask = Task.FromResult<IEmbedData>(Data);
+                        _FetchTask = Task.FromResult<EmbedData>(Data);
                     }
                     else
                     {
-                        _FetchTask = Task.Run((Func<IEmbedData>)FetchCore);
+                        _FetchTask = Task.Run((Func<EmbedData>)FetchCore);
                         _FetchTask.ConfigureAwait(false);
                     }
                 }
@@ -108,14 +108,13 @@ namespace MoEmbed.Models
             }
         }
 
-        private IEmbedData FetchCore()
+        private EmbedData FetchCore()
         {
             var tweet = Tweet.GetTweet(TweetId);
             var user = User.GetUserFromScreenName(ScreenName);
 
             return Data = new EmbedData()
             {
-                Type = Types.Rich,
 
                 AuthorName = $"{ user.Name }(@{ ScreenName })",
                 AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
@@ -124,11 +123,7 @@ namespace MoEmbed.Models
                 Title = $"{ user.Name }(@{ ScreenName })",
 
                 // TODO: Insert media
-                Html = tweet.FullText,
-
-                // TODO: Use request parameter
-                Width = 400,
-                Height = 150,
+                Description = tweet.FullText,
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
