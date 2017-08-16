@@ -52,7 +52,7 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
                 if (um.Success)
                 {
                     var u = l.Substring(um.Length).Trim('\'', '"', ' ');
-                    schemeUrls.Add(string.Join("[^/]", u.Split(new [] {'*'}, StringSplitOptions.RemoveEmptyEntries).Select(Regex.Escape)));
+                    schemeUrls.Add(string.Join(".*", u.Split(new [] {'*'}, StringSplitOptions.RemoveEmptyEntries).Select(Regex.Escape)));
                     continue;
                 }
                 schemes = false;

@@ -94,39 +94,39 @@ namespace MoEmbed.Models.Metadata
                 }
 
                 Data = new EmbedData();
-                if(values["title"] != null)
+                if(values.ContainsKey("title"))
                 {
-                    Data.Title = values["Title"].ToString();
+                    Data.Title = values["title"].ToString();
                 }
-                if(values["author_name"] != null)
+                if(values.ContainsKey("author_name"))
                 {
                     Data.AuthorName = values["author_name"].ToString();
                 }
-                if(values["author_url"] != null)
+                if(values.ContainsKey("author_url"))
                 {
                     Data.AuthorUrl = new Uri(values["author_url"].ToString());
                 }
-                if(values["provider_name"] != null)
+                if(values.ContainsKey("provider_name"))
                 {
                     Data.ProviderName = values["provider_name"].ToString();
                 }
-                if(values["provider_url"] != null)
+                if(values.ContainsKey("provider_url"))
                 {
                     Data.ProviderUrl = new Uri(values["provider_url"].ToString());
                 }
-                if(values["cache_age"] != null)
+                if(values.ContainsKey("cache_age"))
                 {
                     Data.CacheAge = (values["cache_age"] as IConvertible).ToInt32(null);
                 }
-                if(values["thumbnail_url"] != null)
+                if(values.ContainsKey("thumbnail_url"))
                 {
                     Data.ThumbnailUrl = new Uri(values["thumbnail_url"].ToString());
                 }
-                if(values["thumbnail_width"] != null)
+                if(values.ContainsKey("thumbnail_width"))
                 {
                     Data.ThumbnailWidth = (values["thumbnail_width"] as IConvertible).ToInt32(null);
                 }
-                if(values["thumbnail_height"] != null)
+                if(values.ContainsKey("thumbnail_height"))
                 {
                     Data.ThumbnailHeight = (values["thumbnail_height"] as IConvertible).ToInt32(null);
                 }

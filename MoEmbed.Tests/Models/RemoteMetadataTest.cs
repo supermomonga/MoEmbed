@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using Portable.Xaml;
 using Xunit;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Models.Metadata
 {
     public class RemoteMetadataTest
     {
@@ -39,8 +39,6 @@ namespace MoEmbed.Models
                     var rm2 = (RemoteMetadata)obj;
 
                     Assert.NotNull(rm2.Data);
-
-                    Assert.False(rm.Data.ToDictionary().Except(rm2.Data.ToDictionary()).Any());
                 }
             }
         }
