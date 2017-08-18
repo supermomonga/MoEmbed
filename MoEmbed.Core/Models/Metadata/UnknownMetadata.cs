@@ -137,11 +137,54 @@ namespace MoEmbed.Models.Metadata
             var hd = new HtmlDocument();
             hd.LoadHtml(html);
 
+            // OGP Spec: http://ogp.me/
+
             var nav = hd.CreateNavigator();
+            // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
             {
-                Title = nav.SelectSingleNode("//html/head/title/text()")?.Value
+                Url = new Uri(nav.SelectSingleNode("//html/head/meta[@property='og:url']/@content")?.Value ?? Uri),
+                Title = (nav.SelectSingleNode("//html/head/meta[@property='og:title']/@content")?.Value ??
+                         nav.SelectSingleNode("//html/head/title/text()")?.Value),
+                Description = (nav.SelectSingleNode("//html/head/meta[@property='og:description']/@content")?.Value ??
+                               nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value),
+                ProviderName = nav.SelectSingleNode("//html/head/meta[@property='og:site_name']/@content")?.Value
             };
+            // TODO: Support multiple images, audios and videos.
+            var image = (nav.SelectSingleNode("//html/head/meta[@property='og:image:secure_url']/@content")?.Value ??
+                         nav.SelectSingleNode("//html/head/meta[@property='og:image']/@content")?.Value);
+            if(!string.IsNullOrEmpty(image))
+            {
+                Data.ThumbnailUrl = new Uri(image);
+                Data.Medias.Add(new Media(){
+                        Type = MediaTypes.Image,
+                        ThumbnailUri = new Uri(image),
+                        RawUri = new Uri(image),
+                        Location = Data.Url,
+                    });
+            }
+            var audio = (nav.SelectSingleNode("//html/head/meta[@property='og:audio:secure_url']/@content")?.Value ??
+                         nav.SelectSingleNode("//html/head/meta[@property='og:audio']/@content")?.Value);
+            if(!string.IsNullOrEmpty(audio))
+            {
+                Data.Medias.Add(new Media(){
+                        Type = MediaTypes.Audio,
+                        ThumbnailUri = new Uri(audio),
+                        RawUri = new Uri(audio),
+                        Location = Data.Url,
+                    });
+            }
+            var video = (nav.SelectSingleNode("//html/head/meta[@property='og:video:secure_url']/@content")?.Value ??
+                         nav.SelectSingleNode("//html/head/meta[@property='og:video']/@content")?.Value);
+            if(!string.IsNullOrEmpty(video))
+            {
+                Data.Medias.Add(new Media(){
+                        Type = MediaTypes.Video,
+                        ThumbnailUri = new Uri(video),
+                        RawUri = new Uri(video),
+                        Location = Data.Url,
+                    });
+            }
         }
     }
 }
