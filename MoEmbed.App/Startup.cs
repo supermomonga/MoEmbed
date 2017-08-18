@@ -57,21 +57,10 @@ namespace MoEmbed
             }
 
             service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
+            service.Providers.Add(new UnknownMetadataProvider());
             routeBuilder.MapGet("", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
 
             app.UseRouter(routeBuilder.Build());
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
