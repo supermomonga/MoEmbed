@@ -14,6 +14,9 @@ namespace MoEmbed
         private readonly IMemoryCache _Cache;
         private readonly DistributedMetadataCache _Distributed;
 
+        /// <summary>
+        ///   Initializes a new instance of the <see cref="MemoryMetadataCache" /> class.
+        /// </summary>
         public MemoryMetadataCache(IMemoryCache cache, DistributedMetadataCache distributed = null)
         {
             _Cache = cache;
@@ -48,6 +51,9 @@ namespace MoEmbed
             return r;
         }
 
+        /// <summary>
+        ///   Writes the <see cref="Metadata" /> to to the cache store.
+        /// </summary>
         public async Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata)
         {
             if (metadata == null)

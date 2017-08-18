@@ -7,6 +7,9 @@ using MoEmbed.Providers;
 
 namespace MoEmbed
 {
+    /// <summary>
+    ///   Handles the request object and use right metadata handler to fetch embed data.
+    /// </summary>
     public class MetadataService
     {
         private readonly ILogger<MetadataService> _logger;
@@ -14,6 +17,9 @@ namespace MoEmbed
 
         private List<IMetadataProvider> _Providers;
 
+        /// <summary>
+        ///   Initializes a new instance of the <see cref="MetadataService" /> class.
+        /// </summary>
         public MetadataService(ILoggerFactory loggerFactory, IMetadataCache cache = null)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -21,9 +27,15 @@ namespace MoEmbed
             _Cache = cache;
         }
 
+        /// <summary>
+        ///   Gets the list of <see cref="IMetadataProvider" />.
+        /// </summary>
         public List<IMetadataProvider> Providers
             => _Providers ?? (_Providers = new List<IMetadataProvider>());
 
+        /// <summary>
+        ///   Finds the right provider and use it to fetch embed data.
+        /// </summary>
         public async Task<EmbedDataResult> GetDataAsync(ConsumerRequest request)
         {
             var m = _Cache == null ? null : await _Cache.ReadAsync(this, request).ConfigureAwait(false);

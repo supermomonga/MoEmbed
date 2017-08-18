@@ -18,6 +18,9 @@ namespace MoEmbed
         /// The <see cref="Task{TResult}.Result"/> property on the task object returns a cached <see cref="Metadata"/>.</returns>
         Task<Metadata> ReadAsync(MetadataService service, ConsumerRequest request);
 
+        /// <summary>
+        ///   Writes the <see cref="Metadata" /> to to the cache store.
+        /// </summary>
         Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata);
     }
 }

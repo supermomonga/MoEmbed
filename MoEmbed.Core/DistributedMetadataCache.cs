@@ -14,6 +14,9 @@ namespace MoEmbed
     {
         private readonly IDistributedCache _Cache;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DistributedMetadataCache" /> class.
+        /// </summary>
         public DistributedMetadataCache(IDistributedCache cache)
         {
             _Cache = cache;
@@ -57,6 +60,9 @@ namespace MoEmbed
             }
         }
 
+        /// <summary>
+        /// Write a cache data to the cache store.
+        /// </summary>
         public async Task WriteAsync(MetadataService service, ConsumerRequest request, Metadata metadata)
         {
             var u = request.Url.ToString();

@@ -7,18 +7,27 @@ using MoEmbed.Models;
 
 namespace MoEmbed
 {
+    /// <summary>
+    ///   Receives http context and write response data.
+    /// </summary>
     public class HttpMetadataHandler
     {
         private readonly ILogger<HttpMetadataHandler> _Logger;
         private readonly MetadataService _Service;
         private const string JSON_CONTENT_TYPE = "application/json";
 
+        /// <summary>
+        ///   Initializes a new instance of the <see cref="HttpMetadataHandler" /> class.
+        /// </summary>
         public HttpMetadataHandler(ILoggerFactory loggerFactory, MetadataService service)
         {
             _Logger = loggerFactory.CreateLogger<HttpMetadataHandler>();
             _Service = service;
         }
 
+        /// <summary>
+        ///   Takes the <see cref="HttpContext" /> object, and writes a embed data response.
+        /// </summary>
         public async Task HandleAsync(HttpContext context)
         {
             var queries = context.Request.Query;

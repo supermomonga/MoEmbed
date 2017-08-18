@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
-using MoEmbed.Models.OEmbed;
-using System.Linq;
-using System.Reflection;
 
 namespace MoEmbed.Models.Metadata
 {
