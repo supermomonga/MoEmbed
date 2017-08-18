@@ -16,7 +16,8 @@ namespace MoEmbed
 
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder();
+            var builder = new ConfigurationBuilder()
+                .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
             {
