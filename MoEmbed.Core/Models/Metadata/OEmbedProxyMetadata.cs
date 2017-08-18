@@ -132,10 +132,39 @@ namespace MoEmbed.Models.Metadata
                 {
                     Data.ThumbnailHeight = (values["thumbnail_height"] as IConvertible).ToInt32(null);
                 }
+
+                switch(values["type"])
+                {
+                    case "photo":
+                        Data.Medias.Add(new Media(){
+                                Type = MediaTypes.Image,
+                                ThumbnailUri = new Uri(values["url"].ToString()),
+                                RawUri = new Uri(values["url"].ToString()),
+                                Location = new Uri(values["url"].ToString())
+                            });
+                        break;
+                    case "video":
+                        // TODO: parse video url from html parameter
+                        if(values.ContainsKey("thumbnail_url"))
+                        {
+                            Data.Medias.Add(new Media(){
+                                    Type = MediaTypes.Video,
+                                    ThumbnailUri = new Uri(values["thumbnail_url"].ToString()),
+                                    RawUri = new Uri(Uri),
+                                    Location = new Uri(Uri)
+                                });
+                        }
+                        break;
+                    case "link":
+                        // Nothing to do, for now.
+                        break;
+                    case "rich":
+                        // Nothing to do, for now.
+                        break;
+                }
                 return Data;
             }
         }
     }
 }
-
 
