@@ -29,9 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Generated Codes\RemoteMetadataProviders.tt">
+    <None Update="Generated Codes\OEmbedProxyMetadataProviders.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RemoteMetadataProviders.cs</LastGenOutput>
+      <LastGenOutput>OEmbedProxyMetadataProviders.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -40,10 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Generated Codes\RemoteMetadataProviders.cs">
+    <Compile Update="Generated Codes\OEmbedProxyMetadataProviders.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>RemoteMetadataProviders.tt</DependentUpon>
+      <DependentUpon>OEmbedProxyMetadataProviders.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

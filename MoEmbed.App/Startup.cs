@@ -56,7 +56,7 @@ namespace MoEmbed
                 service.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
             }
 
-            service.Providers.AddRange(RemoteMetadataProvider.CreateKnownHandlers());
+            service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
             routeBuilder.MapGet("", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
 
             app.UseRouter(routeBuilder.Build());

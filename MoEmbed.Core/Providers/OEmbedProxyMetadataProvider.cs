@@ -5,7 +5,7 @@ using MoEmbed.Models.Metadata;
 
 namespace MoEmbed.Providers
 {
-    public abstract partial class RemoteMetadataProvider : IMetadataProvider
+    public abstract partial class OEmbedProxyMetadataProvider : IMetadataProvider
     {
         public abstract bool CanHandle(Uri uri);
 
@@ -92,7 +92,7 @@ namespace MoEmbed.Providers
             {
                 return null;
             }
-            return new RemoteMetadata()
+            return new OEmbedProxyMetadata()
             {
                 Uri = request.Url.ToString(),
                 OEmbedUrl = GetProviderUriFor(request).ToString()

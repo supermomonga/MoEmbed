@@ -17,7 +17,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
     /// </summary>
     [Serializable]
-    public class RemoteMetadata : Metadata
+    public class OEmbedProxyMetadata : Metadata
     {
         /// <summary>
         /// Gets or sets the requested URL.

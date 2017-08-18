@@ -93,7 +93,7 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
     /// <summary>
     /// Handles oEmbed request for <see href="<#= prov #>" />.
     /// </summary>
-    public sealed class <#= n #>MetadataProvider : RemoteMetadataProvider
+    public sealed class <#= n #>MetadataProvider : OEmbedProxyMetadataProvider
     {
 <#
         if (schemeUrls.Count > 2)
@@ -146,9 +146,9 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
     }
 }
 #>
-    partial class RemoteMetadataProvider
+    partial class OEmbedProxyMetadataProvider
     {
-        public static IEnumerable<RemoteMetadataProvider> CreateKnownHandlers()
+        public static IEnumerable<OEmbedProxyMetadataProvider> CreateKnownHandlers()
         {
 <#
     foreach (var n in generated)

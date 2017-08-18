@@ -9,7 +9,7 @@ using Xunit;
 
 namespace MoEmbed.Models.Metadata
 {
-    public class RemoteMetadataTest
+    public class OEmbedProxyMetadataTest
     {
         [Fact]
         public void SerializationTest()
@@ -17,7 +17,7 @@ namespace MoEmbed.Models.Metadata
             var url = "http://www.flickr.com/photos/bees/2341623661/";
             var oEmbedUrl = "http://www.flickr.com/services/oembed/?format=json&url=http%3A//www.flickr.com/photos/bees/2341623661/";
 
-            var rm = new RemoteMetadata()
+            var rm = new OEmbedProxyMetadata()
             {
                 Uri = url,
                 OEmbedUrl = oEmbedUrl
@@ -34,9 +34,9 @@ namespace MoEmbed.Models.Metadata
                 using (var sr = new StringReader(xml))
                 {
                     var obj = XamlServices.Load(sr);
-                    Assert.IsType<RemoteMetadata>(obj);
+                    Assert.IsType<OEmbedProxyMetadata>(obj);
 
-                    var rm2 = (RemoteMetadata)obj;
+                    var rm2 = (OEmbedProxyMetadata)obj;
 
                     Assert.NotNull(rm2.Data);
                 }
