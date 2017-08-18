@@ -93,7 +93,9 @@ namespace MoEmbed.Models.Metadata
                     values = jo.ToObject<Dictionary<string, object>>();
                 }
 
-                Data = new EmbedData();
+                Data = new EmbedData(){
+                    Url = new Uri(Uri)
+                };
                 if(values.ContainsKey("title"))
                 {
                     Data.Title = values["title"].ToString();
