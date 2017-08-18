@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Text;
 using Microsoft.Extensions.Logging;
 using MoEmbed.Models;
 using MoEmbed.Providers;
@@ -15,6 +16,7 @@ namespace MoEmbed
 
         public MetadataService(ILoggerFactory loggerFactory, IMetadataCache cache = null)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _logger = loggerFactory.CreateLogger<MetadataService>();
             _Cache = cache;
         }
