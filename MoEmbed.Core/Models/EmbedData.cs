@@ -46,7 +46,7 @@ namespace MoEmbed.Models
     /// Gets or sets the suggested cache lifetime for this resource, in seconds. Consumers may choose to use this value or not.
     /// </summary>
     [DefaultValue(null)]
-    public int? CacheAge { get; set; }
+    public int? CacheAge { get; set; } = 86400;
 
     /// <summary>
     /// Gets or sets a URL to a thumbnail image representing the resource.
