@@ -29,10 +29,10 @@ namespace MoEmbed.Models
         }
         protected XmlWriter BaseWriter { get; private set; }
 
-        public void WriteStartResponse()
+        public void WriteStartResponse(string name)
         {
             ThrowIfDisposed();
-            BaseWriter.WriteStartElement("oembed");
+            BaseWriter.WriteStartElement(name);
         }
 
         public void WriteProperty(string name, bool value)

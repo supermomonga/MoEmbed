@@ -30,7 +30,7 @@ namespace MoEmbed.Models
 
         protected JsonWriter BaseWriter { get; private set; }
 
-        public void WriteStartResponse()
+        public void WriteStartResponse(string name)
         {
             ThrowIfDisposed();
             BaseWriter.WriteStartObject();

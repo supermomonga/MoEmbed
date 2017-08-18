@@ -4,7 +4,7 @@ namespace MoEmbed.Models
 {
   public interface IResponseWriter : IDisposable
   {
-    void WriteStartResponse();
+    void WriteStartResponse(string name = "embed");
     void WriteStartArrayProperty(string name);
     void WriteEndArrayProperty();
     void WriteStartObjectProperty(string name);
