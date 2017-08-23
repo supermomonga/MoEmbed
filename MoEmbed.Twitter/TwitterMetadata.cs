@@ -135,14 +135,25 @@ namespace MoEmbed.Models
             Data.ThumbnailHeight = 48;
             Data.ThumbnailWidth = 48;
 
-            foreach(var m in tweet.Media)
+            foreach(var m in (extendedTweet?.ExtendedEntities ?? tweet.Entities).Medias)
             {
                 // https://dev.twitter.com/overview/api/entities-in-twitter-objects#media
+                Console.WriteLine(m.MediaType);
                 if(m.MediaType == "photo")
                 {
                     var media = new Media
                     {
                         Type = MediaTypes.Image,
+                        ThumbnailUri = new Uri($"{m.MediaURLHttps}:thumb"),
+                        RawUri = new Uri(m.MediaURLHttps),
+                        Location = new Uri(m.ExpandedURL),
+                    };
+                    Data.Medias.Add(media);
+                } else if(m.MediaType == "animated_gif" || m.MediaType == "video")
+                {
+                    var media = new Media
+                    {
+                        Type = MediaTypes.Video,
                         ThumbnailUri = new Uri($"{m.MediaURLHttps}:thumb"),
                         RawUri = new Uri(m.MediaURLHttps),
                         Location = new Uri(m.ExpandedURL),
