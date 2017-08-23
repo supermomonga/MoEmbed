@@ -130,6 +130,10 @@ namespace MoEmbed.Models
                 ProviderUrl = new Uri("https://twitter.com/"),
             };
 
+            Data.ThumbnailUrl = new Uri(user.ProfileImageUrlHttps);
+            Data.ThumbnailHeight = 48;
+            Data.ThumbnailWidth = 48;
+
             foreach(var m in tweet.Media)
             {
                 // https://dev.twitter.com/overview/api/entities-in-twitter-objects#media
