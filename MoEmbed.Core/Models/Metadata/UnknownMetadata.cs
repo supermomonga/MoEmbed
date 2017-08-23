@@ -1,8 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -183,8 +183,24 @@ namespace MoEmbed.Models.Metadata
 
             if (author != null)
             {
-                Data.AuthorName = author.Title.DeEntitize();
-                Data.AuthorUrl = author.Url.DeEntitize().ToUri();
+                var authorRef = author.Url.DeEntitize();
+
+                // Determines whether reference is absolute URL.
+                if (System.Uri.TryCreate(authorRef, UriKind.Absolute, out var authorUri))
+                {
+                    Data.AuthorUrl = authorUri;
+
+                    // As author is OGP Reference type, `:title` structured property is invalid.
+                    // But try to read value.
+                    Data.AuthorName = author.Title.DeEntitize();
+
+                    // HACK: To acquire futher information, we can load OGP from authorURL.
+                }
+                else
+                {
+                    // authorRef can be Site specific ID.
+                    Data.AuthorName = authorRef;
+                }
             }
 
             foreach (var img in graph.Images)
