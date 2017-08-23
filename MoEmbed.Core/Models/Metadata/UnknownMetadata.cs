@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -192,12 +193,6 @@ namespace MoEmbed.Models.Metadata
 
                 if (url != null)
                 {
-                    if (Data.ThumbnailUrl == null)
-                    {
-                        Data.ThumbnailUrl = url;
-                        Data.ThumbnailWidth = img.Width;
-                        Data.ThumbnailHeight = img.Height;
-                    }
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Image,
@@ -237,6 +232,12 @@ namespace MoEmbed.Models.Metadata
                         Location = Data.Url,
                     });
                 }
+            }
+
+            if (Data.Medias.Count == 1 && Data.Medias.First().ThumbnailUri != null)
+            {
+                Data.ThumbnailUrl = Data.Medias.First().ThumbnailUri;
+                Data.Medias.RemoveAt(0);
             }
 
             {
