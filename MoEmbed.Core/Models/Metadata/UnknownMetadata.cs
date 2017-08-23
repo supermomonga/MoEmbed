@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -92,14 +94,30 @@ namespace MoEmbed.Models.Metadata
                 {
                     LoadHtml(await res.Content.ReadAsStringAsync());
                 }
-                else if (Regex.IsMatch(mediaType, @"^image\/"))
+                else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
                 {
+                    var u = new Uri(MovedTo ?? Uri);
+                    Data = new EmbedData()
+                    {
+                        Url = u,
+                        ThumbnailUrl = mediaType[0] == 'i' ? u : null,
+                        Medias = new List<Media>(1)
+                        {
+                            new Media()
+                            {
+                                Type =mediaType[0] == 'i' ?  MediaTypes.Image
+                                        :mediaType[0] == 'v' ?  MediaTypes.Video
+                                        : MediaTypes.Audio,
+                                RawUri = u
+                            }
+                        }
+                    };
                 }
-                else if (Regex.IsMatch(mediaType, @"^video\/"))
+
+                if (Data != null)
                 {
-                }
-                else
-                {
+                    Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
+                    Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
                 }
             }
             return Data;
@@ -144,7 +162,7 @@ namespace MoEmbed.Models.Metadata
             // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
             {
-                Url = new Uri(graph.Url.DeEntitize() ?? Uri),
+                Url = new Uri(graph.Url.DeEntitize() ?? MovedTo ?? Uri),
                 Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value).DeEntitize(),
                 Description = (graph.Description ?? nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value).DeEntitize(),
                 ProviderName = graph.SiteName.DeEntitize(),
@@ -219,6 +237,11 @@ namespace MoEmbed.Models.Metadata
                         Location = Data.Url,
                     });
                 }
+            }
+
+            {
+                var age = graph.Restriction?.Age;
+                Data.Nsfw = age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18;
             }
         }
     }
