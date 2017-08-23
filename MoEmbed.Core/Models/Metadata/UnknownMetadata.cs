@@ -108,7 +108,7 @@ namespace MoEmbed.Models.Metadata
         private async Task<HttpResponseMessage> GetResponseAsync(HttpClient hc)
         {
             var u = MovedTo ?? Uri;
-            for (;;)
+            for (; ; )
             {
                 var res = await hc.GetAsync(u).ConfigureAwait(false);
 
@@ -138,52 +138,87 @@ namespace MoEmbed.Models.Metadata
             hd.LoadHtml(html);
 
             // OGP Spec: http://ogp.me/
+            var graph = Shipwreck.OpenGraph.Graph.FromXPathNavigable(hd);
 
             var nav = hd.CreateNavigator();
             // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
             {
-                Url = new Uri(nav.SelectSingleNode("//html/head/meta[@property='og:url']/@content")?.Value ?? Uri),
-                Title = (nav.SelectSingleNode("//html/head/meta[@property='og:title']/@content")?.Value ??
-                         nav.SelectSingleNode("//html/head/title/text()")?.Value),
-                Description = (nav.SelectSingleNode("//html/head/meta[@property='og:description']/@content")?.Value ??
-                               nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value),
-                ProviderName = nav.SelectSingleNode("//html/head/meta[@property='og:site_name']/@content")?.Value
+                Url = new Uri(graph.Url.DeEntitize() ?? Uri),
+                Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value).DeEntitize(),
+                Description = (graph.Description ?? nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value).DeEntitize(),
+                ProviderName = graph.SiteName.DeEntitize(),
+                CacheAge = graph.TimeToLive
             };
-            // TODO: Support multiple images, audios and videos.
-            var image = (nav.SelectSingleNode("//html/head/meta[@property='og:image:secure_url']/@content")?.Value ??
-                         nav.SelectSingleNode("//html/head/meta[@property='og:image']/@content")?.Value);
-            if(!string.IsNullOrEmpty(image))
+
+            var author = graph.Article?.Author
+                        ?? graph.Book?.Author
+                        ?? graph.MusicAlbum?.Musician
+                        ?? graph.MusicSong?.Musician
+                        ?? graph.MusicPlaylist?.Creator
+                        ?? graph.MusicRadioStation?.Creator
+                        ?? graph.VideoEpisode?.Director
+                        ?? graph.VideoMovie?.Director
+                        ?? graph.VideoOther?.Director
+                        ?? graph.VideoTVShow?.Director;
+
+            if (author != null)
             {
-                Data.ThumbnailUrl = new Uri(image);
-                Data.Medias.Add(new Media(){
+                Data.AuthorName = author.Title.DeEntitize();
+                Data.AuthorUrl = author.Url.DeEntitize().ToUri();
+            }
+
+            foreach (var img in graph.Images)
+            {
+                var url = (img.SecureUrl ?? img.Url).DeEntitize().ToUri();
+
+                if (url != null)
+                {
+                    if (Data.ThumbnailUrl == null)
+                    {
+                        Data.ThumbnailUrl = url;
+                        Data.ThumbnailWidth = img.Width;
+                        Data.ThumbnailHeight = img.Height;
+                    }
+                    Data.Medias.Add(new Media()
+                    {
                         Type = MediaTypes.Image,
-                        ThumbnailUri = new Uri(image),
-                        RawUri = new Uri(image),
+                        ThumbnailUri = url,
+                        RawUri = url,
                         Location = Data.Url,
                     });
+                }
             }
-            var audio = (nav.SelectSingleNode("//html/head/meta[@property='og:audio:secure_url']/@content")?.Value ??
-                         nav.SelectSingleNode("//html/head/meta[@property='og:audio']/@content")?.Value);
-            if(!string.IsNullOrEmpty(audio))
+            foreach (var v in graph.Videos)
             {
-                Data.Medias.Add(new Media(){
-                        Type = MediaTypes.Audio,
-                        ThumbnailUri = new Uri(audio),
-                        RawUri = new Uri(audio),
-                        Location = Data.Url,
-                    });
-            }
-            var video = (nav.SelectSingleNode("//html/head/meta[@property='og:video:secure_url']/@content")?.Value ??
-                         nav.SelectSingleNode("//html/head/meta[@property='og:video']/@content")?.Value);
-            if(!string.IsNullOrEmpty(video))
-            {
-                Data.Medias.Add(new Media(){
+                var url = (v.SecureUrl ?? v.Url).DeEntitize().ToUri();
+
+                if (url != null)
+                {
+                    Data.Medias.Add(new Media()
+                    {
                         Type = MediaTypes.Video,
-                        ThumbnailUri = new Uri(video),
-                        RawUri = new Uri(video),
+                        ThumbnailUri = (v.Image?.SecureUrl ?? v.Image?.Url).DeEntitize().ToUri(),
+                        RawUri = url,
                         Location = Data.Url,
                     });
+                }
+            }
+
+            foreach (var a in graph.Audios)
+            {
+                var url = (a.SecureUrl ?? a.Url).DeEntitize().ToUri();
+
+                if (url != null)
+                {
+                    Data.Medias.Add(new Media()
+                    {
+                        Type = MediaTypes.Audio,
+                        ThumbnailUri = (a.Image?.SecureUrl ?? a.Image?.Url).DeEntitize().ToUri(),
+                        RawUri = url,
+                        Location = Data.Url,
+                    });
+                }
             }
         }
     }

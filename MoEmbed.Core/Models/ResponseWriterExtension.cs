@@ -108,16 +108,16 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("thumbnail_height", obj.ThumbnailHeight);
             writer.WritePropertyIfNeeded("nsfw", obj.Nsfw);
 
-            if(obj.Medias.Count > 0)
+            if (obj.Medias.Count > 0)
             {
                 writer.WriteStartArrayProperty("medias");
-                foreach(var media in obj.Medias)
+                foreach (var media in obj.Medias)
                 {
                     writer.WriteStartObjectProperty("media");
                     writer.WriteProperty("type", media.Type.ToString());
-                    writer.WriteProperty("thumbnail_url", media.ThumbnailUri.ToString());
-                    writer.WriteProperty("raw_url", media.RawUri.ToString());
-                    writer.WriteProperty("location", media.Location.ToString());
+                    writer.WriteProperty("thumbnail_url", media.ThumbnailUri?.ToString());
+                    writer.WriteProperty("raw_url", media.RawUri?.ToString());
+                    writer.WriteProperty("location", media.Location?.ToString());
                     writer.WriteEndObjectProperty();
                 }
                 writer.WriteEndArrayProperty();
