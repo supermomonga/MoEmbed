@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -7,8 +6,6 @@ namespace MoEmbed.Providers
 {
     public class TwitterMetadataProvider : IMetadataProvider
     {
-        private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/(?<statusId>\d+)");
-
         public TwitterMetadataProvider(string consumerKey, string consumerSecret)
         {
             var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
@@ -18,9 +15,7 @@ namespace MoEmbed.Providers
         }
 
         public bool CanHandle(Uri uri)
-        {
-            return regex.IsMatch(uri.ToString());
-        }
+            => TwitterMetadata.regex.IsMatch(uri.ToString());
 
         public bool CanHandle(ConsumerRequest request)
             => CanHandle(request.Url);
