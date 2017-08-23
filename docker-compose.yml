@@ -3,5 +3,7 @@ services:
   web:
     build: .
     env_file: .env
+    volumes:
+      - .:/usr/src/
     ports:
       - "${PORT}:5000"

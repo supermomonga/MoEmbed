@@ -270,3 +270,5 @@ tools
 
 # VSCode
 .vscode
+
+.env

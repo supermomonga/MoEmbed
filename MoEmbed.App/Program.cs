@@ -1,5 +1,6 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace MoEmbed
 {
@@ -7,9 +8,15 @@ namespace MoEmbed
     {
         public static void Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+            var serverport = config.GetValue<int?>("port") ?? 5000;
+            var serverurls = $"http://*:{ serverport }";
+
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:5000")
+                .UseUrls(serverurls)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
