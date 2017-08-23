@@ -109,6 +109,9 @@ namespace MoEmbed.Models
         private EmbedData FetchCore()
         {
             var tweet = Tweet.GetTweet(TweetId);
+
+            // Update Url to set right screenName
+            Uri = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
 
             Data = new EmbedData()
