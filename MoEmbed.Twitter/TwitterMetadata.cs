@@ -9,11 +9,6 @@ namespace MoEmbed.Models
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        public TwitterMetadata(string url)
-            : this(new Uri(url))
-        {
-        }
-
         public TwitterMetadata(Uri url)
         {
             Url = url;
@@ -69,12 +64,6 @@ namespace MoEmbed.Models
                 _Url = value;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the URL the <see cref="Uri" /> moved to.
-        /// </summary>
-        [DefaultValue(null)]
-        public Uri MovedTo { get; set; }
 
         /// <summary>
         /// Gets or sets the resolved data.
