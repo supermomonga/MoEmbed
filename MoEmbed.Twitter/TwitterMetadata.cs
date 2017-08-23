@@ -110,7 +110,6 @@ namespace MoEmbed.Models
         {
             var tweet = Tweet.GetTweet(TweetId);
             var extendedTweet = tweet.ExtendedTweet;
-
             // Update Url to set right screenName
             Uri = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
@@ -129,7 +128,10 @@ namespace MoEmbed.Models
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
+
+                Nsfw = !!tweet.PossiblySensitive,
             };
+
 
             Data.ThumbnailUrl = new Uri(user.ProfileImageUrlHttps);
             Data.ThumbnailHeight = 48;
