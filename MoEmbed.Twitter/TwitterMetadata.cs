@@ -3,21 +3,19 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Tweetinvi;
-using Tweetinvi.Models;
 
 namespace MoEmbed.Models
 {
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        public TwitterMetadata(string uri, ITwitterCredentials credentials)
-            : this(new Uri(uri), credentials)
+        public TwitterMetadata(string uri)
+            : this(new Uri(uri))
         {
         }
 
-        public TwitterMetadata(Uri uri, ITwitterCredentials credentials)
+        public TwitterMetadata(Uri uri)
         {
-            Tweetinvi.Auth.SetCredentials(credentials);
             Uri = uri;
         }
 

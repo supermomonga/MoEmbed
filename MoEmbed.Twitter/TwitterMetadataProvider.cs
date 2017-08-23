@@ -14,12 +14,14 @@ namespace MoEmbed.Providers
 
         public TwitterMetadataProvider(string consumerKey, string consumerSecret)
         {
-            this.Credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
+            var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
+            Tweetinvi.Auth.SetCredentials(credentials);
         }
 
         public TwitterMetadataProvider(string consumerKey, string consumerSecret, string accessToken)
         {
-            this.Credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, accessToken);
+            var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, accessToken);
+            Tweetinvi.Auth.SetCredentials(credentials);
         }
 
         public bool CanHandle(Uri uri)
