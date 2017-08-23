@@ -9,13 +9,21 @@ namespace MoEmbed.Models
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        public TwitterMetadata(Uri url)
+        /// <summary>
+        /// Initializes a new instaince of the <see cref="TwitterMetadata" /> class.
+        /// </summary>
+        public TwitterMetadata()
+        {
+        }
+
+        internal TwitterMetadata(Uri url)
         {
             Url = url;
         }
 
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
 
+        [NonSerialized]
         private string _ScreenName;
 
         /// <summary>
@@ -44,6 +52,7 @@ namespace MoEmbed.Models
             }
         }
 
+        [NonSerialized]
         private Uri _Url;
 
         /// <summary>
