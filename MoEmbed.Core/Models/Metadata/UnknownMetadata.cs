@@ -234,10 +234,14 @@ namespace MoEmbed.Models.Metadata
                 }
             }
 
-            if (Data.Medias.Count == 1 && Data.Medias.First().ThumbnailUri != null)
             {
-                Data.ThumbnailUrl = Data.Medias.First().ThumbnailUri;
-                Data.Medias.RemoveAt(0);
+                var medias = Data.Medias.Where(m => m.ThumbnailUri != null);
+                if (medias.Count() == 1)
+                {
+                    var media = medias.First();
+                    Data.ThumbnailUrl = media.ThumbnailUri;
+                    Data.Medias.Remove(media);
+                }
             }
 
             {
