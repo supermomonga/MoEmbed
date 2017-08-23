@@ -239,8 +239,10 @@ namespace MoEmbed.Models.Metadata
                 }
             }
 
-            var age = graph.Restriction?.Age;
-            Data.Nsfw = age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18;
+            {
+                var age = graph.Restriction?.Age;
+                Data.Nsfw = age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18;
+            }
         }
     }
 }
