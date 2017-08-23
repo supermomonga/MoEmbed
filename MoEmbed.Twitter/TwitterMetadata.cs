@@ -67,10 +67,20 @@ namespace MoEmbed.Models
             }
             set
             {
-                var groups = regex.Match(value.ToString()).Groups;
-                _TweetId = Int64.Parse(groups["statusId"].Value);
-                _ScreenName = groups["screenName"].Value;
                 _Url = value;
+                if (value != null)
+                {
+                    var m = regex.Match(value.ToString());
+                    if (m.Success)
+                    {
+                        var groups = m.Groups;
+                        _TweetId = Int64.Parse(groups["statusId"].Value);
+                        _ScreenName = groups["screenName"].Value;
+                        return;
+                    }
+                }
+                _TweetId = 0;
+                _ScreenName = null;
             }
         }
 
@@ -106,6 +116,10 @@ namespace MoEmbed.Models
 
         private EmbedData FetchCore()
         {
+            if (TweetId <= 0)
+            {
+                return null;
+            }
             var tweet = Tweet.GetTweet(TweetId);
             var extendedTweet = tweet.ExtendedTweet;
             // Update Url to set right screenName
