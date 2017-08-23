@@ -144,7 +144,7 @@ namespace MoEmbed.Models.Metadata
             // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
             {
-                Url = new Uri(graph.Url.DeEntitize() ?? Uri),
+                Url = new Uri(graph.Url.DeEntitize() ?? MovedTo ?? Uri),
                 Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value).DeEntitize(),
                 Description = (graph.Description ?? nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value).DeEntitize(),
                 ProviderName = graph.SiteName.DeEntitize(),
