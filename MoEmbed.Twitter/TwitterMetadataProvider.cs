@@ -16,12 +16,16 @@ namespace MoEmbed.Providers
         {
             var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
             Tweetinvi.Auth.SetCredentials(credentials);
+            Tweetinvi.TweetinviConfig.CurrentThreadSettings.TweetMode = Tweetinvi.TweetMode.Extended;
+            Tweetinvi.TweetinviConfig.ApplicationSettings.TweetMode = Tweetinvi.TweetMode.Extended;
         }
 
         public TwitterMetadataProvider(string consumerKey, string consumerSecret, string accessToken)
         {
             var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, accessToken);
             Tweetinvi.Auth.SetCredentials(credentials);
+            Tweetinvi.TweetinviConfig.CurrentThreadSettings.TweetMode = Tweetinvi.TweetMode.Extended;
+            Tweetinvi.TweetinviConfig.ApplicationSettings.TweetMode = Tweetinvi.TweetMode.Extended;
         }
 
         public bool CanHandle(Uri uri)

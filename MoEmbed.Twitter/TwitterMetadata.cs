@@ -109,6 +109,7 @@ namespace MoEmbed.Models
         private EmbedData FetchCore()
         {
             var tweet = Tweet.GetTweet(TweetId);
+            var extendedTweet = tweet.ExtendedTweet;
 
             // Update Url to set right screenName
             Uri = new Uri(tweet.Url);
@@ -153,3 +154,5 @@ namespace MoEmbed.Models
         }
     }
 }
+
+
