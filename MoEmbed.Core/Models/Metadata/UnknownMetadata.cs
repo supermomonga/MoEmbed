@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -92,14 +94,30 @@ namespace MoEmbed.Models.Metadata
                 {
                     LoadHtml(await res.Content.ReadAsStringAsync());
                 }
-                else if (Regex.IsMatch(mediaType, @"^image\/"))
+                else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
                 {
+                    var u = new Uri(MovedTo ?? Uri);
+                    Data = new EmbedData()
+                    {
+                        Url = u,
+                        ThumbnailUrl = mediaType[0] == 'i' ? u : null,
+                        Medias = new List<Media>(1)
+                        {
+                            new Media()
+                            {
+                                Type =mediaType[0] == 'i' ?  MediaTypes.Image
+                                        :mediaType[0] == 'v' ?  MediaTypes.Video
+                                        : MediaTypes.Audio,
+                                RawUri = u
+                            }
+                        }
+                    };
                 }
-                else if (Regex.IsMatch(mediaType, @"^video\/"))
+
+                if (Data != null)
                 {
-                }
-                else
-                {
+                    Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
+                    Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
                 }
             }
             return Data;
