@@ -79,6 +79,12 @@ namespace MoEmbed.Models
     [DefaultValue(null)]
     public Uri Url { get; set; }
 
+    /// <summary>
+    /// Gets or sets a NSFW for content
+    /// </summary>
+    [DefaultValue(false)]
+    public bool Nsfw { get; set; }
+
     public List<Media> _Medias;
     public List<Media> Medias {
         get

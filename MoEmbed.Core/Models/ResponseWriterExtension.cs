@@ -106,6 +106,7 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("thumbnail_url", obj.ThumbnailUrl);
             writer.WritePropertyIfNeeded("thumbnail_width", obj.ThumbnailWidth);
             writer.WritePropertyIfNeeded("thumbnail_height", obj.ThumbnailHeight);
+            writer.WritePropertyIfNeeded("nsfw", obj.Nsfw);
 
             if(obj.Medias.Count > 0)
             {
