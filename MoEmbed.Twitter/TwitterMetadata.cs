@@ -9,11 +9,6 @@ namespace MoEmbed.Models
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        public TwitterMetadata(string uri)
-            : this(new Uri(uri))
-        {
-        }
-
         public TwitterMetadata(Uri uri)
         {
             Uri = uri;
@@ -71,12 +66,6 @@ namespace MoEmbed.Models
         }
 
         /// <summary>
-        /// Gets or sets the URL the <see cref="Uri" /> moved to.
-        /// </summary>
-        [DefaultValue(null)]
-        public Uri MovedTo { get; set; }
-
-        /// <summary>
         /// Gets or sets the resolved data.
         /// </summary>
         [DefaultValue(null)]
@@ -116,7 +105,6 @@ namespace MoEmbed.Models
 
             Data = new EmbedData()
             {
-
                 AuthorName = $"{ user.Name }(@{ ScreenName })",
                 AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
 
@@ -134,10 +122,10 @@ namespace MoEmbed.Models
             Data.ThumbnailHeight = 48;
             Data.ThumbnailWidth = 48;
 
-            foreach(var m in tweet.Media)
+            foreach (var m in tweet.Media)
             {
                 // https://dev.twitter.com/overview/api/entities-in-twitter-objects#media
-                if(m.MediaType == "photo")
+                if (m.MediaType == "photo")
                 {
                     var media = new Media
                     {
