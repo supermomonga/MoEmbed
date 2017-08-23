@@ -50,8 +50,8 @@ namespace MoEmbed
                                 loggerFactory,
                                 new MemoryMetadataCache(app.ApplicationServices.GetService<IMemoryCache>()));
 
-            var twitterConsumerKey = Configuration["TwitterConsumerKey"];
-            var twitterConsumerSecret = Configuration["TwitterConsumerSecret"];
+            var twitterConsumerKey = Configuration["TwitterConsumerKey"] ?? Environment.GetEnvironmentVariable("TWITTER_CONSUMER_KEY");
+            var twitterConsumerSecret = Configuration["TwitterConsumerSecret"] ?? Environment.GetEnvironmentVariable("TWITTER_CONSUMER_SECRET");
             if (!string.IsNullOrEmpty(twitterConsumerKey) && !string.IsNullOrEmpty(twitterConsumerSecret))
             {
                 service.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
@@ -65,3 +65,8 @@ namespace MoEmbed
         }
     }
 }
+
+
+
+
+
