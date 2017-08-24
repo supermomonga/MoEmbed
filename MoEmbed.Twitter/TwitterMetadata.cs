@@ -128,6 +128,7 @@ namespace MoEmbed.Models
 
             Data = new EmbedData()
             {
+                Url = Url,
                 AuthorName = $"{ user.Name }(@{ ScreenName })",
                 AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
 
