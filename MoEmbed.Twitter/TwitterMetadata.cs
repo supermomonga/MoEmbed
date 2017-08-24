@@ -9,14 +9,14 @@ namespace MoEmbed.Models
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        public TwitterMetadata(string uri)
-            : this(new Uri(uri))
+        public TwitterMetadata(string url)
+            : this(new Uri(url))
         {
         }
 
-        public TwitterMetadata(Uri uri)
+        public TwitterMetadata(Uri url)
         {
-            Uri = uri;
+            Url = url;
         }
 
         private static Regex regex = new Regex(@"https:\/\/twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
@@ -49,24 +49,24 @@ namespace MoEmbed.Models
             }
         }
 
-        private Uri _Uri;
+        private Uri _Url;
 
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
         [DefaultValue(null)]
-        public Uri Uri
+        public Uri Url
         {
             get
             {
-                return _Uri;
+                return _Url;
             }
             set
             {
                 var groups = regex.Match(value.ToString()).Groups;
                 _TweetId = Int64.Parse(groups["statusId"].Value);
                 _ScreenName = groups["screenName"].Value;
-                _Uri = value;
+                _Url = value;
             }
         }
 
@@ -111,7 +111,7 @@ namespace MoEmbed.Models
             var tweet = Tweet.GetTweet(TweetId);
             var extendedTweet = tweet.ExtendedTweet;
             // Update Url to set right screenName
-            Uri = new Uri(tweet.Url);
+            Url = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
 
             Data = new EmbedData()
@@ -138,7 +138,6 @@ namespace MoEmbed.Models
             foreach (var m in (extendedTweet?.ExtendedEntities ?? tweet.Entities).Medias)
             {
                 // https://dev.twitter.com/overview/api/entities-in-twitter-objects#media
-                Console.WriteLine(m.MediaType);
                 if (m.MediaType == "photo")
                 {
                     var media = new Media
