@@ -56,7 +56,7 @@ namespace MoEmbed
             {
                 service.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
             }
-
+            service.Providers.Add(new NicovideoMetadataProvider());
             service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
             service.Providers.Add(new UnknownMetadataProvider());
             routeBuilder.MapGet("", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
@@ -65,8 +65,3 @@ namespace MoEmbed
         }
     }
 }
-
-
-
-
-
