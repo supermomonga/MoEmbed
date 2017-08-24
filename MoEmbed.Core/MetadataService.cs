@@ -24,10 +24,10 @@ namespace MoEmbed
         /// <summary>
         ///   Initializes a new instance of the <see cref="MetadataService" /> class.
         /// </summary>
-        public MetadataService(ILoggerFactory loggerFactory, IMetadataCache cache = null)
+        public MetadataService(ILoggerFactory loggerFactory = null, IMetadataCache cache = null)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            _logger = loggerFactory.CreateLogger<MetadataService>();
+            _logger = loggerFactory?.CreateLogger<MetadataService>();
             _Cache = cache;
         }
 
