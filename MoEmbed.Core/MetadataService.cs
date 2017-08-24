@@ -60,7 +60,7 @@ namespace MoEmbed
 
             if (m != null)
             {
-                var d = await m.FetchAsync();
+                var d = await m.FetchAsync(new RequestContext(this, request));
 
                 if (d != null)
                 {

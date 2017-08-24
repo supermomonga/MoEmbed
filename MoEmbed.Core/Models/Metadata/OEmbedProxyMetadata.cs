@@ -33,7 +33,7 @@ namespace MoEmbed.Models.Metadata
         private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<EmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync(RequestContext context)
         {
             lock (this)
             {

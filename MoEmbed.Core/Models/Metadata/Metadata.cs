@@ -1,14 +1,21 @@
-using System.IO;
 using System.Threading.Tasks;
 
 namespace MoEmbed.Models.Metadata
 {
-    // TODO: Move to Another file
-    public enum Types { Photo, Video, Link, Rich }
-
+    /// <summary>
+    /// Represents a metadata for the specified URL.
+    /// </summary>
+    /// <remarks>
+    /// Derived types must be XAML serializable.
+    /// </remarks>
     public abstract class Metadata
     {
-        public abstract Task<EmbedData> FetchAsync();
+        /// <summary>
+        /// Asynchronously returns embed data from remote service.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
+        public abstract Task<EmbedData> FetchAsync(RequestContext context);
 
         /// <summary>
         /// Invoked when the instance deserialized from storage.
@@ -19,4 +26,3 @@ namespace MoEmbed.Models.Metadata
         }
     }
 }
-

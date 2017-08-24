@@ -1,6 +1,5 @@
+using System;
 using System.IO;
-using System.Linq;
-using System.Xml.Serialization;
 using Portable.Xaml;
 using Xunit;
 
@@ -18,7 +17,7 @@ namespace MoEmbed.Models.Metadata
                 Uri = url
             };
 
-            var d1 = rm.FetchAsync().GetAwaiter().GetResult();
+            var d1 = rm.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(new Uri(url)))).GetAwaiter().GetResult();
             Assert.Equal(rm.Data, d1);
 
             using (var sw = new StringWriter())
