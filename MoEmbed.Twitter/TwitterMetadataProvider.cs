@@ -1,17 +1,11 @@
 using System;
-using System.Text.RegularExpressions;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
-using Tweetinvi.Models;
 
 namespace MoEmbed.Providers
 {
     public class TwitterMetadataProvider : IMetadataProvider
     {
-        private static Regex regex = new Regex(@"https:\/\/twitter\.com\/[^\/]+\/status\/(?<statusId>\d+)");
-
-        private ITwitterCredentials Credentials { get; }
-
         public TwitterMetadataProvider(string consumerKey, string consumerSecret)
         {
             var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, true);
@@ -20,22 +14,11 @@ namespace MoEmbed.Providers
             Tweetinvi.TweetinviConfig.ApplicationSettings.TweetMode = Tweetinvi.TweetMode.Extended;
         }
 
-        public TwitterMetadataProvider(string consumerKey, string consumerSecret, string accessToken)
-        {
-            var credentials = Tweetinvi.Auth.SetApplicationOnlyCredentials(consumerKey, consumerSecret, accessToken);
-            Tweetinvi.Auth.SetCredentials(credentials);
-            Tweetinvi.TweetinviConfig.CurrentThreadSettings.TweetMode = Tweetinvi.TweetMode.Extended;
-            Tweetinvi.TweetinviConfig.ApplicationSettings.TweetMode = Tweetinvi.TweetMode.Extended;
-        }
-
         public bool CanHandle(Uri uri)
-        {
-            return regex.IsMatch(uri.ToString());
-        }
+            => TwitterMetadata.regex.IsMatch(uri.ToString());
 
         public bool CanHandle(ConsumerRequest request)
             => CanHandle(request.Url);
-
 
         public Metadata GetMetadata(ConsumerRequest request)
         {
@@ -47,4 +30,3 @@ namespace MoEmbed.Providers
         }
     }
 }
-
