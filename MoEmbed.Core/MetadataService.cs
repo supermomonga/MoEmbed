@@ -104,12 +104,11 @@ namespace MoEmbed
 
                     // HACK: make User-Agent configurable
                     const string product = "MoEmbed";
-                    var version = new AssemblyName(typeof(MetadataService).AssemblyQualifiedName).Version;
-                    const string url = "https://github.com/supermomonga/MoEmbed";
+                    var version = typeof(MetadataService).GetTypeInfo().Assembly.GetName().Version;
 
                     c.DefaultRequestHeaders.UserAgent.Clear();
                     c.DefaultRequestHeaders.UserAgent.Add(
-                        new ProductInfoHeaderValue($"Mozilla/5.0 (compatible; {product}/{version}; +{url})"));
+                        new ProductInfoHeaderValue(product, version.ToString()));
 
                     _HttpClient = c;
                 }

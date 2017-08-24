@@ -64,7 +64,7 @@ namespace MoEmbed.Models.Metadata
                     }
                     else
                     {
-                        _FetchTask = FetchAsyncCore();
+                        _FetchTask = FetchAsyncCore(context);
                         _FetchTask.ConfigureAwait(false);
                     }
                 }
@@ -72,36 +72,30 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        private async Task<EmbedData> FetchAsyncCore()
+        private async Task<EmbedData> FetchAsyncCore(RequestContext context)
         {
-            using (var hh = new HttpClientHandler()
+            var hc = context.Service.HttpClient;
+
+            var res = await GetResponseAsync(hc).ConfigureAwait(false);
+            if (!res.IsSuccessStatusCode)
             {
-                AllowAutoRedirect = false
-            })
-            using (var hc = new HttpClient(hh))
+                return null;
+            }
+
+            var mediaType = res.Content.Headers.ContentType.MediaType;
+
+            if (Regex.IsMatch(mediaType, @"^text\/html$"))
             {
-                // TODO: share HttpClient in service
-
-                var res = await GetResponseAsync(hc).ConfigureAwait(false);
-                if (!res.IsSuccessStatusCode)
+                LoadHtml(await res.Content.ReadAsStringAsync());
+            }
+            else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
+            {
+                var u = new Uri(MovedTo ?? Uri);
+                Data = new EmbedData()
                 {
-                    return null;
-                }
-
-                var mediaType = res.Content.Headers.ContentType.MediaType;
-
-                if (Regex.IsMatch(mediaType, @"^text\/html$"))
-                {
-                    LoadHtml(await res.Content.ReadAsStringAsync());
-                }
-                else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
-                {
-                    var u = new Uri(MovedTo ?? Uri);
-                    Data = new EmbedData()
-                    {
-                        Url = u,
-                        ThumbnailUrl = mediaType[0] == 'i' ? u : null,
-                        Medias = new List<Media>(1)
+                    Url = u,
+                    ThumbnailUrl = mediaType[0] == 'i' ? u : null,
+                    Medias = new List<Media>(1)
                         {
                             new Media()
                             {
@@ -111,15 +105,15 @@ namespace MoEmbed.Models.Metadata
                                 RawUri = u
                             }
                         }
-                    };
-                }
-
-                if (Data != null)
-                {
-                    Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
-                    Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
-                }
+                };
             }
+
+            if (Data != null)
+            {
+                Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
+                Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
+            }
+
             return Data;
         }
 
