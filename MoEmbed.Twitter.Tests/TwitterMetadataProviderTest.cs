@@ -2,7 +2,7 @@ using Xunit;
 
 namespace MoEmbed.Tests.Handlers
 {
-    public class TwitterEmbedObjectHandlerTest
+    public class TwitterMetadataProviderTest
     {
         [Theory]
         [InlineData("https://twitter.com/mikoillust/status/887644409226866689")]
