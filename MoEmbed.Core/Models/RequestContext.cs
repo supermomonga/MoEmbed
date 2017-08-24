@@ -3,33 +3,29 @@ using System;
 namespace MoEmbed.Models
 {
     /// <summary>
-    /// Represents a request of consumer.
+    /// Represents a request to  <see cref="Metadata.Metadata"/>.
     /// </summary>
-    public sealed class ConsumerRequest
+    public sealed class RequestContext
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="RequestContext" /> class with the specified URL.
+        /// Initializes a new instance of <see cref="RequestContext" /> class with the specified <see cref="MetadataService" /> and <see cref="ConsumerRequest"/>.
         /// </summary>
-        /// <param name="url">The URL to retrieve embedding information for.</param>
-        public ConsumerRequest(Uri url)
+        /// <param name="service">The <see cref="MetadataService"/> processing this request.</param>
+        /// <param name="request">The request from consumer.</param>
+        public RequestContext(MetadataService service, ConsumerRequest request)
         {
-            Url = url;
+            Service = service;
+
+            Url = request.Url;
+            MaxWidth = request.MaxWidth;
+            MaxHeight = request.MaxHeight;
+            Format = request.Format;
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="RequestContext" /> class with full parameters.
+        /// Gets the <see cref="MetadataService" /> processing this request.
         /// </summary>
-        /// <param name="url">The URL to retrieve embedding information for.</param>
-        /// <param name="maxWidth">The maximum width of the embedded resource.</param>
-        /// <param name="maxHeight">The maximum height of the embedded resource.</param>
-        /// <param name="format">The required response format.</param>
-        public ConsumerRequest(Uri url, int? maxWidth, int? maxHeight, string format)
-        {
-            Url = url;
-            MaxWidth = maxWidth;
-            MaxHeight = maxHeight;
-            Format = format;
-        }
+        public MetadataService Service { get; }
 
         /// <summary>
         /// Gets the URL to retrieve embedding information for.

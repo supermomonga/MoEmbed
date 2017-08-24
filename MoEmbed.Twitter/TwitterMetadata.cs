@@ -86,7 +86,7 @@ namespace MoEmbed.Models
         private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<EmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync(RequestContext request)
         {
             lock (this)
             {
@@ -116,7 +116,6 @@ namespace MoEmbed.Models
 
             Data = new EmbedData()
             {
-
                 AuthorName = $"{ user.Name }(@{ ScreenName })",
                 AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
 
@@ -132,16 +131,15 @@ namespace MoEmbed.Models
                 Nsfw = !!tweet.PossiblySensitive,
             };
 
-
             Data.ThumbnailUrl = new Uri(user.ProfileImageUrlHttps);
             Data.ThumbnailHeight = 48;
             Data.ThumbnailWidth = 48;
 
-            foreach(var m in (extendedTweet?.ExtendedEntities ?? tweet.Entities).Medias)
+            foreach (var m in (extendedTweet?.ExtendedEntities ?? tweet.Entities).Medias)
             {
                 // https://dev.twitter.com/overview/api/entities-in-twitter-objects#media
                 Console.WriteLine(m.MediaType);
-                if(m.MediaType == "photo")
+                if (m.MediaType == "photo")
                 {
                     var media = new Media
                     {
@@ -151,7 +149,8 @@ namespace MoEmbed.Models
                         Location = new Uri(m.ExpandedURL),
                     };
                     Data.Medias.Add(media);
-                } else if(m.MediaType == "animated_gif" || m.MediaType == "video")
+                }
+                else if (m.MediaType == "animated_gif" || m.MediaType == "video")
                 {
                     var media = new Media
                     {
@@ -167,5 +166,3 @@ namespace MoEmbed.Models
         }
     }
 }
-
-

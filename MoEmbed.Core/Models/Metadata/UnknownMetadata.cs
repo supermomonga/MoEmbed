@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -53,7 +52,7 @@ namespace MoEmbed.Models.Metadata
         private Task<EmbedData> _FetchTask;
 
         /// <inheritdoc />
-        public override Task<EmbedData> FetchAsync()
+        public override Task<EmbedData> FetchAsync(RequestContext context)
         {
             lock (this)
             {
@@ -65,7 +64,7 @@ namespace MoEmbed.Models.Metadata
                     }
                     else
                     {
-                        _FetchTask = FetchAsyncCore();
+                        _FetchTask = FetchAsyncCore(context);
                         _FetchTask.ConfigureAwait(false);
                     }
                 }
@@ -73,36 +72,30 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        private async Task<EmbedData> FetchAsyncCore()
+        private async Task<EmbedData> FetchAsyncCore(RequestContext context)
         {
-            using (var hh = new HttpClientHandler()
+            var hc = context.Service.HttpClient;
+
+            var res = await GetResponseAsync(hc).ConfigureAwait(false);
+            if (!res.IsSuccessStatusCode)
             {
-                AllowAutoRedirect = false
-            })
-            using (var hc = new HttpClient(hh))
+                return null;
+            }
+
+            var mediaType = res.Content.Headers.ContentType.MediaType;
+
+            if (Regex.IsMatch(mediaType, @"^text\/html$"))
             {
-                // TODO: share HttpClient in service
-
-                var res = await GetResponseAsync(hc).ConfigureAwait(false);
-                if (!res.IsSuccessStatusCode)
+                LoadHtml(await res.Content.ReadAsStringAsync());
+            }
+            else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
+            {
+                var u = new Uri(MovedTo ?? Uri);
+                Data = new EmbedData()
                 {
-                    return null;
-                }
-
-                var mediaType = res.Content.Headers.ContentType.MediaType;
-
-                if (Regex.IsMatch(mediaType, @"^text\/html$"))
-                {
-                    LoadHtml(await res.Content.ReadAsStringAsync());
-                }
-                else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
-                {
-                    var u = new Uri(MovedTo ?? Uri);
-                    Data = new EmbedData()
-                    {
-                        Url = u,
-                        ThumbnailUrl = mediaType[0] == 'i' ? u : null,
-                        Medias = new List<Media>(1)
+                    Url = u,
+                    ThumbnailUrl = mediaType[0] == 'i' ? u : null,
+                    Medias = new List<Media>(1)
                         {
                             new Media()
                             {
@@ -112,43 +105,23 @@ namespace MoEmbed.Models.Metadata
                                 RawUri = u
                             }
                         }
-                    };
-                }
-
-                if (Data != null)
-                {
-                    Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
-                    Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
-                }
+                };
             }
+
+            if (Data != null)
+            {
+                Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
+                Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
+            }
+
             return Data;
         }
 
         private async Task<HttpResponseMessage> GetResponseAsync(HttpClient hc)
         {
-            var u = MovedTo ?? Uri;
-            for (; ; )
-            {
-                var res = await hc.GetAsync(u).ConfigureAwait(false);
-
-                switch (res.StatusCode)
-                {
-                    case HttpStatusCode.Moved:
-                        if (u == (MovedTo ?? Uri))
-                        {
-                            MovedTo = res.Headers.Location.ToString();
-                        }
-                        u = res.Headers.Location.ToString();
-                        continue;
-                    case HttpStatusCode.Ambiguous:
-                    case HttpStatusCode.Found:
-                    case HttpStatusCode.RedirectMethod:
-                        u = res.Headers.Location.ToString();
-                        continue;
-                }
-
-                return res;
-            }
+            var res = await hc.FollowRedirectAsync(MovedTo ?? Uri).ConfigureAwait(false);
+            MovedTo = res.MovedTo ?? MovedTo;
+            return res.Message;
         }
 
         private void LoadHtml(string html)

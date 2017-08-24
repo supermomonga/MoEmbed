@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MoEmbed.Models;
 using MoEmbed.Providers;
@@ -10,7 +14,7 @@ namespace MoEmbed
     /// <summary>
     ///   Handles the request object and use right metadata handler to fetch embed data.
     /// </summary>
-    public class MetadataService
+    public class MetadataService : IDisposable
     {
         private readonly ILogger<MetadataService> _logger;
         private readonly IMetadataCache _Cache;
@@ -20,10 +24,10 @@ namespace MoEmbed
         /// <summary>
         ///   Initializes a new instance of the <see cref="MetadataService" /> class.
         /// </summary>
-        public MetadataService(ILoggerFactory loggerFactory, IMetadataCache cache = null)
+        public MetadataService(ILoggerFactory loggerFactory = null, IMetadataCache cache = null)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            _logger = loggerFactory.CreateLogger<MetadataService>();
+            _logger = loggerFactory?.CreateLogger<MetadataService>();
             _Cache = cache;
         }
 
@@ -56,7 +60,7 @@ namespace MoEmbed
 
             if (m != null)
             {
-                var d = await m.FetchAsync();
+                var d = await m.FetchAsync(new RequestContext(this, request));
 
                 if (d != null)
                 {
@@ -74,5 +78,73 @@ namespace MoEmbed
                 ErrorMessage = "Not Found"
             };
         }
+
+        #region HttpClient
+
+        private HttpClient _HttpClient;
+
+        /// <summary>
+        /// Gets a <see cref="HttpClient"/> instance that is shared over this <see cref="MetadataService"/>.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="HttpClient"/> won't follow redirect automatically.
+        /// </remarks>
+        public HttpClient HttpClient
+        {
+            get
+            {
+                if (_HttpClient == null)
+                {
+                    var c = new HttpClient(new HttpClientHandler()
+                    {
+                        AllowAutoRedirect = false,
+                    });
+
+                    // Set User-Agent
+
+                    // HACK: make User-Agent configurable
+                    const string product = "MoEmbed";
+                    var version = typeof(MetadataService).GetTypeInfo().Assembly.GetName().Version;
+                    const string url = "https://github.com/supermomonga/MoEmbed";
+
+                    c.DefaultRequestHeaders.UserAgent.Clear();
+                    c.DefaultRequestHeaders.UserAgent.Add(
+                        new ProductInfoHeaderValue("Mozilla", "5.0"));
+                    c.DefaultRequestHeaders.UserAgent.Add(
+                        new ProductInfoHeaderValue($"(compatible; {product}/{version}; +{url})"));
+
+                    _HttpClient = c;
+                }
+                return _HttpClient;
+            }
+        }
+
+        #endregion HttpClient
+
+        #region IDisposable support
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc />
+        ~MetadataService()
+            => Dispose(false);
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _HttpClient?.Dispose();
+            }
+            _HttpClient = null;
+        }
+
+        #endregion IDisposable support
     }
 }
