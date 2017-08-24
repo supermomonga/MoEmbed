@@ -136,7 +136,7 @@ namespace MoEmbed.Models
                 Title = $"{ user.Name }(@{ ScreenName })",
 
                 // TODO: Insert media
-                Description = tweet.FullText.Replace(tweet.Suffix, ""),
+                Description = tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}" : tweet.Text,
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
