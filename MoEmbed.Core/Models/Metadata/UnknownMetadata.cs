@@ -1,9 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Net;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -126,29 +125,9 @@ namespace MoEmbed.Models.Metadata
 
         private async Task<HttpResponseMessage> GetResponseAsync(HttpClient hc)
         {
-            var u = MovedTo ?? Uri;
-            for (; ; )
-            {
-                var res = await hc.GetAsync(u).ConfigureAwait(false);
-
-                switch (res.StatusCode)
-                {
-                    case HttpStatusCode.Moved:
-                        if (u == (MovedTo ?? Uri))
-                        {
-                            MovedTo = res.Headers.Location.ToString();
-                        }
-                        u = res.Headers.Location.ToString();
-                        continue;
-                    case HttpStatusCode.Ambiguous:
-                    case HttpStatusCode.Found:
-                    case HttpStatusCode.RedirectMethod:
-                        u = res.Headers.Location.ToString();
-                        continue;
-                }
-
-                return res;
-            }
+            var res = await hc.FollowRedirectAsync(MovedTo ?? Uri).ConfigureAwait(false);
+            MovedTo = res.MovedTo ?? MovedTo;
+            return res.Message;
         }
 
         private void LoadHtml(string html)
