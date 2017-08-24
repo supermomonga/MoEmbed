@@ -9,18 +9,21 @@ namespace MoEmbed.Models
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        public TwitterMetadata(string url)
-            : this(new Uri(url))
+        /// <summary>
+        /// Initializes a new instaince of the <see cref="TwitterMetadata" /> class.
+        /// </summary>
+        public TwitterMetadata()
         {
         }
 
-        public TwitterMetadata(Uri url)
+        internal TwitterMetadata(Uri url)
         {
             Url = url;
         }
 
-        private static Regex regex = new Regex(@"https:\/\/twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
+        internal static readonly Regex regex = new Regex(@"https:\/\/twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
 
+        [NonSerialized]
         private string _ScreenName;
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace MoEmbed.Models
             }
         }
 
+        [NonSerialized]
         private Uri _Url;
 
         /// <summary>
@@ -63,18 +67,22 @@ namespace MoEmbed.Models
             }
             set
             {
-                var groups = regex.Match(value.ToString()).Groups;
-                _TweetId = Int64.Parse(groups["statusId"].Value);
-                _ScreenName = groups["screenName"].Value;
                 _Url = value;
+                if (value != null)
+                {
+                    var m = regex.Match(value.ToString());
+                    if (m.Success)
+                    {
+                        var groups = m.Groups;
+                        _TweetId = Int64.Parse(groups["statusId"].Value);
+                        _ScreenName = groups["screenName"].Value;
+                        return;
+                    }
+                }
+                _TweetId = 0;
+                _ScreenName = null;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the URL the <see cref="Uri" /> moved to.
-        /// </summary>
-        [DefaultValue(null)]
-        public Uri MovedTo { get; set; }
 
         /// <summary>
         /// Gets or sets the resolved data.
@@ -108,6 +116,10 @@ namespace MoEmbed.Models
 
         private EmbedData FetchCore()
         {
+            if (TweetId <= 0)
+            {
+                return null;
+            }
             var tweet = Tweet.GetTweet(TweetId);
             var extendedTweet = tweet.ExtendedTweet;
             // Update Url to set right screenName
@@ -116,6 +128,7 @@ namespace MoEmbed.Models
 
             Data = new EmbedData()
             {
+                Url = Url,
                 AuthorName = $"{ user.Name }(@{ ScreenName })",
                 AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
 
