@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace MoEmbed.Models
 {
-    public enum EmbedDataTypes { MixedContent, SinglePhoto, SingleVideo, SingleAudio }
+    public enum EmbedDataTypes { MixedContent, SingleImage, SingleVideo, SingleAudio }
 
     /// <summary>
     /// Represents a result fetched by <see cref="Metadata.Metadata"/>

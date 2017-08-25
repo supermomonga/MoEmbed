@@ -93,21 +93,26 @@ namespace MoEmbed.Models.Metadata
                 var u = new Uri(MovedTo ?? Uri);
                 Data = new EmbedData()
                 {
+                    Type = mediaType[0] == 'i' ?  EmbedDataTypes.SingleImage
+                    :mediaType[0] == 'v' ?  EmbedDataTypes.SingleVideo
+                    : EmbedDataTypes.SingleAudio,
                     Url = u,
                     Medias = new List<Media>(1)
                         {
                             new Media()
                             {
-                                Type =mediaType[0] == 'i' ?  MediaTypes.Image
-                                        :mediaType[0] == 'v' ?  MediaTypes.Video
-                                        : MediaTypes.Audio,
+                                Type = mediaType[0] == 'i' ?  MediaTypes.Image
+                                :mediaType[0] == 'v' ?  MediaTypes.Video
+                                : MediaTypes.Audio,
                                 RawUrl = u
                             }
                         }
                 };
-                if (mediaType[0] == 'i')
+                if (mediaType.StartsWith("image"))
                 {
+                    Data.Type = EmbedDataTypes.SingleImage;
                     Data.Thumbnail = new Media {
+                        Type = MediaTypes.Image,
                         Thumbnail = new ImageInfo {
                             Url = u
                         }
