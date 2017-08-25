@@ -6,6 +6,7 @@
 <#@ import namespace="System.Text.RegularExpressions" #>
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
 namespace MoEmbed.Providers
@@ -93,7 +94,7 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
     /// <summary>
     /// Handles oEmbed request for <see href="<#= prov #>" />.
     /// </summary>
-    public sealed class <#= n #>MetadataProvider : OEmbedProxyMetadataProvider
+    public sealed class <#= n #>MetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
 <#
         if (schemeUrls.Count > 2)
@@ -105,7 +106,7 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
         else if (schemeUrls.Any())
         {
 #>
-        private static readonly Regex _UriPattern = new Regex(@"<#= schemeUrls[0] #>");
+        private static readonly Regex _UriPattern = new Regex(@"^<#= schemeUrls[0] #>");
 <#
         }
         else
@@ -114,7 +115,45 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
         private static readonly Regex _UriPattern = new Regex(@"^<#= Regex.Escape(prov) #>");
 <#
         }
+
+        var hostNames = (schemeUrls.Any() ? schemeUrls : Enumerable.Repeat(prov, 1))
+                            .Select(u =>
+                            {
+                                var m = Regex.Match(u, "^https?://([^/]+)(/|$)");
+                                return m.Groups[1].Value.Replace("\\", "").TrimStart('*', '.');
+                            })
+                            .SelectMany(hn =>
+                            {
+                                var cps = hn.Split('.');
+                                var r = new List<string>();
+                                for(var i = 0; i  < cps.Length - 1; i++)
+                                {
+                                    var cp = cps[i];
+                                    if (!Regex.IsMatch(cp, "^(com?|net?|org?|ac|gov?|lg)$"))
+                                    {
+                                        r.Add(string.Join(".", cps.Skip(i)));
+                                    }
+                                }
+                                return r;
+                            })
+                            .Distinct()
+                            .ToArray();
+
 #>
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+<#
+        foreach (var hn in hostNames)
+        {
+#>
+            yield return "<#= hn #>";
+<#
+        }
+#>
+        }
+
         /// <inheritdoc />
         public override bool CanHandle(Uri uri)
             => _UriPattern.IsMatch(uri.ToString());

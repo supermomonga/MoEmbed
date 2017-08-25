@@ -21,7 +21,7 @@ namespace MoEmbed.Models
             Url = url;
         }
 
-        internal static readonly Regex regex = new Regex(@"https:\/\/twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
+        internal static readonly Regex regex = new Regex(@"https:\/\/(mobile\.)?twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
 
         [NonSerialized]
         private string _ScreenName;
