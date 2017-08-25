@@ -7,6 +7,11 @@ namespace MoEmbed.Models.Metadata
 {
     public class UnknownMetadataTest
     {
+        internal RequestContext GetRequestContext(Uri url)
+            => new RequestContext(new MetadataService(), new ConsumerRequest(url));
+        internal RequestContext GetRequestContext(string url)
+            => GetRequestContext(new Uri(url));
+
         [Fact]
         public void SerializationTest()
         {
@@ -17,7 +22,7 @@ namespace MoEmbed.Models.Metadata
                 Uri = url
             };
 
-            var d1 = rm.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(new Uri(url)))).GetAwaiter().GetResult();
+            var d1 = rm.FetchAsync(GetRequestContext(url)).GetAwaiter().GetResult();
             Assert.Equal(rm.Data, d1);
 
             using (var sw = new StringWriter())
@@ -36,5 +41,18 @@ namespace MoEmbed.Models.Metadata
                 }
             }
         }
+
+        [Theory]
+        [InlineData("http://d.pr/i/sYDF7v.png", EmbedDataTypes.SingleImage)]
+        [InlineData("http://imgur.com/GBfaPnJ.png", EmbedDataTypes.SingleImage)]
+        [InlineData("http://game-a5.granbluefantasy.jp/assets/sound/voice/3030147000_v_017.mp3", EmbedDataTypes.SingleAudio)]
+        [InlineData("https://gyazo.com/7dd82fe03e109f4a9db9074831b4c65b", EmbedDataTypes.MixedContent)]
+        public async void ResourceTypeTest(string url, EmbedDataTypes type)
+        {
+            var rm = new UnknownMetadata() { Uri = url };
+            var d = await rm.FetchAsync(GetRequestContext(url));
+            Assert.Equal(type, d.Type);
+        }
     }
 }
+
