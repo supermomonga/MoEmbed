@@ -1,41 +1,73 @@
 ﻿<!DOCTYPE html>
 <html>
-<head prefix="og: http://ogp.me/ns#">
+  <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
     <title>MoEmbed</title>
     <meta name="description" content="MoEmbed is a oEmbed provider which supports any websites." />
     <meta property="og:title" content="MoEmbed" />
     <meta property="og:description" content="MoEmbed is a oEmbed provider which supports any websites." />
-</head>
-<body>
-    <h1>MoEmbed</h1>
-    <p>
+    <style>
+     <!--
+     main { width: 800px; margin: 0 auto; }
+     #result { height: 500px; width: 100%; }
+     #request-info { display: none; }
+     -->
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>MoEmbed</h1>
+      <p>
         MoEmbed is a oEmbed provider which supports any websites.
-    </p>
-    <h2>Test Form</h2>
+      </p>
+      <h2>Test Form</h2>
+      <div>
+        <label for="url">URL:</label>
+        <input id="url"
+               name="url"
+               type="url"
+               style="width: 85%; max-width:400px"
+               placeholder="http://url/to/fetch"
+               value="https://github.com/supermomonga/MoEmbed" />
+      </div>
+      <div>
+        <label for="format">Response Format:</label>
+        <select id="format" name="format">
+          <option value="json">JSON</option>
+          <option value="xml">XML</option>
+        </select>
+      </div>
+      <div>
+        <button type="submit">Fetch</button>
+      </div>
+      <h2>Result</h2>
+      <p id="request-info">
+        Fetched: <a id="request-url" href="" target="_blank"></a>
+      </p>
+      <textarea id="result"></textarea>
+    </main>
+    <script>
+     document.querySelector('button').addEventListener('click', (e) => {
+       const url = document.querySelector('#url').value;
+       const encodedUrl = encodeURIComponent(url);
+       const format = document.querySelector('#format option:checked').value;
+       const requestUrl = `/api?url=${encodedUrl}&format=${format}`;
+       const t = document.querySelector('#result');
 
-    <form action="./api">
-        <div>
-            <label for="url">URL:</label>
-            <input id="url"
-                   name="url"
-                   type="url"
-                   style="width: 85%; max-width:400px"
-                   placeholder="http://url/to/fetch"
-                   value="https://github.com/supermomonga/MoEmbed" />
-        </div>
-        <div>
-
-            <label for="format">Response Format:</label>
-            <select id="format" name="format">
-                <option value="json">JSON</option>
-                <option value="xml">XML</option>
-            </select>
-        </div>
-        <div>
-
-            <button type="submit">Fetch</button>
-        </div>
-    </form>
-</body>
+       document.querySelector('#request-info').style.display = 'block';
+       document.querySelector('#request-url').href = requestUrl;
+       document.querySelector('#request-url').innerText = requestUrl;
+       fetch(requestUrl, {
+         method: 'get'
+       }).then(
+         (response) => {
+           if(format == 'json') response.json().then((json) => t.innerText = JSON.stringify(json))
+           else response.text().then((text) => t.innerText = text)
+         }
+       ).catch(
+         (response) => t.innerText = 'error'
+       );
+     });
+    </script>
+  </body>
 </html>
