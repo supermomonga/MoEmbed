@@ -125,7 +125,6 @@ namespace MoEmbed.Models
             // Update Url to set right screenName
             Url = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
-            var nsfw = !!tweet.PossiblySensitive;
 
             Data = new EmbedData()
             {
@@ -142,6 +141,7 @@ namespace MoEmbed.Models
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
 
+                Nsfw = !!tweet.PossiblySensitive,
             };
 
             Data.Thumbnail = new Media {
@@ -171,6 +171,7 @@ namespace MoEmbed.Models
                         },
                         RawUrl = new Uri(m.MediaURLHttps),
                         Location = new Uri(m.ExpandedURL),
+                        Nsfw = Data.Nsfw,
                     };
                     Data.Medias.Add(media);
                 }

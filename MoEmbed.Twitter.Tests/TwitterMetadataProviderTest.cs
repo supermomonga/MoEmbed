@@ -75,5 +75,35 @@ namespace MoEmbed.Providers
             => Assert.Null(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
 
         #endregion GetMetadata
+
+        #region GetEmbedData
+
+        [Theory]
+        [InlineData("https://twitter.com/realDonaldTrump/status/900714982823821313", 0)]
+        [InlineData("https://twitter.com/foo/status/560070183650213889", 1)]
+        [InlineData("https://twitter.com/realDonaldTrump/status/900488148194516992", 4)]
+        public async void GetEmbedDataTest_GetMedia(string uri, int mediaCount)
+        {
+            var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
+
+            await m.FetchAsync(GetRequestContext(uri));
+            var data = m.Data;
+            Assert.NotNull(m.Data);
+            Assert.Equal(mediaCount, m.Data.Medias.Count);
+        }
+
+        [Theory]
+        [InlineData("https://twitter.com/realDonaldTrump/status/900714982823821313", false)]
+        [InlineData("https://twitter.com/shift0808/status/900831119397986304", true)]
+        public async void GetEmbedDataTest_Nsfw(string uri, bool nsfw)
+        {
+            var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
+
+            await m.FetchAsync(GetRequestContext(uri));
+            var data = m.Data;
+            Assert.Equal(nsfw, data.Nsfw);
+        }
+
+        #endregion GetEmbedData
     }
 }
