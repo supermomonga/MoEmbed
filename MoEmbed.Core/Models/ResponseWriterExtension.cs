@@ -1,7 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
 using MoEmbed.Models.OEmbed;
-using MoEmbed.Models.Metadata;
 
 namespace MoEmbed.Models
 {
@@ -11,7 +10,6 @@ namespace MoEmbed.Models
         {
             if (value != null)
             {
-
                 var t = value.GetType();
 
                 if (t == typeof(bool))
@@ -76,11 +74,13 @@ namespace MoEmbed.Models
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IPhotoOEmbedData)?.Width);
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IPhotoOEmbedData)?.Height);
                     break;
+
                 case OEmbed.Types.Video:
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.HTML, (obj as IVideoOEmbedData)?.Html);
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IVideoOEmbedData)?.Width);
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IVideoOEmbedData)?.Height);
                     break;
+
                 case OEmbed.Types.Rich:
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.HTML, (obj as IRichOEmbedData)?.Html);
                     writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IRichOEmbedData)?.Width);
@@ -104,9 +104,9 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("provider_url", obj.ProviderUrl);
             writer.WritePropertyIfNeeded("cache_age", obj.CacheAge);
             writer.WriteStartObjectProperty("thumbnail");
-            writer.WritePropertyIfNeeded("url", obj.Thumbnail.Thumbnail.Url);
-            writer.WritePropertyIfNeeded("width", obj.Thumbnail.Thumbnail.Width);
-            writer.WritePropertyIfNeeded("height", obj.Thumbnail.Thumbnail.Height);
+            writer.WritePropertyIfNeeded("url", obj.Thumbnail?.Thumbnail?.Url);
+            writer.WritePropertyIfNeeded("width", obj.Thumbnail?.Thumbnail?.Width);
+            writer.WritePropertyIfNeeded("height", obj.Thumbnail?.Thumbnail?.Height);
             writer.WriteEndObjectProperty();
             writer.WritePropertyIfNeeded("nsfw", obj.Nsfw);
 
@@ -117,13 +117,16 @@ namespace MoEmbed.Models
                 {
                     writer.WriteStartObject("media");
                     writer.WriteProperty("type", media.Type.ToString());
-                    writer.WriteStartObjectProperty("thumbnail");
-                    writer.WritePropertyIfNeeded("url", media.Thumbnail.Url);
-                    writer.WritePropertyIfNeeded("width", media.Thumbnail.Width);
-                    writer.WritePropertyIfNeeded("height", media.Thumbnail.Height);
-                    writer.WriteEndObjectProperty();
-                    writer.WriteProperty("raw_url", media.RawUrl?.ToString());
-                    writer.WriteProperty("location", media.Location?.ToString());
+                    if (media.Thumbnail != null)
+                    {
+                        writer.WriteStartObjectProperty("thumbnail");
+                        writer.WritePropertyIfNeeded("url", media.Thumbnail.Url);
+                        writer.WritePropertyIfNeeded("width", media.Thumbnail.Width);
+                        writer.WritePropertyIfNeeded("height", media.Thumbnail.Height);
+                        writer.WriteEndObjectProperty();
+                    }
+                    writer.WritePropertyIfNeeded("raw_url", media.RawUrl);
+                    writer.WritePropertyIfNeeded("location", media.Location);
                     writer.WriteProperty("nsfw", media.Nsfw);
                     writer.WriteEndObject();
                 }
