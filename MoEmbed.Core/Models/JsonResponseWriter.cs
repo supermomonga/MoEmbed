@@ -80,6 +80,7 @@ namespace MoEmbed.Models
         public void WriteStartObjectProperty(string name)
         {
             ThrowIfDisposed();
+            BaseWriter.WritePropertyName(name);
             BaseWriter.WriteStartObject();
         }
 
