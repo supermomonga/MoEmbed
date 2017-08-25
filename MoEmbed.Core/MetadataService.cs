@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -19,7 +18,7 @@ namespace MoEmbed
         private readonly ILogger<MetadataService> _logger;
         private readonly IMetadataCache _Cache;
 
-        private List<IMetadataProvider> _Providers;
+        private MetadataProviderCollection _Providers;
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="MetadataService" /> class.
@@ -34,8 +33,8 @@ namespace MoEmbed
         /// <summary>
         ///   Gets the list of <see cref="IMetadataProvider" />.
         /// </summary>
-        public List<IMetadataProvider> Providers
-            => _Providers ?? (_Providers = new List<IMetadataProvider>());
+        public MetadataProviderCollection Providers
+            => _Providers ?? (_Providers = new MetadataProviderCollection());
 
         /// <summary>
         ///   Finds the right provider and use it to fetch embed data.
@@ -45,7 +44,7 @@ namespace MoEmbed
             var m = _Cache == null ? null : await _Cache.ReadAsync(this, request).ConfigureAwait(false);
             if (m == null)
             {
-                foreach (var prov in Providers)
+                foreach (var prov in Providers.GetByHost(request.Url.Host))
                 {
                     m = prov.GetMetadata(request);
                     if (m != null)
