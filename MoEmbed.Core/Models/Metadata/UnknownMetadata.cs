@@ -241,7 +241,14 @@ namespace MoEmbed.Models.Metadata
                 if (medias.Count() == 1)
                 {
                     var media = medias.First();
-                    Data.Thumbnail.Thumbnail.Url = media.Thumbnail?.Url;
+                    if(media.Thumbnail?.Url != null)
+                    {
+                        Data.Thumbnail = new Media {
+                            Thumbnail = new ImageInfo {
+                                Url = media.Thumbnail?.Url
+                            }
+                        };
+                    }
                     Data.Medias.Remove(media);
                 }
             }
