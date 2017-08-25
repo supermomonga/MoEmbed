@@ -115,7 +115,7 @@ namespace MoEmbed.Models
                 writer.WriteStartArrayProperty("medias");
                 foreach (var media in obj.Medias)
                 {
-                    writer.WriteStartObjectProperty("media");
+                    writer.WriteStartObject("media");
                     writer.WriteProperty("type", media.Type.ToString());
                     writer.WriteStartObjectProperty("thumbnail");
                     writer.WritePropertyIfNeeded("url", media.Thumbnail.Url);
@@ -125,7 +125,7 @@ namespace MoEmbed.Models
                     writer.WriteProperty("raw_url", media.RawUrl?.ToString());
                     writer.WriteProperty("location", media.Location?.ToString());
                     writer.WriteProperty("nsfw", media.Nsfw);
-                    writer.WriteEndObjectProperty();
+                    writer.WriteEndObject();
                 }
                 writer.WriteEndArrayProperty();
             }

@@ -90,6 +90,18 @@ namespace MoEmbed.Models
             BaseWriter.WriteEndObject();
         }
 
+        public void WriteStartObject(string name)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteStartObject();
+        }
+
+        public void WriteEndObject()
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteEndObject();
+        }
+
         public void WriteArrayValue(string name, bool value)
         {
             ThrowIfDisposed();

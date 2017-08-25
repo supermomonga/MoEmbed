@@ -80,6 +80,18 @@ namespace MoEmbed.Models
             BaseWriter.WriteEndElement();
         }
 
+        public void WriteStartObject(string name)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteStartElement(name);
+        }
+
+        public void WriteEndObject()
+        {
+            ThrowIfDisposed();
+            BaseWriter.WriteEndElement();
+        }
+
         public void WriteArrayValue(string name, bool value)
             => WriteArrayValue(name, value ? "true" : "false");
 
