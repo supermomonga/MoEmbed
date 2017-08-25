@@ -6,15 +6,17 @@ WORKDIR /usr/src/
 COPY ./MoEmbed.sln                            ./MoEmbed.sln
 COPY ./MoEmbed.App/MoEmbed.App.csproj         ./MoEmbed.App/MoEmbed.App.csproj
 COPY ./MoEmbed.Core/MoEmbed.Core.csproj       ./MoEmbed.Core/MoEmbed.Core.csproj
-COPY ./MoEmbed.Tests/MoEmbed.Tests.csproj     ./MoEmbed.Tests/MoEmbed.Tests.csproj
+COPY ./MoEmbed.Core.Tests/MoEmbed.Core.Tests.csproj     ./MoEmbed.Tests/MoEmbed.Core.Tests.csproj
 COPY ./MoEmbed.Twitter/MoEmbed.Twitter.csproj ./MoEmbed.Twitter/MoEmbed.Twitter.csproj
+COPY ./MoEmbed.Twitter.Tests/MoEmbed.Twitter.Tests.csproj     ./MoEmbed.Tests/MoEmbed.Twitter.Tests.csproj
 RUN dotnet restore
 
 # Copy entire source code
 COPY ./MoEmbed.App     ./MoEmbed.App
 COPY ./MoEmbed.Core    ./MoEmbed.Core
-COPY ./MoEmbed.Tests   ./MoEmbed.Tests
+COPY ./MoEmbed.Core.Tests   ./MoEmbed.Core.Tests
 COPY ./MoEmbed.Twitter ./MoEmbed.Twitter
+COPY ./MoEmbed.Twitter.Tests   ./MoEmbed.Twitter.Tests
 
 # Build app
 WORKDIR /usr/src/MoEmbed.App
