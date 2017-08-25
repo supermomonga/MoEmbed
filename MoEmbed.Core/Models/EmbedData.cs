@@ -15,8 +15,8 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets or sets a resource type. Value is <see cref="EmbedDataTypes"/>
         /// </summary>
-        [DefaultValue(null)]
-        public EmbedDataTypes Type { get; set; } = EmbedDataTypes.MixedContent;
+        [DefaultValue(EmbedDataTypes.MixedContent)]
+        public EmbedDataTypes Type { get; set; }
 
         /// <summary>
         /// Gets or sets a text title, describing the resource.
