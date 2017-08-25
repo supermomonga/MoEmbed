@@ -3,7 +3,7 @@
 
 # MoEmbed
 
-MoEmbed is a [oEmbed](http://oembed.com/) provider which supports any websites.
+MoEmbed is a embed data provider which supports any websites.
 
 # Features and concepts
 
@@ -12,6 +12,10 @@ MoEmbed is a [oEmbed](http://oembed.com/) provider which supports any websites.
 - Every URL ... Support any website even if they don't provide oEmbed endpoint. It parses `og:title`, `og:image`, `<title>` tag, and other related elements.
 - Caching ... It caches responses for performance.
 - Easy use ... Just pass an URL encoded url as a `url` query string, like `http://localhost:5000/?url=https%3A%2F%2Fexample.com%2F`.
+
+# EmbedData data structure
+
+(TBD)
 
 # How to use
 
