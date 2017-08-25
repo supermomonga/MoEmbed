@@ -30,7 +30,7 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets or sets a NSFW for content
         /// </summary>
-        public bool Nsfw { get; set; }
+        public bool Nsfw { get; set; } = false;
     }
 }
 
