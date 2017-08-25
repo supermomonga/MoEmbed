@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using MoEmbed.Models;
 using MoEmbed.Providers;
 
 namespace MoEmbed
@@ -131,5 +123,4 @@ namespace MoEmbed
             }
         }
     }
-
 }
