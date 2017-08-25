@@ -39,6 +39,7 @@ namespace MoEmbed.Providers
 
         [Theory]
         [InlineData("https://twitter.com/mikoillust/status/887644409226866689")]
+        [InlineData("https://mobile.twitter.com/mikoillust/status/887644409226866689")]
         public void CanHandleTest_True(string uri)
             => Assert.True(Provider.CanHandle(new ConsumerRequest(new Uri(uri))));
 
@@ -48,6 +49,7 @@ namespace MoEmbed.Providers
 
         [Theory]
         [InlineData("https://twitter.com/Twitter/status/560070183650213889", 560070183650213889L, "Twitter")]
+        [InlineData("https://mobile.twitter.com/Twitter/status/560070183650213889", 560070183650213889L, "Twitter")]
         public void GetMetadataTest_Success(string uri, long statusId, string screenName)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
@@ -59,6 +61,7 @@ namespace MoEmbed.Providers
 
         [Theory]
         [InlineData("https://twitter.com/foo/status/560070183650213889", 560070183650213889L, "Twitter")]
+        [InlineData("https://mobile.twitter.com/foo/status/560070183650213889", 560070183650213889L, "Twitter")]
         public async void GetMetadataTest_CorrectScreenName(string uri, long statusId, string screenName)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
@@ -82,6 +85,7 @@ namespace MoEmbed.Providers
         [InlineData("https://twitter.com/realDonaldTrump/status/900714982823821313", 0)]
         [InlineData("https://twitter.com/foo/status/560070183650213889", 1)]
         [InlineData("https://twitter.com/realDonaldTrump/status/900488148194516992", 4)]
+        [InlineData("https://mobile.twitter.com/realDonaldTrump/status/900488148194516992", 4)]
         public async void GetEmbedDataTest_GetMedia(string uri, int mediaCount)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
@@ -95,6 +99,7 @@ namespace MoEmbed.Providers
         [Theory]
         [InlineData("https://twitter.com/realDonaldTrump/status/900714982823821313", false)]
         [InlineData("https://twitter.com/shift0808/status/900831119397986304", true)]
+        [InlineData("https://mobile.twitter.com/shift0808/status/900831119397986304", true)]
         public async void GetEmbedDataTest_Nsfw(string uri, bool nsfw)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
