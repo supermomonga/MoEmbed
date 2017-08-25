@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
@@ -60,6 +61,14 @@ namespace MoEmbed
             service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
             service.Providers.Add(new UnknownMetadataProvider());
             routeBuilder.MapGet("", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
+            routeBuilder.MapGet("about.html", async (c) =>
+            {
+                using (var s = GetType().GetTypeInfo().Assembly.GetManifestResourceStream("MoEmbed.about.html"))
+                {
+                    c.Response.ContentType = "text/html";
+                    await s.CopyToAsync(c.Response.Body).ConfigureAwait(false);
+                }
+            });
 
             app.UseRouter(routeBuilder.Build());
         }

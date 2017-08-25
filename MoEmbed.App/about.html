@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8" />
+    <title>MoEmbed</title>
+    <meta name="description" content="MoEmbed is a oEmbed provider which supports any websites." />
+    <meta property="og:title" content="MoEmbed" />
+    <meta property="og:description" content="MoEmbed is a oEmbed provider which supports any websites." />
+</head>
+<body>
+    <h1>MoEmbed</h1>
+    <p>
+        MoEmbed is a oEmbed provider which supports any websites.
+    </p>
+    <h2>Test Form</h2>
+
+    <form action="./">
+        <div>
+            <label for="url">URL:</label>
+            <input id="url"
+                   name="url"
+                   type="url"
+                   style="width: 85%; max-width:400px"
+                   placeholder="http://url/to/fetch"
+                   value="https://github.com/supermomonga/MoEmbed" />
+        </div>
+        <div>
+
+            <label for="format">Response Format:</label>
+            <select id="format" name="format">
+                <option value="json">JSON</option>
+                <option value="xml">XML</option>
+            </select>
+        </div>
+        <div>
+
+            <button type="submit">Fetch</button>
+        </div>
+    </form>
+</body>
+</html>
