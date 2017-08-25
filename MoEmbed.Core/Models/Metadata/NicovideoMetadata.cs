@@ -78,7 +78,11 @@ namespace MoEmbed.Models.Metadata
                                 break;
 
                             case "thumbnail_url":
-                                getOrCreate().ThumbnailUrl = xr.ReadElementContentAsString().ToUri();
+                                getOrCreate().Thumbnail = new Media {
+                                    Thumbnail = new ImageInfo {
+                                        Url = xr.ReadElementContentAsString().ToUri()
+                                    }
+                                };
                                 break;
 
                             case "watch_url":

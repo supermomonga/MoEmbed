@@ -94,7 +94,6 @@ namespace MoEmbed.Models.Metadata
                 Data = new EmbedData()
                 {
                     Url = u,
-                    ThumbnailUrl = mediaType[0] == 'i' ? u : null,
                     Medias = new List<Media>(1)
                         {
                             new Media()
@@ -102,10 +101,18 @@ namespace MoEmbed.Models.Metadata
                                 Type =mediaType[0] == 'i' ?  MediaTypes.Image
                                         :mediaType[0] == 'v' ?  MediaTypes.Video
                                         : MediaTypes.Audio,
-                                RawUri = u
+                                RawUrl = u
                             }
                         }
                 };
+                if (mediaType[0] == 'i')
+                {
+                    Data.Thumbnail = new Media {
+                        Thumbnail = new ImageInfo {
+                            Url = u
+                        }
+                    };
+                }
             }
 
             if (Data != null)
@@ -185,8 +192,10 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Image,
-                        ThumbnailUri = url,
-                        RawUri = url,
+                        Thumbnail = new ImageInfo {
+                            Url = url
+                        },
+                        RawUrl = url,
                         Location = Data.Url,
                     });
                 }
@@ -200,8 +209,10 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Video,
-                        ThumbnailUri = (v.Image?.SecureUrl ?? v.Image?.Url).DeEntitize().ToUri(),
-                        RawUri = url,
+                        Thumbnail = new ImageInfo {
+                            Url = (v.Image?.SecureUrl ?? v.Image?.Url).DeEntitize().ToUri()
+                        },
+                        RawUrl = url,
                         Location = Data.Url,
                     });
                 }
@@ -216,19 +227,21 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Audio,
-                        ThumbnailUri = (a.Image?.SecureUrl ?? a.Image?.Url).DeEntitize().ToUri(),
-                        RawUri = url,
+                        Thumbnail = new ImageInfo {
+                            Url = (a.Image?.SecureUrl ?? a.Image?.Url).DeEntitize().ToUri()
+                        },
+                        RawUrl = url,
                         Location = Data.Url,
                     });
                 }
             }
 
             {
-                var medias = Data.Medias.Where(m => m.ThumbnailUri != null);
+                var medias = Data.Medias.Where(m => m.Thumbnail?.Url != null);
                 if (medias.Count() == 1)
                 {
                     var media = medias.First();
-                    Data.ThumbnailUrl = media.ThumbnailUri;
+                    Data.Thumbnail.Thumbnail.Url = media.Thumbnail?.Url;
                     Data.Medias.Remove(media);
                 }
             }
@@ -240,3 +253,8 @@ namespace MoEmbed.Models.Metadata
         }
     }
 }
+
+
+
+
+

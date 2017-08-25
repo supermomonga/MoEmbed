@@ -103,9 +103,11 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("provider_name", obj.ProviderName);
             writer.WritePropertyIfNeeded("provider_url", obj.ProviderUrl);
             writer.WritePropertyIfNeeded("cache_age", obj.CacheAge);
-            writer.WritePropertyIfNeeded("thumbnail_url", obj.ThumbnailUrl);
-            writer.WritePropertyIfNeeded("thumbnail_width", obj.ThumbnailWidth);
-            writer.WritePropertyIfNeeded("thumbnail_height", obj.ThumbnailHeight);
+            writer.WriteStartObjectProperty("thumbnail");
+            writer.WritePropertyIfNeeded("url", obj.Thumbnail.Thumbnail.Url);
+            writer.WritePropertyIfNeeded("width", obj.Thumbnail.Thumbnail.Width);
+            writer.WritePropertyIfNeeded("height", obj.Thumbnail.Thumbnail.Height);
+            writer.WriteEndObjectProperty();
             writer.WritePropertyIfNeeded("nsfw", obj.Nsfw);
 
             if (obj.Medias.Count > 0)
@@ -115,9 +117,14 @@ namespace MoEmbed.Models
                 {
                     writer.WriteStartObjectProperty("media");
                     writer.WriteProperty("type", media.Type.ToString());
-                    writer.WriteProperty("thumbnail_url", media.ThumbnailUri?.ToString());
-                    writer.WriteProperty("raw_url", media.RawUri?.ToString());
+                    writer.WriteStartObjectProperty("thumbnail");
+                    writer.WritePropertyIfNeeded("url", media.Thumbnail.Url);
+                    writer.WritePropertyIfNeeded("width", media.Thumbnail.Width);
+                    writer.WritePropertyIfNeeded("height", media.Thumbnail.Height);
+                    writer.WriteEndObjectProperty();
+                    writer.WriteProperty("raw_url", media.RawUrl?.ToString());
                     writer.WriteProperty("location", media.Location?.ToString());
+                    writer.WriteProperty("nsfw", media.Nsfw);
                     writer.WriteEndObjectProperty();
                 }
                 writer.WriteEndArrayProperty();

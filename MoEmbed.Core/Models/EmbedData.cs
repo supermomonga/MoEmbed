@@ -1,14 +1,23 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace MoEmbed.Models
 {
+    public enum EmbedDataTypes { MixedContent, SinglePhoto, SingleVideo, SingleAudio }
+
     /// <summary>
     /// Represents a result fetched by <see cref="Metadata.Metadata"/>
     /// </summary>
     public class EmbedData
     {
+        /// <summary>
+        /// Gets or sets a resource type. Value is <see cref="EmbedDataTypes"/>
+        /// </summary>
+        [DefaultValue(null)]
+        public EmbedDataTypes Type { get; set; } = EmbedDataTypes.MixedContent;
+
         /// <summary>
         /// Gets or sets a text title, describing the resource.
         /// </summary>
@@ -59,25 +68,7 @@ namespace MoEmbed.Models
         /// If this parameter is present, <see cref="ThumbnailWidth" /> and <see cref="ThumbnailHeight" /> must also be present.
         /// </remarks>
         [DefaultValue(null)]
-        public Uri ThumbnailUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the width of the optional thumbnail.
-        /// </summary>
-        /// <remarks>
-        /// If this parameter is present, <see cref="ThumbnailUrl" /> and <see cref="ThumbnailHeight" /> must also be present.
-        /// </remarks>
-        [DefaultValue(null)]
-        public int? ThumbnailWidth { get; set; }
-
-        /// <summary>
-        /// Gets or sets the height of the optional thumbnail.
-        /// </summary>
-        /// <remarks>
-        /// If this parameter is present, <see cref="ThumbnailUrl" /> and <see cref="ThumbnailWidth" /> must also be present.
-        /// </remarks>
-        [DefaultValue(null)]
-        public int? ThumbnailHeight { get; set; }
+        public Media Thumbnail { get; set; }
 
         /// <summary>
         /// Gets or sets the requested URL.
@@ -86,7 +77,7 @@ namespace MoEmbed.Models
         public Uri Url { get; set; }
 
         /// <summary>
-        /// Gets or sets a NSFW for content
+        /// Gets a NSFW flag
         /// </summary>
         [DefaultValue(false)]
         public bool Nsfw { get; set; }

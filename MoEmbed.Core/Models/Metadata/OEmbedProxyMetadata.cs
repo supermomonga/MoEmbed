@@ -116,15 +116,19 @@ namespace MoEmbed.Models.Metadata
             }
             if (values.ContainsKey("thumbnail_url"))
             {
-                Data.ThumbnailUrl = new Uri(values["thumbnail_url"].ToString());
+                Data.Thumbnail = new Media {
+                    Thumbnail = new ImageInfo {
+                        Url = new Uri(values["thumbnail_url"].ToString())
+                    }
+                };
             }
-            if (values.ContainsKey("thumbnail_width"))
+            if (values.ContainsKey("thumbnail_width") && Data.Thumbnail?.Thumbnail != null)
             {
-                Data.ThumbnailWidth = (values["thumbnail_width"] as IConvertible).ToInt32(null);
+                Data.Thumbnail.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
             }
-            if (values.ContainsKey("thumbnail_height"))
+            if (values.ContainsKey("thumbnail_height") && Data.Thumbnail?.Thumbnail != null)
             {
-                Data.ThumbnailHeight = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+                Data.Thumbnail.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
             }
 
             switch (values["type"])
@@ -133,8 +137,10 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Image,
-                        ThumbnailUri = new Uri(values["url"].ToString()),
-                        RawUri = new Uri(values["url"].ToString()),
+                        Thumbnail = new ImageInfo {
+                            Url = new Uri(values["url"].ToString())
+                        },
+                        RawUrl = new Uri(values["url"].ToString()),
                         Location = new Uri(values["url"].ToString())
                     });
                     break;
@@ -146,8 +152,10 @@ namespace MoEmbed.Models.Metadata
                         Data.Medias.Add(new Media()
                         {
                             Type = MediaTypes.Video,
-                            ThumbnailUri = new Uri(values["thumbnail_url"].ToString()),
-                            RawUri = new Uri(Uri),
+                            Thumbnail = new ImageInfo {
+                                Url = new Uri(values["thumbnail_url"].ToString()),
+                            },
+                            RawUrl = new Uri(Uri),
                             Location = new Uri(Uri)
                         });
                     }

@@ -14,18 +14,23 @@ namespace MoEmbed.Models
         /// <summary>
         /// Thumbnail image URL
         /// </summary>
-        public Uri ThumbnailUri { get; set; }
+        public ImageInfo Thumbnail { get; set; }
 
         /// <summary>
         /// Raw resouce URL
         /// </summary>
-        public Uri RawUri { get; set; }
+        public Uri RawUrl { get; set; }
 
         /// <summary>
         /// URL of Media resouce. The resouce can be HTML page which contains the media.
         /// It doesn't have to be a raw media.
         /// </summary>
         public Uri Location { get; set; }
+
+        /// <summary>
+        /// Gets or sets a NSFW for content
+        /// </summary>
+        public bool Nsfw { get; set; }
     }
 }
 

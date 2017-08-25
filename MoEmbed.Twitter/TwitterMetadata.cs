@@ -125,6 +125,7 @@ namespace MoEmbed.Models
             // Update Url to set right screenName
             Url = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
+            var nsfw = !!tweet.PossiblySensitive;
 
             Data = new EmbedData()
             {
@@ -141,12 +142,18 @@ namespace MoEmbed.Models
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
 
-                Nsfw = !!tweet.PossiblySensitive,
             };
 
-            Data.ThumbnailUrl = new Uri(user.ProfileImageUrlHttps);
-            Data.ThumbnailHeight = 48;
-            Data.ThumbnailWidth = 48;
+            Data.Thumbnail = new Media {
+                Thumbnail = new ImageInfo {
+                    Url = new Uri(user.ProfileImageUrlHttps),
+                    Height = 48,
+                    Width = 48,
+                },
+                RawUrl = new Uri(user.ProfileImageUrlHttps),
+                Location = Url,
+                Nsfw = false
+            };
 
             foreach (var m in (extendedTweet?.ExtendedEntities ?? tweet.Entities).Medias)
             {
@@ -156,8 +163,13 @@ namespace MoEmbed.Models
                     var media = new Media
                     {
                         Type = MediaTypes.Image,
-                        ThumbnailUri = new Uri($"{m.MediaURLHttps}:thumb"),
-                        RawUri = new Uri(m.MediaURLHttps),
+                        Thumbnail = new ImageInfo {
+                            Url = new Uri($"{m.MediaURLHttps}:thumb"),
+                            // Thumbnail size is always 150x150
+                            Width = 150,
+                            Height = 150,
+                        },
+                        RawUrl = new Uri(m.MediaURLHttps),
                         Location = new Uri(m.ExpandedURL),
                     };
                     Data.Medias.Add(media);
@@ -167,8 +179,13 @@ namespace MoEmbed.Models
                     var media = new Media
                     {
                         Type = MediaTypes.Video,
-                        ThumbnailUri = new Uri($"{m.MediaURLHttps}:thumb"),
-                        RawUri = new Uri(m.MediaURLHttps),
+                        Thumbnail = new ImageInfo {
+                            Url = new Uri($"{m.MediaURLHttps}:thumb"),
+                            // Thumbnail size is always 150x150
+                            Width = 150,
+                            Height = 150,
+                        },
+                        RawUrl = new Uri(m.MediaURLHttps),
                         Location = new Uri(m.ExpandedURL),
                     };
                     Data.Medias.Add(media);
