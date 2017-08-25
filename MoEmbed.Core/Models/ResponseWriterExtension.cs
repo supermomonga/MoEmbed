@@ -95,6 +95,7 @@ namespace MoEmbed.Models
         {
             writer.WriteStartResponse();
 
+            writer.WritePropertyIfNeeded("type", obj.Type);
             writer.WritePropertyIfNeeded("url", obj.Url);
             writer.WritePropertyIfNeeded("title", obj.Title);
             writer.WritePropertyIfNeeded("description", obj.Description);
