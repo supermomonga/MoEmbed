@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -10,6 +11,16 @@ namespace MoEmbed.Providers
     public sealed class NicovideoMetadataProvider : IMetadataProvider
     {
         private static readonly Regex regex = new Regex(@"^http://www.nicovideo.jp/watch/sm([0-9]+)");
+
+        bool IMetadataProvider.SupportsAnyHost
+            => false;
+
+        /// <summary>
+        /// Returns a sequence of host names that is able to handle.
+        /// </summary>
+        /// <returns>The sequence of host names.</returns>
+        public IEnumerable<string> GetSupportedHostNames()
+            => new[] { "nicovideo.jp", "www.nicovideo.jp" };
 
         /// <summary>
         /// Determines whether this provider can handle the specified request.

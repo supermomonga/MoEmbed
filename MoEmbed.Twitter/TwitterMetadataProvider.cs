@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -13,6 +14,16 @@ namespace MoEmbed.Providers
             Tweetinvi.TweetinviConfig.CurrentThreadSettings.TweetMode = Tweetinvi.TweetMode.Extended;
             Tweetinvi.TweetinviConfig.ApplicationSettings.TweetMode = Tweetinvi.TweetMode.Extended;
         }
+
+        bool IMetadataProvider.SupportsAnyHost
+            => false;
+
+        /// <summary>
+        /// Returns a sequence of host names that is able to handle.
+        /// </summary>
+        /// <returns>The sequence of host names.</returns>
+        public IEnumerable<string> GetSupportedHostNames()
+            => new[] { "twitter.com", "mobile.twitter.com" };
 
         public bool CanHandle(Uri uri)
             => TwitterMetadata.regex.IsMatch(uri.ToString());

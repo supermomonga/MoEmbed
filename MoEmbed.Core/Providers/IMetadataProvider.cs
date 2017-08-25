@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -8,6 +9,17 @@ namespace MoEmbed.Providers
     /// </summary>
     public interface IMetadataProvider
     {
+        /// <summary>
+        /// Gets a value indicating whether the provider can handle  any host.
+        /// </summary>
+        bool SupportsAnyHost { get; }
+
+        /// <summary>
+        /// Returns a sequence of host names that is able to handle.
+        /// </summary>
+        /// <returns>The sequence of host names.</returns>
+        IEnumerable<string> GetSupportedHostNames();
+
         /// <summary>
         /// Determines whether this provider can handle the specified request.
         /// </summary>
