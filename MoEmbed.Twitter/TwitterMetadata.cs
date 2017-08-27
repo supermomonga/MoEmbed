@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 using Tweetinvi;
 
 namespace MoEmbed.Models
@@ -126,21 +127,25 @@ namespace MoEmbed.Models
             Url = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
 
-            Data = new EmbedData()
-            {
-                Url = Url,
-                AuthorName = $"{ user.Name }(@{ ScreenName })",
-                AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
+            var authorName = HtmlEntity.DeEntitize($"{ user.Name }(@{ ScreenName })");
 
-                // TODO: Insert Fav, RT
-                Title = $"{ user.Name }(@{ ScreenName })",
-
-                // TODO: Insert media
-                Description = tweet.FullText != null
+            var description = tweet.FullText != null
                                         && tweet.DisplayTextRange?.Length == 2
                                             ? tweet.FullText.Substring(tweet.DisplayTextRange[0], tweet.DisplayTextRange[1] - tweet.DisplayTextRange[0])
                                 : tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}"
-                                : tweet.Text,
+                                : tweet.Text;
+
+            Data = new EmbedData()
+            {
+                Url = Url,
+                AuthorName = authorName,
+                AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
+
+                // TODO: Insert Fav, RT
+                Title = authorName,
+
+                // TODO: Insert media
+                Description = HtmlEntity.DeEntitize(description),
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
