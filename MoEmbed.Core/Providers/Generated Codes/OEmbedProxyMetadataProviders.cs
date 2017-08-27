@@ -9,7 +9,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.23hq.com" />.
     /// </summary>
-    public sealed class TwentyThreeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TwentyThreeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.23hq\.com/.*/photo/");
 
@@ -32,7 +32,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://alpha.app.net/browse/posts/" />.
     /// </summary>
-    public sealed class AlphaAppNetMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class AlphaAppNetMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://alpha\.app\.net/.*/post/");
 
@@ -56,7 +56,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://live.amcharts.com/" />.
     /// </summary>
-    public sealed class AmchartsLiveEditorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class AmchartsLiveEditorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://live\.amcharts\.com/");
 
@@ -79,7 +79,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.animatron.com/" />.
     /// </summary>
-    public sealed class AnimatronMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class AnimatronMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.animatron\.com/project/");
 
@@ -102,7 +102,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://animoto.com/" />.
     /// </summary>
-    public sealed class AnimotoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class AnimotoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://animoto\.com/play/");
 
@@ -124,7 +124,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://audiosnaps.com" />.
     /// </summary>
-    public sealed class AudiosnapsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class AudiosnapsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://audiosnaps\.com/k/");
 
@@ -146,7 +146,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://blackfire.io" />.
     /// </summary>
-    public sealed class BlackfireIoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class BlackfireIoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://blackfire\.io/profiles/.*/graph");
 
@@ -168,7 +168,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://boxofficebuz.com" />.
     /// </summary>
-    public sealed class BoxofficebuzMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class BoxofficebuzMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://boxofficebuz\.com");
 
@@ -190,7 +190,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://cacoo.com" />.
     /// </summary>
-    public sealed class CacooMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CacooMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://cacoo\.com/diagrams/");
 
@@ -212,7 +212,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://img.catbo.at/" />.
     /// </summary>
-    public sealed class CatboatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CatboatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://img\.catbo\.at/");
 
@@ -235,7 +235,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.chartblocks.com/" />.
     /// </summary>
-    public sealed class ChartblocksMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ChartblocksMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://public\.chartblocks\.com/c/");
 
@@ -258,7 +258,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.chirbit.com/" />.
     /// </summary>
-    public sealed class ChirbitComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ChirbitComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://chirb\.it/");
 
@@ -280,7 +280,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.circuitlab.com/" />.
     /// </summary>
-    public sealed class CircuitlabMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CircuitlabMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.circuitlab\.com/circuit/");
 
@@ -303,7 +303,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.clipland.com/" />.
     /// </summary>
-    public sealed class CliplandMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CliplandMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.clipland\.com/v/");
 
@@ -326,7 +326,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://clyp.it/" />.
     /// </summary>
-    public sealed class ClypMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ClypMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://clyp\.it/");
 
@@ -348,7 +348,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://codepen.io" />.
     /// </summary>
-    public sealed class CodepenMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CodepenMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://codepen\.io/");
 
@@ -370,7 +370,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://codepoints.net" />.
     /// </summary>
-    public sealed class CodepointsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CodepointsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://codepoints\.net/|https://codepoints\.net/|http://www\.codepoints\.net/|https://www\.codepoints\.net/)");
 
@@ -393,7 +393,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.collegehumor.com/" />.
     /// </summary>
-    public sealed class CollegehumorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CollegehumorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.collegehumor\.com/video/");
 
@@ -416,7 +416,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://coub.com/" />.
     /// </summary>
-    public sealed class CoubMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CoubMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://coub\.com/view/");
 
@@ -438,7 +438,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://crowdranking.com" />.
     /// </summary>
-    public sealed class CrowdRankingMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class CrowdRankingMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://crowdranking\.com/.*/");
 
@@ -460,7 +460,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.dailymotion.com" />.
     /// </summary>
-    public sealed class DailymotionMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DailymotionMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.dailymotion\.com/video/");
 
@@ -483,7 +483,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.dailymile.com" />.
     /// </summary>
-    public sealed class DailyMileMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DailyMileMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.dailymile\.com/people/.*/entries/");
 
@@ -506,7 +506,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.deviantart.com" />.
     /// </summary>
-    public sealed class DeviantartComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DeviantartComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.deviantart\.com/art/|http://.*\.deviantart\.com/.*\#/d|http://fav\.me/|http://sta\.sh/)");
 
@@ -530,7 +530,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.didacte.com/" />.
     /// </summary>
-    public sealed class DidacteMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DidacteMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://.*\.didacte\.com/a/course/");
 
@@ -552,7 +552,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.dipity.com" />.
     /// </summary>
-    public sealed class DipityMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DipityMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.dipity\.com/.*/.*/");
 
@@ -575,7 +575,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.docdroid.net/" />.
     /// </summary>
-    public sealed class DocdroidMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DocdroidMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://.*\.docdroid\.net/|http://.*\.docdroid\.net/|https://docdro\.id/|http://docdro\.id/)");
 
@@ -598,7 +598,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.docs.com" />.
     /// </summary>
-    public sealed class DocsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DocsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://docs\.com/");
 
@@ -621,7 +621,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://dotsub.com/" />.
     /// </summary>
-    public sealed class DotsubMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class DotsubMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://dotsub\.com/view/");
 
@@ -643,7 +643,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.edocr.com" />.
     /// </summary>
-    public sealed class EdocrMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class EdocrMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://edocr\.com/docs/");
 
@@ -665,7 +665,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.edumedia-sciences.com/" />.
     /// </summary>
-    public sealed class EdumediaSciencesComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class EdumediaSciencesComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.edumedia-sciences\.com/");
 
@@ -688,7 +688,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://egliseinfo.catholique.fr/" />.
     /// </summary>
-    public sealed class EgliseinfoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class EgliseinfoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://egliseinfo\.catholique\.fr/");
 
@@ -711,7 +711,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://api.embed.ly/" />.
     /// </summary>
-    public sealed class EmbedlyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class EmbedlyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://api\.embed\.ly/");
 
@@ -734,7 +734,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://embedarticles.com/" />.
     /// </summary>
-    public sealed class EmbedArticlesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class EmbedArticlesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://embedarticles\.com/");
 
@@ -756,7 +756,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://eyrie.io/" />.
     /// </summary>
-    public sealed class EyrieioMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class EyrieioMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://eyrie\.io/board/");
 
@@ -778,7 +778,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.facebook.com/" />.
     /// </summary>
-    public sealed class FacebookMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class FacebookMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.facebook\.com/");
 
@@ -801,7 +801,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://flat.io" />.
     /// </summary>
-    public sealed class FlatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class FlatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://flat\.io/score/");
 
@@ -823,7 +823,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.flickr.com/" />.
     /// </summary>
-    public sealed class FlickrMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class FlickrMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.flickr\.com/photos/");
 
@@ -846,7 +846,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.foxsports.com.au" />.
     /// </summary>
-    public sealed class FoxSportsAustraliaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class FoxSportsAustraliaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://fiso\.foxsports\.com\.au/isomorphic-widget/");
 
@@ -869,7 +869,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://framebuzz.com/" />.
     /// </summary>
-    public sealed class FramebuzzMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class FramebuzzMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://framebuzz\.com/v/");
 
@@ -891,7 +891,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.funnyordie.com/" />.
     /// </summary>
-    public sealed class FunnyordieMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class FunnyordieMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.funnyordie\.com/videos/");
 
@@ -914,7 +914,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://geo-en.hlipp.de/" />.
     /// </summary>
-    public sealed class GeographMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class GeographMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.geograph\.org\.uk/|http://.*\.geograph\.co\.uk/|http://.*\.geograph\.ie/|http://.*\.wikimedia\.org/.*_geograph\.org\.uk_|http://.*\.geograph\.org\.gg/|http://.*\.geograph\.org\.je/|http://channel-islands\.geograph\.org/|http://channel-islands\.geographs\.org/|http://.*\.channel\.geographs\.org/|http://geo-en\.hlipp\.de/|http://geo\.hlipp\.de/|http://germany\.geograph\.org/)");
 
@@ -950,7 +950,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.gettyimages.com/" />.
     /// </summary>
-    public sealed class GettyImagesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class GettyImagesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://gty\.im/");
 
@@ -972,7 +972,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://gfycat.com/" />.
     /// </summary>
-    public sealed class GfycatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class GfycatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://gfycat\.com/|http://www\.gfycat\.com/|https://gfycat\.com/|https://www\.gfycat\.com/)");
 
@@ -995,7 +995,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://giphy.com" />.
     /// </summary>
-    public sealed class GIPHYMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class GIPHYMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://giphy\.com/gifs/|http://gph\.is/|https://media\.giphy\.com/media/.*/giphy\.gif)");
 
@@ -1019,7 +1019,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://gyazo.com" />.
     /// </summary>
-    public sealed class GyazoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class GyazoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://gyazo\.com/");
 
@@ -1041,7 +1041,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://huffduffer.com" />.
     /// </summary>
-    public sealed class HuffdufferMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class HuffdufferMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://huffduffer\.com/.*/");
 
@@ -1063,7 +1063,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.hulu.com/" />.
     /// </summary>
-    public sealed class HuluMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class HuluMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.hulu\.com/watch/");
 
@@ -1086,7 +1086,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.iFixit.com" />.
     /// </summary>
-    public sealed class IfixitMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class IfixitMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.ifixit\.com/Guide/View/");
 
@@ -1109,7 +1109,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.ifttt.com/" />.
     /// </summary>
-    public sealed class IftttMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class IftttMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://ifttt\.com/recipes/");
 
@@ -1131,7 +1131,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://player.indacolive.com/" />.
     /// </summary>
-    public sealed class IndacoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class IndacoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://player\.indacolive\.com/player/jwp/clients/");
 
@@ -1154,7 +1154,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://infogr.am/" />.
     /// </summary>
-    public sealed class InfogramMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class InfogramMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://infogr\.am/");
 
@@ -1176,7 +1176,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.inoreader.com" />.
     /// </summary>
-    public sealed class InoreaderMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class InoreaderMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.inoreader\.com/oembed/");
 
@@ -1199,7 +1199,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://inphood.com/" />.
     /// </summary>
-    public sealed class InphoodMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class InphoodMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.inphood\.com/");
 
@@ -1221,7 +1221,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://instagram.com" />.
     /// </summary>
-    public sealed class InstagramMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class InstagramMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://instagram\.com/p/|http://instagr\.am/p/|http://www\.instagram\.com/p/|http://www\.instagr\.am/p/|https://instagram\.com/p/|https://instagr\.am/p/|https://www\.instagram\.com/p/|https://www\.instagr\.am/p/)");
 
@@ -1246,7 +1246,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.isnare.com/" />.
     /// </summary>
-    public sealed class IsnareArticlesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class IsnareArticlesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.isnare\.com/");
 
@@ -1269,7 +1269,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.kickstarter.com" />.
     /// </summary>
-    public sealed class KickstarterMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class KickstarterMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.kickstarter\.com/projects/");
 
@@ -1292,7 +1292,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.kidoju.com/" />.
     /// </summary>
-    public sealed class KidojuMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class KidojuMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.kidoju\.com/en/x/.*/");
 
@@ -1315,7 +1315,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://kit.com/" />.
     /// </summary>
-    public sealed class KitMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class KitMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://kit\.com/.*/");
 
@@ -1337,7 +1337,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.kitchenbowl.com" />.
     /// </summary>
-    public sealed class KitchenbowlMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class KitchenbowlMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.kitchenbowl\.com/recipe/");
 
@@ -1360,7 +1360,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://jdr.knacki.info" />.
     /// </summary>
-    public sealed class KnackiMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class KnackiMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://jdr\.knacki\.info/meuh/");
 
@@ -1383,7 +1383,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://learningapps.org/" />.
     /// </summary>
-    public sealed class LearningappsOrgMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class LearningappsOrgMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://learningapps\.org/");
 
@@ -1405,7 +1405,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://mathembed.com" />.
     /// </summary>
-    public sealed class MathembedMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class MathembedMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://mathembed\.com/latex\?inputText=");
 
@@ -1427,7 +1427,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.meetup.com" />.
     /// </summary>
-    public sealed class MeetupMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class MeetupMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://meetup\.com/");
 
@@ -1450,7 +1450,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://me.me/" />.
     /// </summary>
-    public sealed class MemeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class MemeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://me\.me/i/");
 
@@ -1472,7 +1472,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://mixcloud.com/" />.
     /// </summary>
-    public sealed class MixcloudMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class MixcloudMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.mixcloud\.com/.*/.*/");
 
@@ -1495,7 +1495,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.mobypicture.com" />.
     /// </summary>
-    public sealed class MobyPictureMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class MobyPictureMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.mobypicture\.com/user/.*/view/");
 
@@ -1519,7 +1519,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://modelo.io/" />.
     /// </summary>
-    public sealed class ModeloMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ModeloMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://beta\.modelo\.io/embedded/");
 
@@ -1542,7 +1542,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://mybeweeg.com" />.
     /// </summary>
-    public sealed class MybeweegMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class MybeweegMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://mybeweeg\.com/w/");
 
@@ -1564,7 +1564,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.nanoo.tv/" />.
     /// </summary>
-    public sealed class NanooMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class NanooMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.nanoo\.tv/link/|http://nanoo\.tv/link/|http://.*\.nanoo\.pro/link/|http://nanoo\.pro/link/|https://.*\.nanoo\.tv/link/|https://nanoo\.tv/link/|https://.*\.nanoo\.pro/link/|https://nanoo\.pro/link/)");
 
@@ -1587,7 +1587,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.nfb.ca/" />.
     /// </summary>
-    public sealed class NfbCaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class NfbCaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.nfb\.ca/film/");
 
@@ -1609,7 +1609,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.odds.com.au" />.
     /// </summary>
-    public sealed class OddsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OddsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.odds\.com\.au/");
 
@@ -1632,7 +1632,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://mix.office.com/" />.
     /// </summary>
-    public sealed class OfficeMixMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OfficeMixMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://mix\.office\.com/watch/");
 
@@ -1655,7 +1655,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://official.fm" />.
     /// </summary>
-    public sealed class OfficialFmMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OfficialFmMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://official\.fm/tracks/");
 
@@ -1677,7 +1677,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://on.aol.com/" />.
     /// </summary>
-    public sealed class OnAolMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OnAolMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://on\.aol\.com/video/");
 
@@ -1700,7 +1700,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.ora.tv/" />.
     /// </summary>
-    public sealed class OraTvMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OraTvMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.ora\.tv/");
 
@@ -1723,7 +1723,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://orbitvu.co" />.
     /// </summary>
-    public sealed class OrbitvuMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OrbitvuMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://orbitvu\.co/001/.*/ov3601/view|https://orbitvu\.co/001/.*/ov3601/.*/view|https://orbitvu\.co/001/.*/ov3602/.*/view|https://orbitvu\.co/001/.*/2/orbittour/.*/view|https://orbitvu\.co/001/.*/1/2/orbittour/.*/view|http://orbitvu\.co/001/.*/ov3601/view|http://orbitvu\.co/001/.*/ov3601/.*/view|http://orbitvu\.co/001/.*/ov3602/.*/view|http://orbitvu\.co/001/.*/2/orbittour/.*/view|http://orbitvu\.co/001/.*/1/2/orbittour/.*/view)");
 
@@ -1745,7 +1745,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.oumy.com/" />.
     /// </summary>
-    public sealed class OumyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class OumyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.oumy\.com/v/");
 
@@ -1768,7 +1768,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.pastery.net" />.
     /// </summary>
-    public sealed class PasteryMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class PasteryMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://pastery\.net/|https://pastery\.net/|http://www\.pastery\.net/|https://www\.pastery\.net/)");
 
@@ -1791,7 +1791,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.pixdor.com/" />.
     /// </summary>
-    public sealed class PixdorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class PixdorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://store\.pixdor\.com/place-marker-widget/.*/show");
 
@@ -1814,7 +1814,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://polldaddy.com" />.
     /// </summary>
-    public sealed class PollDaddyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class PollDaddyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.polldaddy\.com/s/|http://.*\.polldaddy\.com/poll/|http://.*\.polldaddy\.com/ratings/)");
 
@@ -1836,7 +1836,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.sellwithport.com/" />.
     /// </summary>
-    public sealed class PortMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class PortMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://app\.sellwithport\.com/\#/buyer/");
 
@@ -1859,7 +1859,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://portfolium.com" />.
     /// </summary>
-    public sealed class PortfoliumMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class PortfoliumMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://portfolium\.com/entry/");
 
@@ -1881,7 +1881,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.punters.com.au" />.
     /// </summary>
-    public sealed class PuntersMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class PuntersMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.punters\.com\.au/");
 
@@ -1904,7 +1904,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.quizz.biz/" />.
     /// </summary>
-    public sealed class QuizBizMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class QuizBizMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.quiz\.biz/quizz-.*\.html");
 
@@ -1929,7 +1929,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://rapidengage.com" />.
     /// </summary>
-    public sealed class RapidengageMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class RapidengageMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://rapidengage\.com/s/");
 
@@ -1951,7 +1951,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://reddit.com/" />.
     /// </summary>
-    public sealed class RedditMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class RedditMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://reddit\.com/r/.*/comments/.*/");
 
@@ -1973,7 +1973,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.releasewire.com/" />.
     /// </summary>
-    public sealed class ReleasewireMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ReleasewireMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://rwire\.com/");
 
@@ -1995,7 +1995,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://repubhub.icopyright.net/" />.
     /// </summary>
-    public sealed class RepubhubMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class RepubhubMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://repubhub\.icopyright\.net/freePost\.act\?");
 
@@ -2018,7 +2018,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.reverbnation.com/" />.
     /// </summary>
-    public sealed class ReverbnationMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ReverbnationMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.reverbnation\.com/");
 
@@ -2041,7 +2041,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://roomshare.jp" />.
     /// </summary>
-    public sealed class RoomshareMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class RoomshareMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://roomshare\.jp/post/");
 
@@ -2063,7 +2063,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://rumble.com/" />.
     /// </summary>
-    public sealed class RumbleMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class RumbleMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://rumble\.com/");
 
@@ -2085,7 +2085,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://videos.sapo.pt" />.
     /// </summary>
-    public sealed class SapoVideosMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SapoVideosMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://videos\.sapo\.pt/");
 
@@ -2108,7 +2108,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.screen9.com/" />.
     /// </summary>
-    public sealed class Screen9MetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class Screen9MetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.screen9\.com/");
 
@@ -2131,7 +2131,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.screencast.com/" />.
     /// </summary>
-    public sealed class ScreencastComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ScreencastComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.screencast\.com/");
 
@@ -2154,7 +2154,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.screenr.com/" />.
     /// </summary>
-    public sealed class ScreenrMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ScreenrMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.screenr\.com/.*/");
 
@@ -2177,7 +2177,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://scribblemaps.com" />.
     /// </summary>
-    public sealed class ScribblemapsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ScribblemapsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://www\.scribblemaps\.com/maps/view/|https://www\.scribblemaps\.com/maps/view/|http://scribblemaps\.com/maps/view/|https://scribblemaps\.com/maps/view/)");
 
@@ -2200,7 +2200,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.scribd.com/" />.
     /// </summary>
-    public sealed class ScribdMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ScribdMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.scribd\.com/doc/");
 
@@ -2223,7 +2223,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.shortnote.jp/" />.
     /// </summary>
-    public sealed class ShortnoteMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ShortnoteMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://www\.shortnote\.jp/view/notes/");
 
@@ -2246,7 +2246,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://shoudio.com" />.
     /// </summary>
-    public sealed class ShoudioMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ShoudioMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://shoudio\.com/");
 
@@ -2269,7 +2269,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://showtheway.io" />.
     /// </summary>
-    public sealed class ShowTheWayMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class ShowTheWayMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://showtheway\.io/to/");
 
@@ -2291,7 +2291,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.silk.co/" />.
     /// </summary>
-    public sealed class SilkMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SilkMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.silk\.co/explore/|https://.*\.silk\.co/explore/|http://.*\.silk\.co/s/embed/|https://.*\.silk\.co/s/embed/)");
 
@@ -2313,7 +2313,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://onsizzle.com/" />.
     /// </summary>
-    public sealed class SizzleMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SizzleMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://onsizzle\.com/i/");
 
@@ -2335,7 +2335,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://sketchfab.com" />.
     /// </summary>
-    public sealed class SketchfabMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SketchfabMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://sketchfab\.com/models/|https://sketchfab\.com/models/|https://sketchfab\.com/.*/folders/)");
 
@@ -2357,7 +2357,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.slideshare.net/" />.
     /// </summary>
-    public sealed class SlideshareMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SlideshareMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://www\.slideshare\.net/.*/|http://fr\.slideshare\.net/.*/|http://de\.slideshare\.net/.*/|http://es\.slideshare\.net/.*/|http://pt\.slideshare\.net/.*/)");
 
@@ -2384,7 +2384,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.smugmug.com/" />.
     /// </summary>
-    public sealed class SmugmugMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SmugmugMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.smugmug\.com/");
 
@@ -2406,7 +2406,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://soundcloud.com/" />.
     /// </summary>
-    public sealed class SoundcloudMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SoundcloudMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://soundcloud\.com/");
 
@@ -2428,7 +2428,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://soundsgood.co" />.
     /// </summary>
-    public sealed class SoundsgoodMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SoundsgoodMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://play\.soundsgood\.co/playlist/");
 
@@ -2451,7 +2451,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://speakerdeck.com" />.
     /// </summary>
-    public sealed class SpeakerdeckMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SpeakerdeckMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://speakerdeck\.com/.*/");
 
@@ -2473,7 +2473,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.spreaker.com/" />.
     /// </summary>
-    public sealed class SpreakerMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SpreakerMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.spreaker\.com/");
 
@@ -2495,7 +2495,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://streamable.com/" />.
     /// </summary>
-    public sealed class StreamableMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class StreamableMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://streamable\.com/");
 
@@ -2517,7 +2517,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.streamone.nl" />.
     /// </summary>
-    public sealed class StreamonecloudMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class StreamonecloudMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://content\.streamonecloud\.net/embed/");
 
@@ -2540,7 +2540,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.sway.com" />.
     /// </summary>
-    public sealed class SwayMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class SwayMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://sway\.com/");
 
@@ -2563,7 +2563,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://ted.com" />.
     /// </summary>
-    public sealed class TedMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TedMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://ted\.com/talks/");
 
@@ -2585,7 +2585,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://theysaidso.com/" />.
     /// </summary>
-    public sealed class TheySaidSoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TheySaidSoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://theysaidso\.com/image/");
 
@@ -2607,7 +2607,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.nytimes.com" />.
     /// </summary>
-    public sealed class TheNewYorkTimesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TheNewYorkTimesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(https://www\.nytimes\.com/svc/oembed|https://nytimes\.com/|https://.*\.nytimes\.com/)");
 
@@ -2630,7 +2630,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.tickcounter.com" />.
     /// </summary>
-    public sealed class TickcounterMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TickcounterMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://www\.tickcounter\.com/countdown/|http://www\.tickcounter\.com/countup/|http://www\.tickcounter\.com/ticker/|http://www\.tickcounter\.com/worldclock/|https://www\.tickcounter\.com/countdown/|https://www\.tickcounter\.com/countup/|https://www\.tickcounter\.com/ticker/|https://www\.tickcounter\.com/worldclock/)");
 
@@ -2653,7 +2653,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.topy.se/" />.
     /// </summary>
-    public sealed class TopyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TopyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.topy\.se/image/");
 
@@ -2676,7 +2676,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.twitch.tv" />.
     /// </summary>
-    public sealed class TwitchMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class TwitchMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://clips\.twitch\.tv/|https://clips\.twitch\.tv/|http://www\.twitch\.tv/|https://www\.twitch\.tv/|http://twitch\.tv/|https://twitch\.tv/)");
 
@@ -2700,7 +2700,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://player.ubideo.com/" />.
     /// </summary>
-    public sealed class UbideoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class UbideoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://player\.ubideo\.com/");
 
@@ -2723,7 +2723,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://mais.uol.com.br/" />.
     /// </summary>
-    public sealed class UolMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class UolMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://.*\.uol\.com\.br/view/");
 
@@ -2745,7 +2745,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.ustream.tv" />.
     /// </summary>
-    public sealed class UstreamMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class UstreamMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.ustream\.tv/");
 
@@ -2768,7 +2768,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://uttles.com" />.
     /// </summary>
-    public sealed class UttlesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class UttlesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://uttles\.com/uttle/");
 
@@ -2790,7 +2790,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://veer.tv/" />.
     /// </summary>
-    public sealed class VeerMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VeerMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://veer\.tv/videos/");
 
@@ -2813,7 +2813,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://verse.media/" />.
     /// </summary>
-    public sealed class VerseMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VerseMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://verse\.media/");
 
@@ -2835,7 +2835,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.vevo.com/" />.
     /// </summary>
-    public sealed class VevoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VevoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.vevo\.com/");
 
@@ -2858,7 +2858,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.videojug.com" />.
     /// </summary>
-    public sealed class VideojugMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VideojugMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.videojug\.com/film/");
 
@@ -2881,7 +2881,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vidl.it/" />.
     /// </summary>
-    public sealed class VidlitMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VidlitMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://vidl\.it/");
 
@@ -2903,7 +2903,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vimeo.com/" />.
     /// </summary>
-    public sealed class VimeoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VimeoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://vimeo\.com/");
 
@@ -2925,7 +2925,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vine.co/" />.
     /// </summary>
-    public sealed class VineMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VineMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://vine\.co/v/");
 
@@ -2947,7 +2947,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://vlipsy.com/" />.
     /// </summary>
-    public sealed class VlipsyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class VlipsyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://vlipsy\.com/");
 
@@ -2969,7 +2969,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://www.wiredrive.com/" />.
     /// </summary>
-    public sealed class WiredriveMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class WiredriveMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https://.*\.wiredrive\.com/");
 
@@ -2991,7 +2991,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.wizer.me/" />.
     /// </summary>
-    public sealed class WizerMeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class WizerMeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.wizer\.me/learn/|https://.*\.wizer\.me/learn/|http://.*\.wizer\.me/preview/|https://.*\.wizer\.me/preview/)");
 
@@ -3013,7 +3013,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.wootled.com/" />.
     /// </summary>
-    public sealed class WootledMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class WootledMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.wootled\.com/");
 
@@ -3036,7 +3036,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://wordpress.com/" />.
     /// </summary>
-    public sealed class WordpressComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class WordpressComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://wordpress\.com/");
 
@@ -3058,7 +3058,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://yfrog.com/" />.
     /// </summary>
-    public sealed class YfrogMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class YfrogMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://.*\.yfrog\.com/");
 
@@ -3081,7 +3081,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.youtube.com/" />.
     /// </summary>
-    public sealed class YoutubeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class YoutubeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^http://www\.youtube\.com/");
 

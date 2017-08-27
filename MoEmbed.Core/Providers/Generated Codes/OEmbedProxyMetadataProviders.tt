@@ -94,7 +94,7 @@ foreach (var f in Directory.GetFiles(d, "*.yml"))
     /// <summary>
     /// Handles oEmbed request for <see href="<#= prov #>" />.
     /// </summary>
-    public sealed class <#= n #>MetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    public sealed partial class <#= n #>MetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
 <#
         if (schemeUrls.Count > 2)
