@@ -106,18 +106,29 @@ namespace MoEmbed.Providers
         }
 
         [Theory]
-        [InlineData("https://twitter.com/realDonaldTrump/status/900714982823821313", false)]
-        [InlineData("https://twitter.com/shift0808/status/900831119397986304", true)]
-        [InlineData("https://mobile.twitter.com/shift0808/status/900831119397986304", true)]
-        public async void GetEmbedDataTest_Nsfw(string uri, bool nsfw)
+        [InlineData("https://twitter.com/realDonaldTrump/status/900714982823821313", RestrictionPolicies.Unknown)]
+        [InlineData("https://twitter.com/shift0808/status/900831119397986304", RestrictionPolicies.Restricted)]
+        [InlineData("https://mobile.twitter.com/shift0808/status/900831119397986304", RestrictionPolicies.Restricted)]
+        public async void GetEmbedDataTest_Nsfw(string uri, RestrictionPolicies policy)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
 
             await m.FetchAsync(GetRequestContext(uri));
             var data = m.Data;
-            Assert.Equal(nsfw, data.Nsfw);
+            Assert.Equal(policy, data.RestrictionPolicy);
         }
 
         #endregion GetEmbedData
     }
 }
+
+
+
+
+
+
+
+
+
+
+
