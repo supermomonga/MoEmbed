@@ -172,7 +172,7 @@ namespace MoEmbed.Providers
                 };
                 if(int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0)
                 {
-                    d.RestrictedPolicy = RestrictionPolicies.Restricted;
+                    d.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
 
                 var imageSets = itemElem.Element("ImageSets");
@@ -197,7 +197,7 @@ namespace MoEmbed.Providers
 
                     if (elems.Any())
                     {
-                        d.Thumbnail = new Media()
+                        d.MetadataImage = new Media()
                         {
                             Type = MediaTypes.Image,
                             RawUrl = elems[0].Image.Url,
@@ -210,7 +210,7 @@ namespace MoEmbed.Providers
                             {
                                 Type = MediaTypes.Image,
                                 RawUrl = e.Image.Url,
-                                RestrictionPolicy = d.RestrictedPolicy
+                                RestrictionPolicy = d.RestrictionPolicy
                             }).ToList();
                         }
                     }

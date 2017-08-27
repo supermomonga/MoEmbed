@@ -111,7 +111,7 @@ namespace MoEmbed.Models.Metadata
                 if (mediaType.StartsWith("image"))
                 {
                     Data.Type = EmbedDataTypes.SingleImage;
-                    Data.Thumbnail = new Media {
+                    Data.MetadataImage = new Media {
                         Type = MediaTypes.Image,
                         Thumbnail = new ImageInfo {
                             Url = u
@@ -248,7 +248,7 @@ namespace MoEmbed.Models.Metadata
                     var media = medias.First();
                     if(media.Thumbnail?.Url != null)
                     {
-                        Data.Thumbnail = new Media {
+                        Data.MetadataImage = new Media {
                             Thumbnail = new ImageInfo {
                                 Url = media.Thumbnail?.Url
                             }
@@ -262,7 +262,7 @@ namespace MoEmbed.Models.Metadata
                 var age = graph.Restriction?.Age;
                 if(age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18)
                 {
-                    Data.RestrictedPolicy = RestrictionPolicies.Restricted;
+                    Data.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
             }
         }

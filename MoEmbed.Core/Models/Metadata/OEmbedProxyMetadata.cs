@@ -116,19 +116,19 @@ namespace MoEmbed.Models.Metadata
             }
             if (values.ContainsKey("thumbnail_url"))
             {
-                Data.Thumbnail = new Media {
+                Data.MetadataImage = new Media {
                     Thumbnail = new ImageInfo {
                         Url = new Uri(values["thumbnail_url"].ToString())
                     }
                 };
             }
-            if (values.ContainsKey("thumbnail_width") && Data.Thumbnail?.Thumbnail != null)
+            if (values.ContainsKey("thumbnail_width") && Data.MetadataImage?.Thumbnail != null)
             {
-                Data.Thumbnail.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
+                Data.MetadataImage.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
             }
-            if (values.ContainsKey("thumbnail_height") && Data.Thumbnail?.Thumbnail != null)
+            if (values.ContainsKey("thumbnail_height") && Data.MetadataImage?.Thumbnail != null)
             {
-                Data.Thumbnail.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+                Data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
             }
 
             switch (values["type"])

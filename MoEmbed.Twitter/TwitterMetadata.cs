@@ -149,11 +149,13 @@ namespace MoEmbed.Models
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
-
-                Nsfw = !!tweet.PossiblySensitive,
             };
+            if(!!tweet.PossiblySensitive)
+            {
+                Data.RestrictionPolicy = RestrictionPolicies.Restricted;
+            }
 
-            Data.Thumbnail = new Media
+            Data.MetadataImage = new Media
             {
                 Thumbnail = new ImageInfo
                 {
@@ -163,7 +165,7 @@ namespace MoEmbed.Models
                 },
                 RawUrl = new Uri(user.ProfileImageUrlHttps),
                 Location = Url,
-                Nsfw = false
+                RestrictionPolicy = RestrictionPolicies.Safe
             };
 
             foreach (var m in (extendedTweet?.ExtendedEntities ?? tweet.Entities).Medias)
@@ -183,7 +185,7 @@ namespace MoEmbed.Models
                         },
                         RawUrl = new Uri(m.MediaURLHttps),
                         Location = new Uri(m.ExpandedURL),
-                        Nsfw = Data.Nsfw,
+                        RestrictionPolicy = Data.RestrictionPolicy,
                     };
                     Data.Medias.Add(media);
                 }

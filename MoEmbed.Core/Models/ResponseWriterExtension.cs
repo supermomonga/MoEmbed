@@ -104,12 +104,18 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("provider_name", obj.ProviderName);
             writer.WritePropertyIfNeeded("provider_url", obj.ProviderUrl);
             writer.WritePropertyIfNeeded("cache_age", obj.CacheAge);
+            writer.WriteStartObjectProperty("metadata_image");
+            writer.WritePropertyIfNeeded("type", obj.MetadataImage?.Type);
+            writer.WritePropertyIfNeeded("restriction_policy", obj.MetadataImage?.RestrictionPolicy);
+            writer.WritePropertyIfNeeded("raw_url", obj.MetadataImage?.RawUrl);
+            writer.WritePropertyIfNeeded("location", obj.MetadataImage?.Location);
             writer.WriteStartObjectProperty("thumbnail");
-            writer.WritePropertyIfNeeded("url", obj.Thumbnail?.Thumbnail?.Url);
-            writer.WritePropertyIfNeeded("width", obj.Thumbnail?.Thumbnail?.Width);
-            writer.WritePropertyIfNeeded("height", obj.Thumbnail?.Thumbnail?.Height);
+            writer.WritePropertyIfNeeded("url", obj.MetadataImage?.Thumbnail?.Url);
+            writer.WritePropertyIfNeeded("width", obj.MetadataImage?.Thumbnail?.Width);
+            writer.WritePropertyIfNeeded("height", obj.MetadataImage?.Thumbnail?.Height);
             writer.WriteEndObjectProperty();
-            writer.WritePropertyIfNeeded("restricted_policy", obj.RestrictedPolicy);
+            writer.WriteEndObjectProperty();
+            writer.WritePropertyIfNeeded("restricted_policy", obj.RestrictionPolicy);
 
             if (obj.Medias.Count > 0)
             {

@@ -64,12 +64,8 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets or sets a URL to a thumbnail image representing the resource.
         /// </summary>
-        /// <remarks>
-        /// The thumbnail must respect any <see cref="ConsumerRequest.MaxWidth"/> and <see cref="ConsumerRequest.MaxHeight"/> parameters.
-        /// If this parameter is present, <see cref="ThumbnailWidth" /> and <see cref="ThumbnailHeight" /> must also be present.
-        /// </remarks>
         [DefaultValue(null)]
-        public Media Thumbnail { get; set; }
+        public Media MetadataImage { get; set; }
 
         /// <summary>
         /// Gets or sets the requested URL.
@@ -80,8 +76,8 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets a NSFW flag
         /// </summary>
-        [DefaultValue(RestrictedPolicies.Unknown)]
-        public RestrictedPolicies RestrictedPolicy { get; set; } = RestrictedPolicies.Unknown;
+        [DefaultValue(RestrictionPolicies.Unknown)]
+        public RestrictionPolicies RestrictionPolicy { get; set; } = RestrictionPolicies.Unknown;
 
         #region Medias
 
