@@ -128,14 +128,14 @@ namespace MoEmbed.Models.Metadata
                                     .OfType<XmlElement>()
                                     .Select(ce => new ImageInfo
                                     {
-                                        Url = ce.Element("Url")?.InnerText.ToUri(),
+                                        Url = ce.Element("URL")?.InnerText.ToUri(),
                                         Width = int.TryParse(ce.Element("Width")?.InnerText, out var w) ? w : -1,
                                         Height = int.TryParse(ce.Element("Height")?.InnerText, out var h) ? h : -1,
                                     })
-                                    .Where(e => url != null && e.Width * e.Height > 0)
+                                    .Where(e => e.Url != null && e.Width * e.Height > 0)
                                     .OrderByDescending(e => e.Width * e.Height)
                                     .FirstOrDefault()
-                    }).Where(e => e.Image != null).ToArray();
+                    }).Where(e => e.Image != null).OrderBy(e => e.Category == "primary" ? 0 : 1).ToArray();
 
                     if (elems.Any())
                     {
