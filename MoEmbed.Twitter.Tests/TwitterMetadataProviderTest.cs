@@ -1,30 +1,28 @@
 ﻿using System;
-using MoEmbed.Models;
-using MoEmbed.Models.Metadata;
-using Xunit;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using System.Net.Http;
+using MoEmbed.Models;
+using Xunit;
 
 namespace MoEmbed.Providers
 {
     public sealed class TwitterMetadataProviderTest
     {
         internal IConfigurationRoot _Configuration;
+
         public IConfigurationRoot Configuration => _Configuration ??
-            ( _Configuration = new ConfigurationBuilder()
+            (_Configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
                 .AddUserSecrets<TwitterMetadataProviderTest>()
                 .Build());
 
         internal MetadataService _Service;
-        public MetadataService Service => _Service ?? ( _Service = new MetadataService() );
+        public MetadataService Service => _Service ?? (_Service = new MetadataService());
 
         public string ConsumerKey => Configuration["TwitterConsumerKey"] ?? Environment.GetEnvironmentVariable("TWITTER_CONSUMER_KEY");
         public string ConsumerSecret => Configuration["TwitterConsumerSecret"] ?? Environment.GetEnvironmentVariable("TWITTER_CONSUMER_SECRET");
 
         internal TwitterMetadataProvider _Provider;
-        public TwitterMetadataProvider Provider => _Provider ?? ( _Provider = new TwitterMetadataProvider(ConsumerKey, ConsumerSecret) );
+        public TwitterMetadataProvider Provider => _Provider ?? (_Provider = new TwitterMetadataProvider(ConsumerKey, ConsumerSecret));
 
         public RequestContext GetRequestContext(Uri url)
         {
@@ -94,6 +92,17 @@ namespace MoEmbed.Providers
             var data = m.Data;
             Assert.NotNull(m.Data);
             Assert.Equal(mediaCount, m.Data.Medias.Count);
+        }
+
+        [Theory]
+        [InlineData("https://mobile.twitter.com/4423s/status/901462528789626881", "")]
+        public async void GetEmbedDataTest_Description(string uri, string desription)
+        {
+            var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
+
+            await m.FetchAsync(GetRequestContext(uri));
+            var data = m.Data;
+            Assert.Equal(desription, data.Description);
         }
 
         [Theory]

@@ -136,7 +136,11 @@ namespace MoEmbed.Models
                 Title = $"{ user.Name }(@{ ScreenName })",
 
                 // TODO: Insert media
-                Description = tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}" : tweet.Text,
+                Description = tweet.FullText != null
+                                        && tweet.DisplayTextRange?.Length == 2
+                                            ? tweet.FullText.Substring(tweet.DisplayTextRange[0], tweet.DisplayTextRange[1] - tweet.DisplayTextRange[0])
+                                : tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}"
+                                : tweet.Text,
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
@@ -144,8 +148,10 @@ namespace MoEmbed.Models
                 Nsfw = !!tweet.PossiblySensitive,
             };
 
-            Data.Thumbnail = new Media {
-                Thumbnail = new ImageInfo {
+            Data.Thumbnail = new Media
+            {
+                Thumbnail = new ImageInfo
+                {
                     Url = new Uri(user.ProfileImageUrlHttps),
                     Height = 48,
                     Width = 48,
@@ -163,7 +169,8 @@ namespace MoEmbed.Models
                     var media = new Media
                     {
                         Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = new Uri($"{m.MediaURLHttps}:thumb"),
                             // Thumbnail size is always 150x150
                             Width = 150,
@@ -180,7 +187,8 @@ namespace MoEmbed.Models
                     var media = new Media
                     {
                         Type = MediaTypes.Video,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = new Uri($"{m.MediaURLHttps}:thumb"),
                             // Thumbnail size is always 150x150
                             Width = 150,
