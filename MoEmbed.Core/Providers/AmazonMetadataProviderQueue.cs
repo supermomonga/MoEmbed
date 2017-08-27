@@ -39,6 +39,14 @@ namespace MoEmbed.Providers
 
         private DateTime _LastRequest;
 
+        /// <summary>
+        /// Required interval in ms.
+        /// </summary>
+        /// <remarks>
+        /// May scale up to 1280ms.
+        /// </remarks>
+        private int _Interval;
+
         public AmazonMetadataProviderQueue(string accessKeyId, string secretKey, string associateTag)
         {
             AccessKeyId = accessKeyId;
@@ -46,6 +54,7 @@ namespace MoEmbed.Providers
             AssociateTag = associateTag;
 
             _Items = new List<Item>();
+            _Interval = 80;
         }
 
         public Task<EmbedData> Enqueue(HttpClient client, string destination, string asin)
@@ -66,6 +75,7 @@ namespace MoEmbed.Providers
 
         private async void Run(HttpClient client)
         {
+            var hadFailed = false;
             for (; ; )
             {
                 Item item;
@@ -91,7 +101,7 @@ namespace MoEmbed.Providers
 
                 try
                 {
-                    var wait = _LastRequest.AddSeconds(1.25) - DateTime.Now;
+                    var wait = _LastRequest.AddMilliseconds(_Interval) - DateTime.Now;
                     if (wait > TimeSpan.Zero)
                     {
                         await Task.Delay(wait);
@@ -113,8 +123,17 @@ namespace MoEmbed.Providers
 
                     if (res.StatusCode == HttpStatusCode.ServiceUnavailable)
                     {
+                        if (hadFailed)
+                        {
+                            _Interval = Math.Min(1280, _Interval << 1);
+                        }
+                        else
+                        {
+                            hadFailed = true;
+                        }
                         continue;
                     }
+                    hadFailed = false;
 
                     res.EnsureSuccessStatusCode();
 
@@ -170,7 +189,7 @@ namespace MoEmbed.Providers
                     ProviderName = sn,
                     ProviderUrl = new Uri($"https://www.{item.Destination}"),
                 };
-                if(int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0)
+                if (int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0)
                 {
                     d.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
