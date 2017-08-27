@@ -115,7 +115,7 @@ namespace MoEmbed.Providers
                         ["AssociateTag"] = AssociateTag,
                         ["ItemId"] = item.Asin,
                         ["IdType"] = "ASIN",
-                        ["ResponseGroup"] = "Images,ItemAttributes",
+                        ["ResponseGroup"] = "Images,ItemAttributes,EditorialReview",
                     });
 
                     var res = (await client.FollowRedirectAsync(url).ConfigureAwait(false)).Message;
@@ -233,6 +233,15 @@ namespace MoEmbed.Providers
                             }).ToList();
                         }
                     }
+                }
+
+                var reviews = itemElem.Element("EditorialReviews");
+                if (reviews != null)
+                {
+                    d.Description = reviews.Elements("EditorialReview")
+                                            .Select(e => e.Element("Content")?.InnerText)
+                                            .OfType<string>()
+                                            .FirstOrDefault();
                 }
 
                 return d;
