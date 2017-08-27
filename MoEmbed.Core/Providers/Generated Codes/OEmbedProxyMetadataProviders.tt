@@ -23,7 +23,7 @@ var nameMap = new Dictionary<string, string>()
 var schemeUrls = new List<string>();
 var generated = new List<string>();
 
-var d = Host.ResolvePath("../../oembed/providers");
+var d = Host.ResolvePath("../../../oembed/providers");
 foreach (var f in Directory.GetFiles(d, "*.yml"))
 {
     var n = Path.GetFileNameWithoutExtension(f);

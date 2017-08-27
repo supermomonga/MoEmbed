@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Generated Codes\OEmbedProxyMetadataProviders.tt">
+    <None Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OEmbedProxyMetadataProviders.cs</LastGenOutput>
     </None>
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Generated Codes\OEmbedProxyMetadataProviders.cs">
+    <Compile Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>OEmbedProxyMetadataProviders.tt</DependentUpon>
