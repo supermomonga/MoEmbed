@@ -17,13 +17,14 @@
  *
  *  API Version: 2009-03-31
  *  
- *  * Replaced System.Web.HttpUtility by System.Uri by pgrho
+ *  * Replaced System.Web.HttpUtility by WebUtility by pgrho
  */
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
+using System.Net;
 
 namespace AmazonProductAdvtApi
 {
@@ -138,7 +139,7 @@ namespace AmazonProductAdvtApi
          */
         private string PercentEncodeRfc3986(string str)
         {
-            str = Uri.EscapeDataString(str);
+            str = WebUtility.UrlEncode(str);
             str = str.Replace("'", "%27").Replace("(", "%28").Replace(")", "%29").Replace("*", "%2A").Replace("!", "%21").Replace("%7e", "~").Replace("+", "%20");
 
             StringBuilder sbuilder = new StringBuilder(str);
@@ -176,7 +177,7 @@ namespace AmazonProductAdvtApi
                 string[] param = requestParams[i].Split(sep, 2);
                 for (int j = 0; j < param.Length; j++)
                 {
-                    param[j] = Uri.UnescapeDataString(param[j]);
+                    param[j] = WebUtility.UrlDecode(param[j]);
                 }
                 switch (param.Length)
                 {

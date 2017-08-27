@@ -71,7 +71,7 @@ namespace MoEmbed.Models.Metadata
             {
                 return null;
             }
-            var url = new SignedRequestHelper(Provider.AccessKeyId, Provider.SecretKey, Destination).Sign(new Dictionary<string, string>()
+            var url = new SignedRequestHelper(Provider.AccessKeyId, Provider.SecretKey, "webservices." + Destination).Sign(new Dictionary<string, string>()
             {
                 ["Service"] = "AWSECommerceService",
                 ["Operation"] = "ItemLookup",
@@ -82,7 +82,7 @@ namespace MoEmbed.Models.Metadata
                 ["ResponseGroup"] = "Images,ItemAttributes",
             });
 
-            var res = await context.Service.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var res = (await context.Service.HttpClient.FollowRedirectAsync(url).ConfigureAwait(false)).Message;
 
             res.EnsureSuccessStatusCode();
 
@@ -93,25 +93,27 @@ namespace MoEmbed.Models.Metadata
 
             foreach (XmlElement asin in xd.GetElementsByTagName("ASIN", "http://webservices.amazon.com/AWSECommerceService/2011-08-01"))
             {
-                if (!Asin.Equals(asin.Value, StringComparison.OrdinalIgnoreCase))
+                if (!Asin.Equals(asin.InnerText, StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
 
                 var item = (XmlElement)asin.ParentNode;
                 var attributes = item.Element("ItemAttributes");
-                var title = attributes?.Element("Title")?.Value;
+                var title = attributes?.Element("Title")?.InnerText;
 
                 if (title == null)
                 {
                     continue;
                 }
 
+                var sn = char.ToUpper(Destination[0]) + Destination.Substring(1);
+
                 var d = new EmbedData()
                 {
-                    Title = $"{title} - {Destination}",
+                    Title = $"{title} - {sn}",
                     Url = new Uri($"https://www.{Destination}/dp/{Asin}"),
-                    ProviderName = Destination,
+                    ProviderName = sn,
                     ProviderUrl = new Uri($"https://www.{Destination}"),
                 };
 
@@ -119,35 +121,38 @@ namespace MoEmbed.Models.Metadata
 
                 if (imageSets != null)
                 {
-                    var elems = item.Elements("ImageSet").Select(el => new
+                    var elems = imageSets.Elements("ImageSet").Select(el => new
                     {
                         Category = el.GetAttribute("Category"),
                         Image = el.ChildNodes
                                     .OfType<XmlElement>()
                                     .Select(ce => new ImageInfo
                                     {
-                                        Url = ce.Element("Url")?.Value.ToUri(),
-                                        Width = int.TryParse(ce.Element("Width")?.Value, out var w) ? w : -1,
-                                        Height = int.TryParse(ce.Element("Height")?.Value, out var h) ? h : -1,
+                                        Url = ce.Element("Url")?.InnerText.ToUri(),
+                                        Width = int.TryParse(ce.Element("Width")?.InnerText, out var w) ? w : -1,
+                                        Height = int.TryParse(ce.Element("Height")?.InnerText, out var h) ? h : -1,
                                     })
                                     .Where(e => url != null && e.Width * e.Height > 0)
                                     .OrderByDescending(e => e.Width * e.Height)
                                     .FirstOrDefault()
                     }).Where(e => e.Image != null).ToArray();
 
-                    d.Thumbnail = new Media()
+                    if (elems.Any())
                     {
-                        Type = MediaTypes.Image,
-                        RawUrl = elems[0].Image.Url,
-                    };
-
-                    if (elems.Length > 1)
-                    {
-                        d.Medias = elems.Skip(1).Select(e => new Media()
+                        d.Thumbnail = new Media()
                         {
                             Type = MediaTypes.Image,
-                            RawUrl = e.Image.Url
-                        }).ToList();
+                            RawUrl = elems[0].Image.Url,
+                        };
+
+                        if (elems.Length > 1)
+                        {
+                            d.Medias = elems.Skip(1).Select(e => new Media()
+                            {
+                                Type = MediaTypes.Image,
+                                RawUrl = e.Image.Url
+                            }).ToList();
+                        }
                     }
                 }
 
