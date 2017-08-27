@@ -115,7 +115,7 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("height", obj.MetadataImage?.Thumbnail?.Height);
             writer.WriteEndObjectProperty();
             writer.WriteEndObjectProperty();
-            writer.WritePropertyIfNeeded("restricted_policy", obj.RestrictionPolicy);
+            writer.WritePropertyIfNeeded("restriction_policy", obj.RestrictionPolicy);
 
             if (obj.Medias.Count > 0)
             {
@@ -134,7 +134,7 @@ namespace MoEmbed.Models
                     }
                     writer.WritePropertyIfNeeded("raw_url", media.RawUrl);
                     writer.WritePropertyIfNeeded("location", media.Location);
-                    writer.WriteProperty("restricted_policy", media.RestrictionPolicy);
+                    writer.WriteProperty("restriction_policy", media.RestrictionPolicy);
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArrayProperty();
