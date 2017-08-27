@@ -166,7 +166,7 @@ namespace MoEmbed.Providers
                 var d = new EmbedData()
                 {
                     Title = $"{title} - {sn}",
-                    Url = new Uri($"https://www.{item.Destination}/dp/{item.Asin}?tag={AssociateTag}"),
+                    Url = ($"https://www.{item.Destination}/dp/{item.Asin}" + itemElem.Element("DetailPageURL")?.InnerText.ToUri().Query).ToUri(),
                     ProviderName = sn,
                     ProviderUrl = new Uri($"https://www.{item.Destination}"),
                 };
