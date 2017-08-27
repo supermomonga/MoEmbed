@@ -5,6 +5,7 @@ using System.ComponentModel;
 
 namespace MoEmbed.Models
 {
+    public enum RestrictionPolicies { Unknown, Safe, Restricted }
     public enum EmbedDataTypes { MixedContent, SingleImage, SingleVideo, SingleAudio }
 
     /// <summary>
@@ -79,8 +80,8 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets a NSFW flag
         /// </summary>
-        [DefaultValue(false)]
-        public bool Nsfw { get; set; }
+        [DefaultValue(RestrictedPolicies.Unknown)]
+        public RestrictedPolicies RestrictedPolicy { get; set; } = RestrictedPolicies.Unknown;
 
         #region Medias
 

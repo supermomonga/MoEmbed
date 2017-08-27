@@ -109,7 +109,7 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("width", obj.Thumbnail?.Thumbnail?.Width);
             writer.WritePropertyIfNeeded("height", obj.Thumbnail?.Thumbnail?.Height);
             writer.WriteEndObjectProperty();
-            writer.WritePropertyIfNeeded("nsfw", obj.Nsfw);
+            writer.WritePropertyIfNeeded("restricted_policy", obj.RestrictedPolicy);
 
             if (obj.Medias.Count > 0)
             {
@@ -128,7 +128,7 @@ namespace MoEmbed.Models
                     }
                     writer.WritePropertyIfNeeded("raw_url", media.RawUrl);
                     writer.WritePropertyIfNeeded("location", media.Location);
-                    writer.WriteProperty("nsfw", media.Nsfw);
+                    writer.WriteProperty("restricted_policy", media.RestrictionPolicy);
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArrayProperty();

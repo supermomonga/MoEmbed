@@ -169,8 +169,11 @@ namespace MoEmbed.Providers
                     Url = new Uri($"https://www.{item.Destination}/dp/{item.Asin}"),
                     ProviderName = sn,
                     ProviderUrl = new Uri($"https://www.{item.Destination}"),
-                    Nsfw = int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0
                 };
+                if(int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0)
+                {
+                    d.RestrictedPolicy = RestrictionPolicies.Restricted;
+                }
 
                 var imageSets = itemElem.Element("ImageSets");
 
@@ -207,7 +210,7 @@ namespace MoEmbed.Providers
                             {
                                 Type = MediaTypes.Image,
                                 RawUrl = e.Image.Url,
-                                Nsfw = d.Nsfw
+                                RestrictionPolicy = d.RestrictedPolicy
                             }).ToList();
                         }
                     }
