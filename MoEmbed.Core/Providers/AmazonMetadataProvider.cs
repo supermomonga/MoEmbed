@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -10,7 +12,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class AmazonMetadataProvider : IMetadataProvider
     {
-        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|co\.(jp|uk)))/(dp|gp/product)/(?<asin>[A-Za-z0-9]{10})($|/|\?)");
+        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|co\.(jp|uk)))/(([^/]+/)?dp|gp/product)/(?<asin>[A-Za-z0-9]{10})($|/|\?)");
 
         /// <summary>
         /// Initializes a new instaince of the <see cref="AmazonMetadataProvider" /> class with AWS secrets.
@@ -78,6 +80,24 @@ namespace MoEmbed.Providers
                 Destination = m.Groups["dest"].Value,
                 Asin = m.Groups["asin"].Value
             };
+        }
+
+        /// <summary>
+        /// Returns a new instance of the <see cref="AmazonMetadataProvider" /> class if configured.
+        /// </summary>
+        /// <param name="configuration">The application configuration.</param>
+        /// <returns>The <see cref="AmazonMetadataProvider" />.</returns>
+        public static AmazonMetadataProvider GetInstance(IConfigurationRoot configuration)
+        {
+            var id = configuration["AWSAccessKeyId"] ?? Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+            var key = configuration["AWSSecretKey"] ?? Environment.GetEnvironmentVariable("AWS_SECRET_KEY");
+            var tag = configuration["AmazonAssociateTag"] ?? Environment.GetEnvironmentVariable("AMAZON_ASSOCIATE_TAG");
+
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(key) || string.IsNullOrEmpty(tag))
+            {
+                return null;
+            }
+            return new AmazonMetadataProvider(id, key, tag);
         }
     }
 }

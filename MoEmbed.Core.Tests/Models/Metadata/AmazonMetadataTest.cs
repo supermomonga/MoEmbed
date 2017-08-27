@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MoEmbed.Providers;
 using Xunit;
 
@@ -15,22 +14,19 @@ namespace MoEmbed.Models.Metadata
                 .AddUserSecrets<AmazonMetadataTest>()
                 .Build());
 
-        private string AWSAccessKeyId => Configuration["AWSAccessKeyId"] ?? Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
-        private string AWSSecretKey => Configuration["AWSSecretKey"] ?? Environment.GetEnvironmentVariable("AWS_SECRET_KEY");
-        private string AmazonAssociateTag => Configuration["AmazonAssociateTag"] ?? Environment.GetEnvironmentVariable("AMAZON_ASSOCIATE_TAG");
-
         [Theory]
         [InlineData("amazon.co.jp", "B074DYFZM7", "アイドルタイム プリパラ ファララマイク - Amazon.co.jp")]
         public void FetchAsyncTest(string destination, string asin, string title)
         {
-            if (string.IsNullOrEmpty(AWSAccessKeyId))
+            var prov = AmazonMetadataProvider.GetInstance(Configuration);
+            if (prov == null)
             {
                 return;
             }
 
             var md = new AmazonMetadata()
             {
-                Provider = new AmazonMetadataProvider(AWSAccessKeyId, AWSSecretKey, AmazonAssociateTag),
+                Provider = prov,
                 Destination = destination,
                 Asin = asin
             };

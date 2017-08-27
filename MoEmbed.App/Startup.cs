@@ -57,6 +57,13 @@ namespace MoEmbed
             {
                 service.Providers.Add(new TwitterMetadataProvider(twitterConsumerKey, twitterConsumerSecret));
             }
+            {
+                var amazon = AmazonMetadataProvider.GetInstance(Configuration);
+                if (amazon != null)
+                {
+                    service.Providers.Add(amazon);
+                }
+            }
             service.Providers.Add(new NicovideoMetadataProvider());
             service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
             service.Providers.Add(new UnknownMetadataProvider());
