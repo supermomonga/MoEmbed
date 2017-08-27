@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <RootNamespace>MoEmbed</RootNamespace>
+    <UserSecretsId>7d2c1bd0-61c5-4a6b-9c27-5269cfd1b8eb</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +12,12 @@
     <PackageReference Include="Portable.Xaml" Version="0.16.0" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.1" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

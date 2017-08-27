@@ -1,0 +1,8 @@
+## Setup
+
+```sh
+dotnet restore
+user-secrets set AWSAccessKeyId xxxxxxxxxxxxxxxxxxxxxxxxx
+user-secrets set AWSSecretKey yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+user-secrets set AmazonAssociateTag zzzzzzzz-nn
+```
