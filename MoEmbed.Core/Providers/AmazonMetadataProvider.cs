@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
@@ -14,6 +16,8 @@ namespace MoEmbed.Providers
     {
         private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|co\.(jp|uk)))/(([^/]+/)?dp|gp/product)/(?<asin>[A-Za-z0-9]{10})($|/|\?)");
 
+        private readonly AmazonMetadataProviderQueue _Queue;
+
         /// <summary>
         /// Initializes a new instaince of the <see cref="AmazonMetadataProvider" /> class with AWS secrets.
         /// </summary>
@@ -22,17 +26,12 @@ namespace MoEmbed.Providers
         /// <param name="associateTag">The Amazon associate tag.</param>
         public AmazonMetadataProvider(string accessKeyId, string secretKey, string associateTag)
         {
-            AccessKeyId = accessKeyId;
-            SecretKey = secretKey;
-            AssociateTag = associateTag;
+            // TODO: support multiple queue.
+            _Queue = new AmazonMetadataProviderQueue(accessKeyId, secretKey, associateTag);
         }
 
         bool IMetadataProvider.SupportsAnyHost
             => false;
-
-        internal string AccessKeyId { get; }
-        internal string SecretKey { get; }
-        internal string AssociateTag { get; }
 
         /// <summary>
         /// Returns a sequence of host names that is able to handle.
@@ -81,6 +80,9 @@ namespace MoEmbed.Providers
                 Asin = m.Groups["asin"].Value
             };
         }
+
+        internal Task<EmbedData> FetchAsync(HttpClient client, string destination, string asin)
+            => _Queue.Enqueue(client, destination, asin);
 
         /// <summary>
         /// Returns a new instance of the <see cref="AmazonMetadataProvider" /> class if configured.
