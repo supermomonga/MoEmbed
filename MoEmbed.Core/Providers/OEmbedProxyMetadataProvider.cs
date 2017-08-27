@@ -113,11 +113,20 @@ namespace MoEmbed.Providers
             {
                 return null;
             }
-            return new OEmbedProxyMetadata()
-            {
-                Uri = request.Url.ToString(),
-                OEmbedUrl = GetProviderUriFor(request).ToString()
-            };
+
+            var m = CreateMetadata();
+
+            m.Uri = request.Url.ToString();
+            m.OEmbedUrl = GetProviderUriFor(request).ToString();
+
+            return m;
         }
+
+        /// <summary>
+        /// Returns a new instaince of the <see cref="OEmbedProxyMetadata" />
+        /// </summary>
+        /// <returns>A  new instaince of the <see cref="OEmbedProxyMetadata" />.</returns>
+        protected virtual OEmbedProxyMetadata CreateMetadata()
+            => new OEmbedProxyMetadata();
     }
 }

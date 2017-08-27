@@ -25,6 +25,9 @@ namespace MoEmbed.Models.Metadata
         [DefaultValue(null)]
         public string OEmbedUrl { get; set; }
 
+        /// <summary>
+        /// Gets or sets the resolved data.
+        /// </summary>
         [DefaultValue(null)]
         public EmbedData Data { get; set; }
 
@@ -86,58 +89,71 @@ namespace MoEmbed.Models.Metadata
                 values = jo.ToObject<Dictionary<string, object>>();
             }
 
-            Data = new EmbedData()
+            return Data = CreateEmbedData(values);
+        }
+
+        /// <summary>
+        /// Returns a new instance of the <see cref="EmbedData" /> class that is equivalent to the specified oEmbed data.
+        /// </summary>
+        /// <param name="values">The oEmbed data to convert.</param>
+        /// <returns>A new instance of the <see cref="EmbedData" /> class.</returns>
+        protected virtual EmbedData CreateEmbedData(Dictionary<string, object> values)
+        {
+            var data = new EmbedData()
             {
                 Url = new Uri(Uri)
             };
             if (values.ContainsKey("title"))
             {
-                Data.Title = values["title"].ToString();
+                data.Title = values["title"].ToString();
             }
             if (values.ContainsKey("author_name"))
             {
-                Data.AuthorName = values["author_name"].ToString();
+                data.AuthorName = values["author_name"].ToString();
             }
             if (values.ContainsKey("author_url"))
             {
-                Data.AuthorUrl = new Uri(values["author_url"].ToString());
+                data.AuthorUrl = new Uri(values["author_url"].ToString());
             }
             if (values.ContainsKey("provider_name"))
             {
-                Data.ProviderName = values["provider_name"].ToString();
+                data.ProviderName = values["provider_name"].ToString();
             }
             if (values.ContainsKey("provider_url"))
             {
-                Data.ProviderUrl = new Uri(values["provider_url"].ToString());
+                data.ProviderUrl = new Uri(values["provider_url"].ToString());
             }
             if (values.ContainsKey("cache_age"))
             {
-                Data.CacheAge = (values["cache_age"] as IConvertible).ToInt32(null);
+                data.CacheAge = (values["cache_age"] as IConvertible).ToInt32(null);
             }
             if (values.ContainsKey("thumbnail_url"))
             {
-                Data.MetadataImage = new Media {
-                    Thumbnail = new ImageInfo {
+                data.MetadataImage = new Media
+                {
+                    Thumbnail = new ImageInfo
+                    {
                         Url = new Uri(values["thumbnail_url"].ToString())
                     }
                 };
             }
-            if (values.ContainsKey("thumbnail_width") && Data.MetadataImage?.Thumbnail != null)
+            if (values.ContainsKey("thumbnail_width") && data.MetadataImage?.Thumbnail != null)
             {
-                Data.MetadataImage.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
+                data.MetadataImage.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
             }
-            if (values.ContainsKey("thumbnail_height") && Data.MetadataImage?.Thumbnail != null)
+            if (values.ContainsKey("thumbnail_height") && data.MetadataImage?.Thumbnail != null)
             {
-                Data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+                data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
             }
 
             switch (values["type"])
             {
                 case "photo":
-                    Data.Medias.Add(new Media()
+                    data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = new Uri(values["url"].ToString())
                         },
                         RawUrl = new Uri(values["url"].ToString()),
@@ -149,10 +165,11 @@ namespace MoEmbed.Models.Metadata
                     // TODO: parse video url from html parameter
                     if (values.ContainsKey("thumbnail_url"))
                     {
-                        Data.Medias.Add(new Media()
+                        data.Medias.Add(new Media()
                         {
                             Type = MediaTypes.Video,
-                            Thumbnail = new ImageInfo {
+                            Thumbnail = new ImageInfo
+                            {
                                 Url = new Uri(values["thumbnail_url"].ToString()),
                             },
                             RawUrl = new Uri(Uri),
@@ -169,7 +186,8 @@ namespace MoEmbed.Models.Metadata
                     // Nothing to do, for now.
                     break;
             }
-            return Data;
+
+            return data;
         }
     }
 }
