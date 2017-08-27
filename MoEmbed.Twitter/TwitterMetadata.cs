@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 using Tweetinvi;
 
 namespace MoEmbed.Models
@@ -126,17 +127,25 @@ namespace MoEmbed.Models
             Url = new Uri(tweet.Url);
             var user = User.GetUserFromScreenName(ScreenName);
 
+            var authorName = HtmlEntity.DeEntitize($"{ user.Name }(@{ ScreenName })");
+
+            var description = tweet.FullText != null
+                                        && tweet.DisplayTextRange?.Length == 2
+                                            ? tweet.FullText.Substring(tweet.DisplayTextRange[0], tweet.DisplayTextRange[1] - tweet.DisplayTextRange[0])
+                                : tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}"
+                                : tweet.Text;
+
             Data = new EmbedData()
             {
                 Url = Url,
-                AuthorName = $"{ user.Name }(@{ ScreenName })",
+                AuthorName = authorName,
                 AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
 
                 // TODO: Insert Fav, RT
-                Title = $"{ user.Name }(@{ ScreenName })",
+                Title = authorName,
 
                 // TODO: Insert media
-                Description = tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}" : tweet.Text,
+                Description = HtmlEntity.DeEntitize(description),
 
                 ProviderName = "Twitter",
                 ProviderUrl = new Uri("https://twitter.com/"),
@@ -144,8 +153,10 @@ namespace MoEmbed.Models
                 Nsfw = !!tweet.PossiblySensitive,
             };
 
-            Data.Thumbnail = new Media {
-                Thumbnail = new ImageInfo {
+            Data.Thumbnail = new Media
+            {
+                Thumbnail = new ImageInfo
+                {
                     Url = new Uri(user.ProfileImageUrlHttps),
                     Height = 48,
                     Width = 48,
@@ -163,7 +174,8 @@ namespace MoEmbed.Models
                     var media = new Media
                     {
                         Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = new Uri($"{m.MediaURLHttps}:thumb"),
                             // Thumbnail size is always 150x150
                             Width = 150,
@@ -180,7 +192,8 @@ namespace MoEmbed.Models
                     var media = new Media
                     {
                         Type = MediaTypes.Video,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = new Uri($"{m.MediaURLHttps}:thumb"),
                             // Thumbnail size is always 150x150
                             Width = 150,
