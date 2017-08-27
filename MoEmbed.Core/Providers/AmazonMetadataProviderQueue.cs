@@ -169,6 +169,7 @@ namespace MoEmbed.Providers
                     Url = new Uri($"https://www.{item.Destination}/dp/{item.Asin}"),
                     ProviderName = sn,
                     ProviderUrl = new Uri($"https://www.{item.Destination}"),
+                    Nsfw = int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0
                 };
 
                 var imageSets = itemElem.Element("ImageSets");
@@ -197,6 +198,7 @@ namespace MoEmbed.Providers
                         {
                             Type = MediaTypes.Image,
                             RawUrl = elems[0].Image.Url,
+                            Thumbnail = elems[0].Image
                         };
 
                         if (elems.Length > 1)
@@ -204,7 +206,8 @@ namespace MoEmbed.Providers
                             d.Medias = elems.Skip(1).Select(e => new Media()
                             {
                                 Type = MediaTypes.Image,
-                                RawUrl = e.Image.Url
+                                RawUrl = e.Image.Url,
+                                Nsfw = d.Nsfw
                             }).ToList();
                         }
                     }
