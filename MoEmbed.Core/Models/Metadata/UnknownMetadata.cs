@@ -72,7 +72,7 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        private async Task<EmbedData> FetchAsyncCore(RequestContext context)
+        protected virtual async Task<EmbedData> FetchAsyncCore(RequestContext context)
         {
             var hc = context.Service.HttpClient;
 
