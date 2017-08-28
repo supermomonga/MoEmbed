@@ -14,13 +14,13 @@ namespace MoEmbed.Providers
         /// Returns a sequence of host names that is able to handle.
         /// </summary>
         /// <returns>The sequence of host names.</returns>
-        public IEnumerable<string> GetSupportedHostNames()
+        public virtual IEnumerable<string> GetSupportedHostNames()
             => Enumerable.Empty<string>();
 
-        public bool CanHandle(ConsumerRequest request)
+        public virtual bool CanHandle(ConsumerRequest request)
             => request.Url.Scheme == "http" || request.Url.Scheme == "https";
 
-        public Metadata GetMetadata(ConsumerRequest request)
+        public virtual Metadata GetMetadata(ConsumerRequest request)
         {
             if (!CanHandle(request))
             {

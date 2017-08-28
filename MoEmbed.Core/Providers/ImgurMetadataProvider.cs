@@ -17,13 +17,13 @@ namespace MoEmbed.Providers
         /// Returns a sequence of host names that is able to handle.
         /// </summary>
         /// <returns>The sequence of host names.</returns>
-        public new IEnumerable<string> GetSupportedHostNames()
+        public override IEnumerable<string> GetSupportedHostNames()
             => new[] { "imgur.com" };
 
-        public new bool CanHandle(ConsumerRequest request)
+        public override bool CanHandle(ConsumerRequest request)
             => regex.IsMatch(request.Url.ToString());
 
-        public new Metadata GetMetadata(ConsumerRequest request)
+        public override Metadata GetMetadata(ConsumerRequest request)
         {
             if (!CanHandle(request))
             {
