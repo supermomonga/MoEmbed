@@ -82,6 +82,12 @@ namespace MoEmbed.Models.Metadata
                 return null;
             }
 
+            if (MovedTo != null && MovedTo != Uri)
+            {
+                var mcr = new ConsumerRequest(new Uri(MovedTo), context.MaxWidth, context.MaxHeight, context.Format);
+                return Data = (await context.Service.GetDataAsync(mcr).ConfigureAwait(false)).Data;
+            }
+
             var mediaType = res.Content.Headers.ContentType.MediaType;
 
             if (Regex.IsMatch(mediaType, @"^text\/html$"))
@@ -93,8 +99,8 @@ namespace MoEmbed.Models.Metadata
                 var u = new Uri(MovedTo ?? Uri);
                 Data = new EmbedData()
                 {
-                    Type = mediaType[0] == 'i' ?  EmbedDataTypes.SingleImage
-                    :mediaType[0] == 'v' ?  EmbedDataTypes.SingleVideo
+                    Type = mediaType[0] == 'i' ? EmbedDataTypes.SingleImage
+                    : mediaType[0] == 'v' ? EmbedDataTypes.SingleVideo
                     : EmbedDataTypes.SingleAudio,
                     Url = u,
                     Medias = new List<Media>(1)
@@ -111,9 +117,11 @@ namespace MoEmbed.Models.Metadata
                 if (mediaType.StartsWith("image"))
                 {
                     Data.Type = EmbedDataTypes.SingleImage;
-                    Data.MetadataImage = new Media {
+                    Data.MetadataImage = new Media
+                    {
                         Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = u
                         }
                     };
@@ -197,7 +205,8 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = url
                         },
                         RawUrl = url,
@@ -214,7 +223,8 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Video,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = (v.Image?.SecureUrl ?? v.Image?.Url).DeEntitize().ToUri()
                         },
                         RawUrl = url,
@@ -232,7 +242,8 @@ namespace MoEmbed.Models.Metadata
                     Data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Audio,
-                        Thumbnail = new ImageInfo {
+                        Thumbnail = new ImageInfo
+                        {
                             Url = (a.Image?.SecureUrl ?? a.Image?.Url).DeEntitize().ToUri()
                         },
                         RawUrl = url,
@@ -246,10 +257,12 @@ namespace MoEmbed.Models.Metadata
                 if (medias.Count() == 1)
                 {
                     var media = medias.First();
-                    if(media.Thumbnail?.Url != null)
+                    if (media.Thumbnail?.Url != null)
                     {
-                        Data.MetadataImage = new Media {
-                            Thumbnail = new ImageInfo {
+                        Data.MetadataImage = new Media
+                        {
+                            Thumbnail = new ImageInfo
+                            {
                                 Url = media.Thumbnail?.Url
                             }
                         };
@@ -260,7 +273,7 @@ namespace MoEmbed.Models.Metadata
 
             {
                 var age = graph.Restriction?.Age;
-                if(age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18)
+                if (age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18)
                 {
                     Data.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
