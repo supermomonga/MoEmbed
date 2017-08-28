@@ -11,7 +11,7 @@ namespace MoEmbed.Providers
         bool SupportsAnyHost
             => false;
 
-        private static readonly Regex regex = new Regex(@"^https?://imgur\.com/([a-zA-Z0-9)+$");
+        private static readonly Regex regex = new Regex(@"^https?://imgur\.com/[a-zA-Z0-9]+$");
 
         /// <summary>
         /// Returns a sequence of host names that is able to handle.
