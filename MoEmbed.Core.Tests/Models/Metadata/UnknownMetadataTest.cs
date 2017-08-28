@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using MoEmbed.Providers;
 using Portable.Xaml;
 using Xunit;
 
@@ -8,9 +9,14 @@ namespace MoEmbed.Models.Metadata
     public class UnknownMetadataTest
     {
         internal RequestContext GetRequestContext(Uri url)
-            => new RequestContext(new MetadataService(), new ConsumerRequest(url));
+        {
+            var r = new RequestContext(new MetadataService(), new ConsumerRequest(url));
+            r.Service.Providers.Add(new UnknownMetadataProvider());
+            return r;
+        }
+
         internal RequestContext GetRequestContext(string url)
-            => GetRequestContext(new Uri(url));
+        => GetRequestContext(new Uri(url));
 
         [Fact]
         public void SerializationTest()
