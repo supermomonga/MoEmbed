@@ -1,14 +1,16 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
 namespace MoEmbed.Providers
 {
-    public class ImgurMetadataProvider : UnknownMetadataProvider
+    /// <summary>
+    /// Represents the <see cref="Metadata"/> for the URL of the imgur.com
+    /// </summary>
+    public class ImgurMetadataProvider : UnknownMetadataProvider, IMetadataProvider
     {
-        bool SupportsAnyHost
+        bool IMetadataProvider.SupportsAnyHost
             => false;
 
         private static readonly Regex regex = new Regex(@"^https?://imgur\.com/[a-zA-Z0-9]+$");
