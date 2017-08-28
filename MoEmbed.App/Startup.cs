@@ -66,6 +66,7 @@ namespace MoEmbed
             }
             service.Providers.Add(new ImgurMetadataProvider());
             service.Providers.Add(new NicovideoMetadataProvider());
+            service.Providers.Add(new DroplrMetadataProvider());
             service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
             service.Providers.Add(new UnknownMetadataProvider());
             routeBuilder.MapGet("api", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
