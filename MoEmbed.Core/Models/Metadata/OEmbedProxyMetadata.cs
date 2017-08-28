@@ -149,6 +149,7 @@ namespace MoEmbed.Models.Metadata
             switch (values["type"])
             {
                 case "photo":
+                    data.Type = EmbedDataTypes.SingleImage;
                     data.Medias.Add(new Media()
                     {
                         Type = MediaTypes.Image,
@@ -163,6 +164,7 @@ namespace MoEmbed.Models.Metadata
 
                 case "video":
                     // TODO: parse video url from html parameter
+                    data.Type = EmbedDataTypes.SingleVideo;
                     if (values.ContainsKey("thumbnail_url"))
                     {
                         data.Medias.Add(new Media()
