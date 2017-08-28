@@ -155,7 +155,9 @@ namespace MoEmbed.Models.Metadata
                         Type = MediaTypes.Image,
                         Thumbnail = new ImageInfo
                         {
-                            Url = new Uri(values["url"].ToString())
+                            Url = new Uri(values["url"].ToString()),
+                            Width = (values["width"] as IConvertible)?.ToInt32(null),
+                            Height = (values["height"] as IConvertible)?.ToInt32(null)
                         },
                         RawUrl = new Uri(values["url"].ToString()),
                         Location = new Uri(values["url"].ToString())
