@@ -34,6 +34,7 @@ namespace MoEmbed.Models.Metadata
         {
             var Data = await base.FetchAsyncCore(context);
             Data.Type = EmbedDataTypes.SingleImage;
+            Data.Medias.Add(Data.MetadataImage);
             return Data;
         }
 
