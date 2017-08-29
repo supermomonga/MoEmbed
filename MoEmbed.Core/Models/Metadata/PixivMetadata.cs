@@ -38,33 +38,42 @@ namespace MoEmbed.Models.Metadata
             var title = hd.DocumentNode.SelectSingleNode("//meta[@property='twitter:title']")?.Attributes["content"]?.Value;
             var sensoredImage = hd.DocumentNode.SelectSingleNode("//div[@class='sensored']/img")?.Attributes["src"]?.Value;
             var restrictionPolicy = string.IsNullOrEmpty(sensoredImage) ? RestrictionPolicies.Unknown : RestrictionPolicies.Restricted;
-            Uri uri;
+            Uri illustUri;
             if (restrictionPolicy == RestrictionPolicies.Restricted)
             {
-                uri = new Uri(sensoredImage.Replace("64x64", "128x128"));
+                illustUri = new Uri(sensoredImage.Replace("64x64", "128x128"));
                 Data.Title = title.Replace("[R-18]", "");
             }
             else
             {
                 var image = hd.DocumentNode.SelectSingleNode("//div[@class='img-container']/a/img")?.Attributes["src"]?.Value;
-                uri = new Uri(image);
+                illustUri = new Uri(image);
                 Data.Title = title;
             }
-            var media = new Media
-            {
+            Data.Medias.Insert(0, new Media {
+                    Type = MediaTypes.Image,
+                    Thumbnail = new ImageInfo
+                    {
+                        Url = illustUri,
+                        Width = 128,
+                        Height = 128
+                    },
+                    RawUrl = illustUri,
+                    Location = new Uri(Uri),
+                    RestrictionPolicy = restrictionPolicy
+                });
+
+            var userIconUri = new Uri(hd.DocumentNode.SelectSingleNode("//div[@class='usericon']/a/img").Attributes["src"].Value);
+            Data.MetadataImage = new Media {
                 Type = MediaTypes.Image,
                 Thumbnail = new ImageInfo
                 {
-                    Url = uri,
-                    Width = 128,
-                    Height = 128
+                    Url = userIconUri,
                 },
-                RawUrl = uri,
-                Location = uri,
-                RestrictionPolicy = restrictionPolicy
+                RawUrl = userIconUri,
+                Location = new Uri(Uri),
+                RestrictionPolicy = RestrictionPolicies.Safe
             };
-            Data.Medias.Insert(0, media);
-            Data.MetadataImage = media;
             Data.RestrictionPolicy = restrictionPolicy;
         }
 
