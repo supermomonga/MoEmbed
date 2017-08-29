@@ -43,6 +43,13 @@ namespace MoEmbed.Models
             BaseWriter.WriteValue(value);
         }
 
+        public void WriteProperty(string name, int value)
+        {
+            ThrowIfDisposed();
+            BaseWriter.WritePropertyName(name);
+            BaseWriter.WriteValue(value);
+        }
+
         public void WriteProperty(string name, double value)
         {
             ThrowIfDisposed();

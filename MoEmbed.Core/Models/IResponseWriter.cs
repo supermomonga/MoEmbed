@@ -10,6 +10,7 @@ namespace MoEmbed.Models
     void WriteStartObjectProperty(string name);
     void WriteEndObjectProperty();
     void WriteProperty(string name, bool value);
+    void WriteProperty(string name, int value);
     void WriteProperty(string name, double value);
     void WriteProperty(string name, object value);
     void WriteStartObject(string name);
