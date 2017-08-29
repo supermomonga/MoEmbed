@@ -26,4 +26,3 @@ namespace MoEmbed.Models
         public int? Height { get; set; }
     }
 }
-

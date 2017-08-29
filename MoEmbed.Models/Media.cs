@@ -2,8 +2,6 @@ using System;
 
 namespace MoEmbed.Models
 {
-    public enum MediaTypes { Image, Video, Audio }
-
     public class Media
     {
         /// <summary>

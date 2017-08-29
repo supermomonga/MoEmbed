@@ -5,9 +5,6 @@ using System.ComponentModel;
 
 namespace MoEmbed.Models
 {
-    public enum RestrictionPolicies { Unknown, Safe, Restricted }
-    public enum EmbedDataTypes { MixedContent, SingleImage, SingleVideo, SingleAudio }
-
     /// <summary>
     /// Represents a result fetched by <see cref="Metadata.Metadata"/>
     /// </summary>

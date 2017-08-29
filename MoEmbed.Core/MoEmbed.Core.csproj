@@ -31,6 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MoEmbed.Models\MoEmbed.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>OEmbedProxyMetadataProviders.cs</LastGenOutput>
