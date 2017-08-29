@@ -9,7 +9,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://droplr.com" />.
     /// </summary>
-    public sealed partial class DroplrMetadataProvider : IMetadataProvider
+    public sealed partial class DroplrMetadataProvider : UnknownMetadataProvider, IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https?://d.pr/i/(?<hash>[A-Za-z0-9]+)(\.(jpg|png|gif|mp4|mp3))?");
 
@@ -44,10 +44,9 @@ namespace MoEmbed.Providers
             if (m.Success)
             {
                 var url = "https://d.pr/i/" + m.Groups["hash"].Value;
-                return new OEmbedProxyMetadata()
+                return new DroplrMetadata()
                 {
                     Uri = url,
-                    OEmbedUrl = "https://d.pr/oembed?format=json&url=" + Uri.EscapeDataString(url)
                 };
             }
             return null;

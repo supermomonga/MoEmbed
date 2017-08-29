@@ -146,30 +146,31 @@ namespace MoEmbed.Models.Metadata
                 data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
             }
 
-            var embedType = values["type"] as string;
-            if (embedType.StartsWith("photo"))
+            switch (values["type"])
             {
-                data.Type = EmbedDataTypes.SingleImage;
-                data.MetadataImage = new Media()
-                    {
-                        Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo
-                        {
-                            Url = new Uri(values["url"].ToString()),
-                            Width = (values["width"] as IConvertible)?.ToInt32(null),
-                            Height = (values["height"] as IConvertible)?.ToInt32(null)
-                        },
-                        RawUrl = new Uri(values["url"].ToString()),
-                        Location = new Uri(values["url"].ToString())
-                    };
-                data.Medias.Add(data.MetadataImage);
-            } else if (embedType.StartsWith("video"))
-            {
-                // TODO: parse video url from html parameter
-                data.Type = EmbedDataTypes.SingleVideo;
-                if (values.ContainsKey("thumbnail_url"))
-                {
+                case "photo":
+                    data.Type = EmbedDataTypes.SingleImage;
                     data.MetadataImage = new Media()
+                        {
+                            Type = MediaTypes.Image,
+                            Thumbnail = new ImageInfo
+                            {
+                                Url = new Uri(values["url"].ToString()),
+                                Width = (values["width"] as IConvertible)?.ToInt32(null),
+                                Height = (values["height"] as IConvertible)?.ToInt32(null)
+                            },
+                            RawUrl = new Uri(values["url"].ToString()),
+                            Location = new Uri(values["url"].ToString())
+                        };
+                    data.Medias.Add(data.MetadataImage);
+                    break;
+
+                case "video":
+                    // TODO: parse video url from html parameter
+                    data.Type = EmbedDataTypes.SingleVideo;
+                    if (values.ContainsKey("thumbnail_url"))
+                    {
+                        data.MetadataImage = new Media()
                         {
                             Type = MediaTypes.Video,
                             Thumbnail = new ImageInfo
@@ -179,12 +180,17 @@ namespace MoEmbed.Models.Metadata
                             RawUrl = new Uri(Uri),
                             Location = new Uri(Uri)
                         };
-                    data.Medias.Add(data.MetadataImage);
-                }
-            } else if (embedType.StartsWith("link"))
-            {
-            } else if (embedType.StartsWith("rich"))
-            {
+                        data.Medias.Add(data.MetadataImage);
+                    }
+                    break;
+
+                case "link":
+                    // Nothing to do, for now.
+                    break;
+
+                case "rich":
+                    // Nothing to do, for now.
+                    break;
             }
 
             return data;
