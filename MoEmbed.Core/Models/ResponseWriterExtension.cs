@@ -134,7 +134,7 @@ namespace MoEmbed.Models
                     }
                     writer.WritePropertyIfNeeded("raw_url", media.RawUrl);
                     writer.WritePropertyIfNeeded("location", media.Location);
-                    writer.WriteProperty("restriction_policy", media.RestrictionPolicy);
+                    writer.WritePropertyIfNeeded("restriction_policy", media.RestrictionPolicy);
                     writer.WriteEndObject();
                 }
                 writer.WriteEndArrayProperty();
