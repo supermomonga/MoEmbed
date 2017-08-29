@@ -39,7 +39,7 @@ namespace MoEmbed.Models
             => WriteProperty(name, value ? "true" : "false");
 
         public void WriteProperty(string name, int value)
-            => WriteProperty(name, value.ToString("r"));
+            => WriteProperty(name, value.ToString());
 
         public void WriteProperty(string name, double value)
             => WriteProperty(name, value.ToString("r"));
