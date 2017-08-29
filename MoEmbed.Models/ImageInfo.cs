@@ -5,11 +5,14 @@ using Newtonsoft.Json;
 
 namespace MoEmbed.Models
 {
+    /// <summary>
+    /// Represents a single image.
+    /// </summary>
     [DataContract]
     public class ImageInfo
     {
         /// <summary>
-        /// Image URL
+        /// Gets or sets an Image URL
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("url")]

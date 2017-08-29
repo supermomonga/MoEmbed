@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net451</TargetFrameworks>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MoEmbed.Models.xml</DocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company />
+    <Authors>supermomonga</Authors>
+    <Description>Entity definitions for MoEmbed</Description>
+    <PackageProjectUrl>https://github.com/supermomonga/MoEmbed</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,5 +17,4 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
   </ItemGroup>
-
 </Project>

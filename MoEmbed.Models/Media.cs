@@ -6,6 +6,9 @@ using Newtonsoft.Json.Converters;
 
 namespace MoEmbed.Models
 {
+    /// <summary>
+    /// Represents a media information.
+    /// </summary>
     [DataContract]
     public class Media
     {
@@ -18,21 +21,21 @@ namespace MoEmbed.Models
         public MediaTypes Type { get; set; }
 
         /// <summary>
-        /// Thumbnail image URL
+        /// Gets or sets a Thumbnail image URL
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("thumbnail")]
         public ImageInfo Thumbnail { get; set; }
 
         /// <summary>
-        /// Raw resouce URL
+        /// Gets or sets a Raw resouce URL
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("raw_url")]
         public Uri RawUrl { get; set; }
 
         /// <summary>
-        /// URL of Media resouce. The resouce can be HTML page which contains the media.
+        /// Gets or sets a URL of Media resouce. The resouce can be HTML page which contains the media.
         /// It doesn't have to be a raw media.
         /// </summary>
         [DefaultValue(null)]
@@ -40,7 +43,7 @@ namespace MoEmbed.Models
         public Uri Location { get; set; }
 
         /// <summary>
-        /// Gets or sets a NSFW for content
+        /// Gets a content restriction policy that applied to the media.
         /// </summary>
         [DefaultValue(RestrictionPolicies.Unknown)]
         [DataMember, JsonProperty("restriction_policy")]

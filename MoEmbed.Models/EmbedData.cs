@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
@@ -9,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace MoEmbed.Models
 {
     /// <summary>
-    /// Represents a result fetched by <see cref="Metadata.Metadata"/>
+    /// Represents a result fetched by the Metadata.
     /// </summary>
     [DataContract]
     public class EmbedData
@@ -86,7 +85,7 @@ namespace MoEmbed.Models
         public Uri Url { get; set; }
 
         /// <summary>
-        /// Gets a NSFW flag
+        /// Gets a content restriction policy that applied to the URL.
         /// </summary>
         [DefaultValue(RestrictionPolicies.Unknown)]
         [DataMember, JsonProperty("restriction_policy")]
