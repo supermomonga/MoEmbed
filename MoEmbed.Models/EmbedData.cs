@@ -89,6 +89,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(RestrictionPolicies.Unknown)]
         [DataMember, JsonProperty("restriction_policy")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public RestrictionPolicies RestrictionPolicy { get; set; } = RestrictionPolicies.Unknown;
 
         #region Medias

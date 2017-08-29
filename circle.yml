@@ -17,6 +17,8 @@ dependencies:
 test:
   override:
     - dotnet test:
+        pwd: MoEmbed.Models.Tests
+    - dotnet test:
         pwd: MoEmbed.Core.Tests
     - dotnet test:
         pwd: MoEmbed.Twitter.Tests
