@@ -144,7 +144,7 @@ namespace MoEmbed.Models.Metadata
             return res.Message;
         }
 
-        private void LoadHtml(string html)
+        protected virtual void LoadHtml(string html)
         {
             var hd = new HtmlDocument();
             hd.LoadHtml(html);
