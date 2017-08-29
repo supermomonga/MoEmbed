@@ -1,4 +1,17 @@
+using System.Runtime.Serialization;
+
 namespace MoEmbed.Models
 {
-    public enum MediaTypes { Image, Video, Audio }
+    [DataContract]
+    public enum MediaTypes
+    {
+        [EnumMember]
+        Image,
+
+        [EnumMember]
+        Video,
+
+        [EnumMember]
+        Audio
+    }
 }
