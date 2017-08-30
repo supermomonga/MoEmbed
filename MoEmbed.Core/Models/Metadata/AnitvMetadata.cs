@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
@@ -21,7 +21,7 @@ namespace MoEmbed.Models.Metadata
             var noText = nav.SelectSingleNode("//*[@class='movie-content-note']/h3/text()")?.Value?.Trim();
             if (noText != null)
             {
-                var m = Regex.Match(noText, @"‘æ\s*([0-9]{1,8})\s*˜b");
+                var m = Regex.Match(noText, @"ç¬¬\s*([0-9]{1,8})\s*è©±");
 
                 if (m.Success)
                 {
@@ -31,7 +31,7 @@ namespace MoEmbed.Models.Metadata
 
                     if (title != null)
                     {
-                        Data.Title = $"‘æ{no}˜b {title}";
+                        Data.Title = $"ç¬¬{no}è©± {title}";
                     }
                 }
             }
