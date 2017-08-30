@@ -143,7 +143,7 @@ namespace MoEmbed.Models.Metadata
         /// </summary>
         /// <param name="html">The HTML markup to parse.</param>
         /// <returns>The parsed <see cref="HtmlDocument"/>.</returns>
-        protected virtual HtmlDocument LoadHtml(string html)
+        protected internal virtual HtmlDocument LoadHtml(string html)
         {
             var hd = new HtmlDocument();
             hd.LoadHtml(html);
