@@ -33,7 +33,7 @@ namespace MoEmbed.Models.Metadata
         }
 
         /// <inheritdoc />
-        protected override HtmlDocument LoadHtml(string html)
+        protected internal override HtmlDocument LoadHtml(string html)
         {
             var hd = base.LoadHtml(html);
             Data.Title = Data.Title.Replace("[pixiv]", "");

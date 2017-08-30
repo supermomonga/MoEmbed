@@ -11,7 +11,7 @@ namespace MoEmbed.Models.Metadata
     public class AnitvMetadata : UnknownMetadata
     {
         /// <inheritdoc />
-        protected override HtmlDocument LoadHtml(string html)
+        protected internal override HtmlDocument LoadHtml(string html)
         {
             var hd = base.LoadHtml(html);
             var nav = hd.CreateNavigator();
