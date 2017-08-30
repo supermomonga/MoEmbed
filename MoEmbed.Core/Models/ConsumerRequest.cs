@@ -8,7 +8,7 @@ namespace MoEmbed.Models
     public sealed class ConsumerRequest
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="RequestContext" /> class with the specified URL.
+        /// Initializes a new instance of <see cref="ConsumerRequest" /> class with the specified URL.
         /// </summary>
         /// <param name="url">The URL to retrieve embedding information for.</param>
         public ConsumerRequest(Uri url)
@@ -17,7 +17,7 @@ namespace MoEmbed.Models
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="RequestContext" /> class with full parameters.
+        /// Initializes a new instance of <see cref="ConsumerRequest" /> class with full parameters.
         /// </summary>
         /// <param name="url">The URL to retrieve embedding information for.</param>
         /// <param name="maxWidth">The maximum width of the embedded resource.</param>
