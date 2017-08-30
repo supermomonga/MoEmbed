@@ -10,18 +10,6 @@ namespace MoEmbed.Models
     [Serializable]
     public class TwitterMetadata : Metadata.Metadata
     {
-        /// <summary>
-        /// Initializes a new instaince of the <see cref="TwitterMetadata" /> class.
-        /// </summary>
-        public TwitterMetadata()
-        {
-        }
-
-        internal TwitterMetadata(Uri url)
-        {
-            Url = url;
-        }
-
         internal static readonly Regex regex = new Regex(@"https:\/\/(mobile\.)?twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
 
         [NonSerialized]
@@ -54,13 +42,13 @@ namespace MoEmbed.Models
         }
 
         [NonSerialized]
-        private Uri _Url;
+        private string _Url;
 
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
         [DefaultValue(null)]
-        public Uri Url
+        public string Url
         {
             get
             {
@@ -71,7 +59,7 @@ namespace MoEmbed.Models
                 _Url = value;
                 if (value != null)
                 {
-                    var m = regex.Match(value.ToString());
+                    var m = regex.Match(value);
                     if (m.Success)
                     {
                         var groups = m.Groups;
@@ -124,7 +112,7 @@ namespace MoEmbed.Models
             var tweet = Tweet.GetTweet(TweetId);
             var extendedTweet = tweet.ExtendedTweet;
             // Update Url to set right screenName
-            Url = new Uri(tweet.Url);
+            Url = tweet.Url;
             var user = User.GetUserFromScreenName(ScreenName);
 
             var authorName = HtmlEntity.DeEntitize($"{ user.Name }(@{ ScreenName })");
@@ -139,7 +127,7 @@ namespace MoEmbed.Models
             {
                 Url = Url,
                 AuthorName = authorName,
-                AuthorUrl = new Uri($"https://twitter.com/{ ScreenName }/"),
+                AuthorUrl = $"https://twitter.com/{ ScreenName }/",
 
                 // TODO: Insert Fav, RT
                 Title = authorName,
@@ -148,9 +136,9 @@ namespace MoEmbed.Models
                 Description = HtmlEntity.DeEntitize(description),
 
                 ProviderName = "Twitter",
-                ProviderUrl = new Uri("https://twitter.com/"),
+                ProviderUrl = "https://twitter.com/",
             };
-            if(!!tweet.PossiblySensitive)
+            if (!!tweet.PossiblySensitive)
             {
                 Data.RestrictionPolicy = RestrictionPolicies.Restricted;
             }
@@ -159,11 +147,11 @@ namespace MoEmbed.Models
             {
                 Thumbnail = new ImageInfo
                 {
-                    Url = new Uri(user.ProfileImageUrlHttps),
+                    Url = user.ProfileImageUrlHttps,
                     Height = 48,
                     Width = 48,
                 },
-                RawUrl = new Uri(user.ProfileImageUrlHttps),
+                RawUrl = user.ProfileImageUrlHttps,
                 Location = Url,
                 RestrictionPolicy = RestrictionPolicies.Safe
             };
@@ -178,13 +166,13 @@ namespace MoEmbed.Models
                         Type = MediaTypes.Image,
                         Thumbnail = new ImageInfo
                         {
-                            Url = new Uri($"{m.MediaURLHttps}:thumb"),
+                            Url = $"{m.MediaURLHttps}:thumb",
                             // Thumbnail size is always 150x150
                             Width = 150,
                             Height = 150,
                         },
-                        RawUrl = new Uri(m.MediaURLHttps),
-                        Location = new Uri(m.ExpandedURL),
+                        RawUrl = m.MediaURLHttps,
+                        Location = m.ExpandedURL,
                         RestrictionPolicy = Data.RestrictionPolicy,
                     };
                     Data.Medias.Add(media);
@@ -196,13 +184,13 @@ namespace MoEmbed.Models
                         Type = MediaTypes.Video,
                         Thumbnail = new ImageInfo
                         {
-                            Url = new Uri($"{m.MediaURLHttps}:thumb"),
+                            Url = $"{m.MediaURLHttps}:thumb",
                             // Thumbnail size is always 150x150
                             Width = 150,
                             Height = 150,
                         },
-                        RawUrl = new Uri(m.MediaURLHttps),
-                        Location = new Uri(m.ExpandedURL),
+                        RawUrl = m.MediaURLHttps,
+                        Location = m.ExpandedURL,
                     };
                     Data.Medias.Add(media);
                 }

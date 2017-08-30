@@ -16,22 +16,6 @@ namespace MoEmbed.Models.Metadata
         [DefaultValue(0)]
         public int IllustId { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="PixivMetadata" /> class.
-        /// </summary>
-        public PixivMetadata()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="PixivMetadata" /> class with the specified url.
-        /// </summary>
-        /// <param name="uri">The resource URL.</param>
-        public PixivMetadata(string uri)
-        {
-            Uri = uri;
-        }
-
         /// <inheritdoc />
         protected override HtmlDocument LoadHtml(string html)
         {
@@ -41,8 +25,9 @@ namespace MoEmbed.Models.Metadata
             var restrictionPolicy = string.IsNullOrEmpty(sensoredImage) ? RestrictionPolicies.Unknown : RestrictionPolicies.Restricted;
             if (restrictionPolicy == RestrictionPolicies.Restricted)
             {
-                var illustUri = new Uri(sensoredImage.Replace("64x64", "128x128"));
-                Data.MetadataImage = new Media {
+                var illustUri = sensoredImage.Replace("64x64", "128x128");
+                Data.MetadataImage = new Media
+                {
                     Type = MediaTypes.Image,
                     Thumbnail = new ImageInfo
                     {
@@ -51,14 +36,15 @@ namespace MoEmbed.Models.Metadata
                         Height = 128
                     },
                     RawUrl = illustUri,
-                    Location = new Uri(Uri),
+                    Location = Url.ToString(),
                     RestrictionPolicy = restrictionPolicy
                 };
             }
             else
             {
-                var illustUri = new Uri($"http://embed.pixiv.net/decorate.php?illust_id={ IllustId }");
-                Data.MetadataImage = new Media {
+                var illustUri = $"http://embed.pixiv.net/decorate.php?illust_id={ IllustId }";
+                Data.MetadataImage = new Media
+                {
                     Type = MediaTypes.Image,
                     Thumbnail = new ImageInfo
                     {
@@ -66,7 +52,7 @@ namespace MoEmbed.Models.Metadata
                         Width = 600
                     },
                     RawUrl = illustUri,
-                    Location = new Uri(Uri),
+                    Location = Url.ToString(),
                     RestrictionPolicy = restrictionPolicy
                 };
             }
@@ -78,17 +64,3 @@ namespace MoEmbed.Models.Metadata
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

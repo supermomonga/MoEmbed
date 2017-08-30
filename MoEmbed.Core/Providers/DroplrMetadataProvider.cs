@@ -45,7 +45,7 @@ namespace MoEmbed.Providers
                 var url = "https://d.pr/i/" + m.Groups["hash"].Value;
                 return new DroplrMetadata()
                 {
-                    Uri = url,
+                    Url = url.ToUri(),
                 };
             }
             return null;

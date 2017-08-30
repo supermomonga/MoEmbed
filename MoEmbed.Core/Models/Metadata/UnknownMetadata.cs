@@ -17,41 +17,16 @@ namespace MoEmbed.Models.Metadata
     public class UnknownMetadata : Metadata
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="UnknownMetadata" /> class.
-        /// </summary>
-        public UnknownMetadata()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="UnknownMetadata" /> class with the specified url.
-        /// </summary>
-        /// <param name="uri">The resource URL.</param>
-        public UnknownMetadata(string uri)
-        {
-            Uri = uri;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="UnknownMetadata" /> class with the specified url.
-        /// </summary>
-        /// <param name="uri">The resource URL.</param>
-        public UnknownMetadata(Uri uri)
-        {
-            Uri = uri.ToString();
-        }
-
-        /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
         [DefaultValue(null)]
-        public string Uri { get; set; }
+        public Uri Url { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL the <see cref="Uri" /> moved to.
+        /// Gets or sets the URL the <see cref="Url" /> moved to.
         /// </summary>
         [DefaultValue(null)]
-        public string MovedTo { get; set; }
+        public Uri MovedToUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the resolved data.
@@ -102,9 +77,9 @@ namespace MoEmbed.Models.Metadata
                 return null;
             }
 
-            if (MovedTo != null && MovedTo != Uri)
+            if (MovedToUrl != null && MovedToUrl != Url)
             {
-                var mcr = new ConsumerRequest(new Uri(MovedTo), context.MaxWidth, context.MaxHeight, context.Format);
+                var mcr = new ConsumerRequest(MovedToUrl, context.MaxWidth, context.MaxHeight, context.Format);
                 return Data = (await context.Service.GetDataAsync(mcr).ConfigureAwait(false)).Data;
             }
 
@@ -116,13 +91,12 @@ namespace MoEmbed.Models.Metadata
             }
             else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
             {
-                var u = new Uri(MovedTo ?? Uri);
                 Data = new EmbedData()
                 {
                     Type = mediaType[0] == 'i' ? EmbedDataTypes.SingleImage
                     : mediaType[0] == 'v' ? EmbedDataTypes.SingleVideo
                     : EmbedDataTypes.SingleAudio,
-                    Url = u,
+                    Url = Url.ToString(),
                     Medias = new List<Media>(1)
                         {
                             new Media()
@@ -130,7 +104,7 @@ namespace MoEmbed.Models.Metadata
                                 Type = mediaType[0] == 'i' ?  MediaTypes.Image
                                 :mediaType[0] == 'v' ?  MediaTypes.Video
                                 : MediaTypes.Audio,
-                                RawUrl = u
+                                RawUrl = Url.ToString()
                             }
                         }
                 };
@@ -142,7 +116,7 @@ namespace MoEmbed.Models.Metadata
                         Type = MediaTypes.Image,
                         Thumbnail = new ImageInfo
                         {
-                            Url = u
+                            Url = Url.ToString()
                         }
                     };
                 }
@@ -150,7 +124,7 @@ namespace MoEmbed.Models.Metadata
 
             if (Data != null)
             {
-                Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(MovedTo ?? Uri);
+                Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(Url.ToString());
                 Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
             }
 
@@ -159,8 +133,8 @@ namespace MoEmbed.Models.Metadata
 
         private async Task<HttpResponseMessage> GetResponseAsync(HttpClient hc)
         {
-            var res = await hc.FollowRedirectAsync(MovedTo ?? Uri).ConfigureAwait(false);
-            MovedTo = res.MovedTo ?? MovedTo;
+            var res = await hc.FollowRedirectAsync(Url).ConfigureAwait(false);
+            MovedToUrl = res.MovedToUrl ?? MovedToUrl;
             return res.Message;
         }
 
@@ -181,7 +155,7 @@ namespace MoEmbed.Models.Metadata
             // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
             {
-                Url = new Uri(graph.Url.DeEntitize() ?? MovedTo ?? Uri),
+                Url = graph.Url.DeEntitize() ?? Url.ToString(),
                 Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value).DeEntitize(),
                 Description = (graph.Description ?? nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value).DeEntitize(),
                 ProviderName = graph.SiteName.DeEntitize(),
@@ -206,7 +180,7 @@ namespace MoEmbed.Models.Metadata
                 // Determines whether reference is absolute URL.
                 if (System.Uri.TryCreate(authorRef, UriKind.Absolute, out var authorUri))
                 {
-                    Data.AuthorUrl = authorUri;
+                    Data.AuthorUrl = authorRef;
 
                     // As author is OGP Reference type, `:title` structured property is invalid.
                     // But try to read value.
@@ -223,7 +197,7 @@ namespace MoEmbed.Models.Metadata
 
             foreach (var img in graph.Images)
             {
-                var url = (img.SecureUrl ?? img.Url).DeEntitize().ToUri();
+                var url = (img.SecureUrl ?? img.Url).DeEntitize();
 
                 if (url != null)
                 {
@@ -241,7 +215,7 @@ namespace MoEmbed.Models.Metadata
             }
             foreach (var v in graph.Videos)
             {
-                var url = (v.SecureUrl ?? v.Url).DeEntitize().ToUri();
+                var url = (v.SecureUrl ?? v.Url).DeEntitize();
 
                 if (url != null)
                 {
@@ -250,7 +224,7 @@ namespace MoEmbed.Models.Metadata
                         Type = MediaTypes.Video,
                         Thumbnail = new ImageInfo
                         {
-                            Url = (v.Image?.SecureUrl ?? v.Image?.Url).DeEntitize().ToUri()
+                            Url = (v.Image?.SecureUrl ?? v.Image?.Url).DeEntitize()
                         },
                         RawUrl = url,
                         Location = Data.Url,
@@ -260,7 +234,7 @@ namespace MoEmbed.Models.Metadata
 
             foreach (var a in graph.Audios)
             {
-                var url = (a.SecureUrl ?? a.Url).DeEntitize().ToUri();
+                var url = (a.SecureUrl ?? a.Url).DeEntitize();
 
                 if (url != null)
                 {
@@ -269,7 +243,7 @@ namespace MoEmbed.Models.Metadata
                         Type = MediaTypes.Audio,
                         Thumbnail = new ImageInfo
                         {
-                            Url = (a.Image?.SecureUrl ?? a.Image?.Url).DeEntitize().ToUri()
+                            Url = (a.Image?.SecureUrl ?? a.Image?.Url).DeEntitize()
                         },
                         RawUrl = url,
                         Location = Data.Url,

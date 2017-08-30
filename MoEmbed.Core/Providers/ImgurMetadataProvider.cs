@@ -35,7 +35,7 @@ namespace MoEmbed.Providers
             }
             return new ImgurMetadata()
             {
-                Uri = request.Url.ToString(),
+                Url = request.Url,
             };
         }
     }

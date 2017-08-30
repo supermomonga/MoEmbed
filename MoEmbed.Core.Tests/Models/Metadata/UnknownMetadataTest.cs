@@ -25,7 +25,7 @@ namespace MoEmbed.Models.Metadata
 
             var rm = new UnknownMetadata()
             {
-                Uri = url
+                Url = url.ToUri()
             };
 
             var d1 = rm.FetchAsync(GetRequestContext(url)).GetAwaiter().GetResult();
@@ -55,7 +55,7 @@ namespace MoEmbed.Models.Metadata
         [InlineData("https://gyazo.com/7dd82fe03e109f4a9db9074831b4c65b", EmbedDataTypes.MixedContent)]
         public async void ResourceTypeTest(string url, EmbedDataTypes type)
         {
-            var rm = new UnknownMetadata() { Uri = url };
+            var rm = new UnknownMetadata() { Url = url.ToUri() };
             var d = await rm.FetchAsync(GetRequestContext(url));
             Assert.Equal(type, d.Type);
         }

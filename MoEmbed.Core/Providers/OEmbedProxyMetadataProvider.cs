@@ -116,7 +116,7 @@ namespace MoEmbed.Providers
 
             var m = CreateMetadata();
 
-            m.Uri = request.Url.ToString();
+            m.Url = request.Url.ToString();
             m.OEmbedUrl = GetProviderUriFor(request).ToString();
 
             return m;

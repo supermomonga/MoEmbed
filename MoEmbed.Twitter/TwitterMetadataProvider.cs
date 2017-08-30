@@ -37,7 +37,10 @@ namespace MoEmbed.Providers
             {
                 return null;
             }
-            return new TwitterMetadata(request.Url);
+            return new TwitterMetadata()
+            {
+                Url = request.Url.ToString()
+            };
         }
     }
 }

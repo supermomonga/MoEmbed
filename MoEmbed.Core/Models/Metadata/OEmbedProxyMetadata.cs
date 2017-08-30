@@ -19,7 +19,7 @@ namespace MoEmbed.Models.Metadata
         /// Gets or sets the requested URL.
         /// </summary>
         [DefaultValue(null)]
-        public string Uri { get; set; }
+        public string Url { get; set; }
 
         /// <summary>
         /// Gets or sets the oEmbed servide URL.
@@ -61,7 +61,7 @@ namespace MoEmbed.Models.Metadata
         {
             var hc = context.Service.HttpClient;
 
-            var redirection = await hc.FollowRedirectAsync(OEmbedUrl).ConfigureAwait(false);
+            var redirection = await hc.FollowRedirectAsync(OEmbedUrl.ToUri()).ConfigureAwait(false);
 
             var r = redirection.Message;
             r.EnsureSuccessStatusCode();
@@ -103,7 +103,7 @@ namespace MoEmbed.Models.Metadata
         {
             var data = new EmbedData()
             {
-                Url = new Uri(Uri)
+                Url = Url
             };
             if (values.TryGetValue(TITLE, out var title))
             {
@@ -115,7 +115,7 @@ namespace MoEmbed.Models.Metadata
             }
             if (values.TryGetValue(AUTHOR_URL, out var authorUrl))
             {
-                data.AuthorUrl = authorUrl?.ToString().ToUri();
+                data.AuthorUrl = authorUrl?.ToString();
             }
             if (values.TryGetValue(PROVIDER_NAME, out var providerName))
             {
@@ -123,7 +123,7 @@ namespace MoEmbed.Models.Metadata
             }
             if (values.TryGetValue(PROVIDER_URL, out var providerUrl))
             {
-                data.ProviderUrl = providerUrl?.ToString().ToUri();
+                data.ProviderUrl = providerUrl?.ToString();
             }
             if (values.TryGetValue(CACHE_AGE, out var cacheAge))
             {
@@ -137,7 +137,7 @@ namespace MoEmbed.Models.Metadata
                 case PHOTO_TYPE:
                     if (values.TryGetValue(URL, out var url))
                     {
-                        var u = url?.ToString().ToUri();
+                        var u = url?.ToString();
 
                         values.TryGetValue(WIDTH, out var w);
                         values.TryGetValue(HEIGHT, out var h);
@@ -170,7 +170,7 @@ namespace MoEmbed.Models.Metadata
                         {
                             Thumbnail = new ImageInfo
                             {
-                                Url = thumbnailUrl?.ToString().ToUri()
+                                Url = thumbnailUrl?.ToString()
                             }
                         };
 
@@ -190,7 +190,7 @@ namespace MoEmbed.Models.Metadata
 
                         if (data.MetadataImage != null)
                         {
-                            data.MetadataImage.RawUrl = data.MetadataImage.Location = Uri.ToUri();
+                            data.MetadataImage.RawUrl = data.MetadataImage.Location = Url;
 
                             data.Medias.Add(data.MetadataImage);
                         }

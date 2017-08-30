@@ -47,7 +47,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("author_url")]
-        public Uri AuthorUrl { get; set; }
+        public string AuthorUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the resource provider.
@@ -61,7 +61,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("provider_url")]
-        public Uri ProviderUrl { get; set; }
+        public string ProviderUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the suggested cache lifetime for this resource, in seconds. Consumers may choose to use this value or not.
@@ -82,7 +82,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("url")]
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         /// <summary>
         /// Gets a content restriction policy that applied to the URL.

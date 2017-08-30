@@ -41,8 +41,9 @@ namespace MoEmbed.Providers
             if (m.Success)
             {
                 var illustId = int.Parse(m.Groups["illust_id"].Value);
-                return new PixivMetadata($"https://www.pixiv.net/member_illust.php?mode=medium&illust_id={ illustId }")
+                return new PixivMetadata()
                 {
+                    Url = $"https://www.pixiv.net/member_illust.php?mode=medium&illust_id={ illustId }".ToUri(),
                     IllustId = illustId
                 };
             }

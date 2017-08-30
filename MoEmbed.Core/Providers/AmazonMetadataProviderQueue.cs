@@ -118,7 +118,7 @@ namespace MoEmbed.Providers
                         ["ResponseGroup"] = "Images,ItemAttributes,EditorialReview",
                     });
 
-                    var res = (await client.FollowRedirectAsync(url).ConfigureAwait(false)).Message;
+                    var res = (await client.FollowRedirectAsync(url.ToUri()).ConfigureAwait(false)).Message;
                     _LastRequest = DateTime.Now;
 
                     if (res.StatusCode == HttpStatusCode.ServiceUnavailable)
@@ -185,9 +185,9 @@ namespace MoEmbed.Providers
                 var d = new EmbedData()
                 {
                     Title = $"{title} - {sn}",
-                    Url = ($"https://www.{item.Destination}/dp/{item.Asin}" + itemElem.Element("DetailPageURL")?.InnerText.ToUri().Query).ToUri(),
+                    Url = $"https://www.{item.Destination}/dp/{item.Asin}" + itemElem.Element("DetailPageURL")?.InnerText.ToUri().Query,
                     ProviderName = sn,
-                    ProviderUrl = new Uri($"https://www.{item.Destination}"),
+                    ProviderUrl = $"https://www.{item.Destination}",
                 };
                 if (int.TryParse(attributes?.Element("IsAdultProduct")?.InnerText, out int i) && i > 0)
                 {
@@ -205,7 +205,7 @@ namespace MoEmbed.Providers
                                     .OfType<XmlElement>()
                                     .Select(ce => new ImageInfo
                                     {
-                                        Url = ce.Element("URL")?.InnerText.ToUri(),
+                                        Url = ce.Element("URL")?.InnerText,
                                         Width = int.TryParse(ce.Element("Width")?.InnerText, out var w) ? w : -1,
                                         Height = int.TryParse(ce.Element("Height")?.InnerText, out var h) ? h : -1,
                                     })

@@ -17,7 +17,7 @@ namespace MoEmbed.Models.Metadata
 
             var rm = new OEmbedProxyMetadata()
             {
-                Uri = url,
+                Url = url,
                 OEmbedUrl = oEmbedUrl
             };
 
@@ -48,7 +48,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var value = "hoge hoge";
             var d = t.CreateEmbedData(new Dictionary<string, object>()
@@ -64,7 +64,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var value = "hoge hoge";
             var d = t.CreateEmbedData(new Dictionary<string, object>()
@@ -80,7 +80,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var value = "http://hoge";
             var d = t.CreateEmbedData(new Dictionary<string, object>()
@@ -88,7 +88,7 @@ namespace MoEmbed.Models.Metadata
                 ["author_url"] = value
             });
 
-            Assert.Equal(value.ToUri(), d.AuthorUrl);
+            Assert.Equal(value, d.AuthorUrl);
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var value = "hoge hoge";
             var d = t.CreateEmbedData(new Dictionary<string, object>()
@@ -112,7 +112,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var value = "http://hoge";
             var d = t.CreateEmbedData(new Dictionary<string, object>()
@@ -120,7 +120,7 @@ namespace MoEmbed.Models.Metadata
                 ["provider_url"] = value
             });
 
-            Assert.Equal(value.ToUri(), d.ProviderUrl);
+            Assert.Equal(value, d.ProviderUrl);
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var value = "123";
             var d = t.CreateEmbedData(new Dictionary<string, object>()
@@ -144,7 +144,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var d = t.CreateEmbedData(new Dictionary<string, object>()
             {
@@ -158,11 +158,11 @@ namespace MoEmbed.Models.Metadata
             });
 
             Assert.Equal(EmbedDataTypes.SingleImage, d.Type);
-            Assert.Equal("http://url".ToUri(), d.MetadataImage.Thumbnail.Url);
+            Assert.Equal("http://url", d.MetadataImage.Thumbnail.Url);
             Assert.Equal(480, d.MetadataImage.Thumbnail.Width);
             Assert.Equal(320, d.MetadataImage.Thumbnail.Height);
-            Assert.Equal("http://url".ToUri(), d.MetadataImage.RawUrl);
-            Assert.Equal("http://url".ToUri(), d.MetadataImage.Location);
+            Assert.Equal("http://url", d.MetadataImage.RawUrl);
+            Assert.Equal("http://url", d.MetadataImage.Location);
             Assert.Equal(d.MetadataImage, d.Medias.Single());
         }
 
@@ -171,7 +171,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var d = t.CreateEmbedData(new Dictionary<string, object>()
             {
@@ -185,11 +185,11 @@ namespace MoEmbed.Models.Metadata
             });
 
             Assert.Equal(EmbedDataTypes.SingleVideo, d.Type);
-            Assert.Equal("http://thumb".ToUri(), d.MetadataImage.Thumbnail.Url);
+            Assert.Equal("http://thumb", d.MetadataImage.Thumbnail.Url);
             Assert.Equal(48, d.MetadataImage.Thumbnail.Width);
             Assert.Equal(32, d.MetadataImage.Thumbnail.Height);
-            Assert.Equal("http://t".ToUri(), d.MetadataImage.RawUrl);
-            Assert.Equal("http://t".ToUri(), d.MetadataImage.Location);
+            Assert.Equal("http://t", d.MetadataImage.RawUrl);
+            Assert.Equal("http://t", d.MetadataImage.Location);
             Assert.Equal(d.MetadataImage, d.Medias.Single());
         }
 
@@ -202,7 +202,7 @@ namespace MoEmbed.Models.Metadata
         {
             var t = new OEmbedProxyMetadata()
             {
-                Uri = "http://t"
+                Url = "http://t"
             };
             var d = t.CreateEmbedData(new Dictionary<string, object>()
             {
@@ -216,7 +216,7 @@ namespace MoEmbed.Models.Metadata
             });
 
             Assert.Equal(EmbedDataTypes.MixedContent, d.Type);
-            Assert.Equal("http://thumb".ToUri(), d.MetadataImage.Thumbnail.Url);
+            Assert.Equal("http://thumb", d.MetadataImage.Thumbnail.Url);
             Assert.Equal(48, d.MetadataImage.Thumbnail.Width);
             Assert.Equal(32, d.MetadataImage.Thumbnail.Height);
             Assert.Null(d.MetadataImage.RawUrl);
