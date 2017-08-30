@@ -136,14 +136,15 @@ namespace MoEmbed.Models.Metadata
                         Url = new Uri(values["thumbnail_url"].ToString())
                     }
                 };
-            }
-            if (values.ContainsKey("thumbnail_width") && data.MetadataImage?.Thumbnail != null)
-            {
-                data.MetadataImage.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
-            }
-            if (values.ContainsKey("thumbnail_height") && data.MetadataImage?.Thumbnail != null)
-            {
-                data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+
+                if (values.ContainsKey("thumbnail_width") && data.MetadataImage?.Thumbnail != null)
+                {
+                    data.MetadataImage.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
+                }
+                if (values.ContainsKey("thumbnail_height") && data.MetadataImage?.Thumbnail != null)
+                {
+                    data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
+                }
             }
 
             switch (values["type"])
@@ -151,17 +152,17 @@ namespace MoEmbed.Models.Metadata
                 case "photo":
                     data.Type = EmbedDataTypes.SingleImage;
                     data.MetadataImage = new Media()
+                    {
+                        Type = MediaTypes.Image,
+                        Thumbnail = new ImageInfo
                         {
-                            Type = MediaTypes.Image,
-                            Thumbnail = new ImageInfo
-                            {
-                                Url = new Uri(values["url"].ToString()),
-                                Width = (values["width"] as IConvertible)?.ToInt32(null),
-                                Height = (values["height"] as IConvertible)?.ToInt32(null)
-                            },
-                            RawUrl = new Uri(values["url"].ToString()),
-                            Location = new Uri(values["url"].ToString())
-                        };
+                            Url = new Uri(values["url"].ToString()),
+                            Width = (values["width"] as IConvertible)?.ToInt32(null),
+                            Height = (values["height"] as IConvertible)?.ToInt32(null)
+                        },
+                        RawUrl = new Uri(values["url"].ToString()),
+                        Location = new Uri(values["url"].ToString())
+                    };
                     data.Medias.Add(data.MetadataImage);
                     break;
 
