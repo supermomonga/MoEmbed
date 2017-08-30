@@ -8,12 +8,12 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Handles oEmbed request for <see href="https://droplr.com" />.
     /// </summary>
-    public sealed partial class DroplrMetadataProvider : UnknownMetadataProvider, IMetadataProvider
+    public sealed class DroplrMetadataProvider : IMetadataProvider
     {
         private static readonly Regex _UriPattern = new Regex(@"^https?://d.pr/i/(?<hash>[A-Za-z0-9]+)(\.(jpg|png|gif|mp4|mp3))?");
 
         bool IMetadataProvider.SupportsAnyHost
-            => true;
+            => false;
 
         /// <summary>
         /// Returns a sequence of host names that is able to handle.

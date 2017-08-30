@@ -8,7 +8,7 @@ namespace MoEmbed.Providers
     /// <summary>
     /// Represents the <see cref="Metadata"/> for the URL of the imgur.com
     /// </summary>
-    public class ImgurMetadataProvider : UnknownMetadataProvider, IMetadataProvider
+    public sealed class ImgurMetadataProvider : IMetadataProvider
     {
         bool IMetadataProvider.SupportsAnyHost
             => false;
@@ -19,15 +19,15 @@ namespace MoEmbed.Providers
         /// Returns a sequence of host names that is able to handle.
         /// </summary>
         /// <returns>The sequence of host names.</returns>
-        public override IEnumerable<string> GetSupportedHostNames()
+        public IEnumerable<string> GetSupportedHostNames()
             => new[] { "imgur.com" };
 
         /// <inheritdoc />
-        public override bool CanHandle(ConsumerRequest request)
+        public bool CanHandle(ConsumerRequest request)
             => regex.IsMatch(request.Url.ToString());
 
         /// <inheritdoc />
-        public override Metadata GetMetadata(ConsumerRequest request)
+        public Metadata GetMetadata(ConsumerRequest request)
         {
             if (!CanHandle(request))
             {
