@@ -16,7 +16,7 @@ namespace MoEmbed.Models.Metadata
             var hd = base.LoadHtml(html);
             var nav = hd.CreateNavigator();
 
-            Data.Type = EmbedDataTypes.SingleVideo;
+            Data.Type = EmbedDataTypes.MixedContent;
 
             var noText = nav.SelectSingleNode("//*[@class='movie-content-note']/h3/text()")?.Value?.Trim();
             if (noText != null)
