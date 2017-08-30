@@ -168,7 +168,8 @@ namespace MoEmbed.Models.Metadata
         /// Acquires <see cref="Data" /> embedded in the specified HTML.
         /// </summary>
         /// <param name="html">The HTML markup to parse.</param>
-        protected virtual void LoadHtml(string html)
+        /// <returns>The parsed <see cref="HtmlDocument"/>.</returns>
+        protected virtual HtmlDocument LoadHtml(string html)
         {
             var hd = new HtmlDocument();
             hd.LoadHtml(html);
@@ -302,6 +303,8 @@ namespace MoEmbed.Models.Metadata
                     Data.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
             }
+
+            return hd;
         }
     }
 }
