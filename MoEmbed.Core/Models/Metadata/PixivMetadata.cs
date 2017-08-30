@@ -77,6 +77,7 @@ namespace MoEmbed.Models.Metadata
                     });
             }
 
+            Data.MetadataImage = null;
             Data.RestrictionPolicy = restrictionPolicy;
 
             return hd;
