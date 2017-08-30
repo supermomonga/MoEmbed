@@ -40,7 +40,11 @@ namespace MoEmbed.Providers
             var m = _UriPattern.Match(request.Url.ToString());
             if (m.Success)
             {
-                return new PixivMetadata($"https://www.pixiv.net/member_illust.php?mode=medium&illust_id={ m.Groups["illust_id"].Value }");
+                var illustId = int.Parse(m.Groups["illust_id"].Value);
+                return new PixivMetadata($"https://www.pixiv.net/member_illust.php?mode=medium&illust_id={ illustId }")
+                {
+                    IllustId = illustId
+                };
             }
             return null;
         }
