@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Portable.Xaml;
 using Xunit;
 
@@ -136,6 +137,91 @@ namespace MoEmbed.Models.Metadata
             });
 
             Assert.Equal(123, d.CacheAge);
+        }
+
+        [Fact]
+        public void CreateEmbedDataTest_Medias_Photo()
+        {
+            var t = new OEmbedProxyMetadata()
+            {
+                Uri = "http://t"
+            };
+            var d = t.CreateEmbedData(new Dictionary<string, object>()
+            {
+                ["type"] = "photo",
+                ["thumbnail_url"] = "http://thumb",
+                ["thumbnail_width"] = 48,
+                ["thumbnail_height"] = 32,
+                ["url"] = "http://url",
+                ["width"] = 480,
+                ["height"] = 320,
+            });
+
+            Assert.Equal(EmbedDataTypes.SingleImage, d.Type);
+            Assert.Equal("http://url".ToUri(), d.MetadataImage.Thumbnail.Url);
+            Assert.Equal(480, d.MetadataImage.Thumbnail.Width);
+            Assert.Equal(320, d.MetadataImage.Thumbnail.Height);
+            Assert.Equal("http://url".ToUri(), d.MetadataImage.RawUrl);
+            Assert.Equal("http://url".ToUri(), d.MetadataImage.Location);
+            Assert.Equal(d.MetadataImage, d.Medias.Single());
+        }
+
+        [Fact]
+        public void CreateEmbedDataTest_Medias_Video()
+        {
+            var t = new OEmbedProxyMetadata()
+            {
+                Uri = "http://t"
+            };
+            var d = t.CreateEmbedData(new Dictionary<string, object>()
+            {
+                ["type"] = "video",
+                ["thumbnail_url"] = "http://thumb",
+                ["thumbnail_width"] = 48,
+                ["thumbnail_height"] = 32,
+                ["url"] = "http://url",
+                ["width"] = 480,
+                ["height"] = 320,
+            });
+
+            Assert.Equal(EmbedDataTypes.SingleVideo, d.Type);
+            Assert.Equal("http://thumb".ToUri(), d.MetadataImage.Thumbnail.Url);
+            Assert.Equal(48, d.MetadataImage.Thumbnail.Width);
+            Assert.Equal(32, d.MetadataImage.Thumbnail.Height);
+            Assert.Equal("http://t".ToUri(), d.MetadataImage.RawUrl);
+            Assert.Equal("http://t".ToUri(), d.MetadataImage.Location);
+            Assert.Equal(d.MetadataImage, d.Medias.Single());
+        }
+
+        [Theory]
+        [InlineData("link")]
+        [InlineData("rich")]
+        [InlineData("hoge")]
+        [InlineData(null)]
+        public void CreateEmbedDataTest_Medias_Other(string type)
+        {
+            var t = new OEmbedProxyMetadata()
+            {
+                Uri = "http://t"
+            };
+            var d = t.CreateEmbedData(new Dictionary<string, object>()
+            {
+                ["type"] = type,
+                ["thumbnail_url"] = "http://thumb",
+                ["thumbnail_width"] = 48,
+                ["thumbnail_height"] = 32,
+                ["url"] = "http://url",
+                ["width"] = 480,
+                ["height"] = 320,
+            });
+
+            Assert.Equal(EmbedDataTypes.MixedContent, d.Type);
+            Assert.Equal("http://thumb".ToUri(), d.MetadataImage.Thumbnail.Url);
+            Assert.Equal(48, d.MetadataImage.Thumbnail.Width);
+            Assert.Equal(32, d.MetadataImage.Thumbnail.Height);
+            Assert.Null(d.MetadataImage.RawUrl);
+            Assert.Null(d.MetadataImage.Location);
+            Assert.False(d.Medias.Any());
         }
 
         #endregion CreateEmbedData

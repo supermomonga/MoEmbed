@@ -130,75 +130,73 @@ namespace MoEmbed.Models.Metadata
                 data.CacheAge = (cacheAge as IConvertible).ToInt32(null);
             }
 
-            if (values.TryGetValue(TYPE, out var typeObj))
+            values.TryGetValue(TYPE, out var typeObj);
+            var type = typeObj?.ToString();
+            switch (type)
             {
-                var type = typeObj?.ToString();
-                switch (type)
-                {
-                    case PHOTO_TYPE:
-                        if (values.TryGetValue(URL, out var url))
+                case PHOTO_TYPE:
+                    if (values.TryGetValue(URL, out var url))
+                    {
+                        var u = url?.ToString().ToUri();
+
+                        values.TryGetValue(WIDTH, out var w);
+                        values.TryGetValue(HEIGHT, out var h);
+
+                        data.Type = EmbedDataTypes.SingleImage;
+                        data.MetadataImage = new Media()
                         {
-                            var u = url?.ToString().ToUri();
-
-                            values.TryGetValue(WIDTH, out var w);
-                            values.TryGetValue(HEIGHT, out var h);
-
-                            data.Type = EmbedDataTypes.SingleImage;
-                            data.MetadataImage = new Media()
+                            Type = MediaTypes.Image,
+                            Thumbnail = new ImageInfo
                             {
-                                Type = MediaTypes.Image,
-                                Thumbnail = new ImageInfo
-                                {
-                                    Url = u,
-                                    Width = (w as IConvertible)?.ToInt32(null),
-                                    Height = (h as IConvertible)?.ToInt32(null)
-                                },
-                                RawUrl = u,
-                                Location = u
-                            };
+                                Url = u,
+                                Width = (w as IConvertible)?.ToInt32(null),
+                                Height = (h as IConvertible)?.ToInt32(null)
+                            },
+                            RawUrl = u,
+                            Location = u
+                        };
+                        data.Medias.Add(data.MetadataImage);
+                    }
+
+                    break;
+
+                case VIDEO_TYPE:
+                case LINK_TYPE:
+                case RICH_TYPE:
+                default:
+                    if (values.TryGetValue(THUMBNAIL_URL, out var thumbnailUrl))
+                    {
+                        data.MetadataImage = new Media
+                        {
+                            Thumbnail = new ImageInfo
+                            {
+                                Url = thumbnailUrl?.ToString().ToUri()
+                            }
+                        };
+
+                        if (values.TryGetValue(THUMBNAIL_WIDTH, out var thumbnailWidth))
+                        {
+                            data.MetadataImage.Thumbnail.Width = (thumbnailWidth as IConvertible).ToInt32(null);
+                        }
+                        if (values.TryGetValue(THUMBNAIL_HEIGHT, out var thumbnailHeight))
+                        {
+                            data.MetadataImage.Thumbnail.Height = (thumbnailHeight as IConvertible).ToInt32(null);
+                        }
+                    }
+                    if (type == VIDEO_TYPE)
+                    {
+                        // TODO: parse video url from html parameter
+                        data.Type = EmbedDataTypes.SingleVideo;
+
+                        if (data.MetadataImage != null)
+                        {
+                            data.MetadataImage.RawUrl = data.MetadataImage.Location = Uri.ToUri();
+
                             data.Medias.Add(data.MetadataImage);
                         }
+                    }
 
-                        break;
-
-                    case VIDEO_TYPE:
-                    case LINK_TYPE:
-                    case RICH_TYPE:
-                    default:
-                        if (values.TryGetValue(THUMBNAIL_URL, out var thumbnailUrl))
-                        {
-                            data.MetadataImage = new Media
-                            {
-                                Thumbnail = new ImageInfo
-                                {
-                                    Url = thumbnailUrl?.ToString().ToUri()
-                                }
-                            };
-
-                            if (values.TryGetValue(THUMBNAIL_WIDTH, out var thumbnailWidth))
-                            {
-                                data.MetadataImage.Thumbnail.Width = (thumbnailWidth as IConvertible).ToInt32(null);
-                            }
-                            if (values.TryGetValue(THUMBNAIL_HEIGHT, out var thumbnailHeight))
-                            {
-                                data.MetadataImage.Thumbnail.Height = (thumbnailHeight as IConvertible).ToInt32(null);
-                            }
-                        }
-                        if (type == VIDEO_TYPE)
-                        {
-                            // TODO: parse video url from html parameter
-                            data.Type = EmbedDataTypes.SingleVideo;
-
-                            if (data.MetadataImage != null)
-                            {
-                                data.MetadataImage.RawUrl = data.MetadataImage.Location = Uri.ToUri();
-
-                                data.Medias.Add(data.MetadataImage);
-                            }
-                        }
-
-                        break;
-                }
+                    break;
             }
 
             return data;
