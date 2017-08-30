@@ -140,18 +140,18 @@ using (var sw = new StreamWriter(Path.Combine(dir, "../MoEmbed.Core/Providers/Ge
         sw.WriteLine();
 
         sw.WriteLine("        /// <inheritdoc />");
-        sw.WriteLine("         protected override Uri GetProviderUriFor(ConsumerRequest request)");
+        sw.WriteLine("        protected override Uri GetProviderUriFor(ConsumerRequest request)");
         if (url.EndsWith(".xml") || url.EndsWith(".json"))
         {
-            sw.WriteLine($"             => GetProviderUriWithoutFormat(\"{url}\", request);");
+            sw.WriteLine($"            => GetProviderUriWithoutFormat(\"{url}\", request);");
         }
         else if (url.EndsWith(".{format}"))
         {
-            sw.WriteLine($"             => GetProviderUriWithExtension(\"{url.Substring(0, url.Length - 9)}\", request);");
+            sw.WriteLine($"            => GetProviderUriWithExtension(\"{url.Substring(0, url.Length - 9)}\", request);");
         }
         else
         {
-            sw.WriteLine($"             => GetProviderUriCore(\"{url.Split('?')[0]}\", request);");
+            sw.WriteLine($"            => GetProviderUriCore(\"{url.Split('?')[0]}\", request);");
         }
         sw.WriteLine(@"    }");
         sw.WriteLine();

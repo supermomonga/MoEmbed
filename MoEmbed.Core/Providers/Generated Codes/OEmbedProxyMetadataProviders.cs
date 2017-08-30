@@ -24,8 +24,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.23hq.com/23/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.23hq.com/23/oembed", request);
     }
 
     /// <summary>
@@ -48,8 +48,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://alpha-api.app.net/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://alpha-api.app.net/oembed", request);
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://live.amcharts.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://live.amcharts.com/oembed", request);
     }
 
     /// <summary>
@@ -94,8 +94,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://animatron.com/oembed/json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://animatron.com/oembed/json", request);
     }
 
     /// <summary>
@@ -116,8 +116,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://animoto.com/oembeds/create", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://animoto.com/oembeds/create", request);
     }
 
     /// <summary>
@@ -138,8 +138,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://audiosnaps.com/service/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://audiosnaps.com/service/oembed", request);
     }
 
     /// <summary>
@@ -160,8 +160,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://blackfire.io/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://blackfire.io/oembed", request);
     }
 
     /// <summary>
@@ -182,8 +182,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://boxofficebuz.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://boxofficebuz.com/oembed", request);
     }
 
     /// <summary>
@@ -204,8 +204,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://cacoo.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://cacoo.com/oembed", request);
     }
 
     /// <summary>
@@ -227,8 +227,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("http://img.catbo.at/oembed.json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("http://img.catbo.at/oembed.json", request);
     }
 
     /// <summary>
@@ -250,8 +250,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://embed.chartblocks.com/1.0/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://embed.chartblocks.com/1.0/oembed", request);
     }
 
     /// <summary>
@@ -272,8 +272,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://chirb.it/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://chirb.it/oembed", request);
     }
 
     /// <summary>
@@ -295,8 +295,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.circuitlab.com/circuit/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.circuitlab.com/circuit/oembed/", request);
     }
 
     /// <summary>
@@ -318,8 +318,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.clipland.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.clipland.com/api/oembed", request);
     }
 
     /// <summary>
@@ -340,8 +340,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://api.clyp.it/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://api.clyp.it/oembed/", request);
     }
 
     /// <summary>
@@ -362,8 +362,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://codepen.io/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://codepen.io/api/oembed", request);
     }
 
     /// <summary>
@@ -385,8 +385,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://codepoints.net/api/v1/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://codepoints.net/api/v1/oembed", request);
     }
 
     /// <summary>
@@ -408,8 +408,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://www.collegehumor.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://www.collegehumor.com/oembed", request);
     }
 
     /// <summary>
@@ -430,8 +430,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://coub.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://coub.com/api/oembed", request);
     }
 
     /// <summary>
@@ -452,8 +452,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://crowdranking.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://crowdranking.com/api/oembed", request);
     }
 
     /// <summary>
@@ -475,8 +475,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.dailymotion.com/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.dailymotion.com/services/oembed", request);
     }
 
     /// <summary>
@@ -498,8 +498,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://api.dailymile.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://api.dailymile.com/oembed", request);
     }
 
     /// <summary>
@@ -522,8 +522,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://backend.deviantart.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://backend.deviantart.com/oembed", request);
     }
 
     /// <summary>
@@ -544,8 +544,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://*.didacte.com/cards/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://*.didacte.com/cards/oembed", request);
     }
 
     /// <summary>
@@ -567,8 +567,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.dipity.com/oembed/timeline/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.dipity.com/oembed/timeline/", request);
     }
 
     /// <summary>
@@ -590,8 +590,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.docdroid.net/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.docdroid.net/api/oembed", request);
     }
 
     /// <summary>
@@ -613,8 +613,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://docs.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://docs.com/api/oembed", request);
     }
 
     /// <summary>
@@ -635,8 +635,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://dotsub.com/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://dotsub.com/services/oembed", request);
     }
 
     /// <summary>
@@ -657,8 +657,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://edocr.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://edocr.com/api/oembed", request);
     }
 
     /// <summary>
@@ -680,8 +680,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("https://www.edumedia-sciences.com/oembed.xml", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("https://www.edumedia-sciences.com/oembed.xml", request);
     }
 
     /// <summary>
@@ -703,8 +703,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://egliseinfo.catholique.fr/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://egliseinfo.catholique.fr/api/oembed", request);
     }
 
     /// <summary>
@@ -726,8 +726,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://api.embed.ly/1/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://api.embed.ly/1/oembed", request);
     }
 
     /// <summary>
@@ -748,8 +748,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://embedarticles.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://embedarticles.com/oembed/", request);
     }
 
     /// <summary>
@@ -770,8 +770,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://eyrie.io/v1/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://eyrie.io/v1/oembed", request);
     }
 
     /// <summary>
@@ -793,8 +793,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("https://www.facebook.com/plugins/video/oembed.json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("https://www.facebook.com/plugins/video/oembed.json", request);
     }
 
     /// <summary>
@@ -815,8 +815,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://flat.io/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://flat.io/services/oembed", request);
     }
 
     /// <summary>
@@ -838,8 +838,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.flickr.com/services/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.flickr.com/services/oembed/", request);
     }
 
     /// <summary>
@@ -861,8 +861,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://fiso.foxsports.com.au/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://fiso.foxsports.com.au/oembed", request);
     }
 
     /// <summary>
@@ -883,8 +883,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://framebuzz.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://framebuzz.com/oembed/", request);
     }
 
     /// <summary>
@@ -906,8 +906,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://www.funnyordie.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://www.funnyordie.com/oembed", request);
     }
 
     /// <summary>
@@ -942,8 +942,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://geo.hlipp.de/restapi.php/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://geo.hlipp.de/restapi.php/api/oembed", request);
     }
 
     /// <summary>
@@ -964,8 +964,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://embed.gettyimages.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://embed.gettyimages.com/oembed", request);
     }
 
     /// <summary>
@@ -987,8 +987,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.gfycat.com/v1/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.gfycat.com/v1/oembed", request);
     }
 
     /// <summary>
@@ -1011,8 +1011,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://giphy.com/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://giphy.com/services/oembed", request);
     }
 
     /// <summary>
@@ -1033,8 +1033,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.gyazo.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.gyazo.com/api/oembed", request);
     }
 
     /// <summary>
@@ -1055,8 +1055,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://huffduffer.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://huffduffer.com/oembed", request);
     }
 
     /// <summary>
@@ -1078,8 +1078,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://www.hulu.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://www.hulu.com/api/oembed", request);
     }
 
     /// <summary>
@@ -1101,8 +1101,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.ifixit.com/Embed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.ifixit.com/Embed", request);
     }
 
     /// <summary>
@@ -1123,8 +1123,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.ifttt.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.ifttt.com/oembed/", request);
     }
 
     /// <summary>
@@ -1146,8 +1146,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://player.indacolive.com/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://player.indacolive.com/services/oembed", request);
     }
 
     /// <summary>
@@ -1168,8 +1168,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://infogr.am/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://infogr.am/oembed", request);
     }
 
     /// <summary>
@@ -1191,8 +1191,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.inoreader.com/oembed/api/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.inoreader.com/oembed/api/", request);
     }
 
     /// <summary>
@@ -1213,8 +1213,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://api.inphood.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://api.inphood.com/oembed", request);
     }
 
     /// <summary>
@@ -1238,8 +1238,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.instagram.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.instagram.com/oembed", request);
     }
 
     /// <summary>
@@ -1261,8 +1261,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.isnare.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.isnare.com/oembed/", request);
     }
 
     /// <summary>
@@ -1284,8 +1284,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.kickstarter.com/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.kickstarter.com/services/oembed", request);
     }
 
     /// <summary>
@@ -1307,8 +1307,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.kidoju.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.kidoju.com/api/oembed", request);
     }
 
     /// <summary>
@@ -1329,8 +1329,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://embed.kit.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://embed.kit.com/oembed", request);
     }
 
     /// <summary>
@@ -1352,8 +1352,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.kitchenbowl.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.kitchenbowl.com/oembed", request);
     }
 
     /// <summary>
@@ -1375,8 +1375,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://jdr.knacki.info/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://jdr.knacki.info/oembed", request);
     }
 
     /// <summary>
@@ -1397,8 +1397,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://learningapps.org/oembed.php", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://learningapps.org/oembed.php", request);
     }
 
     /// <summary>
@@ -1419,8 +1419,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://mathembed.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://mathembed.com/oembed", request);
     }
 
     /// <summary>
@@ -1442,8 +1442,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.meetup.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.meetup.com/oembed", request);
     }
 
     /// <summary>
@@ -1464,8 +1464,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://me.me/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://me.me/oembed", request);
     }
 
     /// <summary>
@@ -1487,8 +1487,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.mixcloud.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.mixcloud.com/oembed/", request);
     }
 
     /// <summary>
@@ -1511,8 +1511,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://api.mobypicture.com/oEmbed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://api.mobypicture.com/oEmbed", request);
     }
 
     /// <summary>
@@ -1534,8 +1534,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://portal.modelo.io/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://portal.modelo.io/oembed", request);
     }
 
     /// <summary>
@@ -1556,8 +1556,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://mybeweeg.com/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://mybeweeg.com/services/oembed", request);
     }
 
     /// <summary>
@@ -1579,8 +1579,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.nanoo.tv/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.nanoo.tv/services/oembed", request);
     }
 
     /// <summary>
@@ -1601,8 +1601,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.nfb.ca/remote/services/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.nfb.ca/remote/services/oembed/", request);
     }
 
     /// <summary>
@@ -1624,8 +1624,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.odds.com.au/api/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.odds.com.au/api/oembed/", request);
     }
 
     /// <summary>
@@ -1647,8 +1647,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://mix.office.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://mix.office.com/oembed", request);
     }
 
     /// <summary>
@@ -1669,8 +1669,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://official.fm/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://official.fm/services/oembed", request);
     }
 
     /// <summary>
@@ -1692,8 +1692,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://on.aol.com/api", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://on.aol.com/api", request);
     }
 
     /// <summary>
@@ -1715,8 +1715,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.ora.tv/oembed/*", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.ora.tv/oembed/*", request);
     }
 
     /// <summary>
@@ -1737,8 +1737,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://orbitvu.co/service/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://orbitvu.co/service/oembed", request);
     }
 
     /// <summary>
@@ -1760,8 +1760,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.oumy.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.oumy.com/oembed", request);
     }
 
     /// <summary>
@@ -1783,8 +1783,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.pastery.net/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.pastery.net/oembed", request);
     }
 
     /// <summary>
@@ -1806,8 +1806,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://store.pixdor.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://store.pixdor.com/oembed", request);
     }
 
     /// <summary>
@@ -1828,8 +1828,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://polldaddy.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://polldaddy.com/oembed/", request);
     }
 
     /// <summary>
@@ -1851,8 +1851,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.sellwithport.com/v1.0/buyer/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.sellwithport.com/v1.0/buyer/oembed", request);
     }
 
     /// <summary>
@@ -1873,8 +1873,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.portfolium.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.portfolium.com/oembed", request);
     }
 
     /// <summary>
@@ -1896,8 +1896,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.punters.com.au/api/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.punters.com.au/api/oembed/", request);
     }
 
     /// <summary>
@@ -1921,8 +1921,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.quizz.biz/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.quizz.biz/api/oembed", request);
     }
 
     /// <summary>
@@ -1943,8 +1943,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://rapidengage.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://rapidengage.com/api/oembed", request);
     }
 
     /// <summary>
@@ -1965,8 +1965,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.reddit.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.reddit.com/oembed", request);
     }
 
     /// <summary>
@@ -1987,8 +1987,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://publisher.releasewire.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://publisher.releasewire.com/oembed/", request);
     }
 
     /// <summary>
@@ -2010,8 +2010,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://repubhub.icopyright.net/oembed.act", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://repubhub.icopyright.net/oembed.act", request);
     }
 
     /// <summary>
@@ -2033,8 +2033,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.reverbnation.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.reverbnation.com/oembed", request);
     }
 
     /// <summary>
@@ -2055,8 +2055,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://roomshare.jp/en/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://roomshare.jp/en/oembed", request);
     }
 
     /// <summary>
@@ -2077,8 +2077,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("https://rumble.com/api/Media/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("https://rumble.com/api/Media/oembed", request);
     }
 
     /// <summary>
@@ -2100,8 +2100,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://videos.sapo.pt/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://videos.sapo.pt/oembed", request);
     }
 
     /// <summary>
@@ -2123,8 +2123,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.screen9.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.screen9.com/oembed", request);
     }
 
     /// <summary>
@@ -2146,8 +2146,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.screencast.com/external/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.screencast.com/external/oembed", request);
     }
 
     /// <summary>
@@ -2169,8 +2169,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://www.screenr.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://www.screenr.com/api/oembed", request);
     }
 
     /// <summary>
@@ -2192,8 +2192,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("https://scribblemaps.com/api/services/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("https://scribblemaps.com/api/services/oembed", request);
     }
 
     /// <summary>
@@ -2215,8 +2215,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.scribd.com/services/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.scribd.com/services/oembed/", request);
     }
 
     /// <summary>
@@ -2238,8 +2238,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.shortnote.jp/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.shortnote.jp/oembed/", request);
     }
 
     /// <summary>
@@ -2261,8 +2261,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://shoudio.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://shoudio.com/api/oembed", request);
     }
 
     /// <summary>
@@ -2283,8 +2283,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://showtheway.io/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://showtheway.io/oembed", request);
     }
 
     /// <summary>
@@ -2305,8 +2305,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.silk.co/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.silk.co/oembed/", request);
     }
 
     /// <summary>
@@ -2327,8 +2327,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://onsizzle.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://onsizzle.com/oembed", request);
     }
 
     /// <summary>
@@ -2349,8 +2349,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://sketchfab.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://sketchfab.com/oembed", request);
     }
 
     /// <summary>
@@ -2376,8 +2376,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.slideshare.net/api/oembed/2", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.slideshare.net/api/oembed/2", request);
     }
 
     /// <summary>
@@ -2398,8 +2398,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://api.smugmug.com/services/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://api.smugmug.com/services/oembed/", request);
     }
 
     /// <summary>
@@ -2420,8 +2420,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://soundcloud.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://soundcloud.com/oembed", request);
     }
 
     /// <summary>
@@ -2443,8 +2443,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://play.soundsgood.co/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://play.soundsgood.co/oembed", request);
     }
 
     /// <summary>
@@ -2465,8 +2465,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("https://speakerdeck.com/oembed.json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("https://speakerdeck.com/oembed.json", request);
     }
 
     /// <summary>
@@ -2487,8 +2487,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.spreaker.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.spreaker.com/oembed", request);
     }
 
     /// <summary>
@@ -2509,8 +2509,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("https://api.streamable.com/oembed.json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("https://api.streamable.com/oembed.json", request);
     }
 
     /// <summary>
@@ -2532,8 +2532,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://content.streamonecloud.net/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://content.streamonecloud.net/oembed", request);
     }
 
     /// <summary>
@@ -2555,8 +2555,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://sway.com/api/v1.0/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://sway.com/api/v1.0/oembed", request);
     }
 
     /// <summary>
@@ -2577,8 +2577,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://www.ted.com/talks/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://www.ted.com/talks/oembed", request);
     }
 
     /// <summary>
@@ -2599,8 +2599,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://theysaidso.com/extensions/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://theysaidso.com/extensions/oembed/", request);
     }
 
     /// <summary>
@@ -2622,8 +2622,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.nytimes.com/svc/oembed/json/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.nytimes.com/svc/oembed/json/", request);
     }
 
     /// <summary>
@@ -2645,8 +2645,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.tickcounter.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.tickcounter.com/oembed", request);
     }
 
     /// <summary>
@@ -2668,8 +2668,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.topy.se/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.topy.se/oembed/", request);
     }
 
     /// <summary>
@@ -2692,8 +2692,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.twitch.tv/v4/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.twitch.tv/v4/oembed", request);
     }
 
     /// <summary>
@@ -2715,8 +2715,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("https://player.ubideo.com/api/oembed.json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("https://player.ubideo.com/api/oembed.json", request);
     }
 
     /// <summary>
@@ -2737,8 +2737,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://mais.uol.com.br/apiuol/v3/oembed/view", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://mais.uol.com.br/apiuol/v3/oembed/view", request);
     }
 
     /// <summary>
@@ -2760,8 +2760,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.ustream.tv/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.ustream.tv/oembed", request);
     }
 
     /// <summary>
@@ -2782,8 +2782,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://uttles.com/api/reply/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://uttles.com/api/reply/oembed", request);
     }
 
     /// <summary>
@@ -2805,8 +2805,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.veervr.tv/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.veervr.tv/oembed", request);
     }
 
     /// <summary>
@@ -2827,8 +2827,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://verse.media/services/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://verse.media/services/oembed/", request);
     }
 
     /// <summary>
@@ -2850,8 +2850,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://www.vevo.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.vevo.com/oembed", request);
     }
 
     /// <summary>
@@ -2873,8 +2873,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://www.videojug.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://www.videojug.com/oembed", request);
     }
 
     /// <summary>
@@ -2895,8 +2895,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://api.vidl.it/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.vidl.it/oembed", request);
     }
 
     /// <summary>
@@ -2917,8 +2917,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("https://vimeo.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("https://vimeo.com/api/oembed", request);
     }
 
     /// <summary>
@@ -2939,8 +2939,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithoutFormat("https://vine.co/oembed.json", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithoutFormat("https://vine.co/oembed.json", request);
     }
 
     /// <summary>
@@ -2961,8 +2961,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("https://vlipsy.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://vlipsy.com/oembed", request);
     }
 
     /// <summary>
@@ -2983,8 +2983,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://*.wiredrive.com/present-oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://*.wiredrive.com/present-oembed/", request);
     }
 
     /// <summary>
@@ -3005,8 +3005,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriWithExtension("http://app.wizer.me/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriWithExtension("http://app.wizer.me/api/oembed", request);
     }
 
     /// <summary>
@@ -3028,8 +3028,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.wootled.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.wootled.com/oembed", request);
     }
 
     /// <summary>
@@ -3050,8 +3050,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://public-api.wordpress.com/oembed/", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://public-api.wordpress.com/oembed/", request);
     }
 
     /// <summary>
@@ -3073,8 +3073,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.yfrog.com/api/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.yfrog.com/api/oembed", request);
     }
 
     /// <summary>
@@ -3096,8 +3096,8 @@ namespace MoEmbed.Providers
             => _UriPattern.IsMatch(uri.ToString());
 
         /// <inheritdoc />
-         protected override Uri GetProviderUriFor(ConsumerRequest request)
-             => GetProviderUriCore("http://www.youtube.com/oembed", request);
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://www.youtube.com/oembed", request);
     }
 
     partial class OEmbedProxyMetadataProvider
