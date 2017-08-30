@@ -32,11 +32,9 @@ namespace MoEmbed.Models.Metadata
         }
 
         /// <inheritdoc />
-        protected override void LoadHtml(string html)
+        protected override HtmlDocument LoadHtml(string html)
         {
-            base.LoadHtml(html);
-            var hd = new HtmlDocument();
-            hd.LoadHtml(html);
+            var hd = base.LoadHtml(html);
             Data.Title = Data.Title.Replace("[pixiv]", "");
             var sensoredImage = hd.DocumentNode.SelectSingleNode("//div[@class='sensored']/img")?.Attributes["src"]?.Value;
             var restrictionPolicy = string.IsNullOrEmpty(sensoredImage) ? RestrictionPolicies.Unknown : RestrictionPolicies.Restricted;
