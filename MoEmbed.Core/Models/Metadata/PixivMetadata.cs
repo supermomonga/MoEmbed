@@ -59,18 +59,6 @@ namespace MoEmbed.Models.Metadata
                 RestrictionPolicy = restrictionPolicy
             });
 
-            var userIconUri = new Uri(hd.DocumentNode.SelectSingleNode("//div[@class='usericon']/a/img").Attributes["src"].Value);
-            Data.MetadataImage = new Media
-            {
-                Type = MediaTypes.Image,
-                Thumbnail = new ImageInfo
-                {
-                    Url = userIconUri,
-                },
-                RawUrl = userIconUri,
-                Location = new Uri(Uri),
-                RestrictionPolicy = RestrictionPolicies.Safe
-            };
             Data.RestrictionPolicy = restrictionPolicy;
 
             return hd;
