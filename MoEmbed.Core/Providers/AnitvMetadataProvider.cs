@@ -44,7 +44,7 @@ namespace MoEmbed.Providers
             {
                 return new AnitvMetadata()
                 {
-                    Uri = request.Url.ToString()
+                    Url = request.Url
                 };
             }
             return null;

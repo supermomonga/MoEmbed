@@ -9,7 +9,7 @@ namespace MoEmbed.Models.Metadata
         [InlineData("https://ch.ani.tv/episodes/6501", "ゆるゆり なちゅやちゅみ！+　+1")]
         public void LoadHtml_TitleTest(string url, string title)
         {
-            var t = new AnitvMetadata() { Uri = url };
+            var t = new AnitvMetadata() { Url = url.ToUri() };
             var d = t.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(url.ToUri()))).GetAwaiter().GetResult();
 
             Assert.Equal(title, d.Title);
