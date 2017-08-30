@@ -12,6 +12,7 @@ dependencies:
     - sudo apt-get update
     - sudo apt-get install dotnet-dev-1.1.0
   override:
+    - rm -r MoEmbed.CodeGeneration
     - dotnet restore
 
 test:
