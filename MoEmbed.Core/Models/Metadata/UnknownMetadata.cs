@@ -16,15 +16,26 @@ namespace MoEmbed.Models.Metadata
     [Serializable]
     public class UnknownMetadata : Metadata
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="UnknownMetadata" /> class.
+        /// </summary>
         public UnknownMetadata()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="UnknownMetadata" /> class with the specified url.
+        /// </summary>
+        /// <param name="uri">The resource URL.</param>
         public UnknownMetadata(string uri)
         {
             Uri = uri;
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="UnknownMetadata" /> class with the specified url.
+        /// </summary>
+        /// <param name="uri">The resource URL.</param>
         public UnknownMetadata(Uri uri)
         {
             Uri = uri.ToString();
@@ -51,7 +62,11 @@ namespace MoEmbed.Models.Metadata
         [NonSerialized]
         private Task<EmbedData> _FetchTask;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Asynchronously returns embed data fetched from remote service or cached in this instance.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
         public override Task<EmbedData> FetchAsync(RequestContext context)
         {
             lock (this)
@@ -72,6 +87,11 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
+        /// <summary>
+        /// Asynchronously returns embed data fetched from remote service.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
         protected virtual async Task<EmbedData> FetchAsyncCore(RequestContext context)
         {
             var hc = context.Service.HttpClient;
@@ -144,6 +164,10 @@ namespace MoEmbed.Models.Metadata
             return res.Message;
         }
 
+        /// <summary>
+        /// Acquires <see cref="Data" /> embedded in the specified HTML.
+        /// </summary>
+        /// <param name="html">The HTML markup to parse.</param>
         protected virtual void LoadHtml(string html)
         {
             var hd = new HtmlDocument();

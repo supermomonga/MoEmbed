@@ -22,9 +22,11 @@ namespace MoEmbed.Providers
         public override IEnumerable<string> GetSupportedHostNames()
             => new[] { "imgur.com" };
 
+        /// <inheritdoc />
         public override bool CanHandle(ConsumerRequest request)
             => regex.IsMatch(request.Url.ToString());
 
+        /// <inheritdoc />
         public override Metadata GetMetadata(ConsumerRequest request)
         {
             if (!CanHandle(request))

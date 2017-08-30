@@ -9,20 +9,23 @@ namespace MoEmbed.Models.Metadata
     [Serializable]
     public class PixivMetadata : UnknownMetadata
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="PixivMetadata" /> class.
+        /// </summary>
         public PixivMetadata()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="PixivMetadata" /> class with the specified url.
+        /// </summary>
+        /// <param name="uri">The resource URL.</param>
         public PixivMetadata(string uri)
         {
             Uri = uri;
         }
 
-        public PixivMetadata(Uri uri)
-        {
-            Uri = uri.ToString();
-        }
-
+        /// <inheritdoc />
         protected override void LoadHtml(string html)
         {
             base.LoadHtml(html);
