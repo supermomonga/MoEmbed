@@ -162,7 +162,7 @@ using (var sw = new StreamWriter(Path.Combine(dir, "../MoEmbed.Core/Providers/Ge
     sw.WriteLine(@"        {");
     foreach (var n in generated)
     {
-        sw.WriteLine($"      yield return new {n}MetadataProvider();");
+        sw.WriteLine($"            yield return new {n}MetadataProvider();");
     }
 
     sw.WriteLine(@"        }");
