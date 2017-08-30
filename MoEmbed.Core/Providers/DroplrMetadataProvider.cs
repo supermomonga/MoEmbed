@@ -6,7 +6,7 @@ using MoEmbed.Models.Metadata;
 namespace MoEmbed.Providers
 {
     /// <summary>
-    /// Handles oEmbed request for <see href="https://droplr.com" />.
+    /// Handles metadata requests for the <see href="https://droplr.com" />.
     /// </summary>
     public sealed class DroplrMetadataProvider : IMetadataProvider
     {
