@@ -21,22 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OEmbedProxyMetadataProviders.cs</LastGenOutput>
-    </None>
+    <DotNetCliToolReference Include="Dotnet.Script" Version="0.12.1-beta" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OEmbedProxyMetadataProviders.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="dotnet script &quot;Providers\Generated Codes\OEmbedProxyMetadataProviders.csx&quot;" />
+  </Target>
 
 </Project>
