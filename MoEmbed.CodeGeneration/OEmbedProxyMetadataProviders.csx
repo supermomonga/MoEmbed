@@ -3,9 +3,9 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-var dir = @"Providers\Generated Codes";
+var dir = Path.GetDirectoryName(Path.GetFullPath("a"));
 
-using (var sw = new StreamWriter(Path.Combine(dir, "OEmbedProxyMetadataProviders.cs")))
+using (var sw = new StreamWriter(Path.Combine(dir, "../MoEmbed.Core/Providers/Generated Codes/OEmbedProxyMetadataProviders.cs")))
 {
     sw.WriteLine("using System;");
     sw.WriteLine("using System.Collections.Generic;");
@@ -22,7 +22,7 @@ using (var sw = new StreamWriter(Path.Combine(dir, "OEmbedProxyMetadataProviders
     };
     var schemeUrls = new List<string>();
     var generated = new List<string>();
-    var d = Path.Combine(dir, "../../../oembed/providers");
+    var d = Path.Combine(dir, "../oembed/providers");
 
     foreach (var f in Directory.GetFiles(d, "*.yml"))
     {

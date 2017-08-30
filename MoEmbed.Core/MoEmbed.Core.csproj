@@ -20,12 +20,6 @@
     <ProjectReference Include="..\MoEmbed.Models\MoEmbed.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="Dotnet.Script" Version="0.12.1-beta" />
-  </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="dotnet script &quot;Providers\Generated Codes\OEmbedProxyMetadataProviders.csx&quot;" />
-  </Target>
 
 </Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <DotNetCliToolReference Include="Dotnet.Script" Version="0.12.1-beta" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="dotnet script OEmbedProxyMetadataProviders.csx" />
+  </Target>
+  
+</Project>
