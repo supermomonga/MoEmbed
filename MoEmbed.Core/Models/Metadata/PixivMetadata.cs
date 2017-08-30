@@ -42,39 +42,53 @@ namespace MoEmbed.Models.Metadata
             if (restrictionPolicy == RestrictionPolicies.Restricted)
             {
                 var illustUri = new Uri(sensoredImage.Replace("64x64", "128x128"));
-                Data.Medias.Insert(0, new Media {
-                        Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo
-                        {
-                            Url = illustUri,
-                            Width = 128,
-                            Height = 128
-                        },
-                        RawUrl = illustUri,
-                        Location = new Uri(Uri),
-                        RestrictionPolicy = restrictionPolicy
-                    });
+                Data.MetadataImage = new Media {
+                    Type = MediaTypes.Image,
+                    Thumbnail = new ImageInfo
+                    {
+                        Url = illustUri,
+                        Width = 128,
+                        Height = 128
+                    },
+                    RawUrl = illustUri,
+                    Location = new Uri(Uri),
+                    RestrictionPolicy = restrictionPolicy
+                };
             }
             else
             {
                 var illustUri = new Uri($"http://embed.pixiv.net/decorate.php?illust_id={ IllustId }");
-                Data.Medias.Insert(0, new Media {
-                        Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo
-                        {
-                            Url = illustUri,
-                            Width = 600
-                        },
-                        RawUrl = illustUri,
-                        Location = new Uri(Uri),
-                        RestrictionPolicy = restrictionPolicy
-                    });
+                Data.MetadataImage = new Media {
+                    Type = MediaTypes.Image,
+                    Thumbnail = new ImageInfo
+                    {
+                        Url = illustUri,
+                        Width = 600
+                    },
+                    RawUrl = illustUri,
+                    Location = new Uri(Uri),
+                    RestrictionPolicy = restrictionPolicy
+                };
             }
 
-            Data.MetadataImage = null;
+            Data.Medias.Clear();
             Data.RestrictionPolicy = restrictionPolicy;
 
             return hd;
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
