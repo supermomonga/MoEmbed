@@ -119,7 +119,7 @@ namespace MoEmbed.Models
 
             var description = tweet.FullText != null
                                         && tweet.DisplayTextRange?.Length == 2
-                                            ? tweet.FullText.Substring(tweet.DisplayTextRange[0], tweet.DisplayTextRange[1] - tweet.DisplayTextRange[0])
+                                            ? tweet.FullText.Substring(0, tweet.DisplayTextRange[1])
                                 : tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}"
                                 : tweet.Text;
 

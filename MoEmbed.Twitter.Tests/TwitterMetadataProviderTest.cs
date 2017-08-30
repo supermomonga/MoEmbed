@@ -96,6 +96,7 @@ namespace MoEmbed.Providers
 
         [Theory]
         [InlineData("https://mobile.twitter.com/4423s/status/901462528789626881", "")]
+        [InlineData("https://twitter.com/EmmaKennedy/status/902886165350678529", "@realDonaldTrump You? Reading? IDON”TTHINKSO DonDon")]
         public async void GetEmbedDataTest_Description(string uri, string desription)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
@@ -121,14 +122,3 @@ namespace MoEmbed.Providers
         #endregion GetEmbedData
     }
 }
-
-
-
-
-
-
-
-
-
-
-
