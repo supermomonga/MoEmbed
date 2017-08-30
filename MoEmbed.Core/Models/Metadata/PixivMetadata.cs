@@ -1,11 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using HtmlAgilityPack;
 
 namespace MoEmbed.Models.Metadata
@@ -50,21 +43,23 @@ namespace MoEmbed.Models.Metadata
                 illustUri = new Uri(image);
                 Data.Title = title;
             }
-            Data.Medias.Insert(0, new Media {
-                    Type = MediaTypes.Image,
-                    Thumbnail = new ImageInfo
-                    {
-                        Url = illustUri,
-                        Width = 128,
-                        Height = 128
-                    },
-                    RawUrl = illustUri,
-                    Location = new Uri(Uri),
-                    RestrictionPolicy = restrictionPolicy
-                });
+            Data.Medias.Insert(0, new Media
+            {
+                Type = MediaTypes.Image,
+                Thumbnail = new ImageInfo
+                {
+                    Url = illustUri,
+                    Width = 128,
+                    Height = 128
+                },
+                RawUrl = illustUri,
+                Location = new Uri(Uri),
+                RestrictionPolicy = restrictionPolicy
+            });
 
             var userIconUri = new Uri(hd.DocumentNode.SelectSingleNode("//div[@class='usericon']/a/img").Attributes["src"].Value);
-            Data.MetadataImage = new Media {
+            Data.MetadataImage = new Media
+            {
                 Type = MediaTypes.Image,
                 Thumbnail = new ImageInfo
                 {
@@ -76,6 +71,5 @@ namespace MoEmbed.Models.Metadata
             };
             Data.RestrictionPolicy = restrictionPolicy;
         }
-
     }
 }
