@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MoEmbed.Models;
 namespace MoEmbed.Providers
 {
-
     /// <summary>
     /// Handles oEmbed request for <see href="http://www.23hq.com" />.
     /// </summary>
@@ -3100,6 +3099,7 @@ namespace MoEmbed.Providers
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("http://www.youtube.com/oembed", request);
     }
+
     partial class OEmbedProxyMetadataProvider
     {
         public static IEnumerable<OEmbedProxyMetadataProvider> CreateKnownHandlers()

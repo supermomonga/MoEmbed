@@ -20,23 +20,6 @@
     <ProjectReference Include="..\MoEmbed.Models\MoEmbed.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OEmbedProxyMetadataProviders.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
 
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Providers\Generated Codes\OEmbedProxyMetadataProviders.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>OEmbedProxyMetadataProviders.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
 
 </Project>
