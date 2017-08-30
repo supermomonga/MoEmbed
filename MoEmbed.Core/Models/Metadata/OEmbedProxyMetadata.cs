@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 
 namespace MoEmbed.Models.Metadata
 {
+    using static OEmbed.OEmbed;
+
     /// <summary>
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
     /// </summary>
@@ -103,95 +105,100 @@ namespace MoEmbed.Models.Metadata
             {
                 Url = new Uri(Uri)
             };
-            if (values.ContainsKey("title"))
+            if (values.TryGetValue(TITLE, out var title))
             {
-                data.Title = values["title"].ToString();
+                data.Title = title?.ToString();
             }
-            if (values.ContainsKey("author_name"))
+            if (values.TryGetValue(AUTHOR_NAME, out var authorName))
             {
-                data.AuthorName = values["author_name"].ToString();
+                data.AuthorName = authorName?.ToString();
             }
-            if (values.ContainsKey("author_url"))
+            if (values.TryGetValue(AUTHOR_URL, out var authorUrl))
             {
-                data.AuthorUrl = new Uri(values["author_url"].ToString());
+                data.AuthorUrl = authorUrl?.ToString().ToUri();
             }
-            if (values.ContainsKey("provider_name"))
+            if (values.TryGetValue(PROVIDER_NAME, out var providerName))
             {
-                data.ProviderName = values["provider_name"].ToString();
+                data.ProviderName = providerName?.ToString();
             }
-            if (values.ContainsKey("provider_url"))
+            if (values.TryGetValue(PROVIDER_URL, out var providerUrl))
             {
-                data.ProviderUrl = new Uri(values["provider_url"].ToString());
+                data.ProviderUrl = providerUrl?.ToString().ToUri();
             }
-            if (values.ContainsKey("cache_age"))
+            if (values.TryGetValue(CACHE_AGE, out var cacheAge))
             {
-                data.CacheAge = (values["cache_age"] as IConvertible).ToInt32(null);
-            }
-            if (values.ContainsKey("thumbnail_url"))
-            {
-                data.MetadataImage = new Media
-                {
-                    Thumbnail = new ImageInfo
-                    {
-                        Url = new Uri(values["thumbnail_url"].ToString())
-                    }
-                };
-
-                if (values.ContainsKey("thumbnail_width") && data.MetadataImage?.Thumbnail != null)
-                {
-                    data.MetadataImage.Thumbnail.Width = (values["thumbnail_width"] as IConvertible).ToInt32(null);
-                }
-                if (values.ContainsKey("thumbnail_height") && data.MetadataImage?.Thumbnail != null)
-                {
-                    data.MetadataImage.Thumbnail.Height = (values["thumbnail_height"] as IConvertible).ToInt32(null);
-                }
+                data.CacheAge = (cacheAge as IConvertible).ToInt32(null);
             }
 
-            switch (values["type"])
+            if (values.TryGetValue(TYPE, out var typeObj))
             {
-                case "photo":
-                    data.Type = EmbedDataTypes.SingleImage;
-                    data.MetadataImage = new Media()
-                    {
-                        Type = MediaTypes.Image,
-                        Thumbnail = new ImageInfo
+                var type = typeObj?.ToString();
+                switch (type)
+                {
+                    case PHOTO_TYPE:
+                        if (values.TryGetValue(URL, out var url))
                         {
-                            Url = new Uri(values["url"].ToString()),
-                            Width = (values["width"] as IConvertible)?.ToInt32(null),
-                            Height = (values["height"] as IConvertible)?.ToInt32(null)
-                        },
-                        RawUrl = new Uri(values["url"].ToString()),
-                        Location = new Uri(values["url"].ToString())
-                    };
-                    data.Medias.Add(data.MetadataImage);
-                    break;
+                            var u = url?.ToString().ToUri();
 
-                case "video":
-                    // TODO: parse video url from html parameter
-                    data.Type = EmbedDataTypes.SingleVideo;
-                    if (values.ContainsKey("thumbnail_url"))
-                    {
-                        data.MetadataImage = new Media()
-                        {
-                            Type = MediaTypes.Video,
-                            Thumbnail = new ImageInfo
+                            values.TryGetValue(WIDTH, out var w);
+                            values.TryGetValue(HEIGHT, out var h);
+
+                            data.Type = EmbedDataTypes.SingleImage;
+                            data.MetadataImage = new Media()
                             {
-                                Url = new Uri(values["thumbnail_url"].ToString()),
-                            },
-                            RawUrl = new Uri(Uri),
-                            Location = new Uri(Uri)
-                        };
-                        data.Medias.Add(data.MetadataImage);
-                    }
-                    break;
+                                Type = MediaTypes.Image,
+                                Thumbnail = new ImageInfo
+                                {
+                                    Url = u,
+                                    Width = (w as IConvertible)?.ToInt32(null),
+                                    Height = (h as IConvertible)?.ToInt32(null)
+                                },
+                                RawUrl = u,
+                                Location = u
+                            };
+                            data.Medias.Add(data.MetadataImage);
+                        }
 
-                case "link":
-                    // Nothing to do, for now.
-                    break;
+                        break;
 
-                case "rich":
-                    // Nothing to do, for now.
-                    break;
+                    case VIDEO_TYPE:
+                    case LINK_TYPE:
+                    case RICH_TYPE:
+                    default:
+                        if (values.TryGetValue(THUMBNAIL_URL, out var thumbnailUrl))
+                        {
+                            data.MetadataImage = new Media
+                            {
+                                Thumbnail = new ImageInfo
+                                {
+                                    Url = thumbnailUrl?.ToString().ToUri()
+                                }
+                            };
+
+                            if (values.TryGetValue(THUMBNAIL_WIDTH, out var thumbnailWidth))
+                            {
+                                data.MetadataImage.Thumbnail.Width = (thumbnailWidth as IConvertible).ToInt32(null);
+                            }
+                            if (values.TryGetValue(THUMBNAIL_HEIGHT, out var thumbnailHeight))
+                            {
+                                data.MetadataImage.Thumbnail.Height = (thumbnailHeight as IConvertible).ToInt32(null);
+                            }
+                        }
+                        if (type == VIDEO_TYPE)
+                        {
+                            // TODO: parse video url from html parameter
+                            data.Type = EmbedDataTypes.SingleVideo;
+
+                            if (data.MetadataImage != null)
+                            {
+                                data.MetadataImage.RawUrl = data.MetadataImage.Location = Uri.ToUri();
+
+                                data.Medias.Add(data.MetadataImage);
+                            }
+                        }
+
+                        break;
+                }
             }
 
             return data;
