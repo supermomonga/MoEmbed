@@ -68,6 +68,7 @@ namespace MoEmbed
             service.Providers.Add(new PixivMetadataProvider());
             service.Providers.Add(new NicovideoMetadataProvider());
             service.Providers.Add(new DroplrMetadataProvider());
+            service.Providers.Add(new AnitvMetadataProvider());
             service.Providers.AddRange(OEmbedProxyMetadataProvider.CreateKnownHandlers());
             service.Providers.Add(new UnknownMetadataProvider());
             routeBuilder.MapGet("api", new HttpMetadataHandler(loggerFactory, service).HandleAsync);
