@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MoEmbed.Models.Metadata
 {
-    using static OEmbed.OEmbed;
+    using static OEmbed;
 
     /// <summary>
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
