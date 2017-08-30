@@ -99,7 +99,7 @@ namespace MoEmbed.Models.Metadata
         /// </summary>
         /// <param name="values">The oEmbed data to convert.</param>
         /// <returns>A new instance of the <see cref="EmbedData" /> class.</returns>
-        protected virtual EmbedData CreateEmbedData(Dictionary<string, object> values)
+        protected internal virtual EmbedData CreateEmbedData(Dictionary<string, object> values)
         {
             var data = new EmbedData()
             {
