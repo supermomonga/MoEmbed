@@ -28,7 +28,7 @@ namespace MoEmbed.Providers
             }
             return new UnknownMetadata()
             {
-                Uri = request.Url.ToString(),
+                Url = request.Url,
             };
         }
     }

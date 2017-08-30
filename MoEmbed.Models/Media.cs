@@ -32,7 +32,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("raw_url")]
-        public Uri RawUrl { get; set; }
+        public string RawUrl { get; set; }
 
         /// <summary>
         /// Gets or sets a URL of Media resouce. The resouce can be HTML page which contains the media.
@@ -40,7 +40,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("location")]
-        public Uri Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets a content restriction policy that applied to the media.

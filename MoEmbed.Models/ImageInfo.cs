@@ -16,7 +16,7 @@ namespace MoEmbed.Models
         /// </summary>
         [DefaultValue(null)]
         [DataMember, JsonProperty("url")]
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         /// <summary>
         /// Gets or sets the width of the image.

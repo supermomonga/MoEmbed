@@ -1,6 +1,5 @@
 using System;
 using System.Text.RegularExpressions;
-using MoEmbed.Models.OEmbed;
 
 namespace MoEmbed.Models
 {
@@ -49,46 +48,6 @@ namespace MoEmbed.Models
             {
                 writer.WriteProperty(name, value.Value);
             }
-        }
-
-        public static void WriteOEmbed(this IResponseWriter writer, IOEmbedData obj)
-        {
-            writer.WriteStartResponse();
-
-            writer.WriteProperty(OEmbed.OEmbed.TYPE, obj.Type.ToString().ToLower());
-            writer.WriteProperty(OEmbed.OEmbed.VERSION, "1.0");
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.TITLE, obj.Title);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.AUTHOR_NAME, obj.AuthorName);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.AUTHOR_URL, obj.AuthorUrl);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.PROVIDER_NAME, obj.ProviderName);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.PROVIDER_URL, obj.ProviderUrl);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.CACHE_AGE, obj.CacheAge);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.THUMBNAIL_URL, obj.ThumbnailUrl);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.THUMBNAIL_WIDTH, obj.ThumbnailWidth);
-            writer.WritePropertyIfNeeded(OEmbed.OEmbed.THUMBNAIL_HEIGHT, obj.ThumbnailHeight);
-
-            switch (obj.Type)
-            {
-                case OEmbed.Types.Photo:
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.URL, (obj as IPhotoOEmbedData)?.Url);
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IPhotoOEmbedData)?.Width);
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IPhotoOEmbedData)?.Height);
-                    break;
-
-                case OEmbed.Types.Video:
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HTML, (obj as IVideoOEmbedData)?.Html);
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IVideoOEmbedData)?.Width);
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IVideoOEmbedData)?.Height);
-                    break;
-
-                case OEmbed.Types.Rich:
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HTML, (obj as IRichOEmbedData)?.Html);
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.WIDTH, (obj as IRichOEmbedData)?.Width);
-                    writer.WritePropertyIfNeeded(OEmbed.OEmbed.HEIGHT, (obj as IRichOEmbedData)?.Height);
-                    break;
-            }
-
-            writer.WriteEndResponse();
         }
 
         public static void WriteEmbedData(this IResponseWriter writer, EmbedData obj)

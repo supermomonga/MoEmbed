@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -8,18 +9,18 @@ namespace MoEmbed
     {
         public struct RedirectionResult
         {
-            public RedirectionResult(HttpResponseMessage m, string u)
+            public RedirectionResult(HttpResponseMessage m, Uri u)
             {
                 Message = m;
-                MovedTo = u;
+                MovedToUrl = u;
             }
 
             public HttpResponseMessage Message { get; }
 
-            public string MovedTo { get; }
+            public Uri MovedToUrl { get; }
         }
 
-        public static async Task<RedirectionResult> FollowRedirectAsync(this HttpClient httpClient, string url)
+        public static async Task<RedirectionResult> FollowRedirectAsync(this HttpClient httpClient, Uri url)
         {
             bool? moved = null;
             for (; ; )
@@ -29,14 +30,14 @@ namespace MoEmbed
                 switch (res.StatusCode)
                 {
                     case HttpStatusCode.Moved:
-                        url = res.Headers.Location.ToString();
+                        url = res.Headers.Location;
                         moved = moved != false;
                         continue;
 
                     case HttpStatusCode.Ambiguous:
                     case HttpStatusCode.Found:
                     case HttpStatusCode.RedirectMethod:
-                        url = res.Headers.Location.ToString();
+                        url = res.Headers.Location;
                         moved = false;
                         continue;
                 }

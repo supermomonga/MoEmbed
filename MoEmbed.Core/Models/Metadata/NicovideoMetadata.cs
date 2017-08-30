@@ -78,19 +78,21 @@ namespace MoEmbed.Models.Metadata
                                 break;
 
                             case "thumbnail_url":
-                                getOrCreate().MetadataImage = new Media {
-                                    Thumbnail = new ImageInfo {
-                                        Url = xr.ReadElementContentAsString().ToUri()
+                                getOrCreate().MetadataImage = new Media
+                                {
+                                    Thumbnail = new ImageInfo
+                                    {
+                                        Url = xr.ReadElementContentAsString()
                                     }
                                 };
                                 break;
 
                             case "watch_url":
-                                getOrCreate().Url = xr.ReadElementContentAsString().ToUri();
+                                getOrCreate().Url = xr.ReadElementContentAsString();
                                 break;
 
                             case "user_id":
-                                getOrCreate().AuthorUrl = ($"http://www.nicovideo.jp/user/" + xr.ReadElementContentAsString()).ToUri();
+                                getOrCreate().AuthorUrl = $"http://www.nicovideo.jp/user/" + xr.ReadElementContentAsString();
                                 break;
 
                             case "user_nickname":
