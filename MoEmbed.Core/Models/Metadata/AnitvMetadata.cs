@@ -43,6 +43,8 @@ namespace MoEmbed.Models.Metadata
                 Data.Description = desc;
             }
 
+            Data.MetadataImage.Type = MediaTypes.Video;
+
             return hd;
         }
     }

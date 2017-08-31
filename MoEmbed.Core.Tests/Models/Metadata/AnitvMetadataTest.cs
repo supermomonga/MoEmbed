@@ -14,5 +14,25 @@ namespace MoEmbed.Models.Metadata
 
             Assert.Equal(title, d.Title);
         }
+
+        [Theory]
+        [InlineData("https://ch.ani.tv/episodes/7552", EmbedDataTypes.MixedContent)]
+        public void LoadHtml_EmbedDataTypeTest(string url, EmbedDataTypes type)
+        {
+            var t = new AnitvMetadata() { Url = url.ToUri() };
+            var d = t.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(url.ToUri()))).GetAwaiter().GetResult();
+
+            Assert.Equal(type, d.Type);
+        }
+
+        [Theory]
+        [InlineData("https://ch.ani.tv/episodes/7552", MediaTypes.Video)]
+        public void LoadHtml_MediaTypeTest(string url, MediaTypes type)
+        {
+            var t = new AnitvMetadata() { Url = url.ToUri() };
+            var d = t.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(url.ToUri()))).GetAwaiter().GetResult();
+
+            Assert.Equal(type, d.MetadataImage.Type);
+        }
     }
 }
