@@ -11,10 +11,11 @@ namespace MoEmbed.Models.Metadata
     public class AnitvMetadata : UnknownMetadata
     {
         /// <inheritdoc />
-        protected override HtmlDocument LoadHtml(string html)
+        protected override void LoadHtml(HtmlDocument htmlDocument)
         {
-            var hd = base.LoadHtml(html);
-            var nav = hd.CreateNavigator();
+            base.LoadHtml(htmlDocument);
+
+            var nav = htmlDocument.CreateNavigator();
 
             Data.Type = EmbedDataTypes.MixedContent;
 
@@ -44,8 +45,6 @@ namespace MoEmbed.Models.Metadata
             }
 
             Data.MetadataImage.Type = MediaTypes.Video;
-
-            return hd;
         }
     }
 }

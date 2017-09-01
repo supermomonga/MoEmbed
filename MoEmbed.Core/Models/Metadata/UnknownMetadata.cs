@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -87,7 +88,34 @@ namespace MoEmbed.Models.Metadata
 
             if (Regex.IsMatch(mediaType, @"^text\/html$"))
             {
-                LoadHtml(await res.Content.ReadAsStringAsync());
+                var bytes = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+
+                var hd = new HtmlDocument();
+                hd.LoadHtml(Encoding.UTF8.GetString(bytes));
+
+                var nav = hd.CreateNavigator();
+
+                var charset = nav.SelectSingleNode("//html/head/meta[@charset]/@charset")?.Value.Trim();
+                if (charset == null)
+                {
+                    // HACK: lower-case(@http-equiv) throws exception!
+                    charset = nav.SelectSingleNode("//html/head/meta[@http-equiv='content-type']/@content")
+                                ?.Value
+                                ?.Split(';').FirstOrDefault(v => v.Contains("charset="))
+                                ?.Split('=').Last().Trim();
+                }
+
+                if (charset?.Equals("utf-8", StringComparison.OrdinalIgnoreCase) == false)
+                {
+                    var enc = Encoding.GetEncoding(charset);
+                    if (enc != null)
+                    {
+                        hd.LoadHtml(enc.GetString(bytes));
+                        nav = hd.CreateNavigator();
+                    }
+                }
+
+                LoadHtml(hd);
             }
             else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
             {
@@ -141,17 +169,14 @@ namespace MoEmbed.Models.Metadata
         /// <summary>
         /// Acquires <see cref="Data" /> embedded in the specified HTML.
         /// </summary>
-        /// <param name="html">The HTML markup to parse.</param>
-        /// <returns>The parsed <see cref="HtmlDocument"/>.</returns>
-        protected virtual HtmlDocument LoadHtml(string html)
+        /// <param name="htmlDocument">The parsed <see cref="HtmlDocument"/>.</param>
+        protected virtual void LoadHtml(HtmlDocument htmlDocument)
         {
-            var hd = new HtmlDocument();
-            hd.LoadHtml(html);
+            var nav = htmlDocument.CreateNavigator();
 
             // OGP Spec: http://ogp.me/
-            var graph = Shipwreck.OpenGraph.Graph.FromXPathNavigable(hd);
+            var graph = Shipwreck.OpenGraph.Graph.FromXPathNavigable(htmlDocument);
 
-            var nav = hd.CreateNavigator();
             // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
             {
@@ -277,8 +302,6 @@ namespace MoEmbed.Models.Metadata
                     Data.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
             }
-
-            return hd;
         }
     }
 }
