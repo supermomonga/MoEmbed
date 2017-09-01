@@ -17,11 +17,13 @@ namespace MoEmbed.Models.Metadata
         public int IllustId { get; set; }
 
         /// <inheritdoc />
-        protected override HtmlDocument LoadHtml(string html)
+        protected override void LoadHtml(HtmlDocument htmlDocument)
         {
-            var hd = base.LoadHtml(html);
+            base.LoadHtml(htmlDocument);
+
+            var nav = htmlDocument.CreateNavigator();
             Data.Title = Data.Title.Replace("[pixiv]", "");
-            var sensoredImage = hd.DocumentNode.SelectSingleNode("//div[@class='sensored']/img")?.Attributes["src"]?.Value;
+            var sensoredImage = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='sensored']/img")?.Attributes["src"]?.Value;
             var restrictionPolicy = string.IsNullOrEmpty(sensoredImage) ? RestrictionPolicies.Unknown : RestrictionPolicies.Restricted;
             if (restrictionPolicy == RestrictionPolicies.Restricted)
             {
@@ -59,8 +61,6 @@ namespace MoEmbed.Models.Metadata
 
             Data.Medias.Clear();
             Data.RestrictionPolicy = restrictionPolicy;
-
-            return hd;
         }
     }
 }

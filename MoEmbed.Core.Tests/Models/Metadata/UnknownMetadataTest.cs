@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using MoEmbed.Providers;
 using Portable.Xaml;
@@ -59,6 +59,15 @@ namespace MoEmbed.Models.Metadata
             var d = await rm.FetchAsync(GetRequestContext(url));
             Assert.Equal(type, d.Type);
         }
+
+        [Theory]
+        [InlineData("http://www.tbs.co.jp/baseball/top/main.htm", "エキサイトベースボール | プロ野球速報")]
+        [InlineData("http://www.4gamer.net/games/383/G038390/20170610002/", "PC向け純百合ADV「ことのはアムリラート」，公式サイトが6月12日正午に公開")]
+        public async void EncodingTest(string url, string title)
+        {
+            var rm = new UnknownMetadata() { Url = url.ToUri() };
+            var d = await rm.FetchAsync(GetRequestContext(url));
+            Assert.Equal(title, d.Title);
+        }
     }
 }
-
