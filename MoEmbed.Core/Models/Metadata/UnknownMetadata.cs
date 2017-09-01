@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -15,6 +16,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata"/> for the unknown URL.
     /// </summary>
     [Serializable]
+    [ContentProperty(nameof(Data))]
     public class UnknownMetadata : Metadata
     {
         /// <summary>

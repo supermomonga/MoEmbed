@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models
 {
@@ -11,6 +11,7 @@ namespace MoEmbed.Models
     /// Represents a result fetched by the Metadata.
     /// </summary>
     [DataContract]
+    [ContentProperty(nameof(Medias))]
     public class EmbedData
     {
         /// <summary>
@@ -94,18 +95,18 @@ namespace MoEmbed.Models
 
         #region Medias
 
-        private List<Media> _Medias;
+        private MediaCollection _Medias;
 
         /// <summary>
         /// Gets a list of media attached to the URL.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [DataMember, JsonProperty("medias")]
-        public List<Media> Medias
+        public IList<Media> Medias
         {
             get
             {
-                return _Medias ?? (_Medias = new List<Media>());
+                return _Medias ?? (_Medias = new MediaCollection());
             }
             set
             {
@@ -114,7 +115,10 @@ namespace MoEmbed.Models
                     _Medias?.Clear();
                     if (value?.Count > 0)
                     {
-                        Medias.AddRange(value);
+                        foreach (var m in value)
+                        {
+                            Medias.Add(m);
+                        }
                     }
                 }
             }
