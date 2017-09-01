@@ -88,37 +88,19 @@ namespace MoEmbed.Models.Metadata
 
             if (Regex.IsMatch(mediaType, @"^text\/html$"))
             {
-                var bytes = await res.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-
-                var hd = new HtmlDocument();
-                hd.LoadHtml(Encoding.UTF8.GetString(bytes));
-
-                var nav = hd.CreateNavigator();
-
-                var charset = nav.SelectSingleNode("//html/head/meta[@charset]/@charset")?.Value.Trim();
-                if (charset == null)
+                using (var ms = new MemoryStream(await res.Content.ReadAsByteArrayAsync().ConfigureAwait(false)))
                 {
-                    // HACK: lower-case(@http-equiv) throws exception!
-                    charset = nav.SelectSingleNode("//html/head/meta[@http-equiv='content-type'"
-                                                                + " or @http-equiv='Content-Type'"
-                                                                + " or @http-equiv='Content-type'"
-                                                                + " or @http-equiv='CONTENT-TYPE']/@content")
-                                ?.Value
-                                ?.Split(';').FirstOrDefault(v => v.Contains("charset="))
-                                ?.Split('=').Last().Trim();
-                }
+                    var hd = new HtmlDocument();
+                    var enc = hd.DetectEncoding(ms);
 
-                if (charset?.Equals("utf-8", StringComparison.OrdinalIgnoreCase) == false)
-                {
-                    var enc = Encoding.GetEncoding(charset);
-                    if (enc != null)
+                    ms.Position = 0;
+
+                    using (var sr = new StreamReader(ms, enc ?? Encoding.UTF8))
                     {
-                        hd.LoadHtml(enc.GetString(bytes));
-                        nav = hd.CreateNavigator();
+                        hd.Load(sr);
+                        LoadHtml(hd);
                     }
                 }
-
-                LoadHtml(hd);
             }
             else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
             {
