@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.IO;
 using MoEmbed.Providers;
 using Portable.Xaml;
@@ -61,8 +61,8 @@ namespace MoEmbed.Models.Metadata
         }
 
         [Theory]
-        [InlineData("http://www.tbs.co.jp/baseball/top/main.htm", "ƒGƒLƒTƒCƒgƒx[ƒXƒ{[ƒ‹ | ƒvƒ–ì‹…‘¬•ñ")]
-        [InlineData("http://www.4gamer.net/games/383/G038390/20170610002/", "PCŒü‚¯ƒ•S‡ADVu‚±‚Æ‚Ì‚ÍƒAƒ€ƒŠƒ‰[ƒgvCŒö®ƒTƒCƒg‚ª6Œ12“ú³Œß‚ÉŒöŠJ")]
+        [InlineData("http://www.tbs.co.jp/baseball/top/main.htm", "ã‚¨ã‚­ã‚µã‚¤ãƒˆãƒ™ãƒ¼ã‚¹ãƒœãƒ¼ãƒ« | ãƒ—ãƒ­é‡çƒé€Ÿå ±")]
+        [InlineData("http://www.4gamer.net/games/383/G038390/20170610002/", "PCå‘ã‘ç´”ç™¾åˆADVã€Œã“ã¨ã®ã¯ã‚¢ãƒ ãƒªãƒ©ãƒ¼ãƒˆã€ï¼Œå…¬å¼ã‚µã‚¤ãƒˆãŒ6æœˆ12æ—¥æ­£åˆã«å…¬é–‹")]
         public async void EncodingTest(string url, string title)
         {
             var rm = new UnknownMetadata() { Url = url.ToUri() };
