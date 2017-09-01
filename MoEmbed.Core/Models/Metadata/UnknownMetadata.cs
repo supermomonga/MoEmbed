@@ -99,7 +99,10 @@ namespace MoEmbed.Models.Metadata
                 if (charset == null)
                 {
                     // HACK: lower-case(@http-equiv) throws exception!
-                    charset = nav.SelectSingleNode("//html/head/meta[@http-equiv='content-type']/@content")
+                    charset = nav.SelectSingleNode("//html/head/meta[@http-equiv='content-type'"
+                                                                + " or @http-equiv='Content-Type'"
+                                                                + " or @http-equiv='Content-type'"
+                                                                + " or @http-equiv='CONTENT-TYPE']/@content")
                                 ?.Value
                                 ?.Split(';').FirstOrDefault(v => v.Contains("charset="))
                                 ?.Split('=').Last().Trim();
