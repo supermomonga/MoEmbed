@@ -69,5 +69,15 @@ namespace MoEmbed.Models.Metadata
             var d = await rm.FetchAsync(GetRequestContext(url));
             Assert.Equal(title, d.Title);
         }
+
+        [Theory]
+        [InlineData("http://rms.sexy", RestrictionPolicies.Unknown)]
+        [InlineData("http://www.dlsite.com/pro/work/=/product_id/VJ007039.html", RestrictionPolicies.Restricted)]
+        public async void RestrictionPolicyTest(string url, RestrictionPolicies policy)
+        {
+            var rm = new UnknownMetadata() { Url = url.ToUri() };
+            var d = await rm.FetchAsync(GetRequestContext(url));
+            Assert.Equal(policy, d.RestrictionPolicy);
+        }
     }
 }
