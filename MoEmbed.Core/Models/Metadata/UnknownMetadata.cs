@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Shipwreck.OpenGraph;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -160,7 +161,12 @@ namespace MoEmbed.Models.Metadata
             var nav = htmlDocument.CreateNavigator();
 
             // OGP Spec: http://ogp.me/
-            var graph = Shipwreck.OpenGraph.Graph.FromXPathNavigable(htmlDocument);
+            var graph = Graph.FromXPathNavigable(htmlDocument);
+
+            var age = graph.Restriction?.Age;
+            var policy = (age != null && int.TryParse(age.TrimEnd('+'), out var ageValue) && ageValue >= 18)
+                            || graph[Mixi.ContentRating] == "1" ? RestrictionPolicies.Restricted
+                            : RestrictionPolicies.Unknown;
 
             // Open Graph protocol を優先しつつフォールバックする
             Data = new EmbedData()
@@ -169,7 +175,8 @@ namespace MoEmbed.Models.Metadata
                 Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value).DeEntitize(),
                 Description = (graph.Description ?? nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value).DeEntitize(),
                 ProviderName = graph.SiteName.DeEntitize(),
-                CacheAge = graph.TimeToLive
+                CacheAge = graph.TimeToLive,
+                RestrictionPolicy = policy
             };
 
             var author = graph.Article?.Author
@@ -220,6 +227,7 @@ namespace MoEmbed.Models.Metadata
                         },
                         RawUrl = url,
                         Location = Data.Url,
+                        RestrictionPolicy = policy
                     });
                 }
             }
@@ -238,6 +246,7 @@ namespace MoEmbed.Models.Metadata
                         },
                         RawUrl = url,
                         Location = Data.Url,
+                        RestrictionPolicy = policy
                     });
                 }
             }
@@ -257,6 +266,7 @@ namespace MoEmbed.Models.Metadata
                         },
                         RawUrl = url,
                         Location = Data.Url,
+                        RestrictionPolicy = policy
                     });
                 }
             }
@@ -273,18 +283,11 @@ namespace MoEmbed.Models.Metadata
                             Thumbnail = new ImageInfo
                             {
                                 Url = media.Thumbnail?.Url
-                            }
+                            },
+                            RestrictionPolicy = policy
                         };
                     }
                     Data.Medias.Remove(media);
-                }
-            }
-
-            {
-                var age = graph.Restriction?.Age;
-                if (age != null && int.TryParse(age.TrimEnd('+'), out var a) && a >= 18)
-                {
-                    Data.RestrictionPolicy = RestrictionPolicies.Restricted;
                 }
             }
         }
