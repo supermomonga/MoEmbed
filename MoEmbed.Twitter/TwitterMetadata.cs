@@ -117,11 +117,24 @@ namespace MoEmbed.Models
 
             var authorName = HtmlEntity.DeEntitize($"{ user.Name }(@{ ScreenName })");
 
-            var description = tweet.FullText != null
-                                        && tweet.DisplayTextRange?.Length == 2
-                                            ? tweet.FullText.Substring(0, tweet.DisplayTextRange[1])
-                                : tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}"
-                                : tweet.Text;
+            string description;
+            if (tweet.FullText != null
+                && tweet.DisplayTextRange?.Length == 2)
+            {
+                var length = tweet.DisplayTextRange[1];
+                for (var i = 0; i < length; i++)
+                {
+                    if (char.IsHighSurrogate(tweet.FullText[i]))
+                    {
+                        length++;
+                    }
+                }
+                description = tweet.FullText.Substring(0, length);
+            }
+            else
+            {
+                description = tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}" : tweet.Text;
+            }
 
             Data = new EmbedData()
             {

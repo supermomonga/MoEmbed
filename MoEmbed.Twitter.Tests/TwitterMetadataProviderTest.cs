@@ -95,8 +95,10 @@ namespace MoEmbed.Providers
         }
 
         [Theory]
+        [InlineData("https://twitter.com/301kakugen/status/864532607916097536", "プリパラは好きぷり？ じゃあ大丈夫！できるぷり\n\n──南みれぃ")]
         [InlineData("https://mobile.twitter.com/4423s/status/901462528789626881", "")]
         [InlineData("https://twitter.com/EmmaKennedy/status/902886165350678529", "@realDonaldTrump You? Reading? IDON”TTHINKSO DonDon")]
+        [InlineData("https://twitter.com/KiraTwins/status/903283834669604864", "🍽")]
         public async void GetEmbedDataTest_Description(string uri, string desription)
         {
             var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
