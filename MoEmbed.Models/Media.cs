@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models
 {
@@ -10,6 +11,7 @@ namespace MoEmbed.Models
     /// Represents a media information.
     /// </summary>
     [DataContract]
+    [ContentProperty(nameof(Thumbnail))]
     public class Media
     {
         /// <summary>

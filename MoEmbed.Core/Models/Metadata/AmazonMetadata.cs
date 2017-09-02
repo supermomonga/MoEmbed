@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using MoEmbed.Providers;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -10,6 +11,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata" /> for the URL of the Amazon.
     /// </summary>
     [Serializable]
+    [ContentProperty(nameof(Data))]
     public sealed class AmazonMetadata : Metadata
     {
         internal AmazonMetadataProvider Provider { get; set; }

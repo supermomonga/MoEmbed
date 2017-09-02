@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json.Linq;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -13,6 +14,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata"/> fetching from remote oEmbed providers.
     /// </summary>
     [Serializable]
+    [ContentProperty(nameof(Data))]
     public class OEmbedProxyMetadata : Metadata
     {
         /// <summary>

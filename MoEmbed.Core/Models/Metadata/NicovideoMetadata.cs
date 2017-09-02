@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Xml;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -9,6 +10,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata"/> for the URL of the nicovideo.jp.
     /// </summary>
     [Serializable]
+    [ContentProperty(nameof(Data))]
     public class NicovideoMetadata : Metadata
     {
         /// <summary>

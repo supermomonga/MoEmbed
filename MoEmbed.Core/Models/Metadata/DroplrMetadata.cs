@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -7,6 +8,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata"/> for the <see href="droplr.com"/>.
     /// </summary>
     [Serializable]
+    [ContentProperty(nameof(Data))]
     public class DroplrMetadata : UnknownMetadata
     {
         /// <inheritdoc />
