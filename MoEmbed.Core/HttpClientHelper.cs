@@ -25,7 +25,7 @@ namespace MoEmbed
             bool? moved = null;
             for (; ; )
             {
-                var res = await httpClient.GetAsync(url).ConfigureAwait(false);
+                var res = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
 
                 switch (res.StatusCode)
                 {
