@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using HtmlAgilityPack;
+using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -8,6 +9,7 @@ namespace MoEmbed.Models.Metadata
     /// Represents the <see cref="Metadata"/> for the <see href="pixiv.net"/>.
     /// </summary>
     [Serializable]
+    [ContentProperty(nameof(Data))]
     public class PixivMetadata : UnknownMetadata
     {
         /// <summary>

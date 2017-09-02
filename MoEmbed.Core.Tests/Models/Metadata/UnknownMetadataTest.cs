@@ -49,7 +49,7 @@ namespace MoEmbed.Models.Metadata
         }
 
         [Theory]
-        [InlineData("http://d.pr/i/sYDF7v.png", EmbedDataTypes.SingleImage)]
+        // TODO: Removed due to HTTP 404 [InlineData("http://d.pr/i/sYDF7v.png", EmbedDataTypes.SingleImage)]
         [InlineData("http://imgur.com/GBfaPnJ.png", EmbedDataTypes.SingleImage)]
         [InlineData("http://game-a5.granbluefantasy.jp/assets/sound/voice/3030147000_v_017.mp3", EmbedDataTypes.SingleAudio)]
         [InlineData("https://gyazo.com/7dd82fe03e109f4a9db9074831b4c65b", EmbedDataTypes.MixedContent)]
