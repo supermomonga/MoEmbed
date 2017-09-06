@@ -64,7 +64,7 @@ namespace MoEmbed
                     service.Providers.Add(amazon);
                 }
             }
-            service.Providers.Add(new ImgurMetadataProvider());
+            service.Providers.Add(ImgurMetadataProvider.GetInstance(Configuration));
             service.Providers.Add(new PixivMetadataProvider());
             service.Providers.Add(new NicovideoMetadataProvider());
             service.Providers.Add(new DroplrMetadataProvider());
