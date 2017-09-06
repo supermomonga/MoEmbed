@@ -34,7 +34,7 @@ namespace MoEmbed.Models.Imgur
         /// </summary>
         [DefaultValue(0)]
         [JsonProperty("datetime")]
-        public int Datetime { get; set; }
+        public long Datetime { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the album cover image
@@ -62,7 +62,7 @@ namespace MoEmbed.Models.Imgur
         /// </summary>
         [DefaultValue(null)]
         [JsonProperty("accountUrl")]
-        public string Account_url { get; set; }
+        public string AccountUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the account ID or null if it's anonymous.

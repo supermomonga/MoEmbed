@@ -36,7 +36,7 @@ namespace MoEmbed.Models.Imgur
         /// </summary>
         [DefaultValue(0)]
         [JsonProperty("datetime")]
-        public int Datetime { get; set; }
+        public long Datetime { get; set; }
 
         /// <summary>
         /// Gets or sets a image MIME type.
@@ -85,7 +85,7 @@ namespace MoEmbed.Models.Imgur
         /// </summary>
         [DefaultValue(0)]
         [JsonProperty("bandwidth")]
-        public int Bandwidth { get; set; }
+        public long Bandwidth { get; set; }
 
         /// <summary>
         /// Gets or sets the section the image belongs in. (funny, cats, adviceanimals, wtf, etc)

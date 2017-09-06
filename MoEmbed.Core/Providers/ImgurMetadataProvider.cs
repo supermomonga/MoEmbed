@@ -13,7 +13,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class ImgurMetadataProvider : IMetadataProvider
     {
-        private static readonly Regex regex = new Regex(@"^https?://(i\.)?imgur\.com(?<t>/a|gallery)?/(?<h>[a-zA-Z0-9]+)$");
+        private static readonly Regex regex = new Regex(@"^https?://(i\.)?imgur\.com(?<t>/a|/gallery)?/(?<h>[a-zA-Z0-9]+)$");
 
         bool IMetadataProvider.SupportsAnyHost
             => false;
