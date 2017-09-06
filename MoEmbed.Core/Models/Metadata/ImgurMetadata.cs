@@ -1,13 +1,11 @@
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using MoEmbed.Models.Imgur;
 using MoEmbed.Providers;
-using Newtonsoft.Json;
 using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
@@ -93,13 +91,7 @@ namespace MoEmbed.Models.Metadata
 
                     res.EnsureSuccessStatusCode();
 
-                    ImgurImage img;
-                    using (var s = await res.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    using (var sr = new StreamReader(s))
-                    using (var jr = new JsonTextReader(sr))
-                    {
-                        img = new JsonSerializer().Deserialize<ImgurResponse<ImgurImage>>(jr)?.Data;
-                    }
+                    var img = (await res.Content.ReadAsAsync<ImgurResponse<ImgurImage>>())?.Data;
 
                     if (img == null)
                     {
@@ -143,13 +135,7 @@ namespace MoEmbed.Models.Metadata
 
                     res.EnsureSuccessStatusCode();
 
-                    ImgurAlbum album;
-                    using (var s = await res.Content.ReadAsStreamAsync().ConfigureAwait(false))
-                    using (var sr = new StreamReader(s))
-                    using (var jr = new JsonTextReader(sr))
-                    {
-                        album = new JsonSerializer().Deserialize<ImgurResponse<ImgurAlbum>>(jr)?.Data;
-                    }
+                    var album = (await res.Content.ReadAsAsync<ImgurResponse<ImgurAlbum>>())?.Data;
 
                     if (!(album?.Images?.Length > 0))
                     {
