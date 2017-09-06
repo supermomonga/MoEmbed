@@ -49,7 +49,7 @@ namespace MoEmbed.Providers
                     Provider = this,
                     Url = request.Url,
                     Type = !t.Success ? ImgurType.Image
-                            : t.Value == "a" ? ImgurType.Album
+                            : t.Value == "/a" ? ImgurType.Album
                             : ImgurType.Gallery,
                     Hash = m.Groups["h"].Value
                 };

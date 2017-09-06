@@ -57,6 +57,9 @@ namespace MoEmbed.Models.Metadata
                         break;
 
                     case ImgurType.Album:
+                        Data = await FetchAlbumAsync(context, clientId).ConfigureAwait(false);
+                        break;
+
                     case ImgurType.Gallery:
                     default:
                         Data = null;
@@ -103,39 +106,74 @@ namespace MoEmbed.Models.Metadata
                         return null;
                     }
 
-                    var url = "https://imgur.com/" + img.Id;
-                    var policy = img.Nsfw == null ? RestrictionPolicies.Unknown
-                                            : img.Nsfw.Value ? RestrictionPolicies.Restricted
-                                            : RestrictionPolicies.Safe;
-
-                    var thumbScale = Math.Min(320f / Math.Max(img.Width, img.Height), 1);
-
-                    var media = new Media()
+                    return GetEmbedData(img);
+                }
+                catch
+                {
+                    // TODO: log exception
+                    if (i < RequestRetryCount)
                     {
-                        RawUrl = img.Link,
-                        Location = url,
-                        Type = img.IsAnimated ? MediaTypes.Video : MediaTypes.Image,
-                        RestrictionPolicy = policy,
-                        Thumbnail = new ImageInfo()
+                        try
                         {
-                            Url = "https://imgur.com/" + img.Id + "m" + Path.GetExtension(img.Link),
-                            Width = (int)(img.Width * thumbScale),
-                            Height = (int)(img.Height * thumbScale)
-                        }
-                    };
+                            await Task.Delay((int)(RequestRetryWait.TotalMilliseconds * Math.Pow(RequestRetryFactor, i))).ConfigureAwait(false);
 
-                    var d = new EmbedData()
+                            continue;
+                        }
+                        catch { }
+                    }
+
+                    Provider.LastFaulted = DateTime.Now;
+                    throw;
+                }
+            }
+        }
+
+        private async Task<EmbedData> FetchAlbumAsync(RequestContext context, string clientId)
+        {
+            var hc = context.Service.HttpClient;
+
+            for (var i = 0; ; i++)
+            {
+                try
+                {
+                    var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/album/" + Hash);
+                    req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
+                    req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var res = await hc.SendAsync(req).ConfigureAwait(false);
+
+                    res.EnsureSuccessStatusCode();
+
+                    ImgurAlbum album;
+                    using (var s = await res.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    using (var sr = new StreamReader(s))
+                    using (var jr = new JsonTextReader(sr))
                     {
-                        Url = url,
-                        Title = img.Title,
-                        Description = img.Description,
-                        Type = img.IsAnimated ? EmbedDataTypes.SingleVideo : EmbedDataTypes.SingleImage,
-                        ProviderName = "Imgur",
-                        ProviderUrl = "https://imgur.com",
-                        RestrictionPolicy = policy,
-                        MetadataImage = media,
-                        Medias = new[] { media }
-                    };
+                        album = new JsonSerializer().Deserialize<ImgurResponse<ImgurAlbum>>(jr)?.Data;
+                    }
+
+                    if (!(album?.Images?.Length > 0))
+                    {
+                        return null;
+                    }
+
+                    var ci = album.Images.FirstOrDefault(im => im.Id == album.Cover) ?? album.Images[0];
+                    var d = GetEmbedData(ci);
+                    d.Url = "https://imgur.com/a/" + album.Id;
+                    d.Title = album.Title ?? d.Title;
+                    d.Description = album.Description ?? d.Description;
+
+                    if (album.Images.Length > 1)
+                    {
+                        d.Type = EmbedDataTypes.MixedContent;
+
+                        foreach (var img in album.Images)
+                        {
+                            if (img != ci)
+                            {
+                                d.Medias.Add(img.ToMedia());
+                            }
+                        }
+                    }
 
                     return d;
                 }
@@ -157,6 +195,24 @@ namespace MoEmbed.Models.Metadata
                     throw;
                 }
             }
+        }
+
+        private static EmbedData GetEmbedData(ImgurImage img)
+        {
+            var media = img.ToMedia();
+
+            return new EmbedData()
+            {
+                Url = media.Location,
+                Title = img.Title,
+                Description = img.Description,
+                Type = img.IsAnimated ? EmbedDataTypes.SingleVideo : EmbedDataTypes.SingleImage,
+                ProviderName = "Imgur",
+                ProviderUrl = "https://imgur.com",
+                RestrictionPolicy = media.RestrictionPolicy,
+                MetadataImage = media,
+                Medias = new[] { media }
+            };
         }
 
         /// <inheritdoc />

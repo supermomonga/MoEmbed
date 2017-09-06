@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace MoEmbed.Models.Imgur
@@ -146,5 +148,27 @@ namespace MoEmbed.Models.Imgur
         [DefaultValue(false)]
         [JsonProperty("in_gallery")]
         public bool InGallery { get; set; }
+
+        internal Media ToMedia()
+        {
+            var thumbScale = Math.Min(320f / Math.Max(Width, Height), 1);
+
+            var media = new Media()
+            {
+                RawUrl = Link,
+                Location = "https://imgur.com/" + Id,
+                Type = IsAnimated ? MediaTypes.Video : MediaTypes.Image,
+                RestrictionPolicy = Nsfw == null ? RestrictionPolicies.Unknown
+                                    : Nsfw.Value ? RestrictionPolicies.Restricted
+                                    : RestrictionPolicies.Safe,
+                Thumbnail = new ImageInfo()
+                {
+                    Url = "https://imgur.com/" + Id + "m" + Path.GetExtension(Link),
+                    Width = (int)(Width * thumbScale),
+                    Height = (int)(Height * thumbScale)
+                }
+            };
+            return media;
+        }
     }
 }
