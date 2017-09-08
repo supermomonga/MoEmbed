@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MoEmbed
 {
@@ -43,6 +45,16 @@ namespace MoEmbed
                 }
 
                 return new RedirectionResult(res, moved == true ? url : null);
+            }
+        }
+
+        public static async Task<T> ReadAsAsync<T>(this HttpContent content)
+        {
+            using (var s = await content.ReadAsStreamAsync().ConfigureAwait(false))
+            using (var sr = new StreamReader(s))
+            using (var jr = new JsonTextReader(sr))
+            {
+                return new JsonSerializer().Deserialize<T>(jr);
             }
         }
     }

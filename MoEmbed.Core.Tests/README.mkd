@@ -2,7 +2,9 @@
 
 ```sh
 dotnet restore
-user-secrets set AWSAccessKeyId xxxxxxxxxxxxxxxxxxxxxxxxx
-user-secrets set AWSSecretKey yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-user-secrets set AmazonAssociateTag zzzzzzzz-nn
+dotnet user-secrets set AWSAccessKeyId xxxxxxxxxxxxxxxxxxxxxxxxx
+dotnet user-secrets set AWSSecretKey yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+dotnet user-secrets set AmazonAssociateTag zzzzzzzz-nn
+
+dotnet user-secrets set ImgurClientId **********
 ```
