@@ -15,6 +15,11 @@ namespace MoEmbed.Providers
         bool SupportsAnyHost { get; }
 
         /// <summary>
+        /// Gets a value indicating wheter the provider is enabled.
+        /// </summary>
+        bool IsEnabled { get; }
+
+        /// <summary>
         /// Returns a sequence of host names that is able to handle.
         /// </summary>
         /// <returns>The sequence of host names.</returns>

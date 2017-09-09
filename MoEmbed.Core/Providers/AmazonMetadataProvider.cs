@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -30,8 +31,29 @@ namespace MoEmbed.Providers
             _Queue = new AmazonMetadataProviderQueue(accessKeyId, secretKey, associateTag);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AmazonMetadataProvider" /> with the
+        /// configuration for Amazon.
+        /// </summary>
+        /// <param name="optionsAccessor">The accessor to the configuration for Amazon.</param>
+        public AmazonMetadataProvider(IOptions<AmazonMetadataOptions> optionsAccessor)
+        {
+            var op = optionsAccessor?.Value;
+            var id = op?.AWSAccessKeyId ?? Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+            var key = op?.AWSSecretKey ?? Environment.GetEnvironmentVariable("AWS_SECRET_KEY");
+            var tag = op?.AmazonAssociateTag ?? Environment.GetEnvironmentVariable("AMAZON_ASSOCIATE_TAG");
+
+            if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(tag))
+            {
+                _Queue = new AmazonMetadataProviderQueue(id, key, tag);
+            }
+        }
+
         bool IMetadataProvider.SupportsAnyHost
             => false;
+
+        bool IMetadataProvider.IsEnabled
+            => _Queue != null;
 
         /// <summary>
         /// Returns a sequence of host names that is able to handle.

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MoEmbed.Models;
 using MoEmbed.Models.Imgur;
 using MoEmbed.Models.Metadata;
@@ -9,14 +9,30 @@ using MoEmbed.Models.Metadata;
 namespace MoEmbed.Providers
 {
     /// <summary>
-    /// Represents the <see cref="Metadata"/> for the URL of the imgur.com
+    /// Represents the <see cref="Metadata" /> for the URL of the imgur.com
     /// </summary>
     public sealed class ImgurMetadataProvider : IMetadataProvider
     {
         private static readonly Regex regex = new Regex(@"^https?://(i\.)?imgur\.com(?<t>/a|/gallery)?/(?<h>[a-zA-Z0-9]+)$");
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImgurMetadataProvider" /> with the
+        /// configuration for imgur.
+        /// </summary>
+        /// <param name="optionsAccessor">The accessor to the configuration for imgur.</param>
+        public ImgurMetadataProvider(IOptions<ImgurMetadataOptions> optionsAccessor)
+        {
+            var id = optionsAccessor?.Value?.ImgurClientId
+                    ?? Environment.GetEnvironmentVariable("IMGUR_CLIENT_ID");
+
+            ClientId = id;
+        }
+
         bool IMetadataProvider.SupportsAnyHost
             => false;
+
+        bool IMetadataProvider.IsEnabled
+            => true;
 
         /// <summary>
         /// Gets or sets the imgur.com OAUth client id.
@@ -77,21 +93,6 @@ namespace MoEmbed.Providers
                 }
             }
             return false;
-        }
-
-        /// <summary>
-        /// Returns a new instance of the <see cref="ImgurMetadataProvider" /> class if configured.
-        /// </summary>
-        /// <param name="configuration">The application configuration.</param>
-        /// <returns>The <see cref="ImgurMetadataProvider" />.</returns>
-        public static ImgurMetadataProvider GetInstance(IConfigurationRoot configuration)
-        {
-            var id = configuration["ImgurClientId"] ?? Environment.GetEnvironmentVariable("IMGUR_CLIENT_ID");
-
-            return new ImgurMetadataProvider()
-            {
-                ClientId = id
-            };
         }
     }
 }

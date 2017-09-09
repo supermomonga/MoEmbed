@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using MoEmbed.Models;
 using Xunit;
 
-namespace MoEmbed.Providers
+namespace MoEmbed.Twitter
 {
     public sealed class TwitterMetadataProviderTest
     {

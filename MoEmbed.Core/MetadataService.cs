@@ -2,8 +2,8 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MoEmbed.Models;
 using MoEmbed.Providers;
@@ -11,7 +11,7 @@ using MoEmbed.Providers;
 namespace MoEmbed
 {
     /// <summary>
-    ///   Handles the request object and use right metadata handler to fetch embed data.
+    /// Handles the request object and use right metadata handler to fetch embed data.
     /// </summary>
     public class MetadataService : IDisposable
     {
@@ -21,23 +21,42 @@ namespace MoEmbed
         private MetadataProviderCollection _Providers;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="MetadataService" /> class.
+        /// Initializes a new instance of the <see cref="MetadataService" /> class.
         /// </summary>
-        public MetadataService(ILoggerFactory loggerFactory = null, IMetadataCache cache = null)
+        /// <param name="loggerFactory">The logger factory,</param>
+        /// <param name="serviceProvider">
+        /// The <see cref="IServiceProvider" /> to instanciate <see cref="IMetadataProvider" /> s.
+        /// </param>
+        /// <param name="cache">The cache provider for the resolved metadata.</param>
+        public MetadataService(ILoggerFactory loggerFactory = null, IServiceProvider serviceProvider = null, IMetadataCache cache = null)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _logger = loggerFactory?.CreateLogger<MetadataService>();
             _Cache = cache;
+
+            if (serviceProvider != null)
+            {
+                foreach (var s in serviceProvider.GetServices<IMetadataProvider>())
+                {
+                    if (s.IsEnabled)
+                    {
+                        Providers.Add(s);
+                    }
+                    else
+                    {
+                        _logger.LogWarning("Ignore disabled IMetadataProvider: {0}", s);
+                    }
+                }
+            }
         }
 
         /// <summary>
-        ///   Gets the list of <see cref="IMetadataProvider" />.
+        /// Gets the list of <see cref="IMetadataProvider" />.
         /// </summary>
         public MetadataProviderCollection Providers
             => _Providers ?? (_Providers = new MetadataProviderCollection());
 
         /// <summary>
-        ///   Finds the right provider and use it to fetch embed data.
+        /// Finds the right provider and use it to fetch embed data.
         /// </summary>
         public async Task<EmbedDataResult> GetDataAsync(ConsumerRequest request)
         {
@@ -83,11 +102,10 @@ namespace MoEmbed
         private HttpClient _HttpClient;
 
         /// <summary>
-        /// Gets a <see cref="HttpClient"/> instance that is shared over this <see cref="MetadataService"/>.
+        /// Gets a <see cref="HttpClient" /> instance that is shared over this <see
+        /// cref="MetadataService" />.
         /// </summary>
-        /// <remarks>
-        /// The <see cref="HttpClient"/> won't follow redirect automatically.
-        /// </remarks>
+        /// <remarks>The <see cref="HttpClient" /> won't follow redirect automatically.</remarks>
         public HttpClient HttpClient
         {
             get
@@ -123,7 +141,8 @@ namespace MoEmbed
         #region IDisposable support
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting
+        /// unmanaged resources.
         /// </summary>
         public void Dispose()
         {

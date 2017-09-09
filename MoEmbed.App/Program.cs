@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
@@ -8,6 +9,8 @@ namespace MoEmbed
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .Build();
@@ -26,4 +29,3 @@ namespace MoEmbed
         }
     }
 }
-
