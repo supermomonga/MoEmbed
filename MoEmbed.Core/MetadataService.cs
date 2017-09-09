@@ -23,6 +23,11 @@ namespace MoEmbed
         /// <summary>
         /// Initializes a new instance of the <see cref="MetadataService" /> class.
         /// </summary>
+        /// <param name="loggerFactory">The logger factory,</param>
+        /// <param name="serviceProvider">
+        /// The <see cref="IServiceProvider" /> to instanciate <see cref="IMetadataProvider" /> s.
+        /// </param>
+        /// <param name="cache">The cache provider for the resolved metadata.</param>
         public MetadataService(ILoggerFactory loggerFactory = null, IServiceProvider serviceProvider = null, IMetadataCache cache = null)
         {
             _logger = loggerFactory?.CreateLogger<MetadataService>();
@@ -38,6 +43,7 @@ namespace MoEmbed
                     }
                     else
                     {
+                        _logger.LogWarning("Ignore disabled IMetadataProvider: {0}", s);
                     }
                 }
             }

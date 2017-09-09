@@ -20,6 +20,11 @@ namespace MoEmbed.Twitter
             _IsEnabled = true;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TwitterMetadataProvider" /> with the
+        /// configuration for Twitter.
+        /// </summary>
+        /// <param name="optionsAccessor">The accessor to the configuration for Twitter.</param>
         public TwitterMetadataProvider(IOptions<TwitterMetadataOptions> optionsAccessor)
         {
             var consumerKey = optionsAccessor?.Value?.TwitterConsumerKey ?? Environment.GetEnvironmentVariable("TWITTER_CONSUMER_KEY");

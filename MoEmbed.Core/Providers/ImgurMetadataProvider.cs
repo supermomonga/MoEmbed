@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MoEmbed.Models;
 using MoEmbed.Models.Imgur;
@@ -16,6 +15,11 @@ namespace MoEmbed.Providers
     {
         private static readonly Regex regex = new Regex(@"^https?://(i\.)?imgur\.com(?<t>/a|/gallery)?/(?<h>[a-zA-Z0-9]+)$");
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImgurMetadataProvider" /> with the
+        /// configuration for imgur.
+        /// </summary>
+        /// <param name="optionsAccessor">The accessor to the configuration for imgur.</param>
         public ImgurMetadataProvider(IOptions<ImgurMetadataOptions> optionsAccessor)
         {
             var id = optionsAccessor?.Value?.ImgurClientId

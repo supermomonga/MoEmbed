@@ -19,18 +19,23 @@ namespace MoEmbed.Providers
 
         private readonly AmazonMetadataProviderQueue _Queue;
 
-        ///// <summary>
-        ///// Initializes a new instaince of the <see cref="AmazonMetadataProvider" /> class with AWS secrets.
-        ///// </summary>
-        ///// <param name="accessKeyId">The AWS access key id.</param>
-        ///// <param name="secretKey">The AWS secret key.</param>
-        ///// <param name="associateTag">The Amazon associate tag.</param>
+        /// <summary>
+        /// Initializes a new instaince of the <see cref="AmazonMetadataProvider" /> class with AWS secrets.
+        /// </summary>
+        /// <param name="accessKeyId">The AWS access key id.</param>
+        /// <param name="secretKey">The AWS secret key.</param>
+        /// <param name="associateTag">The Amazon associate tag.</param>
         public AmazonMetadataProvider(string accessKeyId, string secretKey, string associateTag)
         {
             // TODO: support multiple queue.
             _Queue = new AmazonMetadataProviderQueue(accessKeyId, secretKey, associateTag);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AmazonMetadataProvider" /> with the
+        /// configuration for Amazon.
+        /// </summary>
+        /// <param name="optionsAccessor">The accessor to the configuration for Amazon.</param>
         public AmazonMetadataProvider(IOptions<AmazonMetadataOptions> optionsAccessor)
         {
             var op = optionsAccessor?.Value;
