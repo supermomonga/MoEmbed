@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using MoEmbed.Providers;
 using Portable.Xaml;
 using Xunit;
@@ -8,6 +9,11 @@ namespace MoEmbed.Models.Metadata
 {
     public class UnknownMetadataTest
     {
+        static UnknownMetadataTest()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+
         internal RequestContext GetRequestContext(Uri url)
         {
             var r = new RequestContext(new MetadataService(), new ConsumerRequest(url));

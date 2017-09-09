@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
@@ -18,20 +19,36 @@ namespace MoEmbed.Providers
 
         private readonly AmazonMetadataProviderQueue _Queue;
 
-        /// <summary>
-        /// Initializes a new instaince of the <see cref="AmazonMetadataProvider" /> class with AWS secrets.
-        /// </summary>
-        /// <param name="accessKeyId">The AWS access key id.</param>
-        /// <param name="secretKey">The AWS secret key.</param>
-        /// <param name="associateTag">The Amazon associate tag.</param>
+        ///// <summary>
+        ///// Initializes a new instaince of the <see cref="AmazonMetadataProvider" /> class with AWS secrets.
+        ///// </summary>
+        ///// <param name="accessKeyId">The AWS access key id.</param>
+        ///// <param name="secretKey">The AWS secret key.</param>
+        ///// <param name="associateTag">The Amazon associate tag.</param>
         public AmazonMetadataProvider(string accessKeyId, string secretKey, string associateTag)
         {
             // TODO: support multiple queue.
             _Queue = new AmazonMetadataProviderQueue(accessKeyId, secretKey, associateTag);
         }
 
+        public AmazonMetadataProvider(IOptions<AmazonMetadataOptions> optionsAccessor)
+        {
+            var op = optionsAccessor?.Value;
+            var id = op?.AWSAccessKeyId ?? Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+            var key = op?.AWSSecretKey ?? Environment.GetEnvironmentVariable("AWS_SECRET_KEY");
+            var tag = op?.AmazonAssociateTag ?? Environment.GetEnvironmentVariable("AMAZON_ASSOCIATE_TAG");
+
+            if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(tag))
+            {
+                _Queue = new AmazonMetadataProviderQueue(id, key, tag);
+            }
+        }
+
         bool IMetadataProvider.SupportsAnyHost
             => false;
+
+        bool IMetadataProvider.IsEnabled
+            => _Queue != null;
 
         /// <summary>
         /// Returns a sequence of host names that is able to handle.

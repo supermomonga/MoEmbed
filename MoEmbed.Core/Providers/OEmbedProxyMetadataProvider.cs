@@ -10,6 +10,9 @@ namespace MoEmbed.Providers
     {
         bool IMetadataProvider.SupportsAnyHost => false;
 
+        bool IMetadataProvider.IsEnabled
+            => true;
+
         /// <summary>
         /// Returns a sequence of host names that is able to handle.
         /// </summary>
@@ -22,7 +25,9 @@ namespace MoEmbed.Providers
         /// Determines whether this provider can handle the specified request.
         /// </summary>
         /// <param name="request">The consumer request to handle.</param>
-        /// <returns><c>true</c> if this provider can handle <paramref name="request"/>; otherwise <c>false</c>.</returns>
+        /// <returns>
+        /// <c>true</c> if this provider can handle <paramref name="request" />; otherwise <c>false</c>.
+        /// </returns>
         public bool CanHandle(ConsumerRequest request)
             => CanHandle(request.Url);
 
@@ -103,10 +108,13 @@ namespace MoEmbed.Providers
         }
 
         /// <summary>
-        /// Returns a <see cref="Metadata"/> that represents the specified URL.
+        /// Returns a <see cref="Metadata" /> that represents the specified URL.
         /// </summary>
         /// <param name="request">The consumer request to handle.</param>
-        /// <returns>The <see cref="Metadata"/> if this provider can handle <paramref name="request"/>; otherwise <c>null</c>.</returns>
+        /// <returns>
+        /// The <see cref="Metadata" /> if this provider can handle <paramref name="request" />;
+        /// otherwise <c>null</c>.
+        /// </returns>
         public Metadata GetMetadata(ConsumerRequest request)
         {
             if (!CanHandle(request))
@@ -125,7 +133,7 @@ namespace MoEmbed.Providers
         /// <summary>
         /// Returns a new instaince of the <see cref="OEmbedProxyMetadata" />
         /// </summary>
-        /// <returns>A  new instaince of the <see cref="OEmbedProxyMetadata" />.</returns>
+        /// <returns>A new instaince of the <see cref="OEmbedProxyMetadata" />.</returns>
         protected virtual OEmbedProxyMetadata CreateMetadata()
             => new OEmbedProxyMetadata();
     }

@@ -3,12 +3,17 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MoEmbed.Models;
+using MoEmbed.Models.Metadata;
+using MoEmbed.Providers;
 using Tweetinvi;
 
-namespace MoEmbed.Models
+namespace MoEmbed.Twitter
 {
     [Serializable]
-    public class TwitterMetadata : Metadata.Metadata
+    public class TwitterMetadata : Metadata
     {
         internal static readonly Regex regex = new Regex(@"https:\/\/(mobile\.)?twitter\.com\/(?<screenName>[^\/]+)\/status\/(?<statusId>\d+)");
 

@@ -15,6 +15,9 @@ namespace MoEmbed.Providers
         bool IMetadataProvider.SupportsAnyHost
             => false;
 
+        bool IMetadataProvider.IsEnabled
+            => true;
+
         /// <summary>
         /// Returns a sequence of host names that is able to handle.
         /// </summary>
@@ -26,15 +29,20 @@ namespace MoEmbed.Providers
         /// Determines whether this provider can handle the specified request.
         /// </summary>
         /// <param name="request">The consumer request to handle.</param>
-        /// <returns><c>true</c> if this provider can handle <paramref name="request"/>; otherwise <c>false</c>.</returns>
+        /// <returns>
+        /// <c>true</c> if this provider can handle <paramref name="request" />; otherwise <c>false</c>.
+        /// </returns>
         public bool CanHandle(ConsumerRequest request)
             => regex.IsMatch(request.Url.ToString());
 
         /// <summary>
-        /// Returns a <see cref="Metadata"/> that represents the specified URL.
+        /// Returns a <see cref="Metadata" /> that represents the specified URL.
         /// </summary>
         /// <param name="request">The consumer request to handle.</param>
-        /// <returns>The <see cref="NicovideoMetadata"/> if this provider can handle <paramref name="request"/>; otherwise <c>null</c>.</returns>
+        /// <returns>
+        /// The <see cref="NicovideoMetadata" /> if this provider can handle <paramref name="request"
+        /// />; otherwise <c>null</c>.
+        /// </returns>
         public Metadata GetMetadata(ConsumerRequest request)
         {
             var m = regex.Match(request.Url.ToString());

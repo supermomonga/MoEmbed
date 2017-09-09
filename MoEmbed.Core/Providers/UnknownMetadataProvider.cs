@@ -10,6 +10,9 @@ namespace MoEmbed.Providers
         bool IMetadataProvider.SupportsAnyHost
             => true;
 
+        bool IMetadataProvider.IsEnabled
+            => true;
+
         /// <summary>
         /// Returns a sequence of host names that is able to handle.
         /// </summary>

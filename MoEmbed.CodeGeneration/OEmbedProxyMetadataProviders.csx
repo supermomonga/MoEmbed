@@ -158,11 +158,11 @@ using (var sw = new StreamWriter(Path.Combine(dir, "../MoEmbed.Core/Providers/Ge
     }
     sw.WriteLine(@"    partial class OEmbedProxyMetadataProvider");
     sw.WriteLine(@"    {");
-    sw.WriteLine(@"        public static IEnumerable<OEmbedProxyMetadataProvider> CreateKnownHandlers()");
+    sw.WriteLine(@"        internal static IEnumerable<Type> CreateKnownHandlerTypes()");
     sw.WriteLine(@"        {");
     foreach (var n in generated)
     {
-        sw.WriteLine($"            yield return new {n}MetadataProvider();");
+        sw.WriteLine($"            yield return typeof({n}MetadataProvider);");
     }
 
     sw.WriteLine(@"        }");
