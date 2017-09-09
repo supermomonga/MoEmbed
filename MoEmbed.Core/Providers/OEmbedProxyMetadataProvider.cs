@@ -6,6 +6,9 @@ using MoEmbed.Models.Metadata;
 
 namespace MoEmbed.Providers
 {
+    /// <summary>
+    /// Provides a IMetadataProvider base class to access the known oEmbed provider.
+    /// </summary>
     public abstract partial class OEmbedProxyMetadataProvider : IMetadataProvider
     {
         bool IMetadataProvider.SupportsAnyHost => false;
@@ -19,7 +22,14 @@ namespace MoEmbed.Providers
         /// <returns>The sequence of host names.</returns>
         public abstract IEnumerable<string> GetSupportedHostNames();
 
-        public abstract bool CanHandle(Uri uri);
+        /// <summary>
+        /// Determines whether this provider can handle the specified URL.
+        /// </summary>
+        /// <param name="url">The URL to handle.</param>
+        /// <returns>
+        /// <c>true</c> if this provider can handle <paramref name="url" />; otherwise <c>false</c>.
+        /// </returns>
+        public abstract bool CanHandle(Uri url);
 
         /// <summary>
         /// Determines whether this provider can handle the specified request.
@@ -31,8 +41,19 @@ namespace MoEmbed.Providers
         public bool CanHandle(ConsumerRequest request)
             => CanHandle(request.Url);
 
+        /// <summary>
+        /// Returns a URL to request oEmbed provider.
+        /// </summary>
+        /// <param name="request">The consumer request to handle.</param>
+        /// <returns>The provider URL.</returns>
         protected abstract Uri GetProviderUriFor(ConsumerRequest request);
 
+        /// <summary>
+        /// Returns a URL appended by oEmbed parameters without format.
+        /// </summary>
+        /// <param name="serviceUri">The end point of the oEmbed service.</param>
+        /// <param name="request">The oEmbed request.</param>
+        /// <returns>The provider URL.</returns>
         protected static Uri GetProviderUriWithoutFormat(string serviceUri, ConsumerRequest request)
         {
             var s = new StringBuilder(serviceUri);
@@ -55,6 +76,12 @@ namespace MoEmbed.Providers
             return new Uri(s.ToString());
         }
 
+        /// <summary>
+        /// Returns a URL appended by file extension and oEmbed parameters.
+        /// </summary>
+        /// <param name="serviceUri">The end point of the oEmbed service.</param>
+        /// <param name="request">The oEmbed request.</param>
+        /// <returns>The provider URL.</returns>
         protected static Uri GetProviderUriWithExtension(string serviceUri, ConsumerRequest request)
         {
             var s = new StringBuilder(serviceUri);
@@ -79,6 +106,12 @@ namespace MoEmbed.Providers
             return new Uri(s.ToString());
         }
 
+        /// <summary>
+        /// Returns a URL appended by oEmbed parameters.
+        /// </summary>
+        /// <param name="serviceUri">The end point of the oEmbed service.</param>
+        /// <param name="request">The oEmbed request.</param>
+        /// <returns>The provider URL.</returns>
         protected static Uri GetProviderUriCore(string serviceUri, ConsumerRequest request)
         {
             var s = new StringBuilder(serviceUri);
