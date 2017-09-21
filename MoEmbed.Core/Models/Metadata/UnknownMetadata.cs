@@ -148,15 +148,39 @@ namespace MoEmbed.Models.Metadata
                         using (var ms = new MemoryStream(await res.Content.ReadAsByteArrayAsync().ConfigureAwait(false)))
                         {
                             var hd = new HtmlDocument();
+
                             var enc = hd.DetectEncoding(ms);
+
+                            if (enc == null)
+                            {
+                                ms.Position = 0;
+
+                                using (var sr = new StreamReader(ms, Encoding.UTF8, true, 4096, true))
+                                {
+                                    hd.Load(sr);
+                                }
+
+                                var nav = hd.CreateNavigator();
+
+                                var charset = nav.SelectSingleNode("//html/head/meta[@charset]/@charset")?.Value.Trim();
+                                if (charset != null)
+                                {
+                                    try
+                                    {
+                                        enc = Encoding.GetEncoding(charset);
+                                    }
+                                    catch { }
+                                }
+                            }
 
                             ms.Position = 0;
 
                             using (var sr = new StreamReader(ms, enc ?? Encoding.UTF8))
                             {
                                 hd.Load(sr);
-                                LoadHtml(hd);
                             }
+
+                            LoadHtml(hd);
                         }
                     }
                     else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
