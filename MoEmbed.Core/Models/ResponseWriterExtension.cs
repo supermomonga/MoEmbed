@@ -3,8 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace MoEmbed.Models
 {
+    /// <summary>
+    /// Provides methods to extend <see cref="IResponseWriter" />.
+    /// </summary>
     public static class ResponseWriterExtension
     {
+        /// <summary>
+        /// Writes a property to the specified writer if the value is not null.
+        /// </summary>
+        /// <param name="writer">The writer to write.</param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="value">The value of the property.</param>
         public static void WritePropertyIfNeeded(this IResponseWriter writer, string name, object value)
         {
             if (value != null)
@@ -26,6 +35,12 @@ namespace MoEmbed.Models
             }
         }
 
+        /// <summary>
+        /// Writes a string property to the specified writer if the value is not null.
+        /// </summary>
+        /// <param name="writer">The writer to write.</param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="value">The value of the property.</param>
         public static void WritePropertyIfNeeded(this IResponseWriter writer, string name, string value)
         {
             if (value != null)
@@ -34,6 +49,12 @@ namespace MoEmbed.Models
             }
         }
 
+        /// <summary>
+        /// Writes a URL property to the specified writer if the value is not null.
+        /// </summary>
+        /// <param name="writer">The writer to write.</param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="value">The value of the property.</param>
         public static void WritePropertyIfNeeded(this IResponseWriter writer, string name, Uri value)
         {
             if (value != null)
@@ -42,6 +63,12 @@ namespace MoEmbed.Models
             }
         }
 
+        /// <summary>
+        /// Writes a integral property to the specified writer if the value is not null.
+        /// </summary>
+        /// <param name="writer">The writer to write.</param>
+        /// <param name="name">The name of the property.</param>
+        /// <param name="value">The value of the property.</param>
         public static void WritePropertyIfNeeded(this IResponseWriter writer, string name, int? value)
         {
             if (value != null)
@@ -50,6 +77,11 @@ namespace MoEmbed.Models
             }
         }
 
+        /// <summary>
+        /// Writes a EmbedData to the specified writer.
+        /// </summary>
+        /// <param name="writer">The writer to write.</param>
+        /// <param name="obj">The <see cref="EmbedData" />.</param>
         public static void WriteEmbedData(this IResponseWriter writer, EmbedData obj)
         {
             writer.WriteStartResponse();
