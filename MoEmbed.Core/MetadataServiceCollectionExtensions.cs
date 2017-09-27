@@ -47,6 +47,7 @@ namespace MoEmbed
         {
             services.Configure<AmazonMetadataOptions>(configuration);
             services.Configure<ImgurMetadataOptions>(configuration);
+            services.Configure<MastodonMetadataOptions>(configuration);
         }
     }
 }
