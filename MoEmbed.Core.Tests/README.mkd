@@ -7,4 +7,6 @@ dotnet user-secrets set AWSSecretKey yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 dotnet user-secrets set AmazonAssociateTag zzzzzzzz-nn
 
 dotnet user-secrets set ImgurClientId **********
+
+dotnet user-secrets set MastodonInstancesSecretToken ********************************************************************
 ```
