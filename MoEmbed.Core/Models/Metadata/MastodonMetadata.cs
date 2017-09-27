@@ -87,7 +87,8 @@ namespace MoEmbed.Models.Metadata
                 MetadataImage = new Media()
                 {
                     Type = MediaTypes.Image,
-                    RawUrl = status.Account.AvatarStatic
+                    RawUrl = status.Account.AvatarStatic,
+                    RestrictionPolicy = RestrictionPolicies.Safe
                 },
                 RestrictionPolicy = status.IsSensitive ? RestrictionPolicies.Restricted : RestrictionPolicies.Unknown,
                 Type = EmbedDataTypes.MixedContent,
