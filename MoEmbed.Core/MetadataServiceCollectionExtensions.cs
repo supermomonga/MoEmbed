@@ -27,6 +27,7 @@ namespace MoEmbed
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(NicovideoMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(DroplrMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(AnitvMetadataProvider), ServiceLifetime.Singleton));
+            services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(MastodonMetadataProvider), ServiceLifetime.Singleton));
 
             foreach (var t in OEmbedProxyMetadataProvider.CreateKnownHandlerTypes())
             {
