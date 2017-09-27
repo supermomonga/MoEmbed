@@ -117,7 +117,7 @@ namespace MoEmbed.Models.Metadata
             {
                 var sb = new StringBuilder();
 
-                using (var sr = new StringReader(status.Content.Replace("<br>", "<br />")))
+                using (var sr = new StringReader(status.Content))
                 using (var xr = XmlReader.Create(sr, new XmlReaderSettings()
                 {
                     ConformanceLevel = ConformanceLevel.Fragment
