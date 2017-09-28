@@ -27,6 +27,7 @@ namespace MoEmbed
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(NicovideoMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(DroplrMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(AnitvMetadataProvider), ServiceLifetime.Singleton));
+            services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(MastodonMetadataProvider), ServiceLifetime.Singleton));
 
             foreach (var t in OEmbedProxyMetadataProvider.CreateKnownHandlerTypes())
             {
@@ -46,6 +47,7 @@ namespace MoEmbed
         {
             services.Configure<AmazonMetadataOptions>(configuration);
             services.Configure<ImgurMetadataOptions>(configuration);
+            services.Configure<MastodonMetadataOptions>(configuration);
         }
     }
 }
