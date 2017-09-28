@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -8,7 +8,7 @@ namespace MoEmbed.Models.Metadata
     {
         [Theory]
         [InlineData("pawoo.net", 44073070L, "&nbsp;")]
-        [InlineData("pawoo.net", 44074120L, "‚â‚é‚«\r\n‚° ‚ñ ‚«\r\n‚Ñ  ‚å  ‚¤  ‚«")]
+        [InlineData("pawoo.net", 44074120L, "ã‚„ã‚‹ã\r\nã’ ã‚“ ã\r\nã³  ã‚‡  ã†  ã")]
         public async Task DescriptionTest(string host, long id, string expected)
         {
             var d = await new MastodonMetadata()
