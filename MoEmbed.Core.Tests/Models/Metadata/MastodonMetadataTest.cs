@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,7 +19,10 @@ namespace MoEmbed.Models.Metadata
             }.FetchAsync(new RequestContext(
                 new MetadataService(),
                 new ConsumerRequest(new Uri($"https://{host}/@u/{id}"))));
-            Assert.Equal(expected, d.Description);
+
+            var desc = Regex.Replace(d.Description, @"(\r\n|\r|\n)", Environment.NewLine);
+
+            Assert.Equal(expected, desc);
         }
     }
 }
