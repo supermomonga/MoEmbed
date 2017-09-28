@@ -20,9 +20,9 @@ namespace MoEmbed.Models.Metadata
                 new MetadataService(),
                 new ConsumerRequest(new Uri($"https://{host}/@u/{id}"))));
 
-            var desc = Regex.Replace(d.Description, @"(\r\n|\r|\n)", Environment.NewLine);
+            expected = Regex.Replace(expected, @"\r\n", Environment.NewLine);
 
-            Assert.Equal(expected, desc);
+            Assert.Equal(expected, d.Description);
         }
     }
 }
