@@ -1016,28 +1016,6 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
-    /// Handles oEmbed request for <see href="https://gyazo.com" />.
-    /// </summary>
-    public sealed partial class GyazoMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
-    {
-        private static readonly Regex _UriPattern = new Regex(@"^https://gyazo\.com/");
-
-        /// <inheritdoc />
-        public override IEnumerable<string> GetSupportedHostNames()
-        {
-            yield return "gyazo.com";
-        }
-
-        /// <inheritdoc />
-        public override bool CanHandle(Uri uri)
-            => _UriPattern.IsMatch(uri.ToString());
-
-        /// <inheritdoc />
-        protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://api.gyazo.com/api/oembed", request);
-    }
-
-    /// <summary>
     /// Handles oEmbed request for <see href="http://huffduffer.com" />.
     /// </summary>
     public sealed partial class HuffdufferMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -3148,7 +3126,6 @@ namespace MoEmbed.Providers
             yield return typeof(GettyImagesMetadataProvider);
             yield return typeof(GfycatMetadataProvider);
             yield return typeof(GIPHYMetadataProvider);
-            yield return typeof(GyazoMetadataProvider);
             yield return typeof(HuffdufferMetadataProvider);
             yield return typeof(HuluMetadataProvider);
             yield return typeof(IfixitMetadataProvider);

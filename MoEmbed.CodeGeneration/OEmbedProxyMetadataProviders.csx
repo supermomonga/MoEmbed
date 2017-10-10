@@ -15,7 +15,7 @@ using (var sw = new StreamWriter(Path.Combine(dir, "../MoEmbed.Core/Providers/Ge
     sw.WriteLine("namespace MoEmbed.Providers");
     sw.WriteLine("{");
 
-    var skip = new HashSet<string>() { "twitter" };
+    var skip = new HashSet<string>() { "twitter", "gyazo" };
     var nameMap = new Dictionary<string, string>()
     {
         ["23hq"] = "TwentyThree"
