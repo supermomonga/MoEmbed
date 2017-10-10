@@ -39,12 +39,12 @@ namespace MoEmbed.Models.Metadata
         }
 
         /// <inheritdoc />
-        protected override async Task<EmbedData> FetchAsyncCore(RequestContext context)
+        protected override async Task<EmbedData> FetchOnceAsync(RequestContext context)
         {
             var clientId = Provider?.ClientId;
 
             if (!string.IsNullOrEmpty(clientId)
-                && DateTime.Now > Provider.LastFaulted + DefaultErrorResponseCacheAge)
+                && DateTime.Now > Provider.LastFaulted + context.Service.ErrorResponseCacheAge)
             {
                 if (Type == ImgurType.Unknown || string.IsNullOrEmpty(Hash))
                 {
@@ -80,7 +80,7 @@ namespace MoEmbed.Models.Metadata
                 }
             }
 
-            var data = await base.FetchAsyncCore(context);
+            var data = await base.FetchOnceAsync(context);
             data.Type = EmbedDataTypes.SingleImage;
             data.Medias.Add(data.MetadataImage);
             return data;
@@ -90,152 +90,83 @@ namespace MoEmbed.Models.Metadata
         {
             var hc = context.Service.HttpClient;
 
-            for (var i = 0; ; i++)
+            var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/image/" + Hash);
+            req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
+            req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var res = await hc.SendAsync(req).ConfigureAwait(false);
+
+            res.EnsureSuccessStatusCode();
+
+            var img = (await res.Content.ReadAsAsync<ImgurResponse<ImgurImage>>())?.Data;
+
+            if (img == null)
             {
-                try
-                {
-                    var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/image/" + Hash);
-                    req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
-                    req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var res = await hc.SendAsync(req).ConfigureAwait(false);
-
-                    res.EnsureSuccessStatusCode();
-
-                    var img = (await res.Content.ReadAsAsync<ImgurResponse<ImgurImage>>())?.Data;
-
-                    if (img == null)
-                    {
-                        return null;
-                    }
-
-                    return GetEmbedData(img);
-                }
-                catch
-                {
-                    // TODO: log exception
-                    if (i < RequestRetryCount)
-                    {
-                        try
-                        {
-                            await Task.Delay((int)(RequestRetryWait.TotalMilliseconds * Math.Pow(RequestRetryFactor, i))).ConfigureAwait(false);
-
-                            continue;
-                        }
-                        catch { }
-                    }
-
-                    Provider.LastFaulted = DateTime.Now;
-                    throw;
-                }
+                return null;
             }
+
+            return GetEmbedData(img);
         }
 
         private async Task<EmbedData> FetchAlbumAsync(RequestContext context, string clientId)
         {
             var hc = context.Service.HttpClient;
 
-            for (var i = 0; ; i++)
+            var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/album/" + Hash);
+            req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
+            req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var res = await hc.SendAsync(req).ConfigureAwait(false);
+
+            res.EnsureSuccessStatusCode();
+
+            var album = (await res.Content.ReadAsAsync<ImgurResponse<ImgurAlbum>>())?.Data;
+
+            if (!(album?.Images?.Length > 0))
             {
-                try
-                {
-                    var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/album/" + Hash);
-                    req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
-                    req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var res = await hc.SendAsync(req).ConfigureAwait(false);
-
-                    res.EnsureSuccessStatusCode();
-
-                    var album = (await res.Content.ReadAsAsync<ImgurResponse<ImgurAlbum>>())?.Data;
-
-                    if (!(album?.Images?.Length > 0))
-                    {
-                        return null;
-                    }
-
-                    return GetEmbedData(album);
-                }
-                catch
-                {
-                    // TODO: log exception
-                    if (i < RequestRetryCount)
-                    {
-                        try
-                        {
-                            await Task.Delay((int)(RequestRetryWait.TotalMilliseconds * Math.Pow(RequestRetryFactor, i))).ConfigureAwait(false);
-
-                            continue;
-                        }
-                        catch { }
-                    }
-
-                    Provider.LastFaulted = DateTime.Now;
-                    throw;
-                }
+                return null;
             }
+
+            return GetEmbedData(album);
         }
 
         private async Task<EmbedData> FetchGalleryAsync(RequestContext context, string clientId)
         {
             var hc = context.Service.HttpClient;
 
-            for (var i = 0; ; i++)
+            var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/gallery/album/" + Hash);
+            req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
+            req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var res = await hc.SendAsync(req).ConfigureAwait(false);
+
+            if (res.StatusCode != HttpStatusCode.NotFound)
             {
-                try
+                res.EnsureSuccessStatusCode();
+
+                var album = (await res.Content.ReadAsAsync<ImgurResponse<ImgurAlbum>>())?.Data;
+
+                if (!(album?.Images?.Length > 0))
                 {
-                    var req = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/gallery/album/" + Hash);
-                    req.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
-                    req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var res = await hc.SendAsync(req).ConfigureAwait(false);
-
-                    if (res.StatusCode != HttpStatusCode.NotFound)
-                    {
-                        res.EnsureSuccessStatusCode();
-
-                        var album = (await res.Content.ReadAsAsync<ImgurResponse<ImgurAlbum>>())?.Data;
-
-                        if (!(album?.Images?.Length > 0))
-                        {
-                            return null;
-                        }
-
-                        return GetEmbedData(album);
-                    }
-                    else
-                    {
-                        var imgReq = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/gallery/image/" + Hash);
-                        imgReq.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
-                        imgReq.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                        var imgRes = await hc.SendAsync(imgReq).ConfigureAwait(false);
-
-                        imgRes.EnsureSuccessStatusCode();
-
-                        var img = (await imgRes.Content.ReadAsAsync<ImgurResponse<ImgurImage>>())?.Data;
-
-                        if (img == null)
-                        {
-                            return null;
-                        }
-
-                        return GetEmbedData(img);
-                    }
+                    return null;
                 }
-                catch
+
+                return GetEmbedData(album);
+            }
+            else
+            {
+                var imgReq = new HttpRequestMessage(HttpMethod.Get, "https://api.imgur.com/3/gallery/image/" + Hash);
+                imgReq.Headers.Authorization = new AuthenticationHeaderValue("Client-ID", clientId);
+                imgReq.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var imgRes = await hc.SendAsync(imgReq).ConfigureAwait(false);
+
+                imgRes.EnsureSuccessStatusCode();
+
+                var img = (await imgRes.Content.ReadAsAsync<ImgurResponse<ImgurImage>>())?.Data;
+
+                if (img == null)
                 {
-                    // TODO: log exception
-                    if (i < RequestRetryCount)
-                    {
-                        try
-                        {
-                            await Task.Delay((int)(RequestRetryWait.TotalMilliseconds * Math.Pow(RequestRetryFactor, i))).ConfigureAwait(false);
-
-                            continue;
-                        }
-                        catch { }
-                    }
-
-                    Provider.LastFaulted = DateTime.Now;
-                    throw;
+                    return null;
                 }
+
+                return GetEmbedData(img);
             }
         }
 

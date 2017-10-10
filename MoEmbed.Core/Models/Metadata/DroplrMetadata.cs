@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using HtmlAgilityPack;
 using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
@@ -12,12 +12,15 @@ namespace MoEmbed.Models.Metadata
     public class DroplrMetadata : UnknownMetadata
     {
         /// <inheritdoc />
-        protected override async Task<EmbedData> FetchAsyncCore(RequestContext context)
+        protected override void LoadHtml(HtmlDocument htmlDocument)
         {
-            var Data = await base.FetchAsyncCore(context);
-            Data.Type = EmbedDataTypes.SingleImage;
-            Data.Medias.Add(Data.MetadataImage);
-            return Data;
+            base.LoadHtml(htmlDocument);
+
+            if (Data != null)
+            {
+                Data.Type = EmbedDataTypes.SingleImage;
+                Data.Medias.Add(Data.MetadataImage);
+            }
         }
     }
 }
