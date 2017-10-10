@@ -43,11 +43,23 @@ namespace MoEmbed.Models.Metadata
         [NonSerialized]
         private Task<EmbedData> _FetchTask;
 
+        /// <summary>
+        /// A <see cref="DateTime"/>that an exception was thrown in <see cref="_FetchTask"/>.
+        /// </summary>
+        [NonSerialized]
+        private DateTime _LastFaulted;
+
         /// <inheritdoc />
         public override Task<EmbedData> FetchAsync(RequestContext context)
         {
             lock (this)
             {
+                if (_FetchTask?.Status == TaskStatus.Faulted
+                    && DateTime.Now > _LastFaulted + context.Service.ErrorResponseCacheAge)
+                {
+                    _FetchTask = null;
+                }
+
                 if (_FetchTask == null)
                 {
                     if (Data != null)
@@ -66,12 +78,21 @@ namespace MoEmbed.Models.Metadata
 
         private async Task<EmbedData> FetchAsyncCore(RequestContext context)
         {
+            _LastFaulted = default(DateTime);
+
             if (Provider == null || Destination == null || Asin == null)
             {
                 return null;
             }
-
-            return Data = await Provider.FetchAsync(context.Service.HttpClient, Destination, Asin).ConfigureAwait(false);
+            try
+            {
+                return Data = await Provider.FetchAsync(context.Service.HttpClient, Destination, Asin).ConfigureAwait(false);
+            }
+            catch
+            {
+                _LastFaulted = DateTime.Now;
+                throw;
+            }
         }
     }
 }

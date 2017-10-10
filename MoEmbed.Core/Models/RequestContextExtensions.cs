@@ -1,19 +1,19 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using MoEmbed.Models;
-using MoEmbed.Providers;
 
 namespace MoEmbed.Models
 {
-    internal static class RequestContextExtensions
+    /// <summary>
+    /// Provides extensions of the <see cref="RequestContext"/>.
+    /// </summary>
+    public static class RequestContextExtensions
     {
+        /// <summary>
+        /// Asynchronously executes the specified task with retries.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <param name="func">A method that returns asynchronous task.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
         public static async Task<EmbedData> ExecuteAsync(this RequestContext context, Func<RequestContext, Task<EmbedData>> func)
         {
             var ms = context.Service;

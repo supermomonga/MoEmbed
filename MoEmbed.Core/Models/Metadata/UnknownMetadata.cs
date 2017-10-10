@@ -41,6 +41,9 @@ namespace MoEmbed.Models.Metadata
         [NonSerialized]
         private Task<EmbedData> _FetchTask;
 
+        /// <summary>
+        /// A <see cref="DateTime"/>that an exception was thrown in <see cref="_FetchTask"/>.
+        /// </summary>
         [NonSerialized]
         private DateTime _LastFaulted;
 
@@ -83,13 +86,9 @@ namespace MoEmbed.Models.Metadata
         private Task<EmbedData> FetchAsyncCore(RequestContext context)
             => context.ExecuteAsync(FetchOnceAsync).ContinueWith(t =>
             {
-                if (t.IsFaulted)
-                {
-                    _LastFaulted = DateTime.Now;
-                }
+                _LastFaulted = t.IsFaulted ? DateTime.Now : default(DateTime);
                 return t.Result;
             });
-
 
         /// <summary>
         /// Asynchronously returns embed data fetched from remote service without retries.
