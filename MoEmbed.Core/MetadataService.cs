@@ -15,6 +15,50 @@ namespace MoEmbed
     /// </summary>
     public class MetadataService : IDisposable
     {
+        #region Retry Settings
+
+        /// <summary>
+        /// Gets or sets the default wait initial interval after a HTTP request failed.
+        /// </summary>
+        public static TimeSpan DefaultRequestRetryWait { get; set; } = TimeSpan.FromSeconds(1);
+
+        /// <summary>
+        /// Gets or sets the default scaling factor that will multiply request wait interval.
+        /// </summary>
+        public static double DefaultRequestRetryFactor { get; set; } = 2;
+
+        /// <summary>
+        /// Gets or sets the default maximum count of retries of a HTTP request.
+        /// </summary>
+        public static int DefaultRequestRetryCount { get; set; } = 4;
+
+        /// <summary>
+        /// Gets or sets the default age of the cache that failed to fetch remote resource.
+        /// </summary>
+        public static TimeSpan DefaultErrorResponseCacheAge { get; set; } = TimeSpan.FromMinutes(5);
+
+        /// <summary>
+        /// Gets the wait initial interval after a HTTP request failed.
+        /// </summary>
+        public virtual TimeSpan RequestRetryWait => DefaultRequestRetryWait;
+
+        /// <summary>
+        /// Gets the scaling factor that will multiply request wait interval.
+        /// </summary>
+        public virtual double RequestRetryFactor => DefaultRequestRetryFactor;
+
+        /// <summary>
+        /// Gets the default maximum count of retries of a HTTP request.
+        /// </summary>
+        public virtual int RequestRetryCount => DefaultRequestRetryCount;
+
+        /// <summary>
+        /// Gets the age of the cache that failed to fetch remote resource.
+        /// </summary>
+        public virtual TimeSpan ErrorResponseCacheAge => DefaultErrorResponseCacheAge;
+
+        #endregion Retry Settings
+
         private readonly ILogger<MetadataService> _logger;
         private readonly IMetadataCache _Cache;
 
@@ -165,4 +209,5 @@ namespace MoEmbed
 
         #endregion IDisposable support
     }
+
 }

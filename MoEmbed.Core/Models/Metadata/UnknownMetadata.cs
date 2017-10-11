@@ -20,50 +20,6 @@ namespace MoEmbed.Models.Metadata
     [ContentProperty(nameof(Data))]
     public class UnknownMetadata : Metadata
     {
-        #region Retry Settings
-
-        /// <summary>
-        /// Gets or sets the default wait initial interval after a HTTP request failed.
-        /// </summary>
-        public static TimeSpan DefaultRequestRetryWait { get; set; } = TimeSpan.FromSeconds(1);
-
-        /// <summary>
-        /// Gets or sets the default scaling factor that will multiply request wait interval.
-        /// </summary>
-        public static double DefaultRequestRetryFactor { get; set; } = 2;
-
-        /// <summary>
-        /// Gets or sets the default maximum count of retries of a HTTP request.
-        /// </summary>
-        public static int DefaultRequestRetryCount { get; set; } = 4;
-
-        /// <summary>
-        /// Gets or sets the default age of the cache that failed to fetch remote resource.
-        /// </summary>
-        public static TimeSpan DefaultErrorResponseCacheAge { get; set; } = TimeSpan.FromMinutes(5);
-
-        /// <summary>
-        /// Gets the wait initial interval after a HTTP request failed.
-        /// </summary>
-        public virtual TimeSpan RequestRetryWait => DefaultRequestRetryWait;
-
-        /// <summary>
-        /// Gets the scaling factor that will multiply request wait interval.
-        /// </summary>
-        public virtual double RequestRetryFactor => DefaultRequestRetryFactor;
-
-        /// <summary>
-        /// Gets the default maximum count of retries of a HTTP request.
-        /// </summary>
-        public virtual int RequestRetryCount => DefaultRequestRetryCount;
-
-        /// <summary>
-        /// Gets the age of the cache that failed to fetch remote resource.
-        /// </summary>
-        public virtual TimeSpan ErrorResponseCacheAge => DefaultErrorResponseCacheAge;
-
-        #endregion Retry Settings
-
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
@@ -85,6 +41,9 @@ namespace MoEmbed.Models.Metadata
         [NonSerialized]
         private Task<EmbedData> _FetchTask;
 
+        /// <summary>
+        /// A <see cref="DateTime"/>that an exception was thrown in <see cref="_FetchTask"/>.
+        /// </summary>
         [NonSerialized]
         private DateTime _LastFaulted;
 
@@ -98,7 +57,7 @@ namespace MoEmbed.Models.Metadata
             lock (this)
             {
                 if (_FetchTask?.Status == TaskStatus.Faulted
-                    && DateTime.Now > _LastFaulted + ErrorResponseCacheAge)
+                    && DateTime.Now > _LastFaulted + context.Service.ErrorResponseCacheAge)
                 {
                     _FetchTask = null;
                 }
@@ -120,78 +79,86 @@ namespace MoEmbed.Models.Metadata
         }
 
         /// <summary>
-        /// Asynchronously returns embed data fetched from remote service.
+        /// Asynchronously returns embed data fetched from remote service with retries.
         /// </summary>
         /// <param name="context">The context of the request.</param>
         /// <returns>A task that represents the asynchronous fetch operation.</returns>
-        protected virtual async Task<EmbedData> FetchAsyncCore(RequestContext context)
+        private Task<EmbedData> FetchAsyncCore(RequestContext context)
+            => context.ExecuteAsync(FetchOnceAsync).ContinueWith(t =>
+            {
+                _LastFaulted = t.IsFaulted ? DateTime.Now : default(DateTime);
+                return t.Result;
+            });
+
+        /// <summary>
+        /// Asynchronously returns embed data fetched from remote service without retries.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
+        protected virtual async Task<EmbedData> FetchOnceAsync(RequestContext context)
         {
             var hc = context.Service.HttpClient;
 
-            for (var i = 0; ; i++)
+            var res = await GetResponseAsync(hc).ConfigureAwait(false);
+            res.EnsureSuccessStatusCode();
+
+            if (MovedToUrl != null && MovedToUrl != Url)
             {
-                try
+                var mcr = new ConsumerRequest(MovedToUrl, context.MaxWidth, context.MaxHeight, context.Format);
+                return Data = (await context.Service.GetDataAsync(mcr).ConfigureAwait(false)).Data;
+            }
+
+            var mediaType = res.Content.Headers.ContentType.MediaType;
+
+            if (Regex.IsMatch(mediaType, @"^text\/html$"))
+            {
+                using (var ms = new MemoryStream(await res.Content.ReadAsByteArrayAsync().ConfigureAwait(false)))
                 {
-                    var res = await GetResponseAsync(hc).ConfigureAwait(false);
-                    res.EnsureSuccessStatusCode();
+                    var hd = new HtmlDocument();
 
-                    if (MovedToUrl != null && MovedToUrl != Url)
+                    var enc = hd.DetectEncoding(ms);
+
+                    if (enc == null)
                     {
-                        var mcr = new ConsumerRequest(MovedToUrl, context.MaxWidth, context.MaxHeight, context.Format);
-                        return Data = (await context.Service.GetDataAsync(mcr).ConfigureAwait(false)).Data;
-                    }
+                        ms.Position = 0;
 
-                    var mediaType = res.Content.Headers.ContentType.MediaType;
-
-                    if (Regex.IsMatch(mediaType, @"^text\/html$"))
-                    {
-                        using (var ms = new MemoryStream(await res.Content.ReadAsByteArrayAsync().ConfigureAwait(false)))
+                        using (var sr = new StreamReader(ms, Encoding.UTF8, true, 4096, true))
                         {
-                            var hd = new HtmlDocument();
+                            hd.Load(sr);
+                        }
 
-                            var enc = hd.DetectEncoding(ms);
+                        var nav = hd.CreateNavigator();
 
-                            if (enc == null)
+                        var charset = nav.SelectSingleNode("//html/head/meta[@charset]/@charset")?.Value.Trim();
+                        if (charset != null)
+                        {
+                            try
                             {
-                                ms.Position = 0;
-
-                                using (var sr = new StreamReader(ms, Encoding.UTF8, true, 4096, true))
-                                {
-                                    hd.Load(sr);
-                                }
-
-                                var nav = hd.CreateNavigator();
-
-                                var charset = nav.SelectSingleNode("//html/head/meta[@charset]/@charset")?.Value.Trim();
-                                if (charset != null)
-                                {
-                                    try
-                                    {
-                                        enc = Encoding.GetEncoding(charset);
-                                    }
-                                    catch { }
-                                }
+                                enc = Encoding.GetEncoding(charset);
                             }
-
-                            ms.Position = 0;
-
-                            using (var sr = new StreamReader(ms, enc ?? Encoding.UTF8))
-                            {
-                                hd.Load(sr);
-                            }
-
-                            LoadHtml(hd);
+                            catch { }
                         }
                     }
-                    else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
+
+                    ms.Position = 0;
+
+                    using (var sr = new StreamReader(ms, enc ?? Encoding.UTF8))
                     {
-                        Data = new EmbedData()
-                        {
-                            Type = mediaType[0] == 'i' ? EmbedDataTypes.SingleImage
-                            : mediaType[0] == 'v' ? EmbedDataTypes.SingleVideo
-                            : EmbedDataTypes.SingleAudio,
-                            Url = Url.ToString(),
-                            Medias = new List<Media>(1)
+                        hd.Load(sr);
+                    }
+
+                    LoadHtml(hd);
+                }
+            }
+            else if (Regex.IsMatch(mediaType, @"^(image|video|audio)\/"))
+            {
+                Data = new EmbedData()
+                {
+                    Type = mediaType[0] == 'i' ? EmbedDataTypes.SingleImage
+                    : mediaType[0] == 'v' ? EmbedDataTypes.SingleVideo
+                    : EmbedDataTypes.SingleAudio,
+                    Url = Url.ToString(),
+                    Medias = new List<Media>(1)
                         {
                             new Media()
                             {
@@ -201,47 +168,28 @@ namespace MoEmbed.Models.Metadata
                                 RawUrl = Url.ToString()
                             }
                         }
-                        };
-                        if (mediaType.StartsWith("image"))
-                        {
-                            Data.Type = EmbedDataTypes.SingleImage;
-                            Data.MetadataImage = new Media
-                            {
-                                Type = MediaTypes.Image,
-                                Thumbnail = new ImageInfo
-                                {
-                                    Url = Url.ToString()
-                                }
-                            };
-                        }
-                    }
-
-                    if (Data != null)
-                    {
-                        Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(Url.ToString());
-                        Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
-                    }
-
-                    return Data;
-                }
-                catch
+                };
+                if (mediaType.StartsWith("image"))
                 {
-                    // TODO: log exception
-                    if (i < RequestRetryCount)
+                    Data.Type = EmbedDataTypes.SingleImage;
+                    Data.MetadataImage = new Media
                     {
-                        try
+                        Type = MediaTypes.Image,
+                        Thumbnail = new ImageInfo
                         {
-                            await Task.Delay((int)(RequestRetryWait.TotalMilliseconds * Math.Pow(RequestRetryFactor, i))).ConfigureAwait(false);
-
-                            continue;
+                            Url = Url.ToString()
                         }
-                        catch { }
-                    }
-
-                    _LastFaulted = DateTime.Now;
-                    throw;
+                    };
                 }
             }
+
+            if (Data != null)
+            {
+                Data.Title = Data.Title ?? Path.GetFileNameWithoutExtension(Url.ToString());
+                Data.CacheAge = Data.CacheAge ?? (int?)res.Headers.CacheControl?.MaxAge?.TotalSeconds;
+            }
+
+            return Data;
         }
 
         private async Task<HttpResponseMessage> GetResponseAsync(HttpClient hc)

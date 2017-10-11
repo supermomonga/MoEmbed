@@ -38,11 +38,23 @@ namespace MoEmbed.Models.Metadata
         [NonSerialized]
         private Task<EmbedData> _FetchTask;
 
+        /// <summary>
+        /// A <see cref="DateTime"/>that an exception was thrown in <see cref="_FetchTask"/>.
+        /// </summary>
+        [NonSerialized]
+        private DateTime _LastFaulted;
+
         /// <inheritdoc />
         public override Task<EmbedData> FetchAsync(RequestContext context)
         {
             lock (this)
             {
+                if (_FetchTask?.Status == TaskStatus.Faulted
+                    && DateTime.Now > _LastFaulted + context.Service.ErrorResponseCacheAge)
+                {
+                    _FetchTask = null;
+                }
+
                 if (_FetchTask == null)
                 {
                     if (Data != null)
@@ -59,7 +71,19 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        private async Task<EmbedData> FetchAsyncCore(RequestContext context)
+        private Task<EmbedData> FetchAsyncCore(RequestContext context)
+            => context.ExecuteAsync(FetchOnceAsync).ContinueWith(t =>
+            {
+                _LastFaulted = t.IsFaulted ? DateTime.Now : default(DateTime);
+                return t.Result;
+            });
+
+        /// <summary>
+        /// Asynchronously returns embed data fetched from remote service without retries.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
+        private async Task<EmbedData> FetchOnceAsync(RequestContext context)
         {
             var hc = context.Service.HttpClient;
 

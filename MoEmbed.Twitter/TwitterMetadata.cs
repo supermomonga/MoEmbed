@@ -24,13 +24,7 @@ namespace MoEmbed.Twitter
         /// Gets the tweet's screen name.
         /// </summary>
         [DefaultValue(null)]
-        public string ScreenName
-        {
-            get
-            {
-                return _ScreenName;
-            }
-        }
+        public string ScreenName => _ScreenName;
 
         private long _TweetId;
 
@@ -38,13 +32,7 @@ namespace MoEmbed.Twitter
         /// Gets the tweet ID.
         /// </summary>
         [DefaultValue(null)]
-        public long TweetId
-        {
-            get
-            {
-                return _TweetId;
-            }
-        }
+        public long TweetId => _TweetId;
 
         [NonSerialized]
         private string _Url;
@@ -55,10 +43,7 @@ namespace MoEmbed.Twitter
         [DefaultValue(null)]
         public string Url
         {
-            get
-            {
-                return _Url;
-            }
+            get => _Url;
             set
             {
                 _Url = value;
@@ -87,28 +72,56 @@ namespace MoEmbed.Twitter
         [NonSerialized]
         private Task<EmbedData> _FetchTask;
 
+        /// <summary>
+        /// A <see cref="DateTime"/>that an exception was thrown in <see cref="_FetchTask"/>.
+        /// </summary>
+        [NonSerialized]
+        private DateTime _LastFaulted;
+
         /// <inheritdoc />
-        public override Task<EmbedData> FetchAsync(RequestContext request)
+        public override Task<EmbedData> FetchAsync(RequestContext context)
         {
             lock (this)
             {
+                if (_FetchTask?.Status == TaskStatus.Faulted
+                    && DateTime.Now > _LastFaulted + context.Service.ErrorResponseCacheAge)
+                {
+                    _FetchTask = null;
+                }
+
                 if (_FetchTask == null)
                 {
                     if (Data != null)
                     {
-                        _FetchTask = Task.FromResult<EmbedData>(Data);
+                        _FetchTask = Task.FromResult(Data);
                     }
                     else
                     {
-                        _FetchTask = Task.Run((Func<EmbedData>)FetchCore);
+                        _FetchTask = FetchAsyncCore(context);
                         _FetchTask.ConfigureAwait(false);
                     }
                 }
                 return _FetchTask;
             }
         }
+        /// <summary>
+        /// Asynchronously returns embed data fetched from remote service with retries.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>A task that represents the asynchronous fetch operation.</returns>
+        private Task<EmbedData> FetchAsyncCore(RequestContext context)
+            => context.ExecuteAsync(c => Task.Run(() => FetchOnce(c))).ContinueWith(t =>
+                {
+                    _LastFaulted = t.IsFaulted ? DateTime.Now : default(DateTime);
+                    return t.Result;
+                });
 
-        private EmbedData FetchCore()
+        /// <summary>
+        /// Returns embed data fetched from remote service without retries.
+        /// </summary>
+        /// <param name="context">The context of the request.</param>
+        /// <returns>The fetched information.</returns>
+        private EmbedData FetchOnce(RequestContext context)
         {
             if (TweetId <= 0)
             {
