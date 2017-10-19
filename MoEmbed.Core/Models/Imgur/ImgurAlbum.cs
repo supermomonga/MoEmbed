@@ -69,7 +69,7 @@ namespace MoEmbed.Models.Imgur
         /// </summary>
         [DefaultValue(null)]
         [JsonProperty("account_id")]
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
 
         /// <summary>
         /// Gets or sets the view layout of the album.
