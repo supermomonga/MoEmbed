@@ -35,6 +35,7 @@ namespace MoEmbed
             var fmt = queries["format"].FirstOrDefault();
 
             EmbedDataResult result = null;
+            string hash = null;
             string contentType = null;
             IResponseWriter writer = null;
             try
@@ -59,9 +60,17 @@ namespace MoEmbed
                 }
                 if (result == null)
                 {
+                    var hashIndex = url.IndexOf('#');
+
+                    if (hashIndex >= 0)
+                    {
+                        hash = url.Substring(hashIndex);
+                        url = url.Substring(0, hashIndex);
+                    }
+
                     if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
                     {
-                        _Logger.LogInformation("Handling URL: {0}", url);
+                        _Logger.LogInformation("Handling URL: {0}{1}", url, hash);
 
                         var mw = int.TryParse(queries["max_width"].FirstOrDefault(), out int w) ? (int?)w : null;
                         var mh = int.TryParse(queries["max_height"].FirstOrDefault(), out int h) ? (int?)h : null;
@@ -102,7 +111,7 @@ namespace MoEmbed
             context.Response.ContentType = contentType;
             if (result.Data != null)
             {
-                writer.WriteEmbedData(result.Data);
+                writer.WriteEmbedData(result.Data, hash);
             }
             else
             {

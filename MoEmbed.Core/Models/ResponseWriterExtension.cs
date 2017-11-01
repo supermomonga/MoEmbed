@@ -82,12 +82,13 @@ namespace MoEmbed.Models
         /// </summary>
         /// <param name="writer">The writer to write.</param>
         /// <param name="obj">The <see cref="EmbedData" />.</param>
-        public static void WriteEmbedData(this IResponseWriter writer, EmbedData obj)
+        /// <param name="hash">The URL hash to append.</param>
+        public static void WriteEmbedData(this IResponseWriter writer, EmbedData obj, string hash = null)
         {
             writer.WriteStartResponse();
 
             writer.WritePropertyIfNeeded("type", obj.Type);
-            writer.WritePropertyIfNeeded("url", obj.Url);
+            writer.WritePropertyIfNeeded("url", obj.Url + hash);
             writer.WritePropertyIfNeeded("title", obj.Title);
             writer.WritePropertyIfNeeded("description", obj.Description);
             writer.WritePropertyIfNeeded("author_name", obj.AuthorName);
