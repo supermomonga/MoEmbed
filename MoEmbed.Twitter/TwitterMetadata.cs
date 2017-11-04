@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -220,7 +221,7 @@ namespace MoEmbed.Twitter
                             Width = 150,
                             Height = 150,
                         },
-                        RawUrl = m.MediaURLHttps,
+                        RawUrl = m.VideoDetails.Variants.Last().URL,
                         Location = m.ExpandedURL,
                     };
                     Data.Medias.Add(media);

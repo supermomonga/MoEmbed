@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using MoEmbed.Models;
 using Xunit;
+using System.Linq;
 
 namespace MoEmbed.Twitter
 {
@@ -92,6 +93,30 @@ namespace MoEmbed.Twitter
             var data = m.Data;
             Assert.NotNull(m.Data);
             Assert.Equal(mediaCount, m.Data.Medias.Count);
+        }
+
+        [Fact]
+        public async void GetEmbedDataTest_GetImageMediaRawUrl()
+        {
+            var uri = "https://mobile.twitter.com/realDonaldTrump/status/900488148194516992";
+            var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
+
+            await m.FetchAsync(GetRequestContext(uri));
+            var data = m.Data;
+            Assert.NotNull(m.Data);
+            Assert.Equal("https://pbs.twimg.com/media/DH8s4G9XcAAEK6A.jpg", m.Data.Medias.First().RawUrl);
+        }
+
+        [Fact]
+        public async void GetEmbedDataTest_GetVideoMediaRawUrl()
+        {
+            var uri = "https://twitter.com/Twitter/status/923897123581648896";
+            var m = Assert.IsType<TwitterMetadata>(Provider.GetMetadata(new ConsumerRequest(new Uri(uri))));
+
+            await m.FetchAsync(GetRequestContext(uri));
+            var data = m.Data;
+            Assert.NotNull(m.Data);
+            Assert.Equal("https://video.twimg.com/ext_tw_video/923896697331126272/pu/vid/240x240/WD0ySwHVhuIaEHMm.mp4", m.Data.Medias.First().RawUrl);
         }
 
         [Theory]
