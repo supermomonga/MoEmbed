@@ -38,6 +38,11 @@ namespace MoEmbed
         public static TimeSpan DefaultErrorResponseCacheAge { get; set; } = TimeSpan.FromMinutes(5);
 
         /// <summary>
+        /// Gets or sets the default timeout for <see cref="HttpClient"/>.
+        /// </summary>
+        public static TimeSpan DefaultHttpRequestTimeout { get; set; } = TimeSpan.FromSeconds(30);
+
+        /// <summary>
         /// Gets the wait initial interval after a HTTP request failed.
         /// </summary>
         public virtual TimeSpan RequestRetryWait => DefaultRequestRetryWait;
@@ -56,6 +61,11 @@ namespace MoEmbed
         /// Gets the age of the cache that failed to fetch remote resource.
         /// </summary>
         public virtual TimeSpan ErrorResponseCacheAge => DefaultErrorResponseCacheAge;
+
+        /// <summary>
+        /// Gets or sets the timeout for <see cref="HttpClient"/>.
+        /// </summary>
+        public virtual TimeSpan HttpRequestTimeout => DefaultHttpRequestTimeout;
 
         #endregion Retry Settings
 
@@ -160,6 +170,7 @@ namespace MoEmbed
                     {
                         AllowAutoRedirect = false,
                     });
+                    c.Timeout = HttpRequestTimeout;
 
                     // Set User-Agent
 
@@ -209,5 +220,4 @@ namespace MoEmbed
 
         #endregion IDisposable support
     }
-
 }
