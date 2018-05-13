@@ -116,10 +116,15 @@ namespace MoEmbed.Models.Metadata
                 {
                     var hd = new HtmlDocument();
 
-                    var httpEnc = res.Content.Headers.ContentType.CharSet;
+                    Encoding enc = null;
+                    try
+                    {
+                        var httpEnc = res.Content.Headers.ContentType.CharSet;
+                        enc = string.IsNullOrEmpty(httpEnc) ? null : Encoding.GetEncoding(httpEnc);
+                    }
+                    catch { }
 
-                    var enc = (string.IsNullOrEmpty(httpEnc) ? null : Encoding.GetEncoding(httpEnc))
-                                ?? hd.DetectEncoding(ms);
+                    enc = enc ?? hd.DetectEncoding(ms);
 
                     if (enc == null)
                     {
