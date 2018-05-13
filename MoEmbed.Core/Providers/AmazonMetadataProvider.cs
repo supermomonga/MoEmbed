@@ -15,7 +15,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class AmazonMetadataProvider : IMetadataProvider
     {
-        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|co\.(jp|uk)))/(([^/]+/)?dp|gp/product)/(?<asin>[A-Za-z0-9]{10})($|/|\?)");
+        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|co\.(jp|uk)))/+(([^/]+/+)?dp|gp/product)/+(?<asin>[A-Za-z0-9]{10})($|/|\?)");
 
         private readonly AmazonMetadataProviderQueue _Queue;
 
