@@ -244,8 +244,17 @@ namespace MoEmbed.Providers
                                             .FirstOrDefault();
                 }
 
+                var itemAttr = itemElem.Element("ItemAttributes");
+                if (string.IsNullOrEmpty(d.Description) && itemAttr != null)
+                {
+                    d.Description = string.Join(
+                                        " ",
+                                        itemAttr.Elements("Feature").Select(e => e.InnerText));
+                }
+
                 return d;
             }
+
             return null;
         }
     }
