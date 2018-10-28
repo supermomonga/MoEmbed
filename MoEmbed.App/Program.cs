@@ -13,6 +13,7 @@ namespace MoEmbed
 
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
+                .AddEnvironmentVariables()
                 .Build();
             var serverport = config.GetValue<int?>("port") ?? 5000;
             var serverurls = $"http://*:{ serverport }";
