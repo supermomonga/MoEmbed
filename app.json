@@ -1,9 +1,9 @@
 {
   "name": "MoEmbed",
-  "stack": "heroku-16",
+  "stack": "heroku-18",
   "buildpacks": [
     {
-      "url": "https://github.com/jincod/dotnetcore-buildpack#1.1.5"
+      "url": "https://github.com/jincod/dotnetcore-buildpack"
     }
   ]
 }
