@@ -1,17 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>MoEmbed</RootNamespace>
     <UserSecretsId>b7fd0b29-8b10-497f-9ded-0e87d4f7ef2f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Include="Portable.Xaml" Version="0.17.0" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Portable.Xaml" Version="0.23.0" />
+    <PackageReference Include="xunit" Version="2.4.1-pre.build.4071" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1-pre.build.4071">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0-preview3-35497" />
   </ItemGroup>
 
   <ItemGroup>
