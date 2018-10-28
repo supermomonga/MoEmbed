@@ -6,6 +6,11 @@
     <UserSecretsId>b7fd0b29-8b10-497f-9ded-0e87d4f7ef2f</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Portable.Xaml" Version="0.23.0" />

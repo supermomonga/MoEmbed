@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
   
   <ItemGroup>
     <DotNetCliToolReference Include="Dotnet.Script" Version="0.12.1-beta" />

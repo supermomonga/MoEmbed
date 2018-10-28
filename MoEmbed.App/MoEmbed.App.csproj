@@ -6,6 +6,11 @@
     <UserSecretsId>3980023c-87d0-4037-95ea-41934cad412f</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Public/index.html" />
   </ItemGroup>

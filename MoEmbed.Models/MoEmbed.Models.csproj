@@ -10,6 +10,11 @@
     <PackageProjectUrl>https://github.com/supermomonga/MoEmbed</PackageProjectUrl>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.3|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Portable.Xaml" Version="0.23.0" />

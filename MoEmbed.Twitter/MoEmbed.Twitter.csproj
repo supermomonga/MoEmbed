@@ -5,6 +5,11 @@
     <RootNamespace>MoEmbed</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\MoEmbed.Core\MoEmbed.Core.csproj" />
   </ItemGroup>
