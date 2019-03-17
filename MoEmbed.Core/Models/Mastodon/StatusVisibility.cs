@@ -24,6 +24,12 @@ namespace MoEmbed.Models.Mastodon
         /// The status is direct.
         /// </summary>
         [EnumMember(Value = "direct")]
-        Direct
+        Direct,
+
+        /// <summary>
+        /// The status is unlisted.
+        /// </summary>
+        [EnumMember(Value = "unlisted")]
+        Unlisted
     }
 }
