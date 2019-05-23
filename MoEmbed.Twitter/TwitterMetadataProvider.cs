@@ -1,15 +1,34 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 using MoEmbed.Providers;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using Tweetinvi.Logic.JsonConverters;
+using Tweetinvi.Models;
 
 namespace MoEmbed.Twitter
 {
     public class TwitterMetadataProvider : IMetadataProvider
     {
         private readonly bool _IsEnabled;
+
+        private class CustomJsonLanguageConverter : JsonLanguageConverter
+        {
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                return reader.Value != null
+                    ? base.ReadJson(reader, objectType, existingValue, serializer)
+                    : Language.English;
+            }
+        }
+
+        static TwitterMetadataProvider()
+        {
+            JsonPropertyConverterRepository.JsonConverters.Remove(typeof(Language));
+            JsonPropertyConverterRepository.JsonConverters.Add(typeof(Language), new CustomJsonLanguageConverter());
+        }
 
         public TwitterMetadataProvider(string consumerKey, string consumerSecret)
         {
