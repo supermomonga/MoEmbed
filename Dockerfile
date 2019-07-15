@@ -2,6 +2,9 @@ FROM microsoft/dotnet:2.2-sdk
 
 WORKDIR /usr/src/
 
+# Install dependency tool to execute csx script
+RUN dotnet tool install --global dotnet-script --version 0.30.0
+
 # Install dependencies for layer cache
 COPY ./MoEmbed.sln                            ./MoEmbed.sln
 COPY ./MoEmbed.App/MoEmbed.App.csproj         ./MoEmbed.App/MoEmbed.App.csproj
