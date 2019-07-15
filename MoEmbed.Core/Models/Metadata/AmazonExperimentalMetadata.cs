@@ -40,14 +40,16 @@ namespace MoEmbed.Models.Metadata
 
             if (m.Success)
             {
+                var associateUri = $"https://{Destination}/dp/{Asin}?tag={Provider.AssociateTag}";
                 var tu = m.Groups["image"].Value;
-                Data.Type = EmbedDataTypes.SingleImage;
+                Data.Type = EmbedDataTypes.MixedContent;
+                Data.Url = associateUri;
                 Data.MetadataImage = null;
                 Data.Medias.Add(new Media()
                 {
                     // TODO: Support Detail page URL
-                    Location = $"https://{Destination}/dp/{Asin}?tag={Provider.AssociateTag}",
-                    RawUrl = $"https://{Destination}/dp/{Asin}?tag={Provider.AssociateTag}",
+                    Location = associateUri,
+                    RawUrl = associateUri,
                     Thumbnail = new ImageInfo()
                     {
                         Url = tu
