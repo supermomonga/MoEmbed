@@ -20,7 +20,8 @@ namespace MoEmbed
         /// </param>
         public static void AddMetadataProviders(this IServiceCollection services)
         {
-            services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(AmazonMetadataProvider), ServiceLifetime.Singleton));
+            // services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(AmazonMetadataProvider), ServiceLifetime.Singleton));
+            services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(AmazonExperimentalMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(ImgurMetadataProvider), ServiceLifetime.Singleton));
 
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(PixivMetadataProvider), ServiceLifetime.Singleton));

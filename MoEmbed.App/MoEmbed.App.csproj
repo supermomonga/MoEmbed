@@ -28,17 +28,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoEmbed.Core\MoEmbed.Core.csproj" />
-    <ProjectReference Include="..\MoEmbed.Twitter\MoEmbed.Twitter.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Public/index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MoEmbed.Core\MoEmbed.Core.csproj" />
+    <ProjectReference Include="..\MoEmbed.Twitter\MoEmbed.Twitter.csproj" />
   </ItemGroup>
 
 </Project>
