@@ -15,7 +15,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <DotNetCliToolReference Include="Dotnet.Script" Version="0.29.1" />
+    <DotNetCliToolReference Include="Dotnet.Script" Version="0.50.1" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
