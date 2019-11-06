@@ -14,7 +14,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class AmazonExperimentalMetadataProvider : IMetadataProvider
     {
-        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|co\.(jp|uk)))/+(([^/]+/+)?dp|gp/product)/+(?<asin>[A-Za-z0-9]{10})($|/|\?)");
+        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|jp|co\.(jp|uk)))/+(([^/]+/+)?dp|gp/product)/+(?<asin>[A-Za-z0-9]{10})($|/|\?)");
 
         /// <summary>
         /// Initializes a new instaince of the <see cref="AmazonExperimentalMetadataProvider" /> class with AWS secrets.
@@ -53,7 +53,7 @@ namespace MoEmbed.Providers
         {
             foreach (var p in new[] { null, "www." })
             {
-                foreach (var d in new[] { "com", "com.br", "com.mx", "co.jp", "co.uk", "ca", "cn", "de", "es", "fr", "in", "it" })
+                foreach (var d in new[] { "com", "com.br", "com.mx", "co.jp", "jp", "co.uk", "ca", "cn", "de", "es", "fr", "in", "it" })
                 {
                     yield return p + "amazon." + d;
                 }
