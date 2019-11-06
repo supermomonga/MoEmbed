@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Message Importance="high" Text="Generate OEmbed proxy metadata providers." />
     <Exec Command="dotnet script OEmbedProxyMetadataProviders.csx" />
   </Target>
   
