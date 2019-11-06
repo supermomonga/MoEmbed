@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace MoEmbed.Models
 {
@@ -83,7 +84,7 @@ namespace MoEmbed.Models
         /// <param name="writer">The writer to write.</param>
         /// <param name="obj">The <see cref="EmbedData" />.</param>
         /// <param name="hash">The URL hash to append.</param>
-        public static void WriteEmbedData(this IResponseWriter writer, EmbedData obj, string hash = null)
+        public static async Task WriteEmbedDataAsync(this IResponseWriter writer, EmbedData obj, string hash = null)
         {
             writer.WriteStartResponse();
 
@@ -132,7 +133,7 @@ namespace MoEmbed.Models
                 writer.WriteEndArrayProperty();
             }
 
-            writer.WriteEndResponse();
+            await writer.WriteEndResponseAsync();
         }
     }
 }

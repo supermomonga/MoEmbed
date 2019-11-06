@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace MoEmbed.Models
 {
@@ -18,7 +19,7 @@ namespace MoEmbed.Models
         /// <summary>
         /// Writes an end of the response.
         /// </summary>
-        void WriteEndResponse();
+        Task WriteEndResponseAsync();
 
         #endregion Response
 

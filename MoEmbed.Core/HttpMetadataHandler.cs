@@ -111,13 +111,13 @@ namespace MoEmbed
             context.Response.ContentType = contentType;
             if (result.Data != null)
             {
-                writer.WriteEmbedData(result.Data, hash);
+                await writer.WriteEmbedDataAsync(result.Data, hash);
             }
             else
             {
                 writer.WriteStartResponse();
                 writer.WriteProperty("error", result.ErrorMessage);
-                writer.WriteEndResponse();
+                await writer.WriteEndResponseAsync();
             }
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 
 namespace MoEmbed.Models
@@ -24,7 +25,10 @@ namespace MoEmbed.Models
         /// <param name="leaveOpen">A value indicating whether the writer disposes base steam.</param>
         public XmlResponseWriter(Stream stream, bool leaveOpen = false)
         {
-            BaseWriter = XmlWriter.Create(new StreamWriter(stream, new UTF8Encoding(false), 4096, leaveOpen));
+            BaseWriter = XmlWriter.Create(new StreamWriter(stream, new UTF8Encoding(false), 4096, leaveOpen), new XmlWriterSettings()
+            {
+                Async = true
+            });
         }
 
         /// <summary>
@@ -37,7 +41,8 @@ namespace MoEmbed.Models
         {
             BaseWriter = XmlWriter.Create(textWriter, new XmlWriterSettings()
             {
-                CloseOutput = !leaveOpen
+                CloseOutput = !leaveOpen,
+                Async = true
             });
         }
 
@@ -70,11 +75,11 @@ namespace MoEmbed.Models
         /// <summary>
         /// Writes an end of the response.
         /// </summary>
-        public void WriteEndResponse()
+        public async Task WriteEndResponseAsync()
         {
             ThrowIfDisposed();
-            BaseWriter.WriteEndElement();
-            BaseWriter.Flush();
+            await BaseWriter.WriteEndElementAsync();
+            await BaseWriter.FlushAsync();
         }
 
         #endregion Response

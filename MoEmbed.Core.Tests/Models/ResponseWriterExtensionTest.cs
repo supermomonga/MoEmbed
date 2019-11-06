@@ -12,7 +12,7 @@ namespace MoEmbed.Models
         {
             using (var ms = new MemoryStream())
             {
-                new JsonResponseWriter(ms).WriteEmbedData(new EmbedData());
+                new JsonResponseWriter(ms).WriteEmbedDataAsync(new EmbedData());
             }
         }
 
@@ -21,7 +21,7 @@ namespace MoEmbed.Models
         {
             using (var ms = new MemoryStream())
             {
-                new XmlResponseWriter(ms).WriteEmbedData(new EmbedData());
+                new XmlResponseWriter(ms).WriteEmbedDataAsync(new EmbedData());
             }
         }
 

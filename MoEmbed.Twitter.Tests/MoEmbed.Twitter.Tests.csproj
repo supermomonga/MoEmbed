@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>MoEmbed</RootNamespace>
     <UserSecretsId>b7fd0b29-8b10-497f-9ded-0e87d4f7ef2f</UserSecretsId>
   </PropertyGroup>

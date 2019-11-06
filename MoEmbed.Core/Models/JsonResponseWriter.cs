@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace MoEmbed.Models
@@ -71,11 +72,11 @@ namespace MoEmbed.Models
         /// <summary>
         /// Writes an end of the response.
         /// </summary>
-        public void WriteEndResponse()
+        public async Task WriteEndResponseAsync()
         {
             ThrowIfDisposed();
-            BaseWriter.WriteEndObject();
-            BaseWriter.Flush();
+            await BaseWriter.WriteEndObjectAsync();
+            await BaseWriter.FlushAsync();
         }
 
         #endregion Response
