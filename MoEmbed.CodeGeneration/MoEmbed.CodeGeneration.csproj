@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="dotnet-script OEmbedProxyMetadataProviders.csx" />
+    <Exec Command="dotnet script OEmbedProxyMetadataProviders.csx" />
   </Target>
   
 </Project>
