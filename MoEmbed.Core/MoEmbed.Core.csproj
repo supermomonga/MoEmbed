@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MoEmbed.Models\MoEmbed.Models.csproj" />
+    <ProjectReference Include="..\MoEmbed.CodeGeneration\MoEmbed.CodeGeneration.csproj" />
   </ItemGroup>
 
 
