@@ -38,9 +38,9 @@ namespace MoEmbed.Models.Metadata
             base.LoadHtml(htmlDocument);
             var m = imageRegex.Match(htmlDocument.GetElementbyId("landingImage")?.GetAttributeValue("data-a-dynamic-image", null) ?? "");
 
+            var associateUri = $"https://{Destination}/dp/{Asin}?tag={Provider.AssociateTag}";
             if (m.Success)
             {
-                var associateUri = $"https://{Destination}/dp/{Asin}?tag={Provider.AssociateTag}";
                 var tu = m.Groups["image"].Value;
                 Data.Type = EmbedDataTypes.MixedContent;
                 Data.Url = associateUri;
@@ -55,6 +55,10 @@ namespace MoEmbed.Models.Metadata
                         Url = tu
                     }
                 });
+            }
+            else
+            {
+                Data.Url = associateUri;
             }
         }
     }
