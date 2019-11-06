@@ -14,7 +14,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed class AmazonExperimentalMetadataProvider : IMetadataProvider
     {
-        private static readonly Regex regex = new Regex(@"^https?://(www\.)?(?<dest>amazon\.(com(\.(br|mx))?|ca|cn|de|es|fr|in|it|jp|co\.(jp|uk)))/+(([^/]+/+)?dp|gp/product)/+(?<asin>[A-Za-z0-9]{10})($|/|\?)");
+        private static readonly Regex regex = new Regex(@"^https?://(?:www\.)?(?<dest>amazon\.(?:com(?:\.(?:br|mx))?|ca|cn|de|es|fr|in|it|jp|co\.(?:jp|uk)))(?:/+(?:(?:[^/]+/+)?dp|gp/product)/+|/exec/obidos/ASIN/)(?<asin>[A-Za-z0-9]{10})(?:$|/|\?)");
 
         /// <summary>
         /// Initializes a new instaince of the <see cref="AmazonExperimentalMetadataProvider" /> class with AWS secrets.
