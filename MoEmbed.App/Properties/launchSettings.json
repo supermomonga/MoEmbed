@@ -27,6 +27,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "PORT": "80"
+      },
       "publishAllPorts": true
     }
   }
