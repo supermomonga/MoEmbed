@@ -154,6 +154,10 @@ namespace MoEmbed.Twitter
             {
                 description = tweet.Prefix != null ? $"{tweet.Prefix} {tweet.Text}" : tweet.Text;
             }
+            if(tweet.QuotedTweet != null)
+            {
+                description += $" {tweet.QuotedTweet.Url}";
+            }
 
             Data = new EmbedData()
             {
