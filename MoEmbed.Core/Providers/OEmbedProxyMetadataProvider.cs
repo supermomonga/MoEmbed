@@ -63,13 +63,13 @@ namespace MoEmbed.Providers
 
             if (request.MaxWidth > 0)
             {
-                s.Append("?max_width=");
+                s.Append("&max_width=");
                 s.Append(request.MaxWidth.Value);
             }
 
             if (request.MaxHeight > 0)
             {
-                s.Append("?max_height=");
+                s.Append("&max_height=");
                 s.Append(request.MaxHeight.Value);
             }
 
@@ -93,13 +93,13 @@ namespace MoEmbed.Providers
 
             if (request.MaxWidth > 0)
             {
-                s.Append("?max_width=");
+                s.Append("&max_width=");
                 s.Append(request.MaxWidth.Value);
             }
 
             if (request.MaxHeight > 0)
             {
-                s.Append("?max_height=");
+                s.Append("&max_height=");
                 s.Append(request.MaxHeight.Value);
             }
 
@@ -121,19 +121,19 @@ namespace MoEmbed.Providers
 
             if (request.MaxWidth > 0)
             {
-                s.Append("?max_width=");
+                s.Append("&max_width=");
                 s.Append(request.MaxWidth.Value);
             }
 
             if (request.MaxHeight > 0)
             {
-                s.Append("?max_height=");
+                s.Append("&max_height=");
                 s.Append(request.MaxHeight.Value);
             }
 
             if (!string.IsNullOrEmpty(request.Format))
             {
-                s.Append("?format=");
+                s.Append("&format=");
                 s.Append(request.Format);
             }
 

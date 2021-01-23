@@ -3060,7 +3060,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed partial class YoutubeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^http://www\.youtube\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"^http[s]?://www\.youtube\.com/");
 
         /// <inheritdoc />
         public override IEnumerable<string> GetSupportedHostNames()
@@ -3075,7 +3075,7 @@ namespace MoEmbed.Providers
 
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("http://www.youtube.com/oembed", request);
+            => GetProviderUriCore("https://www.youtube.com/oembed", request);
     }
 
     partial class OEmbedProxyMetadataProvider
