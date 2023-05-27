@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using MoEmbed.Providers;
 
 namespace MoEmbed
@@ -28,7 +29,6 @@ namespace MoEmbed
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(NicovideoMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(DroplrMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(GyazoMetadataProvider), ServiceLifetime.Singleton));
-            services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(AnitvMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(MastodonMetadataProvider), ServiceLifetime.Singleton));
 
             foreach (var t in OEmbedProxyMetadataProvider.CreateKnownHandlerTypes())
