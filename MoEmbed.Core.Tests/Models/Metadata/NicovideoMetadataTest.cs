@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Portable.Xaml;
+
+using System;
 using System.IO;
-using Portable.Xaml;
+
 using Xunit;
 
 namespace MoEmbed.Models.Metadata
@@ -38,7 +40,7 @@ namespace MoEmbed.Models.Metadata
         }
 
         [Theory]
-        [InlineData(28278558L, "【プリパラ】「ぷりっとぱ～ふぇくと」をぬるぬるにしてみた【HD60fps】")]
+        [InlineData(41303991L, "第49回！これって何ナンバーカード？【ソフトウェアトーク劇場】")]
         public void FetchAsyncTest(long videoId, string expectedTitle)
         {
             var target = new NicovideoMetadata()
