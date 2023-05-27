@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MoEmbed.Providers;
+
+using Portable.Xaml;
+
+using System;
 using System.IO;
 using System.Text;
-using MoEmbed.Providers;
-using Portable.Xaml;
+
 using Xunit;
 
 namespace MoEmbed.Models.Metadata
@@ -67,9 +70,9 @@ namespace MoEmbed.Models.Metadata
         }
 
         [Theory]
-        [InlineData("http://www.tbs.co.jp/baseball/top/main.htm", "エキサイトベースボール | プロ野球速報")]
+        [InlineData("http://www.tbs.co.jp/baseball/top/main.html", "プロ野球速報")]
         [InlineData("http://www.4gamer.net/games/383/G038390/20170610002/", "PC向け純百合ADV「ことのはアムリラート」，公式サイトが6月12日正午に公開")]
-        [InlineData("http://www.sony.jp/vaio-v/?s_tc=jp_ml_rtm_vaijrny_170921_03&utm_medium=ml&utm_source=rtm&utm_campaign=170921", "VAIO（パーソナルコンピューター／スマートフォン） | ソニー")]
+        [InlineData("http://www.sony.jp/vaio-v/?s_tc=jp_ml_rtm_vaijrny_170921_03&utm_medium=ml&utm_source=rtm&utm_campaign=170921", "VAIO（パーソナルコンピューター） | ソニー | VAIO（パーソナルコンピューター） | ソニー")]
         public async void EncodingTest(string url, string title)
         {
             var rm = new UnknownMetadata() { Url = url.ToUri() };
