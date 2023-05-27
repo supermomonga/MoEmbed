@@ -1,9 +1,12 @@
+using HtmlAgilityPack;
+
+using Portable.Xaml.Markup;
+
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
-using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -19,9 +22,21 @@ namespace MoEmbed.Models.Metadata
         {
             base.LoadHtml(htmlDocument);
 
-            if (Data?.Medias?.Any() == true)
+            if (Data?.Medias?.FirstOrDefault() is var media && media != null)
             {
-                Data.Type = EmbedDataTypes.SingleImage;
+                if (media.Thumbnail.Url == null)
+                {
+                    media.Thumbnail = Data.MetadataImage.Thumbnail;
+                }
+                Data.Medias = new List<Media>() { media };
+                if (media.Type == MediaTypes.Video)
+                {
+                    Data.Type = EmbedDataTypes.SingleVideo;
+                }
+                else if (media.Type == MediaTypes.Image)
+                {
+                    Data.Type = EmbedDataTypes.SingleImage;
+                }
             }
             else
             {
