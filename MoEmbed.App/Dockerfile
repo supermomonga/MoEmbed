@@ -7,7 +7,6 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["MoEmbed.App/MoEmbed.App.csproj", "MoEmbed.App/"]
-COPY ["MoEmbed.Twitter/MoEmbed.Twitter.csproj", "MoEmbed.Twitter/"]
 COPY ["MoEmbed.Core/MoEmbed.Core.csproj", "MoEmbed.Core/"]
 COPY ["MoEmbed.Models/MoEmbed.Models.csproj", "MoEmbed.Models/"]
 COPY ["MoEmbed.CodeGeneration/MoEmbed.CodeGeneration.csproj", "MoEmbed.CodeGeneration/"]

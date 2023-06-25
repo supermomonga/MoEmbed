@@ -1,11 +1,11 @@
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MoEmbed.Twitter;
+
+using System.Reflection;
 
 namespace MoEmbed
 {
@@ -32,9 +32,6 @@ namespace MoEmbed
         {
             services.AddMemoryCache();
             services.AddRouting();
-
-            services.AddTwitterMetadataProviders();
-            services.ConfigureTwitterMetadataProviderOptions(Configuration);
 
             services.AddMetadataProviders();
             services.ConfigureMetadataProviderOptions(Configuration);

@@ -1,8 +1,0 @@
-
-## Setup
-
-```sh
-dotnet restore
-user-secrets set TwitterConsumerKey xxxxxxxxxxxxxxxxxxxxxxxxx
-user-secrets set TwitterConsumerSecret yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-```

@@ -33,7 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MoEmbed.Core\MoEmbed.Core.csproj" />
-    <ProjectReference Include="..\MoEmbed.Twitter\MoEmbed.Twitter.csproj" />
   </ItemGroup>
 
 </Project>
