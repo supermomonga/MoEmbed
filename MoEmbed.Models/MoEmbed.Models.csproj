@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MoEmbed.Models.xml</DocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
@@ -9,22 +8,18 @@
     <Description>Entity definitions for MoEmbed</Description>
     <PackageProjectUrl>https://github.com/supermomonga/MoEmbed</PackageProjectUrl>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Portable.Xaml" Version="0.25.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
   </ItemGroup>

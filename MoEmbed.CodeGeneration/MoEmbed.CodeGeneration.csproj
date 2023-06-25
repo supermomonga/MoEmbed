@@ -1,25 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-  
   <ItemGroup>
     <DotNetCliToolReference Include="Dotnet.Script" Version="0.50.1" />
   </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Message Importance="high" Text="Generate OEmbed proxy metadata providers." />
   </Target>
-  
 </Project>
