@@ -25,7 +25,7 @@ MoEmbed is a embed data provider which supports any websites.
 ## Requirements
 
 - Redis
-- `dotnet tool install --global dotnet-script --version 0.30.0`
+- `dotnet tool install --global dotnet-script --version 1.4.0`
 
 ## Setup
 
@@ -34,6 +34,7 @@ MoEmbed is a embed data provider which supports any websites.
 ## Update OEmbed metadata providers
 
 ```
+cd MoEmbed.CodeGeneration
 dotnet script OEmbedProxyMetadataProviders.csx
 ```
 
