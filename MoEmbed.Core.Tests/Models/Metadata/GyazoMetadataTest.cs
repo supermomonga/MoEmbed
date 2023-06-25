@@ -56,10 +56,11 @@ namespace MoEmbed.Models.Metadata
 
         [Theory]
         [InlineData("https://gyazo.com/b3c9e70fc041a500f3c8d83dd01bc614")]
-        [InlineData("https://i.gyazo.com/cd81056cb568d7a6d51b8ff87e51efa0.png")]
+        [InlineData("https://i.gyazo.com/b3c9e70fc041a500f3c8d83dd01bc614.gif")]
         public async Task VideoResourceTypeTest(string url)
         {
-            var rm = new GyazoMetadata() { Url = url.ToUri() };
+            var mp = new GyazoMetadataProvider();
+            var rm = mp.GetMetadata(new ConsumerRequest(url.ToUri()));
             var d = await rm.FetchAsync(GetRequestContext(url));
             Assert.Equal(EmbedDataTypes.SingleVideo, d.Type);
 
