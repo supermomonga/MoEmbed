@@ -7,7 +7,6 @@ WORKDIR /src
 COPY ["MoEmbed.App/MoEmbed.App.csproj", "MoEmbed.App/"]
 COPY ["MoEmbed.Core/MoEmbed.Core.csproj", "MoEmbed.Core/"]
 COPY ["MoEmbed.Models/MoEmbed.Models.csproj", "MoEmbed.Models/"]
-COPY ["MoEmbed.CodeGeneration/MoEmbed.CodeGeneration.csproj", "MoEmbed.CodeGeneration/"]
 RUN dotnet restore "MoEmbed.App/MoEmbed.App.csproj"
 COPY . .
 WORKDIR "/src/MoEmbed.App"

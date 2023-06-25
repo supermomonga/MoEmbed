@@ -24,7 +24,7 @@ MoEmbed is a embed data provider which supports any websites.
 
 ```sh
 docker build . -f MoEmbed.App/Dockerfile -t moembed:latest
-docker run --rm -it moembed:latest
+docker run --rm -it -p 5000:5000 moembed:latest
 ```
 
 ## Requirements
