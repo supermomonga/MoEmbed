@@ -12,7 +12,7 @@ namespace MoEmbed.Models.Metadata
         [InlineData(
             463440424141459456L,
             "US Department of the Interior",
-            "Sunsets don't get much better than this one over @GrandTetonNPS. #nature #sunset pic.twitter.com/YuKy2rcjyU— US Department of the Interior (@Interior) May 5, 2014"
+            "Sunsets don't get much better than this one over @GrandTetonNPS. #nature #sunset pic.twitter.com/YuKy2rcjyU"
             )]
         public void FetchAsyncTest(long tweetId, string expectedDisplayName, string expectedDescription)
         {

@@ -21,7 +21,7 @@ namespace MoEmbed.Models.Metadata
 
             var parser = new AngleSharp.Html.Parser.HtmlParser();
             using var doc = parser.ParseDocument(data.Html);
-            data.Description = doc.QuerySelector("blockquote").TextContent;
+            data.Description = doc.QuerySelector("blockquote p").TextContent;
 
             return data;
         }
