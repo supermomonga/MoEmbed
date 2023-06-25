@@ -21,7 +21,8 @@ namespace MoEmbed
                 .AddEnvironmentVariables()
                 .Build();
             var serverport = config.GetValue<int?>("port") ?? 5000;
-            var serverurls = $"http://*:{ serverport }";
+            var serverhost = config.GetValue<string?>("host") ?? "*";
+            var serverurls = $"http://{serverhost}:{ serverport }";
 
             return Host.CreateDefaultBuilder(args)
             .ConfigureLogging(logging => {
