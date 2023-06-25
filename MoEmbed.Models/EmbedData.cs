@@ -1,9 +1,11 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using Portable.Xaml.Markup;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models
 {
@@ -51,6 +53,13 @@ namespace MoEmbed.Models
         public string AuthorUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets a HTML of the content.
+        /// </summary>
+        [DefaultValue(null)]
+        [DataMember, JsonProperty("html")]
+        public string Html { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the resource provider.
         /// </summary>
         [DefaultValue(null)]
@@ -67,9 +76,9 @@ namespace MoEmbed.Models
         /// <summary>
         /// Gets or sets the suggested cache lifetime for this resource, in seconds. Consumers may choose to use this value or not.
         /// </summary>
-        [DefaultValue(86400)]
+        [DefaultValue(86400L)]
         [DataMember, JsonProperty("cache_age")]
-        public int? CacheAge { get; set; } = 86400;
+        public long? CacheAge { get; set; } = 86400;
 
         /// <summary>
         /// Gets or sets a URL to a thumbnail image representing the resource.

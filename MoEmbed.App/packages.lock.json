@@ -24,6 +24,14 @@
           "Microsoft.Extensions.FileProviders.Physical": "7.0.0"
         }
       },
+      "AngleSharp": {
+        "type": "Transitive",
+        "resolved": "1.0.4",
+        "contentHash": "G8R4C2MEDFQvjUbYz1QIcGfibjsTJnzP0aWy8iQgWWk7eKacYydCNGD3JMhVL0Q5pZQ9RYlqpKNESEU5NpqsRw==",
+        "dependencies": {
+          "System.Text.Encoding.CodePages": "7.0.0"
+        }
+      },
       "HtmlAgilityPack.NetCore": {
         "type": "Transitive",
         "resolved": "1.5.0.1",
@@ -895,6 +903,7 @@
       "moembed.core": {
         "type": "Project",
         "dependencies": {
+          "AngleSharp": "[1.0.4, )",
           "HtmlAgilityPack.NetCore": "[1.5.0.1, )",
           "Microsoft.AspNetCore": "[2.2.0, )",
           "Microsoft.Extensions.Caching.Memory": "[7.0.0, )",

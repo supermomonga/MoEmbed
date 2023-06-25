@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+
+using Portable.Xaml.Markup;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Xml;
-using Newtonsoft.Json.Linq;
-using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -143,6 +145,10 @@ namespace MoEmbed.Models.Metadata
             {
                 data.AuthorUrl = authorUrl?.ToString();
             }
+            if (values.TryGetValue(HTML, out var html))
+            {
+                data.Html = html?.ToString();
+            }
             if (values.TryGetValue(PROVIDER_NAME, out var providerName))
             {
                 data.ProviderName = providerName?.ToString();
@@ -153,7 +159,7 @@ namespace MoEmbed.Models.Metadata
             }
             if (values.TryGetValue(CACHE_AGE, out var cacheAge))
             {
-                data.CacheAge = (cacheAge as IConvertible).ToInt32(null);
+                data.CacheAge = (cacheAge as IConvertible).ToInt64(null);
             }
 
             values.TryGetValue(TYPE, out var typeObj);

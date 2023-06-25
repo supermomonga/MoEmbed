@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
 using Xunit;
 
 namespace MoEmbed.Models

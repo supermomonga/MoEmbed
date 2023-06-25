@@ -5738,6 +5738,28 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="http://www.twitter.com/" />.
+    /// </summary>
+    public sealed partial class TwitterMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://twitter\.com/|https://twitter\.com/.*/status/|https://.*\.twitter\.com/.*/status/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "twitter.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://publish.twitter.com/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://typecast.ai" />.
     /// </summary>
     public sealed partial class TypecastMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -6692,6 +6714,7 @@ namespace MoEmbed.Providers
             yield return typeof(TuxxBeMetadataProvider);
             yield return typeof(TvcfMetadataProvider);
             yield return typeof(TwinmotionMetadataProvider);
+            yield return typeof(TwitterMetadataProvider);
             yield return typeof(TypecastMetadataProvider);
             yield return typeof(TyplogMetadataProvider);
             yield return typeof(UcamMapMetadataProvider);

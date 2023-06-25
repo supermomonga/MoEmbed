@@ -94,6 +94,7 @@ namespace MoEmbed.Models
             writer.WritePropertyIfNeeded("description", obj.Description);
             writer.WritePropertyIfNeeded("author_name", obj.AuthorName);
             writer.WritePropertyIfNeeded("author_url", obj.AuthorUrl);
+            writer.WritePropertyIfNeeded("html", obj.Html);
             writer.WritePropertyIfNeeded("provider_name", obj.ProviderName);
             writer.WritePropertyIfNeeded("provider_url", obj.ProviderUrl);
             writer.WritePropertyIfNeeded("cache_age", obj.CacheAge);
