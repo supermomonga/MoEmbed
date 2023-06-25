@@ -3483,32 +3483,6 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
-    /// Handles oEmbed request for <see href="https://www.nanoo.tv/" />.
-    /// </summary>
-    public sealed partial class NanooMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
-    {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.nanoo\.tv/link/|http://nanoo\.tv/link/|http://.*\.nanoo\.pro/link/|http://nanoo\.pro/link/|https://.*\.nanoo\.tv/link/|https://nanoo\.tv/link/|https://.*\.nanoo\.pro/link/|https://nanoo\.pro/link/|http://media\.zhdk\.ch/signatur/|http://new\.media\.zhdk\.ch/signatur/|https://media\.zhdk\.ch/signatur/|https://new\.media\.zhdk\.ch/signatur/)");
-
-        /// <inheritdoc />
-        public override IEnumerable<string> GetSupportedHostNames()
-        {
-            yield return "nanoo.tv";
-            yield return "nanoo.pro";
-            yield return "media.zhdk.ch";
-            yield return "zhdk.ch";
-            yield return "new.media.zhdk.ch";
-        }
-
-        /// <inheritdoc />
-        public override bool CanHandle(Uri uri)
-            => _UriPattern.IsMatch(uri.ToString());
-
-        /// <inheritdoc />
-        protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://www.nanoo.tv/services/oembed", request);
-    }
-
-    /// <summary>
     /// Handles oEmbed request for <see href="https://www.nb.no/" />.
     /// </summary>
     public sealed partial class NasjonalbiblioteketMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -6619,7 +6593,6 @@ namespace MoEmbed.Providers
             yield return typeof(MusicboxmaniacsComMetadataProvider);
             yield return typeof(MybeweegMetadataProvider);
             yield return typeof(NamcheyMetadataProvider);
-            yield return typeof(NanooMetadataProvider);
             yield return typeof(NasjonalbiblioteketMetadataProvider);
             yield return typeof(NaturalatlasMetadataProvider);
             yield return typeof(NdlaMetadataProvider);
