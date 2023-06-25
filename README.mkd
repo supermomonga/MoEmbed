@@ -1,5 +1,4 @@
-
-[![CircleCI](https://circleci.com/gh/supermomonga/MoEmbed.svg?style=svg)](https://circleci.com/gh/supermomonga/MoEmbed)
+[![Test](https://github.com/supermomonga/MoEmbed/actions/workflows/test.yaml/badge.svg)](https://github.com/supermomonga/MoEmbed/actions/workflows/test.yaml)
 
 # MoEmbed
 
