@@ -30,9 +30,11 @@ namespace MoEmbed
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(DroplrMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(GyazoMetadataProvider), ServiceLifetime.Singleton));
             services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(MastodonMetadataProvider), ServiceLifetime.Singleton));
+            services.Add(new ServiceDescriptor(typeof(IMetadataProvider), typeof(TwitterExperimentalMetadataProvider), ServiceLifetime.Singleton));
 
             foreach (var t in OEmbedProxyMetadataProvider.CreateKnownHandlerTypes())
             {
+                if (t == typeof(TwitterMetadataProvider)) continue;
                 services.Add(new ServiceDescriptor(typeof(IMetadataProvider), t, ServiceLifetime.Singleton));
             }
 
