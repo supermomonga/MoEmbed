@@ -1,3 +1,7 @@
+using MoEmbed.Models.TweetExperimental;
+
+using Portable.Xaml.Markup;
+
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -5,8 +9,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using MoEmbed.Models.TweetExperimental;
-using Portable.Xaml.Markup;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -65,7 +67,7 @@ namespace MoEmbed.Models.Metadata
                 },
                 Title = tweet.User.Name,
                 Description = tweet.Text,
-                Medias = tweet.MediaDetails.Select(ToMedia).ToList(),
+                Medias = tweet.MediaDetails?.Select(ToMedia).ToList() ?? new(),
                 RestrictionPolicy = tweet.PossiblySensitive ? RestrictionPolicies.Restricted : RestrictionPolicies.Safe,
 
                 ProviderName = "Twitter",
