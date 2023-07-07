@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace MoEmbed.Models.TweetExperimental
+namespace MoEmbed.Models.TwitterExperimental
 {
     public class Entities
     {

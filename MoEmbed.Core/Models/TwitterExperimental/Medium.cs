@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
 
-// Tweet myDeserializedClass = JsonConvert.DeserializeObject<Tweet>(myJsonResponse);
-namespace MoEmbed.Models.TweetExperimental
+namespace MoEmbed.Models.TwitterExperimental
 {
     public class Medium
     {

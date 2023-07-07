@@ -1,4 +1,4 @@
-using MoEmbed.Models.TweetExperimental;
+using MoEmbed.Models.TwitterExperimental;
 
 using Portable.Xaml.Markup;
 
