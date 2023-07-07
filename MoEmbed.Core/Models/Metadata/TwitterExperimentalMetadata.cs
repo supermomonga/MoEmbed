@@ -65,7 +65,7 @@ namespace MoEmbed.Models.Metadata
                     Location = Url,
                     RestrictionPolicy = RestrictionPolicies.Safe
                 },
-                Title = tweet.User.Name,
+                Title = $"{tweet.User.Name} (@{tweet.User.ScreenName})",
                 Description = tweet.Text,
                 Medias = tweet.MediaDetails?.Select(ToMedia).ToList() ?? new(),
                 RestrictionPolicy = tweet.PossiblySensitive ? RestrictionPolicies.Restricted : RestrictionPolicies.Safe,
