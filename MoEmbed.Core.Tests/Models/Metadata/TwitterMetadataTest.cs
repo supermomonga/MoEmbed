@@ -11,7 +11,7 @@ namespace MoEmbed.Models.Metadata
         [Theory]
         [InlineData(
             463440424141459456L,
-            "US Department of the Interior",
+            "US Department of the Interior (@Interior)",
             "https://pbs.twimg.com/profile_images/432081479/DOI_LOGO_normal.jpg",
             "Sunsets don't get much better than this one over @GrandTetonNPS. #nature #sunset http://t.co/YuKy2rcjyU"
             )]

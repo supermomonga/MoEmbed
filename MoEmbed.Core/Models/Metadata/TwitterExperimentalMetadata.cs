@@ -1,4 +1,4 @@
-using MoEmbed.Models.TweetExperimental;
+using MoEmbed.Models.TwitterExperimental;
 
 using Portable.Xaml.Markup;
 
@@ -46,6 +46,16 @@ namespace MoEmbed.Models.Metadata
             req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var res = await context.Service.HttpClient.SendAsync(req).ConfigureAwait(false);
 
+            if (res.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new EmbedData()
+                {
+                    Url = Url,
+                    Title = "Not found",
+                    Description = "Sorry, we can't create an embed for that. It may have been deleted or made private. Please try again.",
+                };
+            }
+
             res.EnsureSuccessStatusCode();
 
             var tweet = JsonSerializer.Deserialize<Tweet>(res.Content.ReadAsStream(), new JsonSerializerOptions { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
@@ -65,7 +75,7 @@ namespace MoEmbed.Models.Metadata
                     Location = Url,
                     RestrictionPolicy = RestrictionPolicies.Safe
                 },
-                Title = tweet.User.Name,
+                Title = $"{tweet.User.Name} (@{tweet.User.ScreenName})",
                 Description = tweet.Text,
                 Medias = tweet.MediaDetails?.Select(ToMedia).ToList() ?? new(),
                 RestrictionPolicy = tweet.PossiblySensitive ? RestrictionPolicies.Restricted : RestrictionPolicies.Safe,
