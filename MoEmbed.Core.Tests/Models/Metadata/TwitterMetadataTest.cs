@@ -34,13 +34,13 @@ namespace MoEmbed.Models.Metadata
 
         [Theory]
         [InlineData(
-            463440424141459456L,
-            "https://twitter.com/Interior/status/463440424141459456/photo/1",
-            "https://pbs.twimg.com/media/Bm54nBCCYAACwBi.jpg"
+            1608046425149177856L,
+            "https://twitter.com/supermomonga/status/1608046425149177856/photo/1",
+            "https://pbs.twimg.com/media/FlDtq9fakAIHeKj.jpg"
             )]
         public void SingleImageTest(long tweetId, string expectedLocation, string expectedRawUrl)
         {
-            var uri = $"https://twitter.com/Interior/status/{tweetId}";
+            var uri = $"https://twitter.com/supermomonga/status/{tweetId}";
             var target = new TwitterExperimentalMetadataProvider().GetMetadata(
                 new ConsumerRequest(new Uri(uri)));
 
