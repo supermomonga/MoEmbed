@@ -56,5 +56,8 @@ namespace MoEmbed.Models.TwitterExperimental
 
         [JsonPropertyName("isStaleEdit")]
         public bool IsStaleEdit { get; set; }
+
+        [JsonPropertyName("tombstone")]
+        public Tombstone Tombstone { get; set; }
     }
 }
