@@ -42,8 +42,11 @@ namespace MoEmbed.Models.Metadata
         {
             if (string.IsNullOrEmpty(StatusId)) return null;
 
-            var req = new HttpRequestMessage(HttpMethod.Get, $"https://cdn.syndication.twimg.com/tweet-result?id={StatusId}");
+            var req = new HttpRequestMessage(HttpMethod.Get, $"https://cdn.syndication.twimg.com/tweet-result?id={StatusId}&lang=ja&token=elonmusk");
             req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            req.Headers.UserAgent.Clear();
+            req.Headers.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+            req.Headers.Referrer = new("https://platform.twitter.com/");
             var res = await context.Service.HttpClient.SendAsync(req).ConfigureAwait(false);
 
             if (res.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -60,28 +63,37 @@ namespace MoEmbed.Models.Metadata
 
             var tweet = JsonSerializer.Deserialize<Tweet>(res.Content.ReadAsStream(), new JsonSerializerOptions { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
 
-            return new EmbedData()
+            return tweet.Typename switch
             {
-                Url = Url,
-                MetadataImage = new Media
+                "TweetTombstone" => new EmbedData()
                 {
-                    Thumbnail = new ImageInfo
-                    {
-                        Url = tweet.User.ProfileImageUrlHttps,
-                        Height = 48,
-                        Width = 48,
-                    },
-                    RawUrl = tweet.User.ProfileImageUrlHttps,
-                    Location = Url,
-                    RestrictionPolicy = RestrictionPolicies.Safe
+                    Url = Url,
+                    Title = "Twitter",
+                    Description = tweet.Tombstone.Text.TextText,
                 },
-                Title = $"{tweet.User.Name} (@{tweet.User.ScreenName})",
-                Description = tweet.Text,
-                Medias = tweet.MediaDetails?.Select(ToMedia).ToList() ?? new(),
-                RestrictionPolicy = tweet.PossiblySensitive ? RestrictionPolicies.Restricted : RestrictionPolicies.Safe,
+                _ => new EmbedData()
+                {
+                    Url = Url,
+                    MetadataImage = new Media
+                    {
+                        Thumbnail = new ImageInfo
+                        {
+                            Url = tweet.User.ProfileImageUrlHttps,
+                            Height = 48,
+                            Width = 48,
+                        },
+                        RawUrl = tweet.User.ProfileImageUrlHttps,
+                        Location = Url,
+                        RestrictionPolicy = RestrictionPolicies.Safe
+                    },
+                    Title = $"{tweet.User.Name} (@{tweet.User.ScreenName})",
+                    Description = tweet.Text,
+                    Medias = tweet.MediaDetails?.Select(ToMedia).ToList() ?? new(),
+                    RestrictionPolicy = tweet.PossiblySensitive ? RestrictionPolicies.Restricted : RestrictionPolicies.Safe,
 
-                ProviderName = "Twitter",
-                ProviderUrl = "https://twitter.com/",
+                    ProviderName = "Twitter",
+                    ProviderUrl = "https://twitter.com/",
+                },
             };
         }
 
