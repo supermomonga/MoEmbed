@@ -125,15 +125,15 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed partial class AfreecatvMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(https://v\.afree\.ca/ST/|https://vod\.afreecatv\.com/ST/|https://vod\.afreecatv\.com/PLAYER/STATION/|https://play\.afreecatv\.com/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://vod\.afreecatv\.com/player/|https://v\.afree\.ca/ST/|https://vod\.afreecatv\.com/ST/|https://vod\.afreecatv\.com/PLAYER/STATION/|https://play\.afreecatv\.com/)");
 
         /// <inheritdoc />
         public override IEnumerable<string> GetSupportedHostNames()
         {
-            yield return "v.afree.ca";
-            yield return "afree.ca";
             yield return "vod.afreecatv.com";
             yield return "afreecatv.com";
+            yield return "v.afree.ca";
+            yield return "afree.ca";
             yield return "play.afreecatv.com";
         }
 
@@ -328,6 +328,32 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://assemblrworld.com/" />.
+    /// </summary>
+    public sealed partial class AssemblrworldMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(http://.*\.studio\.assemblrworld\.com/creation/|http://studio\.assemblrworld\.com/creation/|http://.*\.app-edu\.assemblrworld\.com/Creation/|http://app-edu\.assemblrworld\.com/Creation/|http://assemblr\.world/|http://editor\.assemblrworld\.com/|https://.*\.studio\.assemblrworld\.com/creation/|https://studio\.assemblrworld\.com/creation/|https://.*\.app-edu\.assemblrworld\.com/Creation/|https://app-edu\.assemblrworld\.com/Creation/|https://assemblr\.world/|https://editor\.assemblrworld\.com/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "studio.assemblrworld.com";
+            yield return "assemblrworld.com";
+            yield return "app-edu.assemblrworld.com";
+            yield return "assemblr.world";
+            yield return "editor.assemblrworld.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://studio.assemblrworld.com/api/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://audioboom.com" />.
     /// </summary>
     public sealed partial class AudioboomMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -370,6 +396,29 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://audioclip.naver.com/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://audio.com/" />.
+    /// </summary>
+    public sealed partial class AudiocomMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://audio\.com/|https://www\.audio\.com/|http://audio\.com/|http://www\.audio\.com/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "audio.com";
+            yield return "www.audio.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.audio.com/oembed", request);
     }
 
     /// <summary>
@@ -463,6 +512,28 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://balsamiq.cloud/" />.
+    /// </summary>
+    public sealed partial class BalsamiqMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://balsamiq\.cloud/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "balsamiq.cloud";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://balsamiq.cloud/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="http://beams.fm" />.
     /// </summary>
     public sealed partial class BeamsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -505,6 +576,29 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://www.beautiful.ai/api/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://www.behance.net" />.
+    /// </summary>
+    public sealed partial class BehanceMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://www\.behance\.net/gallery/.*/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "www.behance.net";
+            yield return "behance.net";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.behance.net/services/oembed", request);
     }
 
     /// <summary>
@@ -707,6 +801,29 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriWithExtension("http://cacoo.com/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://www.canva.com" />.
+    /// </summary>
+    public sealed partial class CanvaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://www\.canva\.com/design/.*/view");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "www.canva.com";
+            yield return "canva.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.canva.com/_oembed", request);
     }
 
     /// <summary>
@@ -1092,6 +1209,29 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://play.itemis.io" />.
+    /// </summary>
+    public sealed partial class CreateMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://play\.itemis\.io/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "play.itemis.io";
+            yield return "itemis.io";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://create.storage.api.itemis.io/api/embed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="http://crowdranking.com" />.
     /// </summary>
     public sealed partial class CrowdRankingMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -1392,7 +1532,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed partial class DocswellMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://docswell\.com/.*/|https://docswell\.com/.*/|http://www\.docswell\.com/.*/|https://www\.docswell\.com/.*/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://docswell\.com/s/.*/|https://docswell\.com/s/.*/|http://www\.docswell\.com/s/.*/|https://www\.docswell\.com/s/.*/)");
 
         /// <inheritdoc />
         public override IEnumerable<string> GetSupportedHostNames()
@@ -1478,6 +1618,29 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://echoeshq.com" />.
+    /// </summary>
+    public sealed partial class EchoeshqMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^http://app\.echoeshq\.com/embed/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "app.echoeshq.com";
+            yield return "echoeshq.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.echoeshq.com/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://www.edumedia-sciences.com/" />.
     /// </summary>
     public sealed partial class EdumediaSciencesComMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -1543,29 +1706,6 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://embedery.com/api/oembed", request);
-    }
-
-    /// <summary>
-    /// Handles oEmbed request for <see href="https://music.enystre.com" />.
-    /// </summary>
-    public sealed partial class EnystreMusicMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
-    {
-        private static readonly Regex _UriPattern = new Regex(@"^https://music\.enystre\.com/lyrics/");
-
-        /// <inheritdoc />
-        public override IEnumerable<string> GetSupportedHostNames()
-        {
-            yield return "music.enystre.com";
-            yield return "enystre.com";
-        }
-
-        /// <inheritdoc />
-        public override bool CanHandle(Uri uri)
-            => _UriPattern.IsMatch(uri.ToString());
-
-        /// <inheritdoc />
-        protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://music.enystre.com/oembed", request);
     }
 
     /// <summary>
@@ -1704,7 +1844,7 @@ namespace MoEmbed.Providers
 
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://graph.facebook.com/v10.0/oembed_page", request);
+            => GetProviderUriCore("https://graph.facebook.com/v16.0/oembed_page", request);
     }
 
     /// <summary>
@@ -1866,6 +2006,28 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://fooday.app" />.
+    /// </summary>
+    public sealed partial class FoodayMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://fooday\.app/.*/reviews/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "fooday.app";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://fooday.app/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="http://www.foxsports.com.au" />.
     /// </summary>
     public sealed partial class FoxSportsAustraliaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -2010,29 +2172,6 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("http://embed.gettyimages.com/oembed", request);
-    }
-
-    /// <summary>
-    /// Handles oEmbed request for <see href="https://gfycat.com/" />.
-    /// </summary>
-    public sealed partial class GfycatMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
-    {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://gfycat\.com/|http://www\.gfycat\.com/|https://gfycat\.com/|https://www\.gfycat\.com/)");
-
-        /// <inheritdoc />
-        public override IEnumerable<string> GetSupportedHostNames()
-        {
-            yield return "gfycat.com";
-            yield return "www.gfycat.com";
-        }
-
-        /// <inheritdoc />
-        public override bool CanHandle(Uri uri)
-            => _UriPattern.IsMatch(uri.ToString());
-
-        /// <inheritdoc />
-        protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://api.gfycat.com/v1/oembed", request);
     }
 
     /// <summary>
@@ -2193,6 +2332,31 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://api.luminery.com/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://www.gumlet.com/" />.
+    /// </summary>
+    public sealed partial class GumletMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://www\.gumlet\.com/watch/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "www.gumlet.com";
+            yield return "gumlet.com";
+            yield return "play.gumlet.io";
+            yield return "gumlet.io";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.gumlet.com/v1/oembed", request);
     }
 
     /// <summary>
@@ -2668,7 +2832,7 @@ namespace MoEmbed.Providers
 
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://graph.facebook.com/v10.0/instagram_oembed", request);
+            => GetProviderUriCore("https://graph.facebook.com/v16.0/instagram_oembed", request);
     }
 
     /// <summary>
@@ -3062,12 +3226,13 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed partial class LottiefilesMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^https://lottiefiles\.com/");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://lottiefiles\.com/|https://.*\.lottiefiles\.com/|https://.*\.lottie\.host/|https://lottie\.host/)");
 
         /// <inheritdoc />
         public override IEnumerable<string> GetSupportedHostNames()
         {
             yield return "lottiefiles.com";
+            yield return "lottie.host";
         }
 
         /// <inheritdoc />
@@ -3750,6 +3915,28 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://origits.com/" />.
+    /// </summary>
+    public sealed partial class OrigitsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://origits\.com/v/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "origits.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://origits.com/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://outplayed.tv/" />.
     /// </summary>
     public sealed partial class OutplayedTvMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -3904,6 +4091,28 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://api.picturelfy.com/service/oembed/", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://piggy.to" />.
+    /// </summary>
+    public sealed partial class PiggyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://piggy\.to/@.*/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "piggy.to";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://piggy.to/oembed", request);
     }
 
     /// <summary>
@@ -5213,6 +5422,29 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://spyke.social" />.
+    /// </summary>
+    public sealed partial class SpykeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(http://spyke\.social/p/|http://spyke\.social/u/|http://spyke\.social/g/|http://spyke\.social/c/|https://spyke\.social/p/|https://spyke\.social/u/|https://spyke\.social/g/|https://spyke\.social/c/|http://www\.spyke\.social/p/|http://www\.spyke\.social/u/|http://www\.spyke\.social/g/|http://www\.spyke\.social/c/|https://www\.spyke\.social/p/|https://www\.spyke\.social/u/|https://www\.spyke\.social/g/|https://www\.spyke\.social/c/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "spyke.social";
+            yield return "www.spyke.social";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://api.spyke.social/embed/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://purl.stanford.edu/" />.
     /// </summary>
     public sealed partial class StanfordDigitalRepositoryMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -5514,7 +5746,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed partial class TickcounterMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^(http://www\.tickcounter\.com/countdown/|http://www\.tickcounter\.com/countup/|http://www\.tickcounter\.com/ticker/|http://www\.tickcounter\.com/worldclock/|https://www\.tickcounter\.com/countdown/|https://www\.tickcounter\.com/countup/|https://www\.tickcounter\.com/ticker/|https://www\.tickcounter\.com/worldclock/)");
+        private static readonly Regex _UriPattern = new Regex(@"^(http://www\.tickcounter\.com/widget/|http://www\.tickcounter\.com/countdown/|http://www\.tickcounter\.com/countup/|http://www\.tickcounter\.com/ticker/|http://www\.tickcounter\.com/clock/|http://www\.tickcounter\.com/worldclock/|https://www\.tickcounter\.com/widget/|https://www\.tickcounter\.com/countdown/|https://www\.tickcounter\.com/countup/|https://www\.tickcounter\.com/ticker/|https://www\.tickcounter\.com/clock/|https://www\.tickcounter\.com/worldclock/)");
 
         /// <inheritdoc />
         public override IEnumerable<string> GetSupportedHostNames()
@@ -5553,6 +5785,29 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://www.tiktok.com/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://tonicaudio.com/" />.
+    /// </summary>
+    public sealed partial class TonicaudioMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://tonicaudio\.com/take/|https://tonicaudio\.com/song/|https://tnic\.io/song/|https://tnic\.io/take/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "tonicaudio.com";
+            yield return "tnic.io";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://tonicaudio.com/oembed", request);
     }
 
     /// <summary>
@@ -5629,7 +5884,7 @@ namespace MoEmbed.Providers
     /// </summary>
     public sealed partial class TrinityaudioMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
     {
-        private static readonly Regex _UriPattern = new Regex(@"^https://trinitymedia\.ai/player/");
+        private static readonly Regex _UriPattern = new Regex(@"^(https://trinitymedia\.ai/player/|https://trinitymedia\.ai/player/.*/|https://trinitymedia\.ai/player/.*/.*/)");
 
         /// <inheritdoc />
         public override IEnumerable<string> GetSupportedHostNames()
@@ -5643,7 +5898,7 @@ namespace MoEmbed.Providers
 
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
-            => GetProviderUriCore("https://trinitymedia.ai/player/trinity-oembed", request);
+            => GetProviderUriCore("https://trinitymedia.ai/services/oembed", request);
     }
 
     /// <summary>
@@ -6345,6 +6600,28 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="http://www.x.com/" />.
+    /// </summary>
+    public sealed partial class XMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://x\.com/|https://x\.com/.*/status/|https://.*\.x\.com/.*/status/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "x.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://publish.x.com/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://www.youtube.com/" />.
     /// </summary>
     public sealed partial class YoutubeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -6365,6 +6642,29 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://www.youtube.com/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://www.yumpu.com/" />.
+    /// </summary>
+    public sealed partial class YumpuMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://www\.yumpu\.com/.*/document/view/.*/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "www.yumpu.com";
+            yield return "yumpu.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.yumpu.com/services/oembed", request);
     }
 
     /// <summary>
@@ -6476,14 +6776,18 @@ namespace MoEmbed.Providers
             yield return typeof(AnimotoMetadataProvider);
             yield return typeof(AnniemusicMetadataProvider);
             yield return typeof(ArchivosMetadataProvider);
+            yield return typeof(AssemblrworldMetadataProvider);
             yield return typeof(AudioboomMetadataProvider);
             yield return typeof(AudioclipMetadataProvider);
+            yield return typeof(AudiocomMetadataProvider);
             yield return typeof(AudiomackMetadataProvider);
             yield return typeof(AudiomeansMetadataProvider);
             yield return typeof(AvocodeMetadataProvider);
             yield return typeof(BacktracksMetadataProvider);
+            yield return typeof(BalsamiqMetadataProvider);
             yield return typeof(BeamsMetadataProvider);
             yield return typeof(BeautifulMetadataProvider);
+            yield return typeof(BehanceMetadataProvider);
             yield return typeof(BlackfireIoMetadataProvider);
             yield return typeof(BlogcastMetadataProvider);
             yield return typeof(BookingmoodMetadataProvider);
@@ -6493,6 +6797,7 @@ namespace MoEmbed.Providers
             yield return typeof(ButtondownMetadataProvider);
             yield return typeof(ByzartMetadataProvider);
             yield return typeof(CacooMetadataProvider);
+            yield return typeof(CanvaMetadataProvider);
             yield return typeof(CatboatMetadataProvider);
             yield return typeof(CerosMetadataProvider);
             yield return typeof(ChainflixMetadataProvider);
@@ -6510,6 +6815,7 @@ namespace MoEmbed.Providers
             yield return typeof(CollegehumorMetadataProvider);
             yield return typeof(CommafulMetadataProvider);
             yield return typeof(CoubMetadataProvider);
+            yield return typeof(CreateMetadataProvider);
             yield return typeof(CrowdRankingMetadataProvider);
             yield return typeof(CrumbsMetadataProvider);
             yield return typeof(CueupMetadataProvider);
@@ -6527,10 +6833,10 @@ namespace MoEmbed.Providers
             yield return typeof(DotsubMetadataProvider);
             yield return typeof(DreambrokerMetadataProvider);
             yield return typeof(DtubeMetadataProvider);
+            yield return typeof(EchoeshqMetadataProvider);
             yield return typeof(EdumediaSciencesComMetadataProvider);
             yield return typeof(EgliseinfoMetadataProvider);
             yield return typeof(EmbederyMetadataProvider);
-            yield return typeof(EnystreMusicMetadataProvider);
             yield return typeof(EthfiddleMetadataProvider);
             yield return typeof(EventliveMetadataProvider);
             yield return typeof(EvervizMetadataProvider);
@@ -6544,13 +6850,13 @@ namespace MoEmbed.Providers
             yield return typeof(FlatMetadataProvider);
             yield return typeof(FlickrMetadataProvider);
             yield return typeof(FlourishMetadataProvider);
+            yield return typeof(FoodayMetadataProvider);
             yield return typeof(FoxSportsAustraliaMetadataProvider);
             yield return typeof(FramebuzzMetadataProvider);
             yield return typeof(FramerMetadataProvider);
             yield return typeof(GeographMetadataProvider);
             yield return typeof(GetshowMetadataProvider);
             yield return typeof(GettyImagesMetadataProvider);
-            yield return typeof(GfycatMetadataProvider);
             yield return typeof(GifnoteMetadataProvider);
             yield return typeof(GIPHYMetadataProvider);
             yield return typeof(GloriatvMetadataProvider);
@@ -6558,6 +6864,7 @@ namespace MoEmbed.Providers
             yield return typeof(GongMetadataProvider);
             yield return typeof(GrainMetadataProvider);
             yield return typeof(GtchannelMetadataProvider);
+            yield return typeof(GumletMetadataProvider);
             yield return typeof(HASHMetadataProvider);
             yield return typeof(HearthisMetadataProvider);
             yield return typeof(HeyzineMetadataProvider);
@@ -6627,6 +6934,7 @@ namespace MoEmbed.Providers
             yield return typeof(OmniscopeMeMetadataProvider);
             yield return typeof(OmnystudioMetadataProvider);
             yield return typeof(OrbitvuMetadataProvider);
+            yield return typeof(OrigitsMetadataProvider);
             yield return typeof(OutplayedTvMetadataProvider);
             yield return typeof(OverflowIoMetadataProvider);
             yield return typeof(OzMetadataProvider);
@@ -6634,6 +6942,7 @@ namespace MoEmbed.Providers
             yield return typeof(PandavideoMetadataProvider);
             yield return typeof(PasteryMetadataProvider);
             yield return typeof(PicturelfyMetadataProvider);
+            yield return typeof(PiggyMetadataProvider);
             yield return typeof(PikassoMetadataProvider);
             yield return typeof(PingvpMetadataProvider);
             yield return typeof(PinpollMetadataProvider);
@@ -6691,6 +7000,7 @@ namespace MoEmbed.Providers
             yield return typeof(SpotlightrMetadataProvider);
             yield return typeof(SpreakerMetadataProvider);
             yield return typeof(SproutvideoMetadataProvider);
+            yield return typeof(SpykeMetadataProvider);
             yield return typeof(StanfordDigitalRepositoryMetadataProvider);
             yield return typeof(StorymapsMetadataProvider);
             yield return typeof(StreamableMetadataProvider);
@@ -6706,6 +7016,7 @@ namespace MoEmbed.Providers
             yield return typeof(TheNewYorkTimesMetadataProvider);
             yield return typeof(TickcounterMetadataProvider);
             yield return typeof(TikTokMetadataProvider);
+            yield return typeof(TonicaudioMetadataProvider);
             yield return typeof(ToornamentMetadataProvider);
             yield return typeof(TopyMetadataProvider);
             yield return typeof(TotangoMetadataProvider);
@@ -6741,7 +7052,9 @@ namespace MoEmbed.Providers
             yield return typeof(WokwiMetadataProvider);
             yield return typeof(WolframcloudMetadataProvider);
             yield return typeof(WordpressComMetadataProvider);
+            yield return typeof(XMetadataProvider);
             yield return typeof(YoutubeMetadataProvider);
+            yield return typeof(YumpuMetadataProvider);
             yield return typeof(ZeplinMetadataProvider);
             yield return typeof(ZingsoftMetadataProvider);
             yield return typeof(ZnipeMetadataProvider);
