@@ -12,7 +12,7 @@ namespace MoEmbed.Providers
     {
         private const string GROUP_STATUS_ID = "statusId";
         // private static readonly Regex uriPattern = new(@$"^(https://twitter\.com/|https://twitter\.com/.*/status/(?<{GROUP_STATUS_ID}>\d+)|https://.*\.twitter\.com/.*/status/(?<{GROUP_STATUS_ID}>\d+))");
-        private static readonly Regex uriPattern = new(@$"^(https://twitter\.com/.*/status/(?<{GROUP_STATUS_ID}>\d+)|https://.*\.twitter\.com/.*/status/(?<{GROUP_STATUS_ID}>\d+))");
+        private static readonly Regex uriPattern = new(@$"^(https://(?:twitter|x)\.com/.*/status/(?<{GROUP_STATUS_ID}>\d+)|https://.*\.(?:twitter|x)\.com/.*/status/(?<{GROUP_STATUS_ID}>\d+))");
 
         bool IMetadataProvider.SupportsAnyHost
             => false;
@@ -43,6 +43,7 @@ namespace MoEmbed.Providers
         public IEnumerable<string> GetSupportedHostNames()
         {
             yield return "twitter.com";
+            yield return "x.com";
         }
     }
 }
