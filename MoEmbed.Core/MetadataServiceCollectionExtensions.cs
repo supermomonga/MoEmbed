@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Linq;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using MoEmbed.Providers;
@@ -11,6 +12,11 @@ namespace MoEmbed
     /// </summary>
     public static class MetadataServiceCollectionExtensions
     {
+        static System.Type[] IgnoredMetadataProvierTypes = {
+            typeof(TwitterMetadataProvider),
+            typeof(XMetadataProvider),
+        };
+
         /// <summary>
         /// Adds <see cref="ServiceDescriptor" /> s of the <see cref="IMetadataProvider" /> in the
         /// <see cref="N:MoEmbed.Providers" /> namespace to the specified <see
@@ -34,7 +40,7 @@ namespace MoEmbed
 
             foreach (var t in OEmbedProxyMetadataProvider.CreateKnownHandlerTypes())
             {
-                if (t == typeof(TwitterMetadataProvider)) continue;
+                if (IgnoredMetadataProvierTypes.Contains(t)) continue;
                 services.Add(new ServiceDescriptor(typeof(IMetadataProvider), t, ServiceLifetime.Singleton));
             }
 
