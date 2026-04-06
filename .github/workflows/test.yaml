@@ -11,18 +11,16 @@ jobs:
     env:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 10.0.x
           cache: true
           cache-dependency-path: MoEmbed.App/packages.lock.json
       - run: dotnet restore --locked-mode
       - run: dotnet build
       - name: Core Test
-        working-directory: MoEmbed.Core.Tests
-        run: dotnet test
+        run: dotnet run --project MoEmbed.Core.Tests
       - name: Models Test
-        working-directory: MoEmbed.Models.Tests
-        run: dotnet test
+        run: dotnet run --project MoEmbed.Models.Tests
