@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-var dir = Path.GetDirectoryName(Path.GetFullPath("a"));
+var repoRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(GetScriptPath()), ".."));
 
-using (var sw = new StreamWriter(Path.Combine(dir, "../../../../MoEmbed.Core/Providers/Generated Codes/OEmbedProxyMetadataProviders.cs")))
+using (var sw = new StreamWriter(Path.Combine(repoRoot, "MoEmbed.Core/Providers/Generated Codes/OEmbedProxyMetadataProviders.cs")))
 {
     sw.WriteLine("using System;");
     sw.WriteLine("using System.Collections.Generic;");
@@ -26,7 +27,7 @@ using (var sw = new StreamWriter(Path.Combine(dir, "../../../../MoEmbed.Core/Pro
     };
     var schemeUrls = new List<string>();
     var generated = new List<string>();
-    var d = Path.GetFullPath(Path.Combine(dir, "../../../../oembed/providers"));
+    var d = Path.GetFullPath(Path.Combine(repoRoot, "oembed/providers"));
 
     foreach (var f in Directory.GetFiles(d, "*.yml"))
     {
@@ -173,3 +174,5 @@ using (var sw = new StreamWriter(Path.Combine(dir, "../../../../MoEmbed.Core/Pro
     sw.WriteLine(@"    }");
     sw.WriteLine(@"}");
 }
+
+static string GetScriptPath([CallerFilePath] string path = "") => path;
