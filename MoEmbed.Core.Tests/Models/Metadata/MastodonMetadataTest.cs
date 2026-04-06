@@ -1,15 +1,14 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace MoEmbed.Models.Metadata
 {
     public class MastodonMetadataTest
     {
-        [Theory]
-        [InlineData("pawoo.net", 44073070L, "&nbsp;")]
-        [InlineData("pawoo.net", 44074120L, "やるき\r\nげ ん き\r\nび  ょ  う  き")]
+        [Test]
+        [Arguments("pawoo.net", 44073070L, "&nbsp;")]
+        [Arguments("pawoo.net", 44074120L, "やるき\r\nげ ん き\r\nび  ょ  う  き")]
         public async Task DescriptionTest(string host, long id, string expected)
         {
             var d = await new MastodonMetadata()
@@ -22,7 +21,7 @@ namespace MoEmbed.Models.Metadata
 
             expected = Regex.Replace(expected, @"\r\n", Environment.NewLine);
 
-            Assert.Equal(expected, d.Description);
+            await Assert.That(d.Description).IsEqualTo(expected);
         }
     }
 }

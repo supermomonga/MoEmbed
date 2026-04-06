@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Xunit;
+using System.IO;
 
 namespace MoEmbed.Models
 {
@@ -7,21 +6,21 @@ namespace MoEmbed.Models
     {
         #region WriteEmbedDataTest
 
-        [Fact]
-        public void WriteEmbedDataTest_Json()
+        [Test]
+        public async Task WriteEmbedDataTest_Json()
         {
             using (var ms = new MemoryStream())
             {
-                new JsonResponseWriter(ms).WriteEmbedDataAsync(new EmbedData());
+                await new JsonResponseWriter(ms).WriteEmbedDataAsync(new EmbedData());
             }
         }
 
-        [Fact]
-        public void WriteEmbedDataTest_Xml()
+        [Test]
+        public async Task WriteEmbedDataTest_Xml()
         {
             using (var ms = new MemoryStream())
             {
-                new XmlResponseWriter(ms).WriteEmbedDataAsync(new EmbedData());
+                await new XmlResponseWriter(ms).WriteEmbedDataAsync(new EmbedData());
             }
         }
 

@@ -1,13 +1,12 @@
-﻿using System.IO;
+using System.IO;
 using Portable.Xaml;
-using Xunit;
 
 namespace MoEmbed.Models
 {
     public class EmbedDataTest
     {
-        [Fact]
-        public void SerializationTest()
+        [Test]
+        public async Task SerializationTest()
         {
             // TODO: Update Portable.Xaml
             var expected = new EmbedData()
@@ -25,13 +24,13 @@ namespace MoEmbed.Models
                 using (var sr = new StringReader(xml))
                 {
                     var obj = XamlServices.Load(sr);
-                    Assert.IsType<EmbedData>(obj);
+                    await Assert.That(obj).IsTypeOf<EmbedData>();
 
                     var actual = (EmbedData)obj;
 
-                    Assert.Equal(expected.Description, actual.Description);
-                    Assert.Equal(expected.CacheAge, actual.CacheAge);
-                    Assert.Equal(expected.AuthorName, actual.AuthorName);
+                    await Assert.That(actual.Description).IsEqualTo(expected.Description);
+                    await Assert.That(actual.CacheAge).IsEqualTo(expected.CacheAge);
+                    await Assert.That(actual.AuthorName).IsEqualTo(expected.AuthorName);
                 }
             }
         }

@@ -1,9 +1,7 @@
-﻿using MoEmbed.Models;
+using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
 
 using System;
-
-using Xunit;
 
 namespace MoEmbed.Providers
 {
@@ -11,34 +9,35 @@ namespace MoEmbed.Providers
     {
         #region CanHandle
 
-        [Theory]
-        [InlineData("https://twitter.com/Interior/status/463440424141459456")]
-        public void CanHandleTest_True(string uri)
-            => Assert.True(new TwitterMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri))));
+        [Test]
+        [Arguments("https://twitter.com/Interior/status/463440424141459456")]
+        public async Task CanHandleTest_True(string uri)
+            => await Assert.That(new TwitterMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri)))).IsTrue();
 
-        [Theory]
-        [InlineData("https://rms.sexy/")]
-        public void CanHandleTest_False(string uri)
-            => Assert.False(new TwitterMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri))));
+        [Test]
+        [Arguments("https://rms.sexy/")]
+        public async Task CanHandleTest_False(string uri)
+            => await Assert.That(new TwitterMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri)))).IsFalse();
 
         #endregion CanHandle
 
         #region GetMetadata
 
-        [Theory]
-        [InlineData("https://twitter.com/Interior/status/463440424141459456")]
-        public void GetMetadataTest_Success(string uri)
+        [Test]
+        [Arguments("https://twitter.com/Interior/status/463440424141459456")]
+        public async Task GetMetadataTest_Success(string uri)
         {
-            var m = Assert.IsType<TwitterMetadata>(
-                new TwitterMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri))));
-            Assert.Equal(uri, m.Url);
-            Assert.Null(m.Data);
+            var result = new TwitterMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri)));
+            await Assert.That(result).IsTypeOf<TwitterMetadata>();
+            var m = (TwitterMetadata)result;
+            await Assert.That(m.Url).IsEqualTo(uri);
+            await Assert.That(m.Data).IsNull();
         }
 
-        [Theory]
-        [InlineData("https://rms.sexy/")]
-        public void GetMetadataTest_Null(string uri)
-            => Assert.Null(new TwitterMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri))));
+        [Test]
+        [Arguments("https://rms.sexy/")]
+        public async Task GetMetadataTest_Null(string uri)
+            => await Assert.That(new TwitterMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri)))).IsNull();
 
         #endregion GetMetadata
     }

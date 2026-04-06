@@ -77,7 +77,7 @@ namespace MoEmbed.Models.Metadata
         {
             var hc = context.Service.HttpClient;
 
-            var res = await hc.GetAsync($"http://ext.nicovideo.jp/api/getthumbinfo/sm" + VideoId).ConfigureAwait(false);
+            var res = await hc.GetAsync($"https://ext.nicovideo.jp/api/getthumbinfo/sm" + VideoId).ConfigureAwait(false);
             if (!res.IsSuccessStatusCode)
             {
                 return null;

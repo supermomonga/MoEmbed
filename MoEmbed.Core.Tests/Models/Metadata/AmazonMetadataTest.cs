@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using MoEmbed.Providers;
-using Xunit;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -14,9 +13,9 @@ namespace MoEmbed.Models.Metadata
                 .AddUserSecrets<AmazonMetadataTest>()
                 .Build());
 
-        [Theory]
-        [InlineData("amazon.co.jp", "B074DYFZM7", "アイドルタイム プリパラ ファララマイク - Amazon.co.jp")]
-        public void FetchAsyncTest(string destination, string asin, string title)
+        [Test]
+        [Arguments("amazon.co.jp", "B074DYFZM7", "アイドルタイム プリパラ ファララマイク - Amazon.co.jp")]
+        public async Task FetchAsyncTest(string destination, string asin, string title)
         {
             var prov = AmazonMetadataProvider.GetInstance(Configuration);
             if (prov == null)
@@ -31,9 +30,9 @@ namespace MoEmbed.Models.Metadata
                 Asin = asin
             };
 
-            var d = md.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(null))).GetAwaiter().GetResult();
+            var d = await md.FetchAsync(new RequestContext(new MetadataService(), new ConsumerRequest(null)));
 
-            Assert.Equal(title, d.Title);
+            await Assert.That(d.Title).IsEqualTo(title);
         }
     }
 }

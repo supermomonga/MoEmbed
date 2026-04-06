@@ -1,12 +1,13 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-bullseye-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0-bullseye-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 COPY ["MoEmbed.App/MoEmbed.App.csproj", "MoEmbed.App/"]
 COPY ["MoEmbed.Core/MoEmbed.Core.csproj", "MoEmbed.Core/"]
 COPY ["MoEmbed.Models/MoEmbed.Models.csproj", "MoEmbed.Models/"]
+COPY ["MoEmbed.CodeGeneration/MoEmbed.CodeGeneration.csproj", "MoEmbed.CodeGeneration/"]
 RUN dotnet restore "MoEmbed.App/MoEmbed.App.csproj"
 COPY . .
 WORKDIR "/src/MoEmbed.App"

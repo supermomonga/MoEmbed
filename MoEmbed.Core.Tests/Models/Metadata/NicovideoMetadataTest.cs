@@ -1,16 +1,14 @@
-﻿using Portable.Xaml;
+using Portable.Xaml;
 
 using System;
 using System.IO;
-
-using Xunit;
 
 namespace MoEmbed.Models.Metadata
 {
     public class NicovideoMetadataTest
     {
-        [Fact]
-        public void SerializationTest()
+        [Test]
+        public async Task SerializationTest()
         {
             var expected = new NicovideoMetadata()
             {
@@ -29,32 +27,31 @@ namespace MoEmbed.Models.Metadata
                 using (var sr = new StringReader(xml))
                 {
                     var obj = XamlServices.Load(sr);
-                    Assert.IsType<NicovideoMetadata>(obj);
+                    await Assert.That(obj).IsTypeOf<NicovideoMetadata>();
 
                     var actual = (NicovideoMetadata)obj;
 
-                    Assert.Equal(expected.VideoId, actual.VideoId);
-                    Assert.Equal(expected.Data.Title, actual.Data.Title);
+                    await Assert.That(actual.VideoId).IsEqualTo(expected.VideoId);
+                    await Assert.That(actual.Data.Title).IsEqualTo(expected.Data.Title);
                 }
             }
         }
 
-        [Theory]
-        [InlineData(41303991L, "第49回！これって何ナンバーカード？【ソフトウェアトーク劇場】")]
-        public void FetchAsyncTest(long videoId, string expectedTitle)
+        [Test]
+        [Arguments(41303991L, "第49回！これって何ナンバーカード？【ソフトウェアトーク劇場】")]
+        public async Task FetchAsyncTest(long videoId, string expectedTitle)
         {
             var target = new NicovideoMetadata()
             {
                 VideoId = videoId
             };
 
-            var data = target.FetchAsync(
+            var data = await target.FetchAsync(
                             new RequestContext(
                                 new MetadataService(),
-                                new ConsumerRequest(new Uri("http://www.nicovideo.jp/watch/sm" + videoId))))
-                                .GetAwaiter().GetResult();
+                                new ConsumerRequest(new Uri("http://www.nicovideo.jp/watch/sm" + videoId))));
 
-            Assert.Equal(expectedTitle, data.Title);
+            await Assert.That(data.Title).IsEqualTo(expectedTitle);
         }
     }
 }

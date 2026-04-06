@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-MoEmbed is a .NET 7.0 (C#) oEmbed metadata provider service. It extracts embed data from any URL by proxying known oEmbed endpoints, parsing OpenGraph/HTML metadata as fallback, and caching results.
+MoEmbed is a .NET 10.0 (C#) oEmbed metadata provider service. It extracts embed data from any URL by proxying known oEmbed endpoints, parsing OpenGraph/HTML metadata as fallback, and caching results.
 
 ## Build & Test Commands
 
@@ -16,14 +16,18 @@ dotnet restore --locked-mode
 dotnet build
 
 # Run all tests
-cd MoEmbed.Core.Tests && dotnet test && cd ../MoEmbed.Models.Tests && dotnet test
+dotnet test --project MoEmbed.Core.Tests && dotnet test --project MoEmbed.Models.Tests
 
 # Run a single test project
-cd MoEmbed.Core.Tests && dotnet test
-cd MoEmbed.Models.Tests && dotnet test
+dotnet test --project MoEmbed.Core.Tests
+dotnet test --project MoEmbed.Models.Tests
 
-# Run a specific test
-cd MoEmbed.Core.Tests && dotnet test --filter "FullyQualifiedName~TwitterMetadataProviderTest"
+# Run a specific test (TUnit filter syntax)
+dotnet test --project MoEmbed.Core.Tests -- --filter "/*/*/TwitterMetadataProviderTest/*"
+
+# Alternative: run tests via dotnet run (TUnit projects are Exe)
+dotnet run --project MoEmbed.Core.Tests
+dotnet run --project MoEmbed.Models.Tests
 
 # Run the application (listens on port 5000)
 cd MoEmbed.App && dotnet run
@@ -70,5 +74,5 @@ Each provider returns a `Metadata` subclass (in `MoEmbed.Core/Models/`) with an 
 ## Code Style
 
 - 4-space indentation for C# (enforced by `.editorconfig`)
-- xUnit for testing with `[Fact]` and `[Theory]`/`[InlineData]` patterns
+- TUnit for testing with `[Test]` and `[Arguments]` patterns (async Task return type)
 - Tests requiring API keys use `dotnet user-secrets` (see `MoEmbed.Core.Tests/README.md`)

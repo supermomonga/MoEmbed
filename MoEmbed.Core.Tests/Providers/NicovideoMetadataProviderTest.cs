@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using MoEmbed.Models;
 using MoEmbed.Models.Metadata;
-using Xunit;
 
 namespace MoEmbed.Providers
 {
@@ -9,34 +8,36 @@ namespace MoEmbed.Providers
     {
         #region CanHandle
 
-        [Theory]
-        [InlineData("http://www.nicovideo.jp/watch/sm43")]
-        public void CanHandleTest_True(string uri)
-            => Assert.True(new NicovideoMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri))));
+        [Test]
+        [Arguments("http://www.nicovideo.jp/watch/sm43")]
+        public async Task CanHandleTest_True(string uri)
+            => await Assert.That(new NicovideoMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri)))).IsTrue();
 
-        [Theory]
-        [InlineData("https://rms.sexy/")]
-        public void CanHandleTest_False(string uri)
-            => Assert.False(new NicovideoMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri))));
+        [Test]
+        [Arguments("https://rms.sexy/")]
+        public async Task CanHandleTest_False(string uri)
+            => await Assert.That(new NicovideoMetadataProvider().CanHandle(new ConsumerRequest(new Uri(uri)))).IsFalse();
 
         #endregion CanHandle
 
         #region GetMetadata
 
-        [Theory]
-        [InlineData("http://www.nicovideo.jp/watch/sm43", 43L)]
-        public void GetMetadataTest_Success(string uri, long videoId)
+        [Test]
+        [Arguments("http://www.nicovideo.jp/watch/sm43", 43L)]
+        public async Task GetMetadataTest_Success(string uri, long videoId)
         {
-            var m = Assert.IsType<NicovideoMetadata>(new NicovideoMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri))));
+            var result = new NicovideoMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri)));
+            await Assert.That(result).IsTypeOf<NicovideoMetadata>();
+            var m = (NicovideoMetadata)result;
 
-            Assert.Equal(videoId, m.VideoId);
-            Assert.Null(m.Data);
+            await Assert.That(m.VideoId).IsEqualTo(videoId);
+            await Assert.That(m.Data).IsNull();
         }
 
-        [Theory]
-        [InlineData("https://rms.sexy/")]
-        public void GetMetadataTest_Null(string uri)
-            => Assert.Null(new NicovideoMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri))));
+        [Test]
+        [Arguments("https://rms.sexy/")]
+        public async Task GetMetadataTest_Null(string uri)
+            => await Assert.That(new NicovideoMetadataProvider().GetMetadata(new ConsumerRequest(new Uri(uri)))).IsNull();
 
         #endregion GetMetadata
     }

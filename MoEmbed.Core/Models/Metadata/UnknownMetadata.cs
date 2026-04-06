@@ -20,6 +20,11 @@ namespace MoEmbed.Models.Metadata
     [ContentProperty(nameof(Data))]
     public class UnknownMetadata : Metadata
     {
+        static UnknownMetadata()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+
         /// <summary>
         /// Gets or sets the requested URL.
         /// </summary>
@@ -124,8 +129,6 @@ namespace MoEmbed.Models.Metadata
                     }
                     catch { }
 
-                    enc = enc ?? hd.DetectEncoding(ms);
-
                     if (enc == null)
                     {
                         ms.Position = 0;
@@ -138,6 +141,22 @@ namespace MoEmbed.Models.Metadata
                         var nav = hd.CreateNavigator();
 
                         var charset = nav.SelectSingleNode("//html/head/meta[@charset]/@charset")?.Value.Trim();
+                        if (charset == null)
+                        {
+                            // Try <meta http-equiv="content-type" content="text/html;charset=...">
+                            var httpEquivContent = hd.DocumentNode
+                                .SelectSingleNode("//meta[@http-equiv]")?
+                                .GetAttributeValue("content", null);
+                            if (httpEquivContent != null)
+                            {
+                                var match = Regex.Match(httpEquivContent, @"charset=([^\s;]+)", RegexOptions.IgnoreCase);
+                                if (match.Success)
+                                {
+                                    charset = match.Groups[1].Value.Trim();
+                                }
+                            }
+                        }
+
                         if (charset != null)
                         {
                             try
@@ -227,7 +246,7 @@ namespace MoEmbed.Models.Metadata
             Data = new EmbedData()
             {
                 Url = graph.Url.DeEntitize() ?? Url.ToString(),
-                Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value).DeEntitize(),
+                Title = (graph.Title ?? nav.SelectSingleNode("//html/head/title/text()")?.Value)?.Trim().DeEntitize(),
                 Description = (graph.Description ?? nav.SelectSingleNode("//html/head/meta[@name='description']/@content")?.Value).DeEntitize(),
                 ProviderName = graph.SiteName.DeEntitize(),
                 CacheAge = graph.TimeToLive,

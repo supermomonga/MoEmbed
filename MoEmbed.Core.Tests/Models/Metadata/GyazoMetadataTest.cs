@@ -1,11 +1,9 @@
-﻿using MoEmbed.Providers;
+using MoEmbed.Providers;
 
 using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
-using Xunit;
 
 namespace MoEmbed.Models.Metadata
 {
@@ -26,14 +24,14 @@ namespace MoEmbed.Models.Metadata
         internal RequestContext GetRequestContext(string url)
         => GetRequestContext(new Uri(url));
 
-        [Theory]
-        [InlineData("https://gyazo.com/7dd82fe03e109f4a9db9074831b4c65b")]
-        [InlineData("https://i.gyazo.com/7dd82fe03e109f4a9db9074831b4c65b.jpg")]
+        [Test]
+        [Arguments("https://gyazo.com/7dd82fe03e109f4a9db9074831b4c65b")]
+        [Arguments("https://i.gyazo.com/7dd82fe03e109f4a9db9074831b4c65b.jpg")]
         public async Task ImageResourceTypeTest(string url)
         {
             var rm = new GyazoMetadata() { Url = url.ToUri() };
             var d = await rm.FetchAsync(GetRequestContext(url));
-            Assert.Equal(EmbedDataTypes.SingleImage, d.Type);
+            await Assert.That(d.Type).IsEqualTo(EmbedDataTypes.SingleImage);
 
             using (var hc = new HttpClient())
             {
@@ -54,15 +52,15 @@ namespace MoEmbed.Models.Metadata
             }
         }
 
-        [Theory]
-        [InlineData("https://gyazo.com/b3c9e70fc041a500f3c8d83dd01bc614")]
-        [InlineData("https://i.gyazo.com/b3c9e70fc041a500f3c8d83dd01bc614.gif")]
+        [Test]
+        [Arguments("https://gyazo.com/b3c9e70fc041a500f3c8d83dd01bc614")]
+        [Arguments("https://i.gyazo.com/b3c9e70fc041a500f3c8d83dd01bc614.gif")]
         public async Task VideoResourceTypeTest(string url)
         {
             var mp = new GyazoMetadataProvider();
             var rm = mp.GetMetadata(new ConsumerRequest(url.ToUri()));
             var d = await rm.FetchAsync(GetRequestContext(url));
-            Assert.Equal(EmbedDataTypes.SingleVideo, d.Type);
+            await Assert.That(d.Type).IsEqualTo(EmbedDataTypes.SingleVideo);
 
             using (var hc = new HttpClient())
             {
