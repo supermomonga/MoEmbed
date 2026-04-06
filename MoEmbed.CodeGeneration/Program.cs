@@ -23,7 +23,8 @@ using (var sw = new StreamWriter(Path.Combine(repoRoot, "MoEmbed.Core/Providers/
   };
     var nameMap = new Dictionary<string, string>()
     {
-        ["23hq"] = "TwentyThree"
+        ["23hq"] = "TwentyThree",
+        ["3q"] = "ThreeQ"
     };
     var schemeUrls = new List<string>();
     var generated = new List<string>();
