@@ -26,7 +26,8 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Regenerate oEmbed proxy providers
-        run: dotnet run --project MoEmbed.CodeGeneration
+        run: dotnet run
+        working-directory: MoEmbed.CodeGeneration
 
       - name: Check for changes
         id: check
