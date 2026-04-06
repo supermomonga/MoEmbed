@@ -37,6 +37,18 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Build
+        if: steps.check.outputs.changed == 'true'
+        run: dotnet restore --locked-mode && dotnet build
+
+      - name: Core Test
+        if: steps.check.outputs.changed == 'true'
+        run: dotnet run --project MoEmbed.Core.Tests
+
+      - name: Models Test
+        if: steps.check.outputs.changed == 'true'
+        run: dotnet run --project MoEmbed.Models.Tests
+
       - name: Create Pull Request
         if: steps.check.outputs.changed == 'true'
         id: create-pr
@@ -49,8 +61,8 @@ jobs:
             Automated update of the `oembed` submodule to the latest commit and regeneration of oEmbed proxy providers.
           delete-branch: true
 
-      - name: Enable auto-merge
+      - name: Merge Pull Request
         if: steps.create-pr.outputs.pull-request-operation == 'created' || steps.create-pr.outputs.pull-request-operation == 'updated'
-        run: gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} --auto --squash
+        run: gh pr merge ${{ steps.create-pr.outputs.pull-request-number }} --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
