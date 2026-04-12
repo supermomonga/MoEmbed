@@ -146,18 +146,6 @@ namespace MoEmbed.Models.Metadata
 
                     d.Medias.Add(m);
                 }
-
-                d.Type = note.Files.Length switch
-                {
-                    0 => EmbedDataTypes.MixedContent,
-                    1 when note.Files[0].Type?.StartsWith("video/") == true => EmbedDataTypes.SingleVideo,
-                    1 => EmbedDataTypes.SingleImage,
-                    _ => EmbedDataTypes.MixedContent
-                };
-            }
-            else
-            {
-                d.Type = EmbedDataTypes.MixedContent;
             }
 
             return Data = d;
