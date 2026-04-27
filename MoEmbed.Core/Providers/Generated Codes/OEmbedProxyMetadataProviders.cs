@@ -7825,6 +7825,29 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://www.circlezeroeight.com" />.
+    /// </summary>
+    public sealed partial class CircleZeroEightMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://www\.circlezeroeight\.com/features/|https://www\.circlezeroeight\.com/news/|https://www\.circlezeroeight\.com/sport/|https://www\.circlezeroeight\.com/style/|https://www\.circlezeroeight\.com/culture/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "www.circlezeroeight.com";
+            yield return "circlezeroeight.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://www.circlezeroeight.com/api/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://showtheway.io" />.
     /// </summary>
     public sealed partial class ShowTheWayMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -7985,6 +8008,28 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://www.reddit.com/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://laude.org" />.
+    /// </summary>
+    public sealed partial class LaudeMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://laude\.org/impact/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "laude.org";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("http://laude.org/api/oembed", request);
     }
 
     /// <summary>
@@ -8757,6 +8802,7 @@ namespace MoEmbed.Providers
             yield return typeof(TechpostcastMetadataProvider);
             yield return typeof(CommafulMetadataProvider);
             yield return typeof(SmugmugMetadataProvider);
+            yield return typeof(CircleZeroEightMetadataProvider);
             yield return typeof(ShowTheWayMetadataProvider);
             yield return typeof(GumletMetadataProvider);
             yield return typeof(AssemblrworldMetadataProvider);
@@ -8764,6 +8810,7 @@ namespace MoEmbed.Providers
             yield return typeof(ReplitMetadataProvider);
             yield return typeof(CodesandboxMetadataProvider);
             yield return typeof(RedditMetadataProvider);
+            yield return typeof(LaudeMetadataProvider);
             yield return typeof(SaootiMetadataProvider);
             yield return typeof(CrumbsMetadataProvider);
             yield return typeof(AfreecatvMetadataProvider);
