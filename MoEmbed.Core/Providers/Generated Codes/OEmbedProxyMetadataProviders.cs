@@ -1006,6 +1006,29 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://tegula.io" />.
+    /// </summary>
+    public sealed partial class TegulaMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://tegula\.io/m/|https://www\.tegula\.io/m/|https://tegula\.io/cat\.html\?model=|https://www\.tegula\.io/cat\.html\?model=)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "tegula.io";
+            yield return "www.tegula.io";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://tegula.io/api/oembed/", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="https://www.sketch.com" />.
     /// </summary>
     public sealed partial class SketchMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -2912,6 +2935,28 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("http://videos.sapo.pt/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://atlantisdatasolutions.com/" />.
+    /// </summary>
+    public sealed partial class AtlantisdatasolutionsMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^(https://atlantisdatasolutions\.com/.*/|https://atlantisdatasolutions\.com/embed/chart/.*/|https://atlantisdatasolutions\.com/yield-curves|https://atlantisdatasolutions\.com/sovereign-yield-curves|https://atlantisdatasolutions\.com/screener|https://atlantisdatasolutions\.com/bubble-chart-screener|https://atlantisdatasolutions\.com/embed/yield-curve|https://atlantisdatasolutions\.com/embed/sovereign-curve|https://atlantisdatasolutions\.com/embed/screener|https://atlantisdatasolutions\.com/embed/europe-screener|https://atlantisdatasolutions\.com/embed/rankings/)");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "atlantisdatasolutions.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://atlantisdatasolutions.com/oembed", request);
     }
 
     /// <summary>
@@ -7285,6 +7330,28 @@ namespace MoEmbed.Providers
     }
 
     /// <summary>
+    /// Handles oEmbed request for <see href="https://u-poll.com" />.
+    /// </summary>
+    public sealed partial class UPollMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://u-poll\.com/p/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "u-poll.com";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://u-poll.com/oembed", request);
+    }
+
+    /// <summary>
     /// Handles oEmbed request for <see href="http://www.pixdor.com/" />.
     /// </summary>
     public sealed partial class PixdorMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
@@ -7620,6 +7687,28 @@ namespace MoEmbed.Providers
         /// <inheritdoc />
         protected override Uri GetProviderUriFor(ConsumerRequest request)
             => GetProviderUriCore("https://api.podbean.com/v1/oembed", request);
+    }
+
+    /// <summary>
+    /// Handles oEmbed request for <see href="https://slidesfly.com" />.
+    /// </summary>
+    public sealed partial class SlidesflyMetadataProvider : OEmbedProxyMetadataProvider, IMetadataProvider
+    {
+        private static readonly Regex _UriPattern = new Regex(@"^https://slidesfly\.xyz/d/");
+
+        /// <inheritdoc />
+        public override IEnumerable<string> GetSupportedHostNames()
+        {
+            yield return "slidesfly.xyz";
+        }
+
+        /// <inheritdoc />
+        public override bool CanHandle(Uri uri)
+            => _UriPattern.IsMatch(uri.ToString());
+
+        /// <inheritdoc />
+        protected override Uri GetProviderUriFor(ConsumerRequest request)
+            => GetProviderUriCore("https://slidesfly.com/api/oembed", request);
     }
 
     /// <summary>
@@ -8168,6 +8257,7 @@ namespace MoEmbed.Providers
             yield return typeof(AmtrakerMetadataProvider);
             yield return typeof(GloriatvMetadataProvider);
             yield return typeof(LineplaceMetadataProvider);
+            yield return typeof(TegulaMetadataProvider);
             yield return typeof(SketchMetadataProvider);
             yield return typeof(HihahoMetadataProvider);
             yield return typeof(EventliveMetadataProvider);
@@ -8252,6 +8342,7 @@ namespace MoEmbed.Providers
             yield return typeof(AudiomeansMetadataProvider);
             yield return typeof(XMetadataProvider);
             yield return typeof(SapoVideosMetadataProvider);
+            yield return typeof(AtlantisdatasolutionsMetadataProvider);
             yield return typeof(AnimatronMetadataProvider);
             yield return typeof(KubitMetadataProvider);
             yield return typeof(MysqlexplainMetadataProvider);
@@ -8444,6 +8535,7 @@ namespace MoEmbed.Providers
             yield return typeof(CatboatMetadataProvider);
             yield return typeof(SpykeMetadataProvider);
             yield return typeof(DadanMetadataProvider);
+            yield return typeof(UPollMetadataProvider);
             yield return typeof(PixdorMetadataProvider);
             yield return typeof(MusicboxmaniacsComMetadataProvider);
             yield return typeof(AudiomackMetadataProvider);
@@ -8459,6 +8551,7 @@ namespace MoEmbed.Providers
             yield return typeof(CuratedMetadataProvider);
             yield return typeof(IcosaGalleryMetadataProvider);
             yield return typeof(PodbeanMetadataProvider);
+            yield return typeof(SlidesflyMetadataProvider);
             yield return typeof(VidyardMetadataProvider);
             yield return typeof(LoomMetadataProvider);
             yield return typeof(GifnoteMetadataProvider);
